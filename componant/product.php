@@ -3,15 +3,15 @@
     <!--************************************
 				Inner Banner Start
 		*************************************-->
-    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-07.jpg">
+    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="../images/background-login1.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="tg-innerbannercontent">
-                        <h1>All Products</h1>
+                        <h1>Tất cả sản phẩm</h1>
                         <ol class="tg-breadcrumb">
-                            <li><a href="">home</a></li>
-                            <li class="tg-active">Products</li>
+                            <li><a href="">Trang chủ</a></li>
+                            <li class="tg-active">Sản phẩm</li>
                         </ol>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                             <div id="tg-content" class="tg-content">
                                 <div class="tg-products">
                                     <div class="tg-sectionhead">
-                                        <h2><span>People’s Choice</span>Bestselling Books</h2>
+                                        <h2><span>Danh mục sản phẩm</span>Điện thoại</h2>
                                     </div>
                                     <div class="tg-featurebook alert" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -45,27 +45,25 @@
                                         <div class="tg-featureditm">
                                             <div class="row">
                                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-sm hidden-xs">
-                                                    <figure><img src="images/dnt.png" alt="image description">
+                                                    <figure><img src="images/iphone.jpg" alt="image description">
                                                     </figure>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                                     <div class="tg-featureditmcontent">
-                                                        <div class="tg-themetagbox"><span class="tg-themetag">featured</span></div>
+                                                        <div class="tg-themetagbox"><span class="tg-themetag">Đang giảm giá</span></div>
                                                         <div class="tg-booktitle">
-                                                            <h3><a href="">Things To Know About
-                                                                    Green Flat Design</a></h3>
+                                                            <h3><a href="">Iphone 15 Promax</a></h3>
                                                         </div>
-                                                        <span class="tg-bookwriter">By: <a href="">Farrah
-                                                                Whisenhunt</a></span>
+                                                        <span class="tg-bookwriter">Hãng: <a href="">APPLE</a></span>
                                                         <span class="tg-stars"><span></span></span>
                                                         <div class="tg-priceandbtn">
                                                             <span class="tg-bookprice">
-                                                                <ins>$23.18</ins>
-                                                                <del>$30.20</del>
+                                                                <ins>30.000.000</ins>
+                                                                <del>39.999.999</del>
                                                             </span>
                                                             <a class="tg-btn tg-btnstyletwo tg-active" href="">
                                                                 <i class="fa fa-shopping-basket"></i>
-                                                                <em>Add To Basket</em>
+                                                                <em>Thêm vào giỏ hàng</em>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -79,24 +77,24 @@
                                             <form class="tg-formtheme tg-formsortshoitems">
                                                 <fieldset>
                                                     <div class="form-group">
-                                                        <label>sort by:</label>
-                                                        <span class="tg-select">
+                                                        <label></label>
                                                             <select>
-                                                                <option>name</option>
-                                                                <option>name</option>
-                                                                <option>name</option>
+                                                                <option >Sắp xếp theo:</option>
+                                                                <option >Giá</option>
+                                                                <option>Hãng</option>
+                                                                <option>Năm</option>
                                                             </select>
                                                         </span>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label>show:</label>
-                                                        <span class="tg-select">
+                                                        <!-- <span class="tg-select"> -->
                                                             <select>
+                                                            <option >Hiển thị:</option>
                                                                 <option>8</option>
                                                                 <option>16</option>
                                                                 <option>20</option>
                                                             </select>
-                                                        </span>
+                                                        <!-- </span> -->
                                                     </div>
                                                 </fieldset>
                                             </form>
@@ -106,26 +104,24 @@
                                             <div class="tg-postbook">
                                                 <figure class="tg-featureimg">
                                                     <div class="tg-bookimg">
-                                                        <div class="tg-frontcover"><img src="images/dnt.png" alt="image description"></div>
+                                                        <div class="tg-frontcover"><img src="images/iphone.jpg" alt="image description"></div>
                                                         <!-- <div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div> -->
                                                     </div>
                                                     <a class="tg-btnaddtowishlist" href="">
                                                         <i class="icon-heart"></i>
-                                                        <span>add to wishlist</span>
+                                                        <span>Yêu thích</span>
                                                     </a>
                                                 </figure>
                                                 <div class="tg-postbookcontent">
                                                     <ul class="tg-bookscategories">
-                                                        <li><a href="">Art &amp; Photography</a>
-
+                                                        <li><a href="">Điện thoại</a>
                                                         </li>
                                                     </ul>
-                                                    <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
+                                                    <div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
                                                     <div class="tg-booktitle">
-                                                        <h3><a href="">Help Me Find My
-                                                                Stomach</a></h3>
+                                                        <h3><a href="">Iphone 15 promax</a></h3>
                                                     </div>
-                                                    <span class="tg-bookwriter">By: <a href="">Angela Gunning</a></span>
+                                                    <span class="tg-bookwriter">Hãng: <a href="">Apple</a></span>
                                                     <span class="tg-stars"><span></span></span>
                                                     <span class="tg-bookprice">
                                                         <ins>$25.18</ins>
@@ -133,7 +129,7 @@
                                                     </span>
                                                     <a class="tg-btn tg-btnstyletwo" href="">
                                                         <i class="fa fa-shopping-basket"></i>
-                                                        <em>Add To Basket</em>
+                                                        <em>Thêm giỏ hàng</em>
                                                     </a>
                                                 </div>
                                             </div>
