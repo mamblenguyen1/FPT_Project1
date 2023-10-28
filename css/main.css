@@ -67,10 +67,10 @@ iframe {
 	float: left;
 	border: none;
 }
-.wp-caption,
+/* .wp-caption,
 .wp-caption-text,
 .gallery-caption,
-.bypostauthor {}
+.bypostauthor {} */
 .wp-caption.alignleft,
 .wp-caption.alignnone { width: 100%; }
 button { border: none; }
@@ -118,7 +118,7 @@ textarea.form-control{
 .form-control:-moz-placeholder { color: #666; } /* Mozilla Firefox 4 to 18 */
 .form-control::-moz-placeholder { color: #666; } /* Mozilla Firefox 19+ */
 .form-control:-ms-input-placeholder { color: #666; } /* Internet Explorer 10-11 */
-.form-control::-ms-input-placeholder { color:#66; } /* Microsoft Edge */
+.form-control::-ms-input-placeholder { color:#666; } /* Microsoft Edge */
 input:focus,
 .select select:focus,
 .form-control:focus {
@@ -828,6 +828,7 @@ body.tg-comingsoonpage .tg-wrapper{overflow:visible;}
 .tg-userlogin figure a img {
 	display: block;
 	border-radius: 50%;
+	
 }
 .tg-userlogin span {
 	float: right;
@@ -858,8 +859,13 @@ body.tg-comingsoonpage .tg-wrapper{overflow:visible;}
 	padding: 10px 0;
 	position:relative;
 }
-.tg-logo a { display: block; }
-.tg-logo a img { display: block; }
+.tg-logo a { display: block;
+
+ }
+.tg-logo a img {
+	 display: block;
+	  }
+	 
 .tg-wishlistandcart {
 	z-index: 2;
 	float: right;
@@ -1096,7 +1102,7 @@ body.tg-comingsoonpage .tg-wrapper{overflow:visible;}
 }
 .tg-navigation > ul {
 	width:100%;
-	float:left;
+	/* float:left; */
 	position: relative;
 	display: inline-block;
 	vertical-align: top;
@@ -1907,6 +1913,7 @@ li.menu-item-has-mega-menu { position: static; }
 	width: 100%;
 	float: left;
 }
+
 .tg-featureditm figure{
 	width: 100%;
 	float: left;
@@ -2118,7 +2125,7 @@ li.menu-item-has-mega-menu { position: static; }
 	-o-transform: perspective(3000px) rotateY(80deg) rotateZ(3deg);
 	transform: perspective(3000px) rotateY(80deg) rotateZ(3deg);
 }
-.tg-pickedbyauthor .tg-postbook:hover .tg-bookimg:before{}
+/* .tg-pickedbyauthor .tg-postbook:hover .tg-bookimg:before{} */
 .tg-pickedbyauthor .tg-backcover,
 .tg-pickedbyauthor .tg-backcover:after{display: none;}
 .tg-hovercontent{
@@ -2888,6 +2895,7 @@ li.menu-item-has-mega-menu { position: static; }
 	font-size:50px;
 	line-height:40px;
 	font-weight:bold;
+	color: red;
 }
 /* =============================================
 			About Us Style						
@@ -3421,6 +3429,7 @@ blockquote .tg-bookwriter{
 	background:#f16945;
 }
 .tg-featurebook .tg-featureditm figure{margin:0;}
+
 .tg-featurebook .tg-featureditmcontent{
 	margin:0;
 	padding:0;
