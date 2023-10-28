@@ -9,3 +9,4 @@ include('componant/feature.php');
 include('componant/footer.php');
 include('js.php');
 ?>
+<h1>abc</h1>
