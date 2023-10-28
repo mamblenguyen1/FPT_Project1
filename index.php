@@ -11,3 +11,4 @@ include('componant/footer.php');
 
 include('js.php');
 ?>
+<p>Hello</p>
