@@ -43,15 +43,51 @@ if (isset($_GET['pages'])) {
                 case 'listorder':
                     include './admin/resources/order/OrderList.php';
                     break;
+                case 'commentList':
+                    include './Admin/resources/comment/CommentList.php';
+                    break;
+                case 'commentDetail':
+                    include './Admin/resources/comment/CommentDetail.php';
+                    break;
+                case 'AccessoryDetail':
+                    include './Admin/resources/product/ProductDetail/AccessoryDetail.php';
+                    break;
+                case 'LaptopDetail':
+                    include './Admin/resources/product/ProductDetail/LaptopDetail.php';
+                    break;
+                case 'PhoneDetail':
+                    include './Admin/resources/product/ProductDetail/PhoneDetail.php';
+                    break;
+                case 'UserList':
+                    include './Admin/resources/user/UserList.php';
+                    break;
+                case 'OrderList':
+                    include './Admin/resources/order/OrderList.php';
+                    break;
+                case 'OrderDetail':
+                    include './Admin/resources/order/OrderDetail.php';
+                    break;
+                case 'TypeList':
+                    include './Admin/resources/Type/TypeList.php';
+                    break;
+                case 'TypeAdd':
+                    include './Admin/resources/Type/TypeAdd.php';
+                    break;
+                case 'TypeEdit':
+                    include './Admin/resources/Type/TypeEdit.php';
+                    break;
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
             }
             break;
-        case 'client':
+        case 'user':
             switch ($_GET['action']) {
                 case 'index':
-                    include './client/index.php';
+                    include './User/index.php';
+                    break;
+                case 'ProductUser':
+                    include './User/Product.php';
                     break;
             }
             break;
@@ -59,4 +95,3 @@ if (isset($_GET['pages'])) {
 }
 
 include 'js.php';
-

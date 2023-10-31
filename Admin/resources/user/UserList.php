@@ -4,7 +4,7 @@
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
-            <h1 style="padding-left: 30px;">Danh sách đơn hàng</h1>
+            <h1 style="padding-left: 30px;">Danh sách người dùng</h1>
         </div>
         <section class="content">
             <div class="container-fluid">
@@ -18,35 +18,37 @@
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Tên khách hàng</th>
-                                            <th>Số lượng sản phẩm</th>
-                                            <th>Tổng tiền</th>
-                                            <th>Số điện thoại</th>
-                                            <th>Địa chỉ</th>
+                                            <th>Tên người dùng</th>
+                                            <th>Email</th>
+                                            <th>Số Điện Thoại</th>
+                                            <th>Địa Chỉ</th>
+                                            <th>Vai Trò</th>
                                             <th>Thao Tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         <tr>
-                                            <td>Khách hàng 1</td>
-                                            <td>2</td>
-                                            <td>350,000</td>
-                                            <td>123456</td>
+                                            <td>Người dùng 1</td>
+                                            <td>ND1@gmail.com</td>
+                                            <td>01234</td>
                                             <td>Cần Thơ</td>
+                                            <td>Admin</td>
                                             <td>
-                                                <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
+                                                <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
+                                                <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
                                             </td>
                                         </tr>
 
                                         <tr>
-                                            <td>Khách hàng 2</td>
-                                            <td>3</td>
-                                            <td>50,000</td>
-                                            <td>987654</td>
+                                            <td>Người dùng 2</td>
+                                            <td>ND2@gmail.com</td>
+                                            <td>04321</td>
                                             <td>Hậu Giang</td>
+                                            <td>User</td>
                                             <td>
-                                                <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
+                                                <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
+                                                <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
                                             </td>
                                         </tr>
 
