@@ -34,6 +34,7 @@
                         <p>Màn Hình: 144hz</p>
                         <p>Card Đồ Họa: RTX 4090</p>
                         <p>CPU: i9</p>
+                        <p>Ổ cứng: hehe</p>
                         <p>RAM: 32GB</p>
                       </td>
                       <td>
