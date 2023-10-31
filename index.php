@@ -3,7 +3,9 @@
 <?php
 require_once './config/pdo.php';
 require_once './Admin/resources/category/CategoryFunction.php';
+require_once './Admin/resources/user/UserFunction.php';
 $db = new connect();
+$user = new UserFunction();
 $category = new Categories();
 
 //require('./admin/core/function.php');
@@ -64,15 +66,15 @@ if (isset($_GET['pages'])) {
                 case 'UserList':
                     include './Admin/resources/user/UserList.php';
                     break;
-                    case 'UserAdd':
-                        include './Admin/resources/user/UserAdd.php';
-                        break; 
-                        case 'UserEdit':
-                            include './Admin/resources/user/UserEdit.php';
-                            break; 
-                            case 'UserList':
-                                include './Admin/resources/user/UserList.php';
-                                break; 
+                case 'UserAdd':
+                    include './Admin/resources/user/UserAdd.php';
+                    break;
+                case 'UserEdit':
+                    include './Admin/resources/user/UserEdit.php';
+                    break;
+                case 'UserList':
+                    include './Admin/resources/user/UserList.php';
+                    break;
                 case 'OrderList':
                     include './Admin/resources/order/OrderList.php';
                     break;
@@ -99,13 +101,12 @@ if (isset($_GET['pages'])) {
                 case 'index':
                     include './client/index.php';
                     break;
-                    case 'Thanks':
-                        include './User/Product.php';
-                        break;
-                }
+                case 'Thanks':
+                    include './User/Product.php';
+                    break;
+            }
             break;
     }
 }
 
 include 'js.php';
-
