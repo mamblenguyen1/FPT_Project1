@@ -13,7 +13,7 @@
                     <div class="card">
                         <div class="card-header" style="width: 200px;">
                             <button type="button" class="btn btn-block btn-outline-primary"><a href="?pages=admin&action=addcate">Thêm danh mục</a></button>
-                            </div>
+                        </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
