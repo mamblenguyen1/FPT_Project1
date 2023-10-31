@@ -1,6 +1,5 @@
 <?php include './Admin/componant/header.php' ?>
 <?php include './admin/componant/sidebar.php' ?>
-
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -12,48 +11,52 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
+                                <button type="button" class="btn btn-outline-primary"><a href="?pages=admin&action=UserAdd">Thêm Tài Khoản</a></button>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
+
                                         <tr>
                                             <th>Tên người dùng</th>
                                             <th>Email</th>
+                                            <th>Password</th>
                                             <th>Số Điện Thoại</th>
                                             <th>Địa Chỉ</th>
                                             <th>Vai Trò</th>
+                                            <th>Ngày tạo</th>
                                             <th>Thao Tác</th>
                                         </tr>
-                                    </thead>
+            </thead>
                                     <tbody>
+                                        <?
+                                        $row = $user->user_select_all();
+                                        foreach ($row as $ketqua) {
+                                            extract($ketqua);
+                                        ?>
+                                            <tr>
+                                                <td><?= $user_name ?></td>
+                                                <td><?= $email ?></td>
+                                                <td><?= $user_password ?></td>
+                                                <td><?= $user_phone_number ?></td>
+                                                <td><?= $user_address ?></td>
+                                                <td><?= $role_id ?></td>
+                                                <td><?= $created_at ?></td>
+                                                <td>
+                                                    <form action="index.php?pages=admin&action=UserEdit" method="post">
+                                                        <input type="hidden" value="<? echo $user_id ?>" name="user_id">
+                                                        <button type="submit" name="edit" class="btn btn-outline-primary">Chỉnh sửa</button>
+                                                        <button type="submit" onclick="return confirm('Bạn Có đồng ý xóa không ?')" name="delete" class="btn btn-outline-danger">Xóa</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
 
-                                        <tr>
-                                            <td>Người dùng 1</td>
-                                            <td>ND1@gmail.com</td>
-                                            <td>01234</td>
-                                            <td>Cần Thơ</td>
-                                            <td>Admin</td>
-                                            <td>
-                                                <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
-                                                <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
-                                            </td>
-                                        </tr>
+                                    </tbody>
 
-                                        <tr>
-                                            <td>Người dùng 2</td>
-                                            <td>ND2@gmail.com</td>
-                                            <td>04321</td>
-                                            <td>Hậu Giang</td>
-                                            <td>User</td>
-                                            <td>
-                                                <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
-                                                <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
-                                            </td>
-                                        </tr>
-
-
-                                        </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -63,4 +66,5 @@
         </section>
     </div>
 </div>
+
 <?php include './admin/componant/footer.php' ?>

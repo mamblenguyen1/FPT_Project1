@@ -3,9 +3,10 @@
 <?php
 require_once './config/pdo.php';
 require_once './Admin/resources/category/CategoryFunction.php';
-require_once './Admin/resources/order/Order_function.php';
 $db = new connect();
+$user = new UserFunction();
 $category = new Categories();
+$type = new Type();
 
 //require('./admin/core/function.php');
 //require('./client/core/FunctionClient.php');
@@ -44,15 +45,14 @@ if (isset($_GET['pages'])) {
                 case 'editcate':
                     include './admin/resources/category/CategoryEdit.php';
                     break;
-                case 'listorder':
-                    include './admin/resources/order/OrderList.php';
-                    break;
+                    // comment
                 case 'commentList':
                     include './Admin/resources/comment/CommentList.php';
                     break;
                 case 'commentDetail':
                     include './Admin/resources/comment/CommentDetail.php';
                     break;
+                    // detail
                 case 'AccessoryDetail':
                     include './Admin/resources/product/ProductDetail/AccessoryDetail.php';
                     break;
@@ -62,21 +62,23 @@ if (isset($_GET['pages'])) {
                 case 'PhoneDetail':
                     include './Admin/resources/product/ProductDetail/PhoneDetail.php';
                     break;
+                    // user 
                 case 'UserList':
                     include './Admin/resources/user/UserList.php';
                     break;
-                case 'UserAdd':
-                    include './Admin/resources/user/UserAdd.php';
-                    break;
-                case 'UserEdit':
-                    include './Admin/resources/user/UserEdit.php';
-                    break;
+                    case 'UserAdd':
+                        include './Admin/resources/user/UserAdd.php';
+                        break; 
+                        case 'UserEdit':
+                            include './Admin/resources/user/UserEdit.php';
+                            break; 
                 case 'OrderList':
                     include './Admin/resources/order/OrderList.php';
                     break;
                 case 'OrderDetail':
                     include './Admin/resources/order/OrderDetail.php';
                     break;
+                    // type
                 case 'TypeList':
                     include './Admin/resources/Type/TypeList.php';
                     break;
@@ -91,15 +93,16 @@ if (isset($_GET['pages'])) {
                     break;
             }
             break;
-        case 'client':
+            
+        case 'user':
             switch ($_GET['action']) {
                 case 'index':
-                    include './client/index.php';
+                    include './User/index.php';
                     break;
-                case 'Thanks':
-                    include './User/Product.php';
-                    break;
-            }
+                    case 'Thanks':
+                        include './User/Product.php';
+                        break;
+                }
             break;
     }
 }

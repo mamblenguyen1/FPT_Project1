@@ -27,7 +27,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?
+                                    <?
                                         $conn = $db->pdo_get_connection();
                                         $stmt = $conn->prepare("SELECT * FROM `order` , `user`, `product`, `order_detail`
                                         WHERE `order`.user_id = `user`.user_id
@@ -38,10 +38,10 @@
                                             foreach ($stmt as $row) {
                                                 echo '<tr>
                                                 <td>' . $row['user_name'] . '</td>
-                                                <td>' . $row['user_name'] . '</td>
-                                                <td>' . $row['user_name'] . '</td>
-                                                <td>' . $row['user_phone_number'] . '</td>
-                                                <td>' . $row['user_address'] . '</td>
+                                                <td>2</td>
+                                                <td>350,000</td>
+                                                <td>123456</td>
+                                                <td>Cần Thơ</td>
                                                 <td>
                                                     <a href="?pages=admin&action=OrderDetail">
                                                         <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
@@ -51,6 +51,17 @@
                                             }
                                         }
                                         ?>
+
+                                        <tr>
+                                            <td>Khách hàng 1</td>
+                                            <td>2</td>
+                                            <td>350,000</td>
+                                            <td>123456</td>
+                                            <td>Cần Thơ</td>
+                                            <td>
+                                                <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
+                                            </td>
+                                        </tr>
 
                                         <!-- <tr>
                                             <td>Khách hàng 2</td>

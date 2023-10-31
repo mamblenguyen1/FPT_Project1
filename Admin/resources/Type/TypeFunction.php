@@ -1,15 +1,16 @@
 <?
-class Categories
+class Type
 {
-    var $category_id = null;
-    var $category_name = null;
+    var $type_id  = null;
+    var $type_name = null;
     var $created_at = null;
-    var $updated_at = null;
+    var $is_deleted = null;
     var $is_show = null;
-    function create_category($category_name, $is_show )
+    var $category_id = null;
+    function create_Type($type_name, $is_show )
     {
         $db = new connect();
-        $select = "INSERT INTO category(category_name, is_show,is_deleted ) VALUES ('$category_name' ,$is_show , 1 )";
+        $select = "INSERT INTO `type`(type_name, is_show,is_deleted ) VALUES ('$type_name' ,$is_show , 1 )";
         $result = $db->pdo_execute($select);
         return $result;
     }
@@ -57,7 +58,8 @@ class Categories
         $db = new connect();
         $sql = "SELECT COUNT(product.product_id) FROM category, type , product
         WHERE category.category_id = type.category_id
-        AND product.type_id = type.type_id AND category.category_id = $cateId";
+        AND product.type_id = type.type_id 
+        AND type.type_id = $cateId";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row['COUNT(product.product_id)'];
@@ -76,25 +78,6 @@ class Categories
             return $row['COUNT(type.type_id)'];
         }
     }
-    // function getInfoCateAll($column)
-    // {
-    //     try {
-    //         $db = new connect();
-    //         $conn = $db->pdo_get_connection();
-    //         $stmt = $conn->prepare("SELECT * FROM loaisach");
-    //         $stmt->execute();
-    //         if($stmt->rowCount()>0){
-    //         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    //             foreach ($row as $kq){
-    //                 echo $kq[$column]; ;
-    //             }
-    //         }
-    //         }
-    //     } catch (PDOException $e) {
-    //         echo "Connection failed: " . $e->getMessage();
-    //     }
-    // }
-
 
 
 

@@ -1,0 +1,167 @@
+<?php
+class UserFunction
+{
+    //thêm
+    function user_insert($user_name, $email, $user_phone_number, $user_address, $user_password, $role_id)
+    {
+        $db = new connect();
+        $sql = "INSERT INTO user(user_name, email, user_phone_number, user_address, user_password, role_id, is_deleted) VALUES ('$user_name','$email' , '$user_phone_number', '$user_address', '$user_password', $role_id, 1)";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+    //
+    function update_user($user_name, $user_password, $user_phone_number, $user_address, $role_id, $user_id)
+    {
+        $db = new connect();
+        $select = "UPDATE `user` SET user_name = '$user_name' , user_password = '$user_password', user_phone_number = '$user_phone_number', user_address = '$user_address', role_id = $role_id  WHERE user_id = $user_id";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
+    //
+    function deleteuser($user_id)
+    {
+        $db = new connect();
+        $sql = "UPDATE `user` SET is_deleted = 2 WHERE user_id = $user_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+    //
+    function getInfouser($user_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM user, status WHERE status.status_id= user.is_deleted AND user_id = $user_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    //hiển thị ra hết
+    function user_select_all()
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM user WHERE is_deleted = 1";
+        return $db->pdo_query($sql);
+    }
+
+
+    function khach_hang_exist($user_id)
+    {
+        $db = new connect();
+        $sql = "SELECT count(*) FROM khachhang WHERE $user_id=?";
+        return $db->pdo_query_value($sql, $user_id) > 0;
+    }
+
+    function khach_hang_select_by_role($vai_tro)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM khachhang WHERE vai_tro=?";
+        return $db->pdo_query($sql, $vai_tro);
+    }
+
+    function khach_hang_change_password($user_id, $mat_khau_moi)
+    {
+        $db = new connect();
+        $sql = "UPDATE khachhang SET mat_khau=? WHERE user_id=?";
+        return $db->pdo_execute($sql, $mat_khau_moi, $user_id);
+    }
+
+    public function checkUser($userAccount, $password)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM khachhang WHERE ho_ten='$userAccount' AND mat_khau='$password'";
+        $result = $db->pdo_query_one($select);
+        if ($result != null)
+            return true;
+        else
+            return false;
+    }
+    public function checkRole($userAccount, $password)
+    {
+        $db = new connect();
+        $select = "SELECT khachhang.vai_tro FROM khachhang, vaitro 
+        WHERE khachhang.vai_tro = vaitro.vai_tro_id AND ho_ten= '$userAccount' AND mat_khau ='$password'";
+        $result = $db->pdo_query_one($select);
+        return $result;
+    }
+    //lay ID
+    public function userid($userAccount, $password)
+    {
+        $db = new connect();
+        $select = "SELECT user_id FROM khachhang WHERE ho_ten='$userAccount' AND mat_khau='$password'";
+        $result = $db->pdo_query_one($select);
+        return $result;
+    }
+
+    function getInfoUserName($userAccount, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM khachhang WHERE ho_ten ='$userAccount'";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    //tk trung
+    public function checkDuplicateUser($userAccount)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM khachhang";
+        $result = $db->pdo_query($select);
+        foreach ($result as $row) {
+            $nw = $row['ho_ten'];
+            if ($userAccount == $nw) {
+                return true;
+            }
+        }
+    }
+
+    //dk
+    function create_User($userAccount, $userPass, $userEmail)
+    {
+        $db = new connect();
+        $select = "INSERT INTO khachhang(ho_ten ,mat_khau, vai_tro , mail ) VALUES ('$userAccount', '$userPass', 2 , '$userEmail')";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
+    //doimk = sét email
+    public function checkDuplicateEmail($userEmail)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM khachhang";
+        $result = $db->pdo_query($select);
+        foreach ($result as $row) {
+            $nw = $row['mail'];
+            if ($userEmail == $nw) {
+                return true;
+            }
+        }
+    }
+    //suapass
+    function update_Pass($userPass, $userID)
+    {
+        $db = new connect();
+        $select = "UPDATE khachhang SET mat_khau = '$userPass' WHERE user_id = $userID";
+        return $db->pdo_execute($select);
+    }
+
+    function getInfoEmail($column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM khachhang";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    function getIdEmail($Email, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM khachhang WHERE mail like '$Email'";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+}
+// $user = new User();
+// echo  $user->create_UserADa(2);
