@@ -70,6 +70,9 @@ if (isset($_GET['pages'])) {
                         case 'UserEdit':
                             include './Admin/resources/user/UserEdit.php';
                             break; 
+                            case 'UserList':
+                                include './Admin/resources/user/UserList.php';
+                                break; 
                 case 'OrderList':
                     include './Admin/resources/order/OrderList.php';
                     break;
