@@ -1,5 +1,4 @@
 <?php
-require_once './config/pdo.php';
 class UserFunction
 {
     //thêm
@@ -43,15 +42,6 @@ class UserFunction
         $sql = "SELECT * FROM user WHERE is_deleted = 1";
         return $db->pdo_query($sql);
     }
-
-
-
-
-
-
-
-
-
 
 
     function khach_hang_exist($user_id)
