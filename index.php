@@ -62,18 +62,30 @@ if (isset($_GET['pages'])) {
                 case 'OrderList':
                     include './Admin/resources/order/OrderList.php';
                     break;
-                    case 'OrderDetail':
-                        include './Admin/resources/order/OrderDetail.php';
-                        break;
+                case 'OrderDetail':
+                    include './Admin/resources/order/OrderDetail.php';
+                    break;
+                case 'TypeList':
+                    include './Admin/resources/Type/TypeList.php';
+                    break;
+                case 'TypeAdd':
+                    include './Admin/resources/Type/TypeAdd.php';
+                    break;
+                case 'TypeEdit':
+                    include './Admin/resources/Type/TypeEdit.php';
+                    break;
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
             }
             break;
-        case 'client':
+        case 'user':
             switch ($_GET['action']) {
                 case 'index':
-                    include './client/index.php';
+                    include './User/index.php';
+                    break;
+                case 'ProductUser':
+                    include './User/Product.php';
                     break;
             }
             break;
