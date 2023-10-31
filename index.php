@@ -3,6 +3,7 @@
 <?php
 require_once './config/pdo.php';
 require_once './Admin/resources/category/CategoryFunction.php';
+require_once './Admin/resources/order/Order_function.php';
 $db = new connect();
 $category = new Categories();
 

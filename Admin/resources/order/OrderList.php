@@ -38,10 +38,10 @@
                                             foreach ($stmt as $row) {
                                                 echo '<tr>
                                                 <td>' . $row['user_name'] . '</td>
-                                                <td>2</td>
-                                                <td>350,000</td>
-                                                <td>123456</td>
-                                                <td>Cần Thơ</td>
+                                                <td>' . $row['user_name'] . '</td>
+                                                <td>' . $row['user_name'] . '</td>
+                                                <td>' . $row['user_phone_number'] . '</td>
+                                                <td>' . $row['user_address'] . '</td>
                                                 <td>
                                                     <a href="?pages=admin&action=OrderDetail">
                                                         <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
@@ -52,7 +52,7 @@
                                         }
                                         ?>
 
-                                        <tr>
+                                        <!-- <tr>
                                             <td>Khách hàng 2</td>
                                             <td>3</td>
                                             <td>50,000</td>
@@ -61,7 +61,7 @@
                                             <td>
                                                 <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
                                             </td>
-                                        </tr>
+                                        </tr> -->
 
 
                                         </tfoot>
