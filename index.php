@@ -1,3 +1,5 @@
+<!-- test sang -->
+
 <?php
 require_once './config/pdo.php';
 require_once './Admin/resources/category/CategoryFunction.php';
@@ -83,19 +85,16 @@ if (isset($_GET['pages'])) {
                 case 'TypeEdit':
                     include './Admin/resources/Type/TypeEdit.php';
                     break;
-                    
+
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
             }
             break;
-        case 'user':
+        case 'client':
             switch ($_GET['action']) {
                 case 'index':
-                    include './User/index.php';
-                    break;
-                case 'ProductUser':
-                    include './User/Product.php';
+                    include './client/index.php';
                     break;
                     case 'Thanks':
                         include './User/Product.php';
@@ -106,3 +105,4 @@ if (isset($_GET['pages'])) {
 }
 
 include 'js.php';
+
