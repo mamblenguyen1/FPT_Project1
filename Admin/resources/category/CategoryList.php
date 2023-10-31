@@ -11,9 +11,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Danh mục danh mục cửa hàng</h3>
-                        </div>
+                        <div class="card-header" style="width: 200px;">
+                            <button type="button" class="btn btn-block btn-outline-primary"><a href="?pages=admin&action=addcate">Thêm danh mục</a></button>
+                            </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
@@ -23,32 +23,42 @@
                                         <th>Số loại danh mục</th>
                                         <th>Số lượng tất cả sản phẩm</th>
                                         <th>Thời gian tạo</th>
+                                        <th>Trạng thái</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Điện thoại</td>
-                                        <td>3</td>
-                                        <td>30</td>
-                                        <td>31/10/2023</td>
+                                    <?
+                                    $conn = $db->pdo_get_connection();
+                                    $stmt = $conn->prepare("SELECT * FROM `category` , isshow 
+                                    WHERE category.is_show = isshow.show_id AND is_deleted = 1");
+                                    $stmt->execute();
+                                    if ($stmt->rowCount() > 0) {
+                                        foreach ($stmt as $row) {
+                                            echo ' 
+                                        <tr>
+                                        <td>' . $row['category_name'] . '</td>
+                                        <td>' . $category->CountTypeCategories($row['category_id']) . '</td>
+                                        <td>' . $category->CountProduct($row['category_id']) . '</td>
+                                        <td>' . $row['created_at'] . '</td>
+                                        <th>' . $row['show_name'] . '</th>
                                         <td>
-                                            <button type="button" class="btn btn-outline-primary">Chỉnh sửa</button>
-                                            <button type="button" class="btn btn-outline-danger">Xóa</button>
+                                        <form action="index.php?pages=admin&action=editcate" method="post">
+                                             <input type="hidden" value="' . $row['category_id'] . '" name="cate_id">
+                                             <button type="submit" name="edit_cate" class="btn btn-outline-primary">Chỉnh sửa</button>
+                                             <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="delete_cate" class="btn btn-outline-danger">Xóa</button>
+                                        </form>
+                                           
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>Laptop</td>
-                                        <td>3</td>
-                                        <td>32</td>
-                                        <td>31/10/2023</td>
-                                        <td>
-                                            <button type="button" class="btn btn-outline-primary">Chỉnh sửa</button>
-                                            <button type="button" class="btn btn-outline-danger">Xóa</button>
-                                        </td>
-                                    </tr>
+                                   
+                                        ';
+                                        }
+                                    }
+                                    ?>
 
-                                    </tfoot>
+                                </tbody>
+
                             </table>
                         </div>
                         <!-- /.card-body -->
