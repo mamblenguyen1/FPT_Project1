@@ -3,17 +3,17 @@
 
 <?
 if (isset($_POST['them_user'])) {
-    $user_name = $_POST['user_name'];
-    $email = $_POST['email'];
-    $user_password = $_POST['user_password'];
-    $user_phone_number = $_POST['user_phone_number'];
-    $user_address = $_POST['user_address'];
-    $role_id = $_POST['role_id'];
-    if (($user_name != '') && ($email != '') && ($user_password != '') && ($user_phone_number != '') && ($user_address != '') && ($user_password != '') && ($role_id != '')) {
-        $user->user_insert($user_name, $email, $user_phone_number, $user_address, $user_password, $role_id);
-        echo '<script>alert("Thêm tài khoản thành công !!!")</script>';
-        echo '<script>window.location.href="?pages=admin&action=UserList</script>';
-    }
+  $user_name = $_POST['user_name'];
+  $email = $_POST['email'];
+  $user_password = $_POST['user_password'];
+  $user_phone_number = $_POST['user_phone_number'];
+  $user_address = $_POST['user_address'];
+  $role_id = $_POST['role_id'];
+  if (($user_name != '') && ($email != '') && ($user_password != '') && ($user_phone_number != '') && ($user_address != '') && ($user_password != '') && ($role_id != '')) {
+    $user->user_insert($user_name, $email, $user_phone_number, $user_address, $user_password, $role_id);
+    echo '<script>alert("Thêm tài khoản thành công !!!")</script>';
+    echo '<script>window.location.href="?pages=admin&action=UserList</script>';
+  }
 }
 ?>
 
@@ -69,7 +69,7 @@ if (isset($_POST['them_user'])) {
 
     </div>
 
-</div>
+  </div>
 
 
-<?php include './admin/componant/footer.php' ?>
+  <?php include './admin/componant/footer.php' ?>
