@@ -12,7 +12,8 @@ if (isset($_POST['them_user'])) {
   if (($user_name != '') && ($email != '') && ($user_password != '') && ($user_phone_number != '') && ($user_address != '') && ($user_password != '') && ($role_id != '')) {
     $user->user_insert($user_name, $email, $user_phone_number, $user_address, $user_password, $role_id);
     echo '<script>alert("Thêm tài khoản thành công !!!")</script>';
-    echo '<script>window.location.href="?pages=admin&action=UserList</script>';
+    echo '<script>window.location.href="index.php?pages=admin&action=UserList</script>';
+
   }
 }
 ?>
@@ -58,6 +59,7 @@ if (isset($_POST['them_user'])) {
               <label>Vai Trò</label>
               <input type="text" class="form-control" id="exampleInputEmail1" name="role_id">
             </div>
+
             <div class="card-footer">
               <button type="submit" class="btn btn-primary" name="them_user">Submit</button>
             </div>
