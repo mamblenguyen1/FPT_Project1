@@ -1,7 +1,7 @@
 <? 
     class connect{
         function pdo_get_connection(){
-            $dburl = "mysql:host=localhost;dbname=library;charset=utf8";
+            $dburl = "mysql:host=localhost;dbname=project1;charset=utf8";
             $username = 'mamblenguyen';
             $password = 'Nguoihung123';
             $conn = new PDO($dburl, $username, $password);
