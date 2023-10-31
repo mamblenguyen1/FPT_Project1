@@ -61,16 +61,25 @@ if (isset($_POST['them_user'])) {
           </div>
 
 
-          <!-- /.card-body -->
+                  <div class="form-group">
+                    <label>Vai Trò</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                  </div>
+                </div>
+                <!-- /.card-body -->
 
           <div class="card-footer">
             <button type="submit" class="btn btn-primary" name="them_user">Submit</button>
           </div>
         </form>
       </div>
-    </div>
-  </div>
 
+    </div>
 
 </div>
 

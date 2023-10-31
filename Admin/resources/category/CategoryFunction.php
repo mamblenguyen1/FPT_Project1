@@ -13,17 +13,26 @@ class Categories
         $result = $db->pdo_execute($select);
         return $result;
     }
-    function update_category($category_name, $categories_cnt, $cateID)
+    function update_category($category_name, $is_show, $userid, $cateid)
     {
         $db = new connect();
-        $select = "UPDATE loaisach SET lsten = '$category_name' , lsthongtin = '$categories_cnt' WHERE lsma  = $cateID";
+        $select = "UPDATE category SET category_name = '$category_name' , is_show = $is_show , user_updated = $userid WHERE category_id = $cateid";
         $result = $db->pdo_execute($select);
         return $result;
     }
+
+    function deleteCate($cateID)
+    {
+        $db = new connect();
+        $sql = "UPDATE category SET is_deleted = 0 WHERE category_id = $cateID";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+
     function getInfoCate($cateID, $column)
     {
         $db = new connect();
-        $sql = "SELECT * FROM loaisach WHERE lsma = $cateID";
+        $sql = "SELECT * FROM category, isshow WHERE isshow.show_id= category.is_show AND category_id = $cateID";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];
@@ -42,40 +51,49 @@ class Categories
     }
 
 
-    function deleteCate($cateID)
+    
+    function CountProduct($cateId)
     {
         $db = new connect();
-        $sql = "DELETE FROM loaisach WHERE lsma = $cateID";
-        $result = $db->pdo_execute($sql);
-        return $result;
-    }
-    function CountCategories()
-    {
-        $db = new connect();
-        $sql = "SELECT COUNT(lsma) FROM loaisach";
+        $sql = "SELECT COUNT(product.product_id) FROM category, type , product
+        WHERE category.category_id = type.category_id
+        AND product.type_id = type.type_id AND category.category_id = $cateId";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
-            return $row['COUNT(lsma)'];
+            return $row['COUNT(product.product_id)'];
         }
     }
-    function getInfoCateAll($column)
+    function CountTypeCategories($cateId)
     {
-        try {
-            $db = new connect();
-            $conn = $db->pdo_get_connection();
-            $stmt = $conn->prepare("SELECT * FROM loaisach");
-            $stmt->execute();
-            if($stmt->rowCount()>0){
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                foreach ($row as $kq){
-                    echo $kq[$column]; ;
-                }
-            }
-            }
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+        $db = new connect();
+        $sql = "SELECT COUNT(type.type_id) FROM category, type , product
+        WHERE category.category_id = type.category_id
+        AND product.type_id = type.type_id
+        AND category.category_id = $cateId
+        ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(type.type_id)'];
         }
     }
+    // function getInfoCateAll($column)
+    // {
+    //     try {
+    //         $db = new connect();
+    //         $conn = $db->pdo_get_connection();
+    //         $stmt = $conn->prepare("SELECT * FROM loaisach");
+    //         $stmt->execute();
+    //         if($stmt->rowCount()>0){
+    //         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    //             foreach ($row as $kq){
+    //                 echo $kq[$column]; ;
+    //             }
+    //         }
+    //         }
+    //     } catch (PDOException $e) {
+    //         echo "Connection failed: " . $e->getMessage();
+    //     }
+    // }
 
 
 
