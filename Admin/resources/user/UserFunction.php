@@ -3,11 +3,12 @@ require_once './config/pdo.php';
 class UserFunction
 {
 //thêm
-    function user_insert($user_id, $user_name, $email, $user_phone_number, $user_address, $user_password, $role_id)
+    function user_insert($user_name, $email, $user_phone_number, $user_address, $user_password, $role_id)
     {
         $db = new connect();
-        $sql = "INSERT INTO user(user_id, user_name, email, user_phone_number, user_address, user_password, role_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        return $db->pdo_execute($sql, $user_id, $user_name, $email, $user_phone_number, $user_address, $user_password, $role_id);
+        $sql = "INSERT INTO user(user_name, email, user_phone_number, user_address, user_password, role_id) VALUES ('$user_name','$email' , '$user_phone_number', '$user_address', '$user_password', $role_id)";
+        $result = $db->pdo_execute($sql);
+        return $result;
     }
 //sửa
     function user_update($mat_khau, $ho_ten, $mail, $ma_kh)
@@ -33,7 +34,7 @@ class UserFunction
     function user_select_all()
     {
         $db = new connect();
-        $sql = "SELECT * FROM khachhang";
+        $sql = "SELECT * FROM user";
         return $db->pdo_query($sql);
     }
 
