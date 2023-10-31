@@ -22,15 +22,17 @@
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
-                                        <tr>
-                                            <th>Tên người dùng</th>
-                                            <th>Email</th>
-                                            <th>Password</th>
-                                            <th>Số Điện Thoại</th>
-                                            <th>Địa Chỉ</th>
-                                            <th>Vai Trò</th>
-                                            <th>Thao Tác</th>
-                                        </tr>
+                                  
+                                            <tr>
+                                                <th>Tên người dùng</th>
+                                                <th>Email</th>
+                                                <th>Password</th>
+                                                <th>Số Điện Thoại</th>
+                                                <th>Địa Chỉ</th>
+                                                <th>Vai Trò</th>
+                                                <th>Ngày tạo</th>
+                                                <th>Thao Tác</th>
+                                            </tr>
                                     </thead>
                                     <tbody>
                                         <?
@@ -38,18 +40,20 @@
                                         foreach ($row as $ketqua) {
                                             extract($ketqua);
                                         ?>
-                                            <tr>
-                                                <td><?= $user_name ?></td>
-                                                <td><?= $email ?></td>
-                                                <td><?= $user_password ?></td>
-                                                <td><?= $user_phone_number ?></td>
-                                                <td><?= $user_address ?></td>
-                                                <td><?= $role_id ?></td>
-                                                <td>
-                                                    <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
-                                                    <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
-                                                </td>
-                                            </tr>
+
+                                        <tr>
+                                            <td><?= $user_name ?></td>
+                                            <td><?= $email ?></td>
+                                            <td><?= $user_password ?></td>
+                                            <td><?= $user_phone_number ?></td>
+                                            <td><?= $user_address ?></td>
+                                            <td><?= $role_id ?></td>
+                                            <td><?= $created_at ?></td>
+                                            <td>
+                                                <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
+                                                <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
+                                            </td>
+                                        </tr>
                                         <?php
                                         }
                                         ?>
