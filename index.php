@@ -1,3 +1,5 @@
+<!-- test sang -->
+
 <?php
 require_once './config/pdo.php';
 require_once './Admin/resources/category/CategoryFunction.php';
@@ -50,6 +52,43 @@ if (isset($_GET['pages'])) {
                 case 'commentDetail':
                     include './Admin/resources/comment/CommentDetail.php';
                     break;
+                case 'AccessoryDetail':
+                    include './Admin/resources/product/ProductDetail/AccessoryDetail.php';
+                    break;
+                case 'LaptopDetail':
+                    include './Admin/resources/product/ProductDetail/LaptopDetail.php';
+                    break;
+                case 'PhoneDetail':
+                    include './Admin/resources/product/ProductDetail/PhoneDetail.php';
+                    break;
+                case 'UserList':
+                    include './Admin/resources/user/UserList.php';
+                    break;
+                    case 'UserAdd':
+                        include './Admin/resources/user/UserAdd.php';
+                        break; 
+                        case 'UserEdit':
+                            include './Admin/resources/user/UserEdit.php';
+                            break; 
+                            case 'UserList':
+                                include './Admin/resources/user/UserList.php';
+                                break; 
+                case 'OrderList':
+                    include './Admin/resources/order/OrderList.php';
+                    break;
+                case 'OrderDetail':
+                    include './Admin/resources/order/OrderDetail.php';
+                    break;
+                case 'TypeList':
+                    include './Admin/resources/Type/TypeList.php';
+                    break;
+                case 'TypeAdd':
+                    include './Admin/resources/Type/TypeAdd.php';
+                    break;
+                case 'TypeEdit':
+                    include './Admin/resources/Type/TypeEdit.php';
+                    break;
+
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
@@ -60,9 +99,13 @@ if (isset($_GET['pages'])) {
                 case 'index':
                     include './client/index.php';
                     break;
-            }
+                    case 'Thanks':
+                        include './User/Product.php';
+                        break;
+                }
             break;
     }
 }
 
 include 'js.php';
+
