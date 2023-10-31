@@ -22,7 +22,7 @@
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
-                                        
+                                  
                                             <tr>
                                                 <th>Tên người dùng</th>
                                                 <th>Email</th>
@@ -35,11 +35,12 @@
                                             </tr>
                                     </thead>
                                     <tbody>
-                                    <?
+                                        <?
                                         $row = $user->user_select_all();
                                         foreach ($row as $ketqua) {
                                             extract($ketqua);
                                         ?>
+
                                         <tr>
                                             <td><?= $user_name ?></td>
                                             <td><?= $email ?></td>
@@ -55,10 +56,10 @@
                                         </tr>
                                         <?php
                                         }
-                                    ?>
+                                        ?>
 
-                                        </tbody>
-                                    
+                                    </tbody>
+
                                 </table>
                             </div>
                         </div>
