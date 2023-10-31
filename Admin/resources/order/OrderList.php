@@ -27,8 +27,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-<<<<<<<<< Temporary merge branch 1
-                                        <?
+                                    <?
                                         $conn = $db->pdo_get_connection();
                                         $stmt = $conn->prepare("SELECT * FROM `order` , `user`, `product`, `order_detail`
                                         WHERE `order`.user_id = `user`.user_id
@@ -40,9 +39,9 @@
                                                 echo '<tr>
                                                 <td>' . $row['user_name'] . '</td>
                                                 <td>2</td>
-                                                <td>350,000</td>
-                                                <td>123456</td>
-                                                <td>Cần Thơ</td>
+                                                <td>' . $row['product_price'] . '</td>
+                                                <td>' . $row['user_phone_number'] . '</td>
+                                                <td>' . $row['user_address'] . '</td>
                                                 <td>
                                                     <a href="?pages=admin&action=OrderDetail">
                                                         <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
@@ -52,7 +51,6 @@
                                             }
                                         }
                                         ?>
-=========
 
                                         <tr>
                                             <td>Khách hàng 1</td>
@@ -64,7 +62,6 @@
                                                 <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
                                             </td>
                                         </tr>
->>>>>>>>> Temporary merge branch 2
 
                                         <tr>
                                             <td>Khách hàng 2</td>

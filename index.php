@@ -48,15 +48,14 @@ if (isset($_GET['pages'])) {
                 case 'editcate':
                     include './admin/resources/category/CategoryEdit.php';
                     break;
-                case 'listorder':
-                    include './admin/resources/order/OrderList.php';
-                    break;
+                    // comment
                 case 'commentList':
                     include './Admin/resources/comment/CommentList.php';
                     break;
                 case 'commentDetail':
                     include './Admin/resources/comment/CommentDetail.php';
                     break;
+                    // detail
                 case 'AccessoryDetail':
                     include './Admin/resources/product/ProductDetail/AccessoryDetail.php';
                     break;
@@ -66,6 +65,7 @@ if (isset($_GET['pages'])) {
                 case 'PhoneDetail':
                     include './Admin/resources/product/ProductDetail/PhoneDetail.php';
                     break;
+                    // user 
                 case 'UserList':
                     include './Admin/resources/user/UserList.php';
                     break;
@@ -75,15 +75,14 @@ if (isset($_GET['pages'])) {
                 case 'UserEdit':
                     include './Admin/resources/user/UserEdit.php';
                     break;
-                case 'UserList':
-                    include './Admin/resources/user/UserList.php';
-                    break;
+                    // order
                 case 'OrderList':
                     include './Admin/resources/order/OrderList.php';
                     break;
                 case 'OrderDetail':
                     include './Admin/resources/order/OrderDetail.php';
                     break;
+                    // type
                 case 'TypeList':
                     include './Admin/resources/Type/TypeList.php';
                     break;
@@ -99,12 +98,13 @@ if (isset($_GET['pages'])) {
                     break;
             }
             break;
-        case 'client':
+            
+        case 'user':
             switch ($_GET['action']) {
                 case 'index':
-                    include './client/index.php';
+                    include './User/index.php';
                     break;
-                case 'Thanks':
+                case 'Product':
                     include './User/Product.php';
                     break;
             }

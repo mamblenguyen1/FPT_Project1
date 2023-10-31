@@ -99,4 +99,5 @@ if (isset($_POST['addCate'])) {
         </div>
     </div>
 </div>
+
 <?php include './admin/componant/footer.php' ?>
