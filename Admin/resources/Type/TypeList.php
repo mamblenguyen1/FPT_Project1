@@ -33,7 +33,6 @@
                                             <td>32/13/2024</td>
                                             <td>
                                                 <button type="button" href="" class="btn btn-block btn-outline-primary">Sửa</button>
-                                                <button type="button" href="" class="btn btn-block btn-outline-danger">Xóa</button>
                                             </td>
                                         </tr>
 

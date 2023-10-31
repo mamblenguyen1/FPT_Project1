@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="css/login.css">
 <div class="container-login">
-<div class="login-wrap">
-  <div class="login-html">
+<div class="login-wrap" style="box-shadow: none;">
+  <div class="login-html" style="margin-top: 80px;">
     <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Đăng nhập</label>
     <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Đăng kí</label>
     <div class="login-form">
