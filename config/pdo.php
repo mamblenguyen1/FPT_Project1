@@ -2,8 +2,8 @@
     class connect{
         function pdo_get_connection(){
             $dburl = "mysql:host=localhost;dbname=project1;charset=utf8";
-            $username = 'mamblenguyen';
-            $password = 'Nguoihung123';
+            $username = 'root';
+            $password = 'mysql';
             $conn = new PDO($dburl, $username, $password);
             $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             return $conn;
