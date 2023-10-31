@@ -34,31 +34,74 @@ if (isset($_POST['them_user'])) {
               <label>Tên người dùng</label>
               <input type="text" class="form-control" id="exampleInputEmail1" name="user_name">
             </div>
-
+            <?
+            if (isset($_POST["user_name"])) {
+              if (empty($_POST["user_name"])) {
+                echo '<span class="vaild">Xin vui lòng nhập tên người dùng </span>';
+              } else {
+                echo '';
+              }
+            }
+            ?>
             <div class="form-group">
               <label>Email</label>
               <input type="email" class="form-control" id="exampleInputEmail1" name="email">
             </div>
-
+            <?
+            if (isset($_POST["email"])) {
+              if (empty($_POST["email"])) {
+                echo '<span class="vaild">Xin vui lòng nhập email </span>';
+              } else {
+                echo '';
+              }
+            }
+            ?>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
               <input type="password" class="form-control" id="exampleInputPassword1" name="user_password">
             </div>
-
+            <?
+            if (isset($_POST["user_password"])) {
+              if (empty($_POST["user_password"])) {
+                echo '<span class="vaild">Xin vui lòng nhập tên password </span>';
+              } else {
+                echo '';
+              }
+            }
+            ?>
             <div class="form-group">
               <label>Số điện thoại</label>
               <input type="text" class="form-control" id="exampleInputEmail1" name="user_phone_number">
             </div>
-
+            <?
+            if (isset($_POST["user_phone_number"])) {
+              if (empty($_POST["user_phone_number"])) {
+                echo '<span class="vaild">Xin vui lòng nhập số điện thoại</span>';
+              } else {
+                echo '';
+              }
+            }
+            ?>
             <div class="form-group">
               <label>Địa chỉ</label>
               <input type="text" class="form-control" id="exampleInputEmail1" name="user_address">
             </div>
-
+            <?
+            if (isset($_POST["user_address"])) {
+              if (empty($_POST["user_address"])) {
+                echo '<span class="vaild">Xin vui lòng nhập địa chỉ</span>';
+              } else {
+                echo '';
+              }
+            }
+            ?>
             <div class="form-group">
               <label>Vai Trò</label>
               <input type="text" class="form-control" id="exampleInputEmail1" name="role_id">
             </div>
+
+          </div>
+          <!-- /.card-body -->
 
             <div class="card-footer">
               <button type="submit" class="btn btn-primary" name="them_user">Submit</button>
