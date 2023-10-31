@@ -11,13 +11,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title" style="padding-bottom: 10px;">Danh sách tài khoản</h3>
-                                <div style="width: 200px;">
-                                    <button type="button" class="btn btn-block btn-outline-primary"><a href="?pages=admin&action=UserAdd">Thêm Tài Khoản</a></button>
-                                </div>
-
+                                <button type="button" class="btn btn-outline-primary"><a href="?pages=admin&action=UserAdd">Thêm Tài Khoản</a></button>
                             </div>
-
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
@@ -33,7 +28,7 @@
                                             <th>Ngày tạo</th>
                                             <th>Thao Tác</th>
                                         </tr>
-                                    </thead>
+            </thead>
                                     <tbody>
                                         <?
                                         $row = $user->user_select_all();

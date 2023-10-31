@@ -13,6 +13,7 @@ if (isset($_POST['them_user'])) {
     $user->user_insert($user_name, $email, $user_phone_number, $user_address, $user_password, $role_id);
     echo '<script>alert("Thêm tài khoản thành công !!!")</script>';
     echo '<script>window.location.href="index.php?pages=admin&action=UserList</script>';
+
   }
 }
 ?>
@@ -27,7 +28,7 @@ if (isset($_POST['them_user'])) {
         <div class="card-header"></div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form method="post">
+        <form method="post" action="">
           <div class="card-body">
             <div class="form-group">
               <label>Tên người dùng</label>
@@ -59,17 +60,9 @@ if (isset($_POST['them_user'])) {
               <input type="text" class="form-control" id="exampleInputEmail1" name="role_id">
             </div>
 
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary" name="them_user">Submit</button>
             </div>
-
-          </div>
-          <!-- /.card-body -->
-
-          <div class="card-footer">
-            <button type="submit" class="btn btn-primary" name="them_user">Submit</button>
-          </div>
         </form>
       </div>
 
