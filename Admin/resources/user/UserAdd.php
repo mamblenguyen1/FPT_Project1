@@ -43,7 +43,6 @@ if (isset($_POST['them_user'])) {
               <label for="exampleInputPassword1">Password</label>
               <input type="password" class="form-control" id="exampleInputPassword1" name="user_password">
             </div>
-          </div>
 
           <div class="form-group">
             <label>Số điện thoại</label>
@@ -60,17 +59,6 @@ if (isset($_POST['them_user'])) {
             <input type="text" class="form-control" id="exampleInputEmail1" name="role_id">
           </div>
 
-
-                  <div class="form-group">
-                    <label>Vai Trò</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                  </div>
-                </div>
                 <!-- /.card-body -->
 
           <div class="card-footer">
