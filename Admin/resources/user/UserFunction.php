@@ -1,5 +1,4 @@
 <?php
-require_once './config/pdo.php';
 class UserFunction
 {
 //thêm
@@ -37,13 +36,6 @@ class UserFunction
         $sql = "SELECT * FROM user";
         return $db->pdo_query($sql);
     }
-
-
-
-
-
-
-
 
 
     function khach_hang_select_by_id($ma_kh)
