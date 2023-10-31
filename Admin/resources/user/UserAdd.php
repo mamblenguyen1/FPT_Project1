@@ -43,7 +43,6 @@ if (isset($_POST['them_user'])) {
               <label for="exampleInputPassword1">Password</label>
               <input type="password" class="form-control" id="exampleInputPassword1" name="user_password">
             </div>
-          </div>
 
           <div class="form-group">
             <label>Số điện thoại</label>

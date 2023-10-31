@@ -30,6 +30,7 @@
                                                 <th>Số Điện Thoại</th>
                                                 <th>Địa Chỉ</th>
                                                 <th>Vai Trò</th>
+                                                <th>Ngày tạo</th>
                                                 <th>Thao Tác</th>
                                             </tr>
                                     </thead>
@@ -46,6 +47,7 @@
                                             <td><?= $user_phone_number ?></td>
                                             <td><?= $user_address ?></td>
                                             <td><?= $role_id ?></td>
+                                            <td><?= $created_at ?></td>
                                             <td>
                                                 <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
                                                 <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
