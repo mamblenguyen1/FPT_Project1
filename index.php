@@ -41,6 +41,12 @@ if (isset($_GET['pages'])) {
                 case 'listorder':
                     include './admin/resources/order/OrderList.php';
                     break;
+                case 'commentList':
+                    include './Admin/resources/comment/CommentList.php';
+                    break;
+                case 'commentDetail':
+                    include './Admin/resources/comment/CommentDetail.php';
+                    break;
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
@@ -57,4 +63,3 @@ if (isset($_GET['pages'])) {
 }
 
 include 'js.php';
-
