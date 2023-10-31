@@ -12,28 +12,33 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h1 style="padding-left: 30px;">Chi tiết phụ kiện</h1>
+                <h1 style="padding-left: 30px;">Chi tiết đơn hàng</h1>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                     <tr>
-                      <th>Tên sản phẩm</th>
-                      <th>Mô tả</th>
-                      <th>Thông số kỹ thuật</th>
+                      <th>Tên đơn hàng</th>
+                      <th>Đơn giá</th>
+                      <th>Số lượng</th>
+                      <th>Tổng tiền</th>
+                      <th>Thanh Toán</th>
+                      <th>Thời gian đặt hàng</th>
+                      <th>Tình trạng</th>
                       <th>Thao Tác</th>
                     </tr>
                   </thead>
                   <tbody>
 
                     <tr>
-                      <td>Tên PK1</td>
-                      <td>Sẩn phẩm chất lượng tốt</td>
-                      <td>
-                        <p>Có dây: Có</p>
-                        <p>Dung Lượng Pin: 500W</p>
-                      </td>
+                      <td>Đơn hàng 1</td>
+                      <td>50,000</td>
+                      <td>5</td>
+                      <td>250,000</td>
+                      <td>Chuyển Khoản</td>
+                      <td>15/12/2022</td>
+                      <td>Đang giao</td>
                       <td>
                         <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
                         <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
@@ -41,9 +46,13 @@
                     </tr>
 
                     <tr>
-                      <td>Tên PK2</td>
-                      <td>2</td>
-                      <td>ACER</td>
+                      <td>Đơn hàng 2</td>
+                      <td>100,000</td>
+                      <td>3</td>
+                      <td>300,000</td>
+                      <td>Tiền mặt</td>
+                      <td>1/1/2023</td>
+                      <td>Chưa giao</td>
                       <td>
                         <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
                         <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
