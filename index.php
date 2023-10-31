@@ -2,6 +2,9 @@
 
 <?php
 require_once './config/pdo.php';
+require_once './Admin/resources/category/CategoryFunction.php';
+$db = new connect();
+$category = new Categories();
 
 //require('./admin/core/function.php');
 //require('./client/core/FunctionClient.php');

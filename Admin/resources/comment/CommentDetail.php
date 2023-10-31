@@ -21,31 +21,30 @@
                                     <tr>
                                         <th>Tài khoản bình luận</th>
                                         <th>Ngày bình luận</th>
-                                        <th>Số lượng tất cả sản phẩm</th>
-                                        <th>Thời gian tạo</th>
+                                        <th>Nội dung bình luận</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Điện thoại</td>
-                                        <td>3</td>
-                                        <td>30</td>
+                                        <td>Minh Quang</td>
                                         <td>31/10/2023</td>
+                                        <td>Sản phẩm tốt</td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-primary">Chỉnh sửa</button>
-                                            <button type="button" class="btn btn-outline-danger">Xóa</button>
+                                            <button type="button" class="btn btn-outline-primary">Trả lời</button>
+                                            <button type="button" class="btn btn-outline-danger">Ẩn</button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Laptop</td>
-                                        <td>3</td>
-                                        <td>32</td>
+                                    <tr>
+                                        <td>Minh Quang</td>
                                         <td>31/10/2023</td>
+                                        <td>Giao hàng nhanh</td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-primary">Chỉnh sửa</button>
-                                            <button type="button" class="btn btn-outline-danger">Xóa</button>
+                                            <button type="button" class="btn btn-outline-primary">Trả lời</button>
+                                            <button type="button" class="btn btn-outline-danger">Ẩn</button>
                                         </td>
+                                    </tr>
                                     </tr>
 
                                     </tfoot>
