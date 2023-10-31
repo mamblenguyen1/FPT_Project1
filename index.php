@@ -47,18 +47,24 @@ if (isset($_GET['pages'])) {
                 case 'commentDetail':
                     include './Admin/resources/comment/CommentDetail.php';
                     break;
-                case 'AccessoryList':
+                case 'AccessoryDetail':
                     include './Admin/resources/product/ProductDetail/AccessoryDetail.php';
                     break;
-                case 'LaptopList':
+                case 'LaptopDetail':
                     include './Admin/resources/product/ProductDetail/LaptopDetail.php';
                     break;
-                case 'PhoneList':
+                case 'PhoneDetail':
                     include './Admin/resources/product/ProductDetail/PhoneDetail.php';
                     break;
-                    case 'UserList':
-                        include './Admin/resources/user/UserList.php';
-                        break;    
+                case 'UserList':
+                    include './Admin/resources/user/UserList.php';
+                    break;
+                case 'OrderList':
+                    include './Admin/resources/order/OrderList.php';
+                    break;
+                    case 'OrderDetail':
+                        include './Admin/resources/order/OrderDetail.php';
+                        break;
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
