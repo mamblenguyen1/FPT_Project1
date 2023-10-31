@@ -3,7 +3,9 @@
 <?php
 require_once './config/pdo.php';
 require_once './Admin/resources/category/CategoryFunction.php';
+require_once './Admin/resources/user/UserFunction.php';
 $db = new connect();
+$user = new UserFunction();
 $category = new Categories();
 
 //require('./admin/core/function.php');
