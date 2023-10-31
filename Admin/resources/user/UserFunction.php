@@ -2,39 +2,45 @@
 require_once './config/pdo.php';
 class UserFunction
 {
-//thêm
+    //thêm
     function user_insert($user_name, $email, $user_phone_number, $user_address, $user_password, $role_id)
     {
         $db = new connect();
-        $sql = "INSERT INTO user(user_name, email, user_phone_number, user_address, user_password, role_id) VALUES ('$user_name','$email' , '$user_phone_number', '$user_address', '$user_password', $role_id)";
+        $sql = "INSERT INTO user(user_name, email, user_phone_number, user_address, user_password, role_id, is_deleted) VALUES ('$user_name','$email' , '$user_phone_number', '$user_address', '$user_password', $role_id, 1)";
         $result = $db->pdo_execute($sql);
         return $result;
     }
-//sửa
-    function user_update($mat_khau, $ho_ten, $mail, $ma_kh)
+    //
+    function update_user($user_name, $user_password, $user_phone_number, $user_address, $role_id, $user_id)
     {
         $db = new connect();
-        $sql = "UPDATE khachhang SET mat_khau='$mat_khau',ho_ten='$ho_ten', mail='$mail' WHERE ma_kh= $ma_kh";
-        return $db->pdo_execute($sql);
+        $select = "UPDATE `user` SET user_name = '$user_name' , user_password = '$user_password', user_phone_number = '$user_phone_number', user_address = '$user_address', role_id = $role_id  WHERE user_id = $user_id";
+        $result = $db->pdo_execute($select);
+        return $result;
     }
-//xóa
-    function user_delete($ma_kh)
+    //
+    function deleteuser($user_id)
     {
         $db = new connect();
-        $sql = "DELETE FROM khachhang  WHERE ma_kh=?";
-        if (is_array($ma_kh)) {
-            foreach ($ma_kh as $ma) {
-                return $db->pdo_execute($sql, $ma);
-            }
-        } else {
-            return $db->pdo_execute($sql, $ma_kh);
+        $sql = "UPDATE `user` SET is_deleted = 2 WHERE user_id = $user_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+    //
+    function getInfouser($user_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM user, status WHERE status.status_id= user.is_deleted AND user_id = $user_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
         }
     }
-//hiển thị ra hết
+    //hiển thị ra hết
     function user_select_all()
     {
         $db = new connect();
-        $sql = "SELECT * FROM user";
+        $sql = "SELECT * FROM user WHERE is_deleted = 1";
         return $db->pdo_query($sql);
     }
 
@@ -46,19 +52,13 @@ class UserFunction
 
 
 
-    function khach_hang_select_by_id($ma_kh)
-    {
-        $db = new connect();
-        $sql = "SELECT * FROM khachhang WHERE ma_kh=" . $ma_kh;
-        $result =  $db->pdo_query_one($sql);
-        return $result;
-    }
 
-    function khach_hang_exist($ma_kh)
+
+    function khach_hang_exist($user_id)
     {
         $db = new connect();
-        $sql = "SELECT count(*) FROM khachhang WHERE $ma_kh=?";
-        return $db->pdo_query_value($sql, $ma_kh) > 0;
+        $sql = "SELECT count(*) FROM khachhang WHERE $user_id=?";
+        return $db->pdo_query_value($sql, $user_id) > 0;
     }
 
     function khach_hang_select_by_role($vai_tro)
@@ -68,11 +68,11 @@ class UserFunction
         return $db->pdo_query($sql, $vai_tro);
     }
 
-    function khach_hang_change_password($ma_kh, $mat_khau_moi)
+    function khach_hang_change_password($user_id, $mat_khau_moi)
     {
         $db = new connect();
-        $sql = "UPDATE khachhang SET mat_khau=? WHERE ma_kh=?";
-        return $db->pdo_execute($sql, $mat_khau_moi, $ma_kh);
+        $sql = "UPDATE khachhang SET mat_khau=? WHERE user_id=?";
+        return $db->pdo_execute($sql, $mat_khau_moi, $user_id);
     }
 
     public function checkUser($userAccount, $password)
@@ -97,7 +97,7 @@ class UserFunction
     public function userid($userAccount, $password)
     {
         $db = new connect();
-        $select = "SELECT ma_kh FROM khachhang WHERE ho_ten='$userAccount' AND mat_khau='$password'";
+        $select = "SELECT user_id FROM khachhang WHERE ho_ten='$userAccount' AND mat_khau='$password'";
         $result = $db->pdo_query_one($select);
         return $result;
     }
@@ -106,16 +106,6 @@ class UserFunction
     {
         $db = new connect();
         $sql = "SELECT * FROM khachhang WHERE ho_ten ='$userAccount'";
-        $result = $db->pdo_query($sql);
-        foreach ($result as $row) {
-            return $row[$column];
-        }
-    }
-
-    function getInfoUser($userID, $column)
-    {
-        $db = new connect();
-        $sql = "SELECT * FROM khachhang WHERE ma_kh = $userID";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];
@@ -156,11 +146,11 @@ class UserFunction
             }
         }
     }
-//suapass
-function update_Pass($userPass , $userID)
+    //suapass
+    function update_Pass($userPass, $userID)
     {
         $db = new connect();
-        $select = "UPDATE khachhang SET mat_khau = '$userPass' WHERE ma_kh = $userID";
+        $select = "UPDATE khachhang SET mat_khau = '$userPass' WHERE user_id = $userID";
         return $db->pdo_execute($select);
     }
 
