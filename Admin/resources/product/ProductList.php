@@ -28,25 +28,34 @@
                 <tbody>
 
                 <tr>
-                  <td>Tên SP1</td>
+                  <td>Tên SP Điện Thoại</td>
                   <td>3</td>
                   <td>Apple</td>
                   <td> 4</td>
                   <td>
-                      <button type="button" class="btn btn-block btn-outline-primary">Xem chi tiết</button>
+                      <button type="button" href="" class="btn btn-block btn-outline-primary">Xem chi tiết</button>
                     </td>
                 </tr>
 
                 <tr>
-                  <td>Tên SP2</td>
+                  <td>Tên SP Laptop</td>
                   <td>2</td>
-                  <td>ACER</td>
+                  <td>Acer</td>
                   <td>5</td>
                   <td>
                       <button type="button" href="" class="btn btn-block btn-outline-primary">Xem chi tiết</button>
                     </td>
                 </tr>
                 
+                <tr>
+                  <td>Tên SP Phụ Kiện</td>
+                  <td>2</td>
+                  <td>Không</td>
+                  <td>5</td>
+                  <td>
+                      <button type="submit" class="btn btn-block btn-outline-primary">Xem chi tiết</button>
+                    </td>
+                </tr>
                 </tfoot>
               </table>
             </div>
