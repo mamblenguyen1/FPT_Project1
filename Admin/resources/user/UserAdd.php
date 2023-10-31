@@ -100,11 +100,6 @@ if (isset($_POST['them_user'])) {
               <input type="text" class="form-control" id="exampleInputEmail1" name="role_id">
             </div>
 
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-
           </div>
           <!-- /.card-body -->
 
