@@ -3,9 +3,13 @@
 <?php
 require_once './config/pdo.php';
 require_once './Admin/resources/category/CategoryFunction.php';
+require_once './Admin/resources/user/UserFunction.php';
+require_once './Admin/resources/Type/TypeFunction.php';
+
 $db = new connect();
 $user = new UserFunction();
 $category = new Categories();
+$product = new ProductFunction();
 $type = new Type();
 
 //require('./admin/core/function.php');
@@ -88,12 +92,13 @@ if (isset($_GET['pages'])) {
                 case 'TypeEdit':
                     include './Admin/resources/Type/TypeEdit.php';
                     break;
+
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
             }
             break;
-            
+
         case 'user':
             switch ($_GET['action']) {
                 case 'index':

@@ -1,13 +1,16 @@
 <?php include './Admin/componant/header.php' ?>
 <?php include './admin/componant/sidebar.php' ?>
 <?
-if (isset($_POST['addCate'])) {
-    $category_name = $_POST['cateName'] ?? "";
-    $category_show = $_POST['cateShow'] ?? "";
-    if (!$category_name == "" && !$category_show == "") {
-        $category->create_category($category_name, $category_show);
+if (isset($_POST['addType'])) {
+    $user_created = 1 ;
+    $typeName = $_POST['typeName'] ?? "";
+    $typeCate = $_POST['typeCate'] ?? "";
+    $typeShow = $_POST['typeShow'] ?? "";
+    if (!$typeName == "" && !$typeCate == "" && !$typeShow == "") {
+        $type->create_Type($typeName, $typeCate, $typeShow,$user_created);
         echo '<script>alert("tạo thành công !!")</script>';
-        echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
+        // exit();
+        echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
     } else {
         $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
     }
@@ -42,7 +45,7 @@ if (isset($_POST['addCate'])) {
                         </div>
                         <div class="form-group">
                             <label>Danh mục</label>
-                            <select name="cate" class="form-control select2" style="width: 100%;">
+                            <select name="typeCate" class="form-control select2" style="width: 100%;">
                                 <option selected="selected" value="">Chọn danh mục</option>
                                 <?
                                 $conn = $db->pdo_get_connection();
@@ -56,8 +59,8 @@ if (isset($_POST['addCate'])) {
                                 ?>
                             </select>
                             <?
-                            if (isset($_POST["cate"])) {
-                                if (empty($_POST["cate"])) {
+                            if (isset($_POST["typeCate"])) {
+                                if (empty($_POST["typeCate"])) {
                                     echo '<span class="vaild">Xin vui lòng nhập tên danh mục </span>';
                                 } else {
                                     echo '';
@@ -67,7 +70,7 @@ if (isset($_POST['addCate'])) {
                         </div>
                         <div class="form-group">
                             <label>Trạng thái</label>
-                            <select name="cateShow" class="form-control select2" style="width: 100%;">
+                            <select name="typeShow" class="form-control select2" style="width: 100%;">
                                 <option selected="selected" value="">Chọn trang thái hiển thị</option>
                                 <?
                                 $conn = $db->pdo_get_connection();
@@ -81,8 +84,8 @@ if (isset($_POST['addCate'])) {
                                 ?>
                             </select>
                             <?
-                            if (isset($_POST["cateShow"])) {
-                                if (empty($_POST["cateShow"])) {
+                            if (isset($_POST["typeShow"])) {
+                                if (empty($_POST["typeShow"])) {
                                     echo '<span class="vaild">Xin vui lòng nhập tên danh mục </span>';
                                 } else {
                                     echo '';
@@ -92,7 +95,7 @@ if (isset($_POST['addCate'])) {
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" name="addCate" class="btn btn-primary">Lưu danh mục</button>
+                            <button type="submit" name="addType" class="btn btn-primary">Lưu danh mục</button>
                         </div>
                 </form>
             </div>

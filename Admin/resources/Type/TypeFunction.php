@@ -7,33 +7,35 @@ class Type
     var $is_deleted = null;
     var $is_show = null;
     var $category_id = null;
-    function create_Type($type_name, $is_show )
+    function create_Type($type_name, $category_id,$user_created, $is_show)
     {
         $db = new connect();
-        $select = "INSERT INTO `type`(type_name, is_show,is_deleted ) VALUES ('$type_name' ,$is_show , 1 )";
+        $select = "INSERT INTO `type`(type_name, category_id , is_show ,user_created,is_deleted ) VALUES ('$type_name',$category_id ,$is_show ,$user_created, 1 )";
         $result = $db->pdo_execute($select);
         return $result;
     }
-    function update_category($category_name, $is_show, $userid, $cateid)
+    function update_Type($type_name,$category_id, $is_show, $user_updated, $type_id)
     {
         $db = new connect();
-        $select = "UPDATE category SET category_name = '$category_name' , is_show = $is_show , user_updated = $userid WHERE category_id = $cateid";
+        $select = "UPDATE `type` SET type_name = '$type_name' , category_id = $category_id, is_show = $is_show , user_updated = $user_updated WHERE type_id = $type_id";
         $result = $db->pdo_execute($select);
         return $result;
     }
 
-    function deleteCate($cateID)
+    function deleteCate($type_id)
     {
         $db = new connect();
-        $sql = "UPDATE category SET is_deleted = 0 WHERE category_id = $cateID";
+        $sql = "UPDATE `type` SET is_deleted = 0 WHERE type_id = $type_id";
         $result = $db->pdo_execute($sql);
         return $result;
     }
 
-    function getInfoCate($cateID, $column)
+    function getInfoType($type_id, $column)
     {
         $db = new connect();
-        $sql = "SELECT * FROM category, isshow WHERE isshow.show_id= category.is_show AND category_id = $cateID";
+        $sql = "SELECT * FROM `type`, isshow, category WHERE isshow.show_id= type.is_show 
+        AND category.category_id = type.category_id
+        AND type_id = $type_id";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];
