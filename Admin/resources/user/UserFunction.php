@@ -163,5 +163,3 @@ class UserFunction
         }
     }
 }
-// $user = new User();
-// echo  $user->create_UserADa(2);
