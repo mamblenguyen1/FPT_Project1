@@ -10,7 +10,6 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-
                             <div class="card-header">
                                 <?
                                 $row = $product->category_select_all();
@@ -19,13 +18,13 @@
                                 ?>
                                     <?
                                     if ($category_id == 1) {
-                                        $url = 'AccessoryAdd';
+                                        $url = 'AddWiredheadphones';
                                         $namebtn = 'Thêm Tay Nghe Có Dây';
                                     } else if ($category_id == 2) {
-                                        $url = 'AccessoryAdd';
+                                        $url = 'AddWirelessheadphones';
                                         $namebtn = 'Thêm Tay Nghe Không Dây';
                                     } else if ($category_id == 3) {
-                                        $url = 'AccessoryAdd';
+                                        $url = 'AddBatterybackup';
                                         $namebtn = 'Thêm Pin Dự Phòng';
                                     } else if ($category_id == 4) {
                                         $url = 'AccessoryAdd';

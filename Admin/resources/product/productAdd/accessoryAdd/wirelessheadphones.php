@@ -14,33 +14,13 @@ if (isset($_POST['addPhone'])) {
     $product_sale = $_POST['product_sale'] ?? "";
     $product_quantily = $_POST['product_quantily'] ?? "";
     $type_id = $_POST['type_id'] ?? "";
-    $accessoy_length = $_POST['accessoy_length'] ?? "";
     $accessoy_port = $_POST['accessoy_port'] ?? "";
     $accessoy_micro = $_POST['accessoy_micro'] ?? "";
     $accessory_charge = $_POST['accessory_charge'] ?? "";
     $accessory_use_time = $_POST['accessory_use_time'] ?? "";
     $accessory_capacity = $_POST['accessory_capacity'] ?? "";
-    $accessory_DPI = $_POST['accessory_DPI'] ?? "";
     $user_created = 1;
     $product_img = $_FILES['product_img']['name'] ?? "";
-
-//     echo $category_id;
-//     echo $product_name;
-//     echo $product_title;
-//     echo $product_price;
-//     echo $product_sale;
-//     echo $product_quantily;
-//     echo $type_id;
-//     echo $accessoy_length;
-//     echo $accessoy_port;
-//     echo $accessoy_micro;
-//     echo $accessory_charge;
-//     echo $accessory_use_time;
-//     echo $accessory_capacity;   
-//     echo $accessory_DPI;
-//     echo $user_created;
-//     echo $product_img;
-// exit();
     if (
         !$category_id == "" &&
         !$product_name == "" &&
@@ -49,17 +29,16 @@ if (isset($_POST['addPhone'])) {
         !$product_sale == "" &&
         !$product_quantily == "" &&
         !$type_id == "" &&
-        !$accessoy_length == "" &&
         !$accessoy_port == "" &&
         !$accessoy_micro == "" &&
         !$accessory_charge == "" &&
         !$accessory_use_time == "" &&
         !$accessory_capacity == "" &&
-        !$accessory_DPI == "" &&
         !$user_created == "" &&
         !$product_img == ""
     ) {
-        $product->add_accesssory($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $accessoy_length, $accessoy_port, $accessoy_micro, $accessory_charge, $accessory_use_time, $accessory_capacity, $accessory_DPI, $user_created);
+        $product->add_wirelessheadphones($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, 
+        $accessoy_port, $accessoy_micro, $accessory_charge, $accessory_use_time, $accessory_capacity, $user_created);
         echo '<script>alert("tạo thành công !!")</script>';
         // exit();
         echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
@@ -71,7 +50,7 @@ if (isset($_POST['addPhone'])) {
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
-            <h1 style="padding-left: 30px;">Thêm Phụ Kiện</h1>
+            <h1 style="padding-left: 30px;">Thêm Tai NGhe Không Dây</h1>
         </div>
         <div class="add-cate-form">
             <div class="card card-primary">
@@ -84,7 +63,7 @@ if (isset($_POST['addPhone'])) {
                     <div class="card-body">
                         <!-- Tên phụ kiện -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Tên phụ kiện </label>
+                            <label for="exampleInputEmail1">Tên tai nghe </label>
                             <input name="product_name" type="text" class="form-control" id="exampleInputEmail1">
                             <?
                             if (isset($_POST["product_name"])) {
@@ -98,7 +77,7 @@ if (isset($_POST['addPhone'])) {
                         </div>
                         <!-- mô tả phụ kiện -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Mô tả phụ kiện </label>
+                            <label for="exampleInputEmail1">Mô tả </label>
                             <input name="product_title" type="text" class="form-control" id="exampleInputEmail1">
                             <?
                             if (isset($_POST["product_title"])) {
@@ -153,23 +132,9 @@ if (isset($_POST['addPhone'])) {
                             }
                             ?>
                         </div>
-                        <!-- Độ dài dây phụ kiện -->
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Độ dài dây </label>
-                            <input name="accessoy_length" type="text" class="form-control" id="exampleInputEmail1">
-                            <?
-                            if (isset($_POST["accessoy_length"])) {
-                                if (empty($_POST["accessoy_length"])) {
-                                    echo '<span class="vaild">Xin vui lòng nhập độ dài dây </span>';
-                                } else {
-                                    echo '';
-                                }
-                            }
-                            ?>
-                        </div>
                         <!-- Cổng cắm phụ kiện -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Cổng cắm phụ kiện </label>
+                            <label for="exampleInputEmail1">Cổng cắm phụ kiện</label>
                             <input name="accessoy_port" type="text" class="form-control" id="exampleInputEmail1">
                             <?
                             if (isset($_POST["accessoy_port"])) {
@@ -183,7 +148,7 @@ if (isset($_POST['addPhone'])) {
                         </div>
                         <!-- Micro sau -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Micro sau </label>
+                            <label for="exampleInputEmail1">Micro</label>
                             <input name="accessoy_micro" type="text" class="form-control" id="exampleInputEmail1">
                             <?
                             if (isset($_POST["accessoy_micro"])) {
@@ -197,7 +162,7 @@ if (isset($_POST['addPhone'])) {
                         </div>
                         <!-- Chân sạc sau -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Chân sạc trước </label>
+                            <label for="exampleInputEmail1">Chân sạc </label>
                             <input name="accessory_charge" type="text" class="form-control" id="exampleInputEmail1">
                             <?
                             if (isset($_POST["accessory_charge"])) {
@@ -211,7 +176,7 @@ if (isset($_POST['addPhone'])) {
                         </div>
                         <!-- Thời gian sạc phụ kiện -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Thời gian sạc phụ kiện </label>
+                            <label for="exampleInputEmail1">Thời gian sạc tai nghe</label>
                             <input name="accessory_use_time" type="text" class="form-control" id="exampleInputEmail1">
                             <?
                             if (isset($_POST["accessory_use_time"])) {
@@ -225,7 +190,7 @@ if (isset($_POST['addPhone'])) {
                         </div>
                         <!-- Dung lượng pin phụ kiện -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Dung lượng pin phụ kiện </label>
+                            <label for="exampleInputEmail1">Dung lượng pin </label>
                             <input name="accessory_capacity" type="text" class="form-control" id="exampleInputEmail1">
                             <?
                             if (isset($_POST["accessory_capacity"])) {
@@ -237,22 +202,7 @@ if (isset($_POST['addPhone'])) {
                             }
                             ?>
                         </div>
-                        <!-- DPI phụ kiện -->
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Tốc độ chuột </label>
-                            <input name="accessory_DPI" type="text" class="form-control" id="exampleInputEmail1">
-                            <?
-                            if (isset($_POST["accessory_DPI"])) {
-                                if (empty($_POST["accessory_DPI"])) {
-                                    echo '<span class="vaild">Xin vui lòng nhập tốc độ chuột </span>';
-                                } else {
-                                    echo '';
-                                }
-                            }
-                            ?>
-                        </div>
                         <!-- hình ảnh phụ kiện -->
-
                         <input type="file" name="product_img" id="">
                         <?
                         if (isset($_FILES['product_img']['name'])) {
@@ -264,7 +214,6 @@ if (isset($_POST['addPhone'])) {
                         }
                         ?>
                         <!-- hãng phụ kiện -->
-
                         <div class="form-group">
                             <label>Hãng phụ kiện</label>
                             <select name="type_id" class="form-control select2" style="width: 100%;">
