@@ -12,7 +12,7 @@ $user = new UserFunction();
 $category = new Categories();
 $product = new ProductFunction();
 $type = new Type();
-  
+   
 //require('./admin/core/function.php');
 //require('./client/core/FunctionClient.php');
 
