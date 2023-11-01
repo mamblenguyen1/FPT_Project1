@@ -30,6 +30,7 @@ function add_phone($product_name, $product_title,$product_price,$product_sale,$p
         product(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , accessoy_length, accessoy_port, accessoy_micro, accessory_charge, accessory_use_time, accessory_capacity , accessory_DPI, user_created, is_deleted )
         VALUES
         ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$accessoy_length', '$accessoy_port', '$accessoy_micro', '$accessory_charge', '$accessory_use_time', '$accessory_capacity', '$accessory_DPI', $user_created,1)";
+
         return $db->pdo_execute($sql);
     }
 
@@ -43,7 +44,17 @@ function add_phone($product_name, $product_title,$product_price,$product_sale,$p
             return $row[$column];
         }
     }
-
+    function getInfoSP1($category_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM category WHERE
+        category.category_id = $category_id
+        ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
     function getTypeName($product_id, $column)
     {
         $db = new connect();
