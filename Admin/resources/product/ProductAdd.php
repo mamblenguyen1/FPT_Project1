@@ -18,23 +18,22 @@
                                     extract($ketqua);
                                 ?>
                                 <?
-                                if($category_id == 1){
-                                    $url = 'PhoneAdd';
-                                    $namebtn = 'Điện thoại';
-                                }else if ($category_id == 2){
-                                    $url = 'LaptopAdd';
-                                    $namebtn = 'Laptop';
 
-                                }else{
-                                    $url = 'AccessoryAdd';
-                                    $namebtn = 'Phụ kiện';
+                                // if($category_id == 1){
+                                //     $url = 'PhoneAdd';
+                                //     $namebtn = 'Điện thoại';
+                                // }else if ($category_id == 2){
+                                //     $url = 'LaptopAdd';
+                                //     $namebtn = 'Laptop';
+                                // }else{
+                                //     $url = 'AccessoryAdd';
+                                //     $namebtn = 'Phụ kiện';
+                                // }
 
-
-                                }
                                 ?>
-                                    <form action="index.php?pages=admin&action=<?echo $url?>" style="display: inline-block;" method="post">
+                                    <form action="index.php?pages=admin&action=<?echo $urlAdd?>" style="display: inline-block;" method="post">
                                         <input type="hidden" name="category_id" value="<?= $category_id?>">
-                                        <button type="submit" class="btn btn-outline-primary" name="addproduct"><?echo $namebtn?></button>
+                                        <button type="submit" class="btn btn-outline-primary" name="addproduct"><?echo $category_display?></button>
                                     </form>
                                 <?
                                 }

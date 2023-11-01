@@ -6,10 +6,10 @@ class Categories
     var $created_at = null;
     var $updated_at = null;
     var $is_show = null;
-    function create_category($category_name, $is_show )
+    function create_category($category_name, $is_show)
     {
         $db = new connect();
-        $select = "INSERT INTO category(category_name, is_show,is_deleted ) VALUES ('$category_name' ,$is_show , 1 )";
+        $select = "INSERT INTO category(category_name, is_show,is_deleted, category_display, urlAdd ) VALUES ('$category_name' ,$is_show , 1, '$category_name', 'AccessoryAdd' )";
         $result = $db->pdo_execute($select);
         return $result;
     }
@@ -41,9 +41,9 @@ class Categories
     function getInfoCate2($cateID, $column)
     {
         $db = new connect();
-        $sql = "SELECT * FROM sach s, loaisach ls 
-        WHERE s.sachmaloai =ls.lsma AND
-        s.sachma = $cateID";
+        $sql = "SELECT * FROM category
+        WHERE 
+        category_id = $cateID";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];
@@ -101,5 +101,3 @@ class Categories
 
   
 }
-
-?>
