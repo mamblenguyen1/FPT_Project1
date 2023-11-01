@@ -73,7 +73,7 @@ class ORDER
         return $result;
     }
 
-    function getInfoPayment($userid , $column)
+    function getInfoPayment($userid, $column)
     {
         $db = new connect();
         $sql = "SELECT * FROM user , cart , cartdetail
@@ -91,7 +91,8 @@ class ORDER
 
     public function DuplicateCart($userid)
     {
-        $db = new connect();$select = "SELECT * FROM cart";
+        $db = new connect();
+        $select = "SELECT * FROM cart";
         $result = $db->pdo_query($select);
         foreach ($result as $row) {
             $nw = $row['userId'];
@@ -301,7 +302,8 @@ class ORDER
     {
         $db = new connect();
         $sql = "SELECT COUNT(detailcommentId) FROM detailcomments";
-        $result = $db->pdo_query($sql);foreach ($result as $row) {
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
             return $row['COUNT(detailcommentId)'];
         }
     }

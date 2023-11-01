@@ -142,7 +142,7 @@
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-              Giỏ Hàng
+              Đơn hàng
               <i class="fas fa-angle-left right"></i>
               <span class="badge badge-info right">6</span>
             </p>
@@ -151,7 +151,7 @@
             <li class="nav-item">
               <a href="?pages=admin&action=OrderList" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Giỏ hàng</p>
+                <p>Tất cả đơn hàng</p>
               </a>
             </li>
           </ul>
