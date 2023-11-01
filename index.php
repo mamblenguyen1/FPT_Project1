@@ -4,8 +4,8 @@
 require_once './config/pdo.php';
 require_once './Admin/resources/category/CategoryFunction.php';
 require_once './Admin/resources/user/UserFunction.php';
-require_once './Admin/resources/product/ProductFunction.php';
 require_once './Admin/resources/Type/TypeFunction.php';
+require_once './Admin/resources/product/ProductFunction.php';
 
 $db = new connect();
 $user = new UserFunction();
@@ -71,13 +71,12 @@ if (isset($_GET['pages'])) {
                 case 'UserList':
                     include './Admin/resources/user/UserList.php';
                     break;
-                case 'UserAdd':
-                    include './Admin/resources/user/UserAdd.php';
-                    break;
-                case 'UserEdit':
-                    include './Admin/resources/user/UserEdit.php';
-                    break;
-                    // order
+                    case 'UserAdd':
+                        include './Admin/resources/user/UserAdd.php';
+                        break; 
+                        case 'UserEdit':
+                            include './Admin/resources/user/UserEdit.php';
+                            break; 
                 case 'OrderList':
                     include './Admin/resources/order/OrderList.php';
                     break;
@@ -113,6 +112,7 @@ if (isset($_GET['pages'])) {
                 case 'AddBatterybackup':
                     include './Admin/resources/product/productAdd/accessoryAdd/batterybackup.php';
                     break;
+
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
@@ -124,10 +124,10 @@ if (isset($_GET['pages'])) {
                 case 'index':
                     include './User/index.php';
                     break;
-                case 'Product':
-                    include './User/Product.php';
-                    break;
-            }
+                    case 'Thanks':
+                        include './User/Product.php';
+                        break;
+                }
             break;
     }
 }
