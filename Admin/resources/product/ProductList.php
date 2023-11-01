@@ -29,7 +29,7 @@
                     <?
                     $conn = $db->pdo_get_connection();
                     $stmt = $conn->prepare("SELECT * FROM product
-                                        WHERE is_deleted = 1");
+                    WHERE is_deleted = 1");
                     $stmt->execute();
                     if ($stmt->rowCount() > 0) {
                       foreach ($stmt as $row) {
@@ -38,13 +38,13 @@
                         echo ' 
                                                 <tr>
                                                 <td>' . $row['product_name'] . '</td>
-                                                <td>' . $CateName. '</td>
+                                                <td>' . $CateName . '</td>
                                                 <td>' . $TypeName . '</td>
                                                 <td>' . $row['product_price'] . '</td>
                                                 <td>
-                                                  <form action="?pages=admin&action=" method="post">
-                                                    <input type="hidden" value="'.$row['product_id'].'" name="product_id">
-                                                  <button type="button" class="btn btn-block btn-outline-primary" name="">Xem chi tiết</button>
+                                                  <form action="?pages=admin&action=PhoneDetail" method="post">
+                                                    <input type="hidden" value="' . $row['product_id'] . '" name="product_id">
+                                                  <button type="submit" class="btn btn-block btn-outline-primary" name="detail">Xem chi tiết</button>
                                                 </form>
                                               </td>
                                               </tr>

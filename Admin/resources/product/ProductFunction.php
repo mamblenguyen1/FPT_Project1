@@ -68,6 +68,13 @@ function add_phone($product_name, $product_title,$product_price,$product_sale,$p
             return $row[$column];
         }
     }
+    function deleteProduct($product_id)
+    {
+        $db = new connect();
+        $sql = "UPDATE product SET is_deleted = 0 WHERE product_id = $product_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
 
 
 
