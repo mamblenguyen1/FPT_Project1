@@ -105,9 +105,7 @@ if (isset($_GET['pages'])) {
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
-                default:
-                    include './admin/resources/admin/Dashboard.php';
-                    break;
+             
             }
             break;
 
