@@ -103,6 +103,16 @@ if (isset($_GET['pages'])) {
                 case 'AccessoryAdd':
                     include './Admin/resources/product/productAdd/accessoryAdd.php';
                     break;
+                    //accessory
+                case 'AddWirelessheadphones':
+                    include './Admin/resources/product/productAdd/accessoryAdd/wirelessheadphones.php';
+                    break;
+                case 'AddWiredheadphones':
+                    include './Admin/resources/product/productAdd/accessoryAdd/wiredheadphones.php';
+                    break;
+                case 'AddBatterybackup':
+                    include './Admin/resources/product/productAdd/accessoryAdd/batterybackup.php';
+                    break;
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
