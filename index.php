@@ -5,10 +5,13 @@ require_once './config/pdo.php';
 require_once './Admin/resources/category/CategoryFunction.php';
 require_once './Admin/resources/user/UserFunction.php';
 require_once './Admin/resources/product/ProductFunction.php';
+require_once './Admin/resources/Type/TypeFunction.php';
+
 $db = new connect();
 $user = new UserFunction();
 $category = new Categories();
 $product = new ProductFunction();
+$type = new Type();
 
 //require('./admin/core/function.php');
 //require('./client/core/FunctionClient.php');

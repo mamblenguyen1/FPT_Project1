@@ -20,7 +20,8 @@ if (isset($_POST['sua_user'])) {
   $user_phone_number = $_POST['user_phone_number'] ?? "";
   $user_address = $_POST['user_address'] ?? "";
   $role_id = $_POST['role_id'] ?? "";
-  if (!$user_name == "" && !$user_password == "" && !$user_phone_number == "" && !$user_address == "" && !$role_id == "") {
+  if (!$user_name == "" && !$user_password == "" && !$user_phone_number == "" && !$user_address == "" && !$role_id =="") {
+
     $user->update_user($user_name, $user_password, $user_phone_number, $user_address, $role_id, $user_id);
     echo '<script>alert("Cập nhật tài khoản thành công")</script>';
     echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
@@ -59,6 +60,7 @@ if (isset($_POST['sua_user'])) {
             }
             ?>
             <div class="form-group">
+
               <label for="exampleInputPassword1">Password</label>
               <input type="text" class="form-control" id="exampleInputPassword1" name="user_password" value="<? echo $user->getInfouser($user_id, 'user_password'); ?>">
             </div>
