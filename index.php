@@ -55,7 +55,7 @@ if (isset($_GET['pages'])) {
                     include './Admin/resources/comment/CommentList.php';
                     break;
                 case 'commentDetail':
-                    include './Admin/resources/comment/CommentDetail.php';
+                    include './Admin/resources/comment/CommentDetail.php'; 
                     break;
                     // detail
                 case 'AccessoryDetail':
