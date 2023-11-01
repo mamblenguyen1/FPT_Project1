@@ -60,24 +60,19 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Điện thoại</p>
-              </a>
+              <?
+              $row = $product->category_select_all();
+              foreach ($row as $ketqua) {
+                extract($ketqua);
+              ?>
+                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                    <p><?= $category_name ?></p>
+                </a>
+              <?
+              }
+              ?>
             </li>
-            <li class="nav-item">
-              <a href="pages/layout/boxed.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Laptop</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Phụ kiện</p>
-              </a>
-            </li>
-
           </ul>
         </li>
         <li class="nav-item">
@@ -94,6 +89,14 @@
               <a href="?pages=admin&action=listpro" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Tất cả Sản phẩm</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="?pages=admin&action=addpro" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thêm Sản phẩm</p>
               </a>
             </li>
           </ul>

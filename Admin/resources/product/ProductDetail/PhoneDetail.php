@@ -12,7 +12,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                            <h1 style="padding-left: 30px;">Chi tiết sản phẩm điện thoại</h1>
+                                <h1 style="padding-left: 30px;">Chi tiết sản phẩm điện thoại</h1>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -26,42 +26,38 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?
+                                        $row = $product->product_select_all();
+                                        foreach ($row as $ketqua) {
+                                            extract($ketqua);
 
-                                        <tr>
-                                            <td>Tên SP ĐT 1</td>
-                                            <td>Sẩn phẩm chất lượng tốt</td>
-                                            <td>
-                                                <p>Màn Hình: Siêu xịn</p>
-                                                <p>Cam trước: Có</p>
-                                                <p>Cam sau: Có</p>
-                                                <p>Chip: A17</p>
-                                                <p>RAM: 128GB</p>
-                                                <p>Dung lượng: 20TB</p>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
-                                                <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Tên SP ĐT 2</td>
-                                            <td>2</td>
-                                            <td>
-                                            <p>Màn Hình: Siêu vip</p>
-                                                <p>Cam trước: Có</p>
-                                                <p>Cam sau: Có</p>
-                                                <p>Chip: A15</p>
-                                                <p>RAM: 1MB</p>
-                                                <p>Dung lượng: 2MB</p>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
-                                                <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
-                                            </td>
-                                        </tr>
-
-                                        </tfoot>
+                                            $product_id = $_POST['product_id'];
+                                            if (isset($_POST['product_id']) && ($_POST['product_id'] > 0)) {
+                                                $product_id = $_POST['product_id'];
+                                            } else {
+                                                $product_id = 0;
+                                            }
+                                        ?>
+                                            <tr>
+                                                <td><?=$product_name?></td>
+                                                <td><?=$product_title?></td>
+                                                <td>
+                                                    <p>Màn Hình: Siêu xịn</p>
+                                                    <p>Cam trước: Có</p>
+                                                    <p>Cam sau: Có</p>
+                                                    <p>Chip: A17</p>
+                                                    <p>RAM: 128GB</p>
+                                                    <p>Dung lượng: 20TB</p>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
+                                                    <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
+                                                </td>
+                                            </tr>
+                                        <?
+                                        }
+                                        ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
