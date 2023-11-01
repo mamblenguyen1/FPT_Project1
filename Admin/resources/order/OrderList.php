@@ -27,19 +27,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?
+                                        <?
                                         $conn = $db->pdo_get_connection();
-                                        $stmt = $conn->prepare("SELECT * FROM `order` , `user`, `product`, `order_detail`
+                                        $stmt = $conn->prepare("SELECT * FROM `order` , `user`
                                         WHERE `order`.user_id = `user`.user_id
-                                        AND product.product_id = order_detail.product_id
-                                        AND `order`.order_id = order_detail.order_id");
+                                        ");
                                         $stmt->execute();
                                         if ($stmt->rowCount() > 0) {
                                             foreach ($stmt as $row) {
-                                                echo '<tr>
+                                                echo '
+                                                <tr>
                                                 <td>' . $row['user_name'] . '</td>
-                                                <td>2</td>
-                                                <td>' . $row['product_price'] . '</td>
+                                                <td>0</td>
+                                                <td> 0 </td>
                                                 <td>' . $row['user_phone_number'] . '</td>
                                                 <td>' . $row['user_address'] . '</td>
                                                 <td>
@@ -49,10 +49,10 @@
                                                 </td>
                                             </tr>';
                                             }
-                                        }
+                                        };
                                         ?>
 
-                                        <tr>
+                                        <!-- <tr>
                                             <td>Khách hàng 1</td>
                                             <td>2</td>
                                             <td>350,000</td>
@@ -61,9 +61,9 @@
                                             <td>
                                                 <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
                                             </td>
-                                        </tr>
+                                        </tr> -->
 
-                                        <tr>
+                                        <!-- <tr>
                                             <td>Khách hàng 2</td>
                                             <td>3</td>
                                             <td>50,000</td>
@@ -72,7 +72,7 @@
                                             <td>
                                                 <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
                                             </td>
-                                        </tr>
+                                        </tr> -->
 
 
                                         </tfoot>
