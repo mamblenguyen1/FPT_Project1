@@ -17,6 +17,7 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
+                  <form action="" method="post">
                   <thead>
                     <tr>
                       <th>Tên sản phẩm</th>
@@ -26,7 +27,6 @@
                     </tr>
                   </thead>
                   <tbody>
-
                     <tr>
                       <td>Tên PK1</td>
                       <td>Sẩn phẩm chất lượng tốt</td>
@@ -40,18 +40,9 @@
                       </td>
                     </tr>
 
-                    <tr>
-                      <td>Tên PK2</td>
-                      <td>2</td>
-                      <td>ACER</td>
-                      <td>
-                        <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
-                        <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
-                      </td>
-                    </tr>
-
                     </tfoot>
                 </table>
+                </form>
               </div>
             </div>
           </div>

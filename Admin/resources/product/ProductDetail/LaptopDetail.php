@@ -26,7 +26,6 @@
                     </tr>
                   </thead>
                   <tbody>
-
                     <tr>
                       <td>Tên SP1</td>
                       <td>Sẩn phẩm chất lượng tốt</td>
