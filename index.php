@@ -94,13 +94,21 @@ if (isset($_GET['pages'])) {
                 case 'TypeEdit':
                     include './Admin/resources/Type/TypeEdit.php';
                     break;
-
+                case 'PhoneAdd':
+                    include './Admin/resources/product/productAdd/phoneAdd.php';
+                    break;
+                case 'LaptopAdd':
+                    include './Admin/resources/product/productAdd/laptopAdd.php';
+                    break;
+                case 'AccessoryAdd':
+                    include './Admin/resources/product/productAdd/accessoryAdd.php';
+                    break;
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
             }
             break;
-            
+
         case 'user':
             switch ($_GET['action']) {
                 case 'index':
