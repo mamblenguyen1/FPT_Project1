@@ -84,6 +84,24 @@
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
+              Danh mục con
+              <i class="fas fa-angle-left right"></i>
+              <span class="badge badge-info right">6</span>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="?pages=admin&action=TypeList" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Tất cả danh mục con</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-copy"></i>
+            <p>
               Sản phẩm
               <i class="fas fa-angle-left right"></i>
               <span class="badge badge-info right">6</span>

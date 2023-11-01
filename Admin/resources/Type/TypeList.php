@@ -42,10 +42,10 @@
                                             <td>' . $row['created_at'] . '</td>
                                             <th>' . $row['show_name'] . '</th>
                                             <td>
-                                            <form action="index.php?pages=admin&action=editcate" method="post">
+                                            <form action="index.php?pages=admin&action=TypeEdit" method="post">
                                             <input type="hidden" value="' . $row['type_id'] . '" name="type_id">
-                                            <button type="submit" name="edit_cate" class="btn btn-outline-primary">Chỉnh sửa</button>
-                                            <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="delete_cate" class="btn btn-outline-danger">Xóa</button>
+                                            <button type="submit" name="edit_type" class="btn btn-outline-primary">Chỉnh sửa</button>
+                                            <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="delete_type" class="btn btn-outline-danger">Xóa</button>
                                            </form>
                                             </td>
                                         ';
