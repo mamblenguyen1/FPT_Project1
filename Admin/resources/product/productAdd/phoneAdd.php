@@ -23,30 +23,37 @@ if (isset($_POST['addPhone'])) {
     $user_created = 1;
     $product_img = $_FILES['product_img']['name'] ?? "";
 
-if (
-    !$category_id == "" &&
-    !$product_name == "" &&
-    !$product_title == "" &&
-    !$product_price == "" &&
-    !$product_sale == "" &&
-    !$product_quantily == "" &&
-    !$type_id == "" &&
-    !$phone_ram == "" &&
-    !$phone_screen == "" &&
-    !$phone_backcam == "" &&
-    !$phone_frontcam == "" &&
-    !$phone_chip == "" &&
-    !$phone_storge == "" &&
-    !$user_created == "" &&
-    !$product_img == "" 
-) {
-    $product->add_phone($product_name, $product_title,$product_price,$product_sale,$product_img,$product_quantily,$category_id,$type_id,$phone_ram,$phone_screen,$phone_backcam,$phone_frontcam,$phone_chip,$phone_storge ,$user_created);
-    echo '<script>alert("tạo thành công !!")</script>';
-    // exit();
-    echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
-} else {
-    $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
-}
+    if (
+        !$category_id == "" &&
+        !$product_name == "" &&
+        !$product_title == "" &&
+        !$product_price == "" &&
+        !$product_sale == "" &&
+        !$product_quantily == "" &&
+        !$type_id == "" &&
+        !$phone_ram == "" &&
+        !$phone_screen == "" &&
+        !$phone_backcam == "" &&
+        !$phone_frontcam == "" &&
+        !$phone_chip == "" &&
+        !$phone_storge == "" &&
+        !$user_created == "" &&
+        !$product_img == ""
+    ) {
+        $product->add_phone($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $phone_ram, $phone_screen, $phone_backcam, $phone_frontcam, $phone_chip, $phone_storge, $user_created);
+        echo '<script>alert("tạo thành công !!")</script>';
+        echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
+        $anhne = $_FILES['product_img']['tmp_name'];
+        $error = $_FILES['product_img']['error'];
+        $path = 'images/product/' . $product_img . '.png';
+        if (
+            $error === 0
+        ) {
+            move_uploaded_file($anhne, $path);
+        }
+    } else {
+        $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
+    }
 }
 ?>
 <div class="main-panel">
