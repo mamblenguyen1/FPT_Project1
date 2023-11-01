@@ -71,12 +71,12 @@ if (isset($_GET['pages'])) {
                 case 'UserList':
                     include './Admin/resources/user/UserList.php';
                     break;
-                case 'UserAdd':
-                    include './Admin/resources/user/UserAdd.php';
-                    break;
-                case 'UserEdit':
-                    include './Admin/resources/user/UserEdit.php';
-                    break;
+                    case 'UserAdd':
+                        include './Admin/resources/user/UserAdd.php';
+                        break; 
+                        case 'UserEdit':
+                            include './Admin/resources/user/UserEdit.php';
+                            break; 
                 case 'OrderList':
                     include './Admin/resources/order/OrderList.php';
                     break;
@@ -93,25 +93,6 @@ if (isset($_GET['pages'])) {
                 case 'TypeEdit':
                     include './Admin/resources/Type/TypeEdit.php';
                     break;
-                case 'PhoneAdd':
-                    include './Admin/resources/product/productAdd/phoneAdd.php';
-                    break;
-                case 'LaptopAdd':
-                    include './Admin/resources/product/productAdd/laptopAdd.php';
-                    break;
-                case 'AccessoryAdd':
-                    include './Admin/resources/product/productAdd/accessoryAdd.php';
-                    break;
-                    //accessory
-                case 'AddWirelessheadphones':
-                    include './Admin/resources/product/productAdd/accessoryAdd/wirelessheadphones.php';
-                    break;
-                case 'AddWiredheadphones':
-                    include './Admin/resources/product/productAdd/accessoryAdd/wiredheadphones.php';
-                    break;
-                case 'AddBatterybackup':
-                    include './Admin/resources/product/productAdd/accessoryAdd/batterybackup.php';
-                    break;
 
                 default:
                     include './admin/resources/admin/Dashboard.php';
@@ -124,10 +105,10 @@ if (isset($_GET['pages'])) {
                 case 'index':
                     include './User/index.php';
                     break;
-                case 'Thanks':
-                    include './User/Product.php';
-                    break;
-            }
+                    case 'Thanks':
+                        include './User/Product.php';
+                        break;
+                }
             break;
     }
 }
