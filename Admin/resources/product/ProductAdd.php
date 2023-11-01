@@ -17,7 +17,25 @@
                                 foreach ($row as $ketqua) {
                                     extract($ketqua);
                                 ?>
-                                    <button type="button" class="btn btn-outline-primary"><a href="?pages=admin&action=">Thêm <?= $category_name ?></a></button>
+                                <?
+                                if($category_id == 1){
+                                    $url = 'PhoneAdd';
+                                    $namebtn = 'Điện thoại';
+                                }else if ($category_id == 2){
+                                    $url = 'LaptopAdd';
+                                    $namebtn = 'Laptop';
+
+                                }else{
+                                    $url = 'AccessoryAdd';
+                                    $namebtn = 'Phụ kiện';
+
+
+                                }
+                                ?>
+                                    <form action="index.php?pages=admin&action=<?echo $url?>" style="display: inline-block;" method="post">
+                                        <input type="hidden" name="category_id" value="<?= $category_id?>">
+                                        <button type="submit" class="btn btn-outline-primary" name="addproduct"><?echo $namebtn?></button>
+                                    </form>
                                 <?
                                 }
                                 ?>

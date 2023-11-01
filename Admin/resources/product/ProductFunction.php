@@ -14,29 +14,70 @@ function category_select_all(){
     $sql = "SELECT * FROM category";
     return $db->pdo_query($sql);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function add_Prod($nameP,$ImgP,$PriP,$CateP,$giam_gia, $dac_biet, $ma_loai)
+function add_phone($product_name, $product_title,$product_price,$product_sale,$product_img,$product_quantily,$category_id,$type_id,$phone_ram,$phone_screen,$phone_backcam,$phone_frontcam,$phone_chip,$phone_storge ,$user_created)
     {
         $db = new connect();
-        $sql = "INSERT INTO sanpham(ten_hh,hinh,don_gia,mo_ta,giam_gia,dac_biet) VALUES ('$nameP','$ImgP',$PriP,$CateP,$giam_gia, '$dac_biet', $ma_loai)";
+        $sql = "INSERT INTO 
+        product(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , phone_ram, phone_screen, phone_backcam, phone_frontcam, phone_chip, phone_storge, user_created, is_deleted )
+        VALUES
+        ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$phone_ram', '$phone_screen', '$phone_backcam', '$phone_frontcam', '$phone_chip', '$phone_storge', $user_created,1)";
         return $db->pdo_execute($sql);
     }
+
+
+    function getInfoSP($category_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM category , product WHERE category.category_id = product.category_id AND
+        category.category_id = $category_id
+        ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
+    function getTypeName($product_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT  * FROM product , `type`
+        WHERE product.type_id = type.type_id
+        AND product.product_id = $product_id       
+        ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    function getCateName($product_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT  * FROM product , category
+        WHERE product.category_id = category.category_id
+        AND product.product_id = $product_id       
+        ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
 
     function create_Prod($nameP,$ImgP,$PriP,$DesP,$CateP,$giam_gia, $dac_biet)
     {
@@ -52,16 +93,7 @@ function category_select_all(){
         return $db->pdo_execute($select);
     }
     
-    function getInfoSP($IDCate, $column)
-    {
-        $db = new connect();
-        $sql = "SELECT * FROM hang_hoa,loai WHERE hang_hoa.ma_loai = loai.ma_loai AND hang_hoa.ma_hh = $IDCate";
-        $result = $db->pdo_query($sql);
-        foreach ($result as $row) {
-            return $row[$column];
-        }
-    }
-
+    
     function sanpham_select_cate_all($IDcate){
         $db = new connect();
         $sql = "SELECT * FROM sanpham INNER JOIN danhmuc ON danhmuc.ma_loai=sanpham.ma_loai WHERE sanpham.ma_loai = $IDcate";

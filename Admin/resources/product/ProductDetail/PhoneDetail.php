@@ -20,47 +20,42 @@
                                     <thead>
                                         <tr>
                                             <th>Tên sản phẩm</th>
+                                            <th>Hình ảnh</th>
                                             <th>Mô tả</th>
                                             <th>Thông số kỹ thuật</th>
-                                            <th>Thao Tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?
-                                        $row = $product->product_select_all();
-                                        foreach ($row as $ketqua) {
-                                            extract($ketqua);
+                                        <form action="" method="post">
+                                            <button type="button" class="btn  btn-outline-primary">Chỉnh Sửa</button>
+                                            <button type="button" class="btn  btn-outline-danger">Xóa</button>
+                                        </form>
 
-                                            $product_id = $_POST['product_id'];
-                                            if (isset($_POST['product_id']) && ($_POST['product_id'] > 0)) {
-                                                $product_id = $_POST['product_id'];
-                                            } else {
-                                                $product_id = 0;
-                                            }
-                                        ?>
-                                            <tr>
-                                                <td><?=$product_name?></td>
-                                                <td><?=$product_title?></td>
-                                                <td>
-                                                    <p>Màn Hình: Siêu xịn</p>
-                                                    <p>Cam trước: Có</p>
-                                                    <p>Cam sau: Có</p>
-                                                    <p>Chip: A17</p>
-                                                    <p>RAM: 128GB</p>
-                                                    <p>Dung lượng: 20TB</p>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
-                                                    <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
-                                                </td>
-                                            </tr>
-                                        <?
-                                        }
-                                        ?>
+                                        <tr>
+                                            <td>Iphone 15 ProMax</td>
+                                            <td> <img src="images/iphone.jpg" alt="">
+                                            </td>
+                                            <td>mô tả</td>
+                                            <td>
+                                                <p>Màn Hình: Siêu xịn</p>
+                                                <p>Cam trước: Có</p>
+                                                <p>Cam sau: Có</p>
+                                                <p>Chip: A17</p>
+                                                <p>RAM: 128GB</p>
+                                                <p>Dung lượng: 20TB</p>
+                                            </td>
+
+                                        </tr>
+
                                     </tbody>
+
                                 </table>
+
+
                             </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
