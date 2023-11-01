@@ -24,6 +24,15 @@ function add_phone($product_name, $product_title,$product_price,$product_sale,$p
         return $db->pdo_execute($sql);
     }
 
+    function add_laptop($product_name, $product_title,$product_price,$product_sale,$product_img,$product_quantily,$category_id,$type_id,$laptop_screen,$laptop_graphic,$laptop_CPU,$laptop_storge,$laptop_ram,$user_created)
+    {
+        $db = new connect();
+        $sql = "INSERT INTO 
+        product(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , laptop_screen, laptop_graphic, laptop_CPU, laptop_storge, laptop_ram, user_created, is_deleted )
+        VALUES
+        ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$laptop_screen', '$laptop_graphic', '$laptop_CPU', '$laptop_storge', '$laptop_ram', $user_created,1)";
+        return $db->pdo_execute($sql);
+    }
 
     function getInfoSP($category_id, $column)
     {
@@ -36,7 +45,17 @@ function add_phone($product_name, $product_title,$product_price,$product_sale,$p
             return $row[$column];
         }
     }
-
+    function getInfoSP1($category_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM category WHERE
+        category.category_id = $category_id
+        ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
     function getTypeName($product_id, $column)
     {
         $db = new connect();
