@@ -99,7 +99,15 @@ if (isset($_POST['them_user'])) {
               <label>Vai Trò</label>
               <input type="text" class="form-control" id="exampleInputEmail1" name="role_id">
             </div>
-
+            <?
+            if (isset($_POST["role_id"])) {
+              if (empty($_POST["role_id"])) {
+                echo '<span class="vaild">Xin vui lòng nhập vai trò</span>';
+              } else {
+                echo '';
+              }
+            }
+            ?>
           </div>
           <!-- /.card-body -->
 
