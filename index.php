@@ -99,6 +99,9 @@ if (isset($_GET['pages'])) {
                 case 'LaptopAdd':
                     include './Admin/resources/product/productAdd/laptopAdd.php';
                     break;
+                case 'wireless':
+                    include './Admin/resources/product/productAdd/wirelessAdd.php';
+                    break;
                 case 'AccessoryAdd':
                     include './Admin/resources/product/productAdd/accessoryAdd.php';
                     break;

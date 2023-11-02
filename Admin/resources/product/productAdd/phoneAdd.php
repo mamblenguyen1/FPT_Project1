@@ -23,6 +23,37 @@ if (isset($_POST['addPhone'])) {
     $user_created = 1;
     $product_img = $_FILES['product_img']['name'] ?? "";
 
+    // echo $category_id ;
+    // echo '<br/>';
+    // echo $product_name ;
+    // echo '<br/>';
+    // echo $product_title ;
+    // echo '<br/>';
+    // echo $product_price ;
+    // echo '<br/>';
+    // echo $product_sale ;
+    // echo '<br/>';
+    // echo $product_quantily ;
+    // echo '<br/>';
+    // echo $type_id ;
+    // echo '<br/>';
+    // echo $phone_ram ;
+    // echo '<br/>';
+    // echo $phone_screen ;
+    // echo '<br/>';
+    // echo $phone_backcam ;
+    // echo '<br/>';
+    // echo $phone_frontcam ;
+    // echo '<br/>';
+    // echo $phone_chip ;
+    // echo '<br/>';
+    // echo $phone_storge ;
+    // echo '<br/>';
+    // echo $user_created ;
+    // echo '<br/>';
+    // echo $product_img ;
+    // echo '<br/>';
+    // exit();
     if (
         !$category_id == "" &&
         !$product_name == "" &&
@@ -68,7 +99,7 @@ if (isset($_POST['addPhone'])) {
                 </div>
 
                 <form action="" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="category_id" value="<? echo $product->getInfoSP($category_id, 'category_id') ?>">
+                    <input type="hidden" name="category_id" value="<? echo $product->getInfoSP1($category_id, 'category_id') ?>">
                     <div class="card-body">
                         <!-- Tên điện thoại -->
                         <div class="form-group">
