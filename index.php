@@ -12,7 +12,7 @@ $user = new UserFunction();
 $category = new Categories();
 $product = new ProductFunction();
 $type = new Type();
-  
+
 //require('./admin/core/function.php');
 //require('./client/core/FunctionClient.php');
 
@@ -26,6 +26,7 @@ if (isset($_GET['pages'])) {
             break;
 
         case 'admin':
+            include 'js.php';
             switch ($_GET['action']) {
                 case 'Dashboard':
                     include './Admin/resources/admin/dashboard.php';
@@ -105,21 +106,21 @@ if (isset($_GET['pages'])) {
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
-             
             }
             break;
 
         case 'user':
             switch ($_GET['action']) {
-                case 'index':
+                case 'home':
                     include './User/index.php';
                     break;
-                case 'Thanks':
+                case 'products':
                     include './User/Product.php';
+                    break;
+                case 'contact':
+                    include './User/contact.php';
                     break;
             }
             break;
     }
 }
-
-include 'js.php';

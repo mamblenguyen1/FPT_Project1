@@ -6,19 +6,19 @@ include('style.php');
 				Header Start
 		*************************************-->
 <header id="tg-header" class="tg-header tg-haslayout">
-	<div class="tg-topbar">
+	<div class="tg-topbar" style="background-color:#504c4c; color:white">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<ul class="tg-addnav">
-						<li>
-							<a href="">
+					<ul class="tg-addnav" >
+						<li >
+							<a href="" style="color:white">
 								<i class="icon-envelope"></i>
-								<em>Liên hệ</em>
+								<em >Liên hệ</em>
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="" style="color:white">
 								<i class="icon-question-circle"></i>
 								<em>Trợ giúp</em>
 							</a>
@@ -51,7 +51,7 @@ include('style.php');
 								</ul>
 							</div> -->
 					<div class="tg-userlogin">
-						<figure><a href=""><img src="../images/user1.jpg" alt="image description"></a></figure>
+						<figure><a href=""><img style="height:40px; width:40px" src="../images/user1.jpg" alt="image description"></a></figure>
 						<span>Chào ! Minh Quang</span>
 					</div>
 				</div>
@@ -62,7 +62,7 @@ include('style.php');
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<strong class="tg-logo"><a href="index-2.html"><img style="width: 150px; height: 80px;" src="../images/logo.png" alt="company name here"></a></strong>
+					<strong class="tg-logo"><a href="index.php?pages=user&action=home"><img style="height: 50px;" src="../images/logo.png" alt="company name here"></a></strong>
 					<div class="tg-wishlistandcart">
 						<div class="dropdown tg-themedropdown tg-wishlistdropdown">
 							<a href="" id="tg-wishlisst" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -139,7 +139,7 @@ include('style.php');
 						<div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
 							<ul>
 								<li class="menu-item-has-children menu-item-has-mega-menu">
-									<a href="">All Categories</a>
+									<a href="">Tất cả danh mục</a>
 									<div class="mega-menu">
 										<ul class="tg-themetabnav" role="tablist">
 											<li role="presentation" class="active">
@@ -702,33 +702,34 @@ include('style.php');
 										</div>
 									</div>
 								</li>
-								<li class="menu-item-has-children current-menu-item">
-									<a href="">Home</a>
-									<ul class="sub-menu">
+								<li >
+									<a href="index.php?pages=user&action=home">Trang chủ</a>
+									<!-- <ul class="sub-menu">
 										<li class="current-menu-item"><a href="index-2.html">Home V one</a></li>
 										<li><a href="indexv2.html">Home V two</a></li>
 										<li><a href="indexv3.html">Home V three</a></li>
-									</ul>
+									</ul> -->
 								</li>
-								<li class="menu-item-has-children">
+								<!-- <li class="menu-item-has-children">
 									<a href="">Authors</a>
 									<ul class="sub-menu">
 										<li><a href="authors.html">Authors</a></li>
 										<li><a href="authordetail.html">Author Detail</a></li>
 									</ul>
-								</li>
-								<li><a href="products.html">Best Selling</a></li>
-								<li><a href="products.html">Weekly Sale</a></li>
+								</li> -->
+								<li><a href="index.php?pages=user&action=products">Sản phẩm</a></li>
+								<li><a href="index.php?pages=user&action=products">Giới thiệu</a></li>
 								<li class="menu-item-has-children">
-									<a href="">Latest News</a>
+									<a href="">Tin tức công nghệ</a>
 									<ul class="sub-menu">
 										<li><a href="newslist.html">News List</a></li>
 										<li><a href="newsgrid.html">News Grid</a></li>
 										<li><a href="newsdetail.html">News Detail</a></li>
 									</ul>
 								</li>
-								<li><a href="contactus.html">Contact</a></li>
-								<li class="menu-item-has-children current-menu-item">
+								<li><a href="index.php?pages=user&action=contact">Liên hệ</a></li>
+								<!-- <li><a href="contactus.html">Liên hệ</a></li> -->
+								<!-- <li class="menu-item-has-children current-menu-item">
 									<a href=""><i class="icon-menu"></i></a>
 									<ul class="sub-menu">
 										<li class="menu-item-has-children">
@@ -742,7 +743,7 @@ include('style.php');
 										<li><a href="404error.html">404 Error</a></li>
 										<li><a href="comingsoon.html">Coming Soon</a></li>
 									</ul>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 					</nav>
