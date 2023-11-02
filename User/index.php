@@ -28,7 +28,7 @@ include('componant/header.php');
                                     <span class="tg-bookprice">
                                         <ins>$23.18</ins>
                                         <del>$30.20</del>
-                                    </span>
+                                    </span> 
                                     <a class="tg-btn tg-btnstyletwo tg-active" href="javascript:void(0);">
                                         <i class="fa fa-shopping-basket"></i>
                                         <em>Add To Basket</em>
