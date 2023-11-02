@@ -16,26 +16,29 @@
                                 $row = $product->category_select_all();
                                 foreach ($row as $ketqua) {
                                     extract($ketqua);
-                                ?>
-                                <?
-
-                                // if($category_id == 1){
-                                //     $url = 'PhoneAdd';
-                                //     $namebtn = 'Điện thoại';
-                                // }else if ($category_id == 2){
-                                //     $url = 'LaptopAdd';
-                                //     $namebtn = 'Laptop';
-                                // }else{
-                                //     $url = 'AccessoryAdd';
-                                //     $namebtn = 'Phụ kiện';
-                                // }
-
-                                ?>
-                                    <form action="index.php?pages=admin&action=<?echo $urlAdd?>" style="display: inline-block;" method="post">
-                                        <input type="hidden" name="category_id" value="<?= $category_id?>">
-                                        <button type="submit" class="btn btn-outline-primary" name="addproduct"><?echo $category_display?></button>
-                                    </form>
-                                <?
+                                    if($category_id == 1 || $category_id == 2){
+                                        ?>
+                                        <form action="index.php?pages=admin&action=<?echo $urlAdd?>" style="display: inline-block;" method="post">
+                                            <input type="hidden" name="category_id" value="<?= $category_id?>">
+                                            <button type="submit" class="btn btn-outline-primary" name="addproduct"><?echo $category_display?></button>
+                                        </form>
+                                    <?
+                                    }else if($category_id == 3){
+                                        ?>
+                                        <form action="index.php?pages=admin&action=wireless" style="display: inline-block;" method="post">
+                                            <input type="hidden" name="category_id" value="<?= $category_id?>">
+                                            <button type="submit" class="btn btn-outline-primary" name="addproduct"><?echo $category_display?></button>
+                                        </form>
+                                    <?
+                                    }else{
+                                        ?>
+                                        <form action="index.php?pages=admin&action=anotherCate" style="display: inline-block;" method="post">
+                                            <input type="hidden" name="category_id" value="<?= $category_id?>">
+                                            <button type="submit" class="btn btn-outline-primary" name="addproduct"><?echo $category_display?></button>
+                                        </form>
+                                    <?
+                                    }
+                            
                                 }
                                 ?>
                             </div>
