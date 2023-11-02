@@ -9,13 +9,21 @@ class ProductFunction
         return $db->pdo_query($sql);
     }
 
-    //truy van hien toan bo sp
-    function category_select_all()
-    {
-        $db = new connect();
-        $sql = "SELECT * FROM category";
-        return $db->pdo_query($sql);
-    }
+        //truy van hien toan bo sp theo hãng
+        function category_type_select_all()
+        {
+            $db = new connect();
+            $sql = "SELECT * FROM category";
+            return $db->pdo_query($sql);
+        }
+
+        //truy van hien toan bo sp theo hãng
+        function category_type_con_select_all($typecon)
+        {
+            $db = new connect();
+            $sql = "SELECT * FROM  type WHERE category_id=$typecon";
+            return $db->pdo_query($sql);
+        }
   
     function add_phone($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $phone_ram, $phone_screen, $phone_backcam, $phone_frontcam, $phone_chip, $phone_storge, $user_created)
     {

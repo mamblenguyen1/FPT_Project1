@@ -16,7 +16,6 @@
         <a href="#" class="d-block">Nguyễn Minh Quang</a>
       </div>
     </div>
-
     <!-- SidebarSearch Form -->
     <div class="form-inline">
       <div class="input-group" data-widget="sidebar-search">
@@ -28,7 +27,6 @@
         </div>
       </div>
     </div>
-
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -41,7 +39,6 @@
               Dashboard
             </p>
           </a>
-
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -137,7 +134,6 @@
             </li>
           </ul>
         </li>
-
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
@@ -172,7 +168,6 @@
             </li>
           </ul>
         </li>
-
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
@@ -191,7 +186,6 @@
             </li>
           </ul>
         </li>
-
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-chart-pie"></i>
@@ -286,6 +280,7 @@
             </li>
           </ul>
         </li>
+
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-edit"></i>
@@ -321,6 +316,7 @@
             </li>
           </ul>
         </li>
+
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-table"></i>
@@ -351,9 +347,16 @@
           </ul>
         </li>
 
-
-
+        <li class="nav-item">
+           <a href="logout.php" class="nav-link">
+             <i class="nav-icon fas fa-copy"></i>
+             <p>
+               Đăng Xuất
+             </p>
+           </a>
+         </li>
       </ul>
+      
     </nav>
     <!-- /.sidebar-menu -->
   </div>
