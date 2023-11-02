@@ -52,7 +52,7 @@ include('style.php');
 							</div> -->
 					<div class="tg-userlogin">
 						<figure><a href=""><img style="height:40px; width:40px" src="../images/user1.jpg" alt="image description"></a></figure>
-						<span>Chào ! Minh Quang</span>
+						<a href="index.php?pages=user&action=userinformation"><span>Chào ! Minh Quang</span></a>
 					</div>
 				</div>
 			</div>

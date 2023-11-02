@@ -103,13 +103,14 @@ if (isset($_GET['pages'])) {
                 case 'AccessoryAdd':
                     include './Admin/resources/product/productAdd/accessoryAdd.php';
                     break;
-                default: 
+                default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
             }
             break;
 
         case 'user':
+
             switch ($_GET['action']) {
                 case 'home':
                     include './User/resources/home.php';
@@ -128,6 +129,18 @@ if (isset($_GET['pages'])) {
                     break;
                 case 'cart':
                     include './User/resources/cart.php';
+                    break;
+                    //thong tin tk
+                case 'userinformation':
+                    include './User/resources/Userinformation.php';
+                    break;
+
+                case 'history':
+                    include './User/resources/history.php';
+                    break;
+
+                case 'changepassword':
+                    include './User/resources/changepassword.php';
                     break;
             }
             break;
