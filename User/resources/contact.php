@@ -1,12 +1,17 @@
+<?
+include('User/component/header.php');
+?>
+
 <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-07.jpg">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="tg-innerbannercontent">
-					<h1>Contact Us</h1>
+					<h1 >Liên hệ với chúng tôi</h1>
+
 					<ol class="tg-breadcrumb">
-						<li><a href="javascript:void(0);">home</a></li>
-						<li class="tg-active">Contact Us</li>
+						<li><a href="javascript:void(0);">Trang chủ</a></li>
+						<li class="tg-active">Liên hệ</li>
 					</ol>
 				</div>
 			</div>
@@ -29,7 +34,7 @@
 				<div class="tg-contactus">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<div class="tg-sectionhead">
-							<h2><span>Say Hello!</span>Get In Touch With Us</h2>
+							<h2><span>Xin chào</span>Hãy liên hệ với chúng tôi</h2>
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -41,44 +46,44 @@
 						<form class="tg-formtheme tg-formcontactus">
 							<fieldset>
 								<div class="form-group">
-									<input type="text" name="first-name" class="form-control" placeholder="First Name*">
+									<input type="text" name="first-name" class="form-control" placeholder="Họ">
 								</div>
 								<div class="form-group">
-									<input type="text" name="last-name" class="form-control" placeholder="Last Name*">
+									<input type="text" name="last-name" class="form-control" placeholder="Email">
 								</div>
 								<div class="form-group">
-									<input type="email" name="email" class="form-control" placeholder="Last Name*">
+									<input type="email" name="email" class="form-control" placeholder="Tên">
 								</div>
 								<div class="form-group">
-									<input type="text" name="subject" class="form-control" placeholder="Subject (optional)">
+									<input type="text" name="subject" class="form-control" placeholder="Chủ đề">
 								</div>
 								<div class="form-group tg-hastextarea">
-									<textarea placeholder="Comment"></textarea>
+									<textarea placeholder="Nội dung"></textarea>
 								</div>
 								<div class="form-group">
-									<button type="submit" class="tg-btn tg-active">Submit</button>
+									<button type="submit" class="tg-btn tg-active">Gửi</button>
 								</div>
 							</fieldset>
 						</form>
 						<div class="tg-contactdetail">
 							<div class="tg-sectionhead">
-								<h2>Get In Touch With Us</h2>
+								<h2>Tìm chúng tôi qua địa chỉ</h2>
 							</div>
 							<ul class="tg-contactinfo">
 								<li>
 									<i class="icon-apartment"></i>
-									<address>Suit # 07, Rose world Building, Street # 02, AT246T Manchester</address>
+									<address>Toà nhà FPT Polytechnic, Đ. Số 22, Thường Thạnh, Cái Răng, Cần Thơ</address>
 								</li>
 								<li>
 									<i class="icon-phone-handset"></i>
 									<span>
-										<em>0800 12345 - 678 - 89</em>
-										<em>+4 1234 - 4567 - 67</em>
+										<em>0907 370 341</em>
+										<em>0999 923 992</em>
 									</span>
 								</li>
 								<li>
 									<i class="icon-clock"></i>
-									<span>Serving 7 Days A Week From 9am - 5pm</span>
+									<span>Làm việc các ngày trong tuần từ 9h - 18h</span>
 								</li>
 								<li>
 									<i class="icon-envelope"></i>
@@ -108,3 +113,7 @@
 <!--************************************
 				Main End
 		*************************************-->
+
+<?
+include('user/component/footer.php');
+?>

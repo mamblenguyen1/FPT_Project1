@@ -4,8 +4,8 @@
 require_once './config/pdo.php';
 require_once './Admin/resources/category/CategoryFunction.php';
 require_once './Admin/resources/user/UserFunction.php';
-require_once './Admin/resources/Type/TypeFunction.php';
 require_once './Admin/resources/product/ProductFunction.php';
+require_once './Admin/resources/Type/TypeFunction.php';
 
 $db = new connect();
 $user = new UserFunction();
@@ -24,7 +24,6 @@ if (isset($_GET['pages'])) {
         case 'register':
             include './admin/auth/register.admin.php';
             break;
-
         case 'admin':
             switch ($_GET['action']) {
                 case 'Dashboard':
@@ -55,7 +54,7 @@ if (isset($_GET['pages'])) {
                     include './Admin/resources/comment/CommentList.php';
                     break;
                 case 'commentDetail':
-                    include './Admin/resources/comment/CommentDetail.php';
+                    include './Admin/resources/comment/CommentDetail.php'; 
                     break;
                     // detail
                 case 'AccessoryDetail':
@@ -77,6 +76,7 @@ if (isset($_GET['pages'])) {
                 case 'UserEdit':
                     include './Admin/resources/user/UserEdit.php';
                     break;
+                    // order
                 case 'OrderList':
                     include './Admin/resources/order/OrderList.php';
                     break;
@@ -105,7 +105,7 @@ if (isset($_GET['pages'])) {
                 case 'AccessoryAdd':
                     include './Admin/resources/product/productAdd/accessoryAdd.php';
                     break;
-                default:
+                default: 
                     include './admin/resources/admin/Dashboard.php';
                     break;
             }
@@ -113,11 +113,26 @@ if (isset($_GET['pages'])) {
 
         case 'user':
             switch ($_GET['action']) {
-                case 'index':
-                    include './User/index.php';
+                case 'home':
+                    include './User/resources/home.php';
                     break;
-                case 'Thanks':
-                    include './User/Product.php';
+                case 'products':
+                    include './User/resources/products.php';
+                    break;
+                case 'productdetail':
+                    include './User/resources/productdetail.php';
+                    break;
+                case 'contact':
+                    include './User/resources/contact.php';
+                    break;
+                case 'introduce':
+                    include './User/resources/introduce.php';
+                    break;
+                case 'cart':
+                    include './User/resources/cart.php';
+                    break;
+                case 'login':
+                    include 'login.php';
                     break;
             }
             break;

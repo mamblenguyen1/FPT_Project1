@@ -714,9 +714,11 @@ body.tg-comingsoonpage .tg-wrapper{overflow:visible;}
 	position: relative;
 }
 .tg-topbar {
+
 	width: 100%;
 	float: left;
 	border-bottom: 1px solid #dbdbdb;
+	
 }
 .tg-addnav {
 	float: left;
@@ -2235,7 +2237,7 @@ li.menu-item-has-mega-menu { position: static; }
 	margin: 0;
 	width: 100%;
 	float: left;
-	color: #666;
+	color: white;
 	padding: 0 0 30px;
 	text-align: center;
 	font: 300 16px/26px 'Open Sans', Arial, Helvetica, sans-serif;
@@ -2243,6 +2245,7 @@ li.menu-item-has-mega-menu { position: static; }
 .tg-testimonial blockquote q{
 	width: 100%;
 	float: left;
+	color: white;
 }
 .tg-testimonialauthor{
 	clear: both;

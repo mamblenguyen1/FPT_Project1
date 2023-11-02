@@ -1,3 +1,8 @@
+
+<?
+include('user/component/header.php');
+?>
+
 <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
 
 	<!--************************************
@@ -392,7 +397,7 @@
 							</div>
 						</div>
 						<?
-						include('sidebar.php');
+						include('user/component/sidebar.php');
 						?>
 					</div>
 				</div>
@@ -407,3 +412,7 @@
 		*************************************-->
 
 </div>
+
+<?
+include('user/component/footer.php');
+?>
