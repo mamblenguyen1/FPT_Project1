@@ -48,7 +48,7 @@
                 <ul>
                     <li>
                         <article class="tg-post">
-                            <figure><a href=""><img src="images/products/img-04.jpg" alt="image description"></a></figure>
+                            <figure><a href=""><img src="images/iphone.jpg" alt="image description"></a></figure>
                             <div class="tg-postcontent">
                                 <div class="tg-posttitle">
                                     <h3><a href="">Where The Wild Things
@@ -61,7 +61,7 @@
                     </li>
                     <li>
                         <article class="tg-post">
-                            <figure><a href=""><img src="images/products/img-05.jpg" alt="image description"></a></figure>
+                            <figure><a href=""><img src="images/iphone.jpg" alt="image description"></a></figure>
                             <div class="tg-postcontent">
                                 <div class="tg-posttitle">
                                     <h3><a href="">Where The Wild Things
@@ -74,7 +74,7 @@
                     </li>
                     <li>
                         <article class="tg-post">
-                            <figure><a href=""><img src="images/products/img-06.jpg" alt="image description"></a></figure>
+                            <figure><a href=""><img src="images/iphone.jpg" alt="image description"></a></figure>
                             <div class="tg-postcontent">
                                 <div class="tg-posttitle">
                                     <h3><a href="">Where The Wild Things
@@ -87,7 +87,7 @@
                     </li>
                     <li>
                         <article class="tg-post">
-                            <figure><a href=""><img src="images/products/img-07.jpg" alt="image description"></a></figure>
+                            <figure><a href=""><img src="images/iphone.jpg" alt="image description"></a></figure>
                             <div class="tg-postcontent">
                                 <div class="tg-posttitle">
                                     <h3><a href="">Where The Wild Things
@@ -102,4 +102,4 @@
             </div>
         </div>
     </aside>
-</div>
+</div> 
