@@ -1,3 +1,6 @@
+<?
+include('user/component/header.php');
+?>
 <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
 
     <!--************************************
@@ -52,7 +55,7 @@
                                                     <div class="tg-featureditmcontent">
                                                         <div class="tg-themetagbox"><span class="tg-themetag">Đang giảm giá</span></div>
                                                         <div class="tg-booktitle">
-                                                            <h3><a href="">Iphone 15 Promax</a></h3>
+                                                            <h3><a href="index.php?pages=user&action=productdetail">Iphone 15 Promax</a></h3>
                                                         </div>
                                                         <span class="tg-bookwriter">Hãng: <a href="">APPLE</a></span>
                                                         <span class="tg-stars"><span></span></span>
@@ -78,28 +81,28 @@
                                                 <fieldset>
                                                     <div class="form-group">
                                                         <label></label>
-                                                            <select>
-                                                                <option >Sắp xếp theo:</option>
-                                                                <option >Giá</option>
-                                                                <option>Hãng</option>
-                                                                <option>Năm</option>
-                                                            </select>
+                                                        <select>
+                                                            <option>Sắp xếp theo:</option>
+                                                            <option>Giá</option>
+                                                            <option>Hãng</option>
+                                                            <option>Năm</option>
+                                                        </select>
                                                         </span>
                                                     </div>
                                                     <div class="form-group">
                                                         <!-- <span class="tg-select"> -->
-                                                            <select>
-                                                            <option >Hiển thị:</option>
-                                                                <option>8</option>
-                                                                <option>16</option>
-                                                                <option>20</option>
-                                                            </select>
+                                                        <select>
+                                                            <option>Hiển thị:</option>
+                                                            <option>8</option>
+                                                            <option>16</option>
+                                                            <option>20</option>
+                                                        </select>
                                                         <!-- </span> -->
                                                     </div>
                                                 </fieldset>
                                             </form>
                                         </div>
-    <!-- Render product -->
+                                        <!-- Render product -->
                                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
                                             <div class="tg-postbook">
                                                 <figure class="tg-featureimg">
@@ -119,7 +122,7 @@
                                                     </ul>
                                                     <div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
                                                     <div class="tg-booktitle">
-                                                        <h3><a href="">Iphone 15 promax</a></h3>
+                                                        <h3><a href="index.php?pages=user&action=productdetail">Iphone 15 promax</a></h3>
                                                     </div>
                                                     <span class="tg-bookwriter">Hãng: <a href="">Apple</a></span>
                                                     <span class="tg-stars"><span></span></span>
@@ -136,7 +139,7 @@
                                         </div>
 
 
-    <!-- / Render product -->
+                                        <!-- / Render product -->
 
 
 
@@ -145,7 +148,7 @@
                             </div>
                         </div>
                         <?
-                        include('componant/sidebar.php');
+                        include('user/component/sidebar.php');
                         ?>
                     </div>
                 </div>
@@ -160,3 +163,7 @@
 		*************************************-->
 
 </div>
+
+<?
+include('user/component/footer.php');
+?>

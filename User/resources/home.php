@@ -1,5 +1,5 @@
 <?
-include('componant/header.php');
+include('user/component/header.php');
 ?>
 
 <body class="tg-home tg-homeone">
@@ -812,5 +812,5 @@ include('componant/header.php');
 </body>
 
 <?
-include('componant/footer.php');
+include('user/component/footer.php');
 ?>
