@@ -13,48 +13,31 @@
                 <h3>Categories</h3>
             </div>
             <div class="tg-widgetcontent">
-                <ul>
-                    <li><a href=""><span>Điện thoại</span><em>28245</em></a>
-                        <ul>
-                            <li>
-                                Apple
-                            </li>
-                            <li>
-                                Samsung
-                            </li>
-                            <li>
-                                OPPO
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href=""><span>Laptop</span><em>28245</em></a>
-                        <ul>
-                            <li>
-                                ASUS
-                            </li>
-                            <li>
-                                ACER
-                            </li>
-                            <li>
-                                MSI
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href=""><span>Phụ kiện</span><em>28245</em></a>
-                        <ul>
-                            <li>
-                                Tai nghe
-                            </li>
-                            <li>
-                                Ốp lưng
-                            </li>
-                            <li>
-                                Sạc dự phòng
-                            </li>
-                        </ul>
-                    </li>
-
-                </ul>
+                <?
+                $product = new ProductFunction();
+                $row = $product->category_type_select_all();
+                foreach ($row as $ketqua) {
+                    extract($ketqua);
+                ?>
+                    <ul>
+                        <li><a href=""><span><?= $category_name ?></span></a>
+                            <ul>
+                                <?
+                                $category = new ProductFunction();
+                                $row = $category->category_type_con_select_all($category_id );
+                                foreach ($row as $ketqua) {
+                                    extract($ketqua);
+                                    echo ' <li>
+                                                <a href="">'.$type_name.'</a>
+                                            </li>';
+                                }
+                                ?>
+                            </ul>
+                        </li>
+                    </ul>
+                <?
+                }
+                ?>
             </div>
         </div>
         <div class="tg-widget tg-widgettrending">
