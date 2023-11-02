@@ -40,7 +40,7 @@
 						<div class="tg-threecolumns">
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 								<div class="tg-footercol">
-									<strong class="tg-logo"><a href=""><img src="../images/logo.png" alt="image description"></a></strong>
+									<strong class="tg-logo"><a href=""><img src="images/logo.png" alt="image description"></a></strong>
 									<ul class="tg-contactinfo">
 										<li>
 											<i class="icon-apartment"></i>
@@ -108,7 +108,7 @@
 									<div class="tg-widgetcontent">
 										<ul>
 											<li>
-												<figure><a href=""><img style="width: 50px; height: 60px;" src="../images/user1.jpg" alt="image description"></a></figure>
+												<figure><a href=""><img style="width: 50px; height: 60px;" src="images/user1.jpg" alt="image description"></a></figure>
 												<div class="tg-authornamebooks">
 													<h4><a href="">Johnny Trí Nguyễn</a></h4>
 													<p>Đã thanh toán hơn 200 đơn hàng</p>

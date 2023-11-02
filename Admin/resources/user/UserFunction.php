@@ -9,6 +9,14 @@ class UserFunction
         $result = $db->pdo_execute($sql);
         return $result;
     }
+
+    function user_create($user_name, $email, $user_phone_number, $user_address, $user_password)
+    {
+        $db = new connect();
+        $sql = "INSERT INTO user(user_name, email, user_phone_number, user_address, user_password, role_id, is_deleted) VALUES ('$user_name','$email' , '$user_phone_number', '$user_address', '$user_password', 2, 1)";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
     //
     function update_user($user_name, $user_password, $user_phone_number, $user_address, $role_id, $user_id)
     {
@@ -43,7 +51,50 @@ class UserFunction
         return $db->pdo_query($sql);
     }
 
+    public function checkUser($Email, $password)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM user WHERE email = '$Email' AND user_password = '$password'";
+        $result = $db->pdo_query_one($select);
+        if ($result != null)
+            return true;
+        else
+            return false;
+    }
+    public function checkRole($Email, $password)
+    {
+        $db = new connect();
+        $select = "SELECT user.role_id FROM user, `role` 
+        WHERE user.role_id = role.role_id AND email = '$Email' AND user_password ='$password'";
+        $result = $db->pdo_query_one($select);
+        return $result;
+    }
 
+    function getInfoUserEmail($Email, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM user WHERE email ='$Email'";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
+    public function checkDuplicateEmail($userEmail)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM user";
+        $result = $db->pdo_query($select);
+        foreach ($result as $row) {
+            $nw = $row['email'];
+            if ($userEmail == $nw) {
+                return true;
+            }
+        }
+    }
+
+
+    // CSDL cu~
     function khach_hang_exist($user_id)
     {
         $db = new connect();
@@ -65,24 +116,6 @@ class UserFunction
         return $db->pdo_execute($sql, $mat_khau_moi, $user_id);
     }
 
-    public function checkUser($userAccount, $password)
-    {
-        $db = new connect();
-        $select = "SELECT * FROM khachhang WHERE ho_ten='$userAccount' AND mat_khau='$password'";
-        $result = $db->pdo_query_one($select);
-        if ($result != null)
-            return true;
-        else
-            return false;
-    }
-    public function checkRole($userAccount, $password)
-    {
-        $db = new connect();
-        $select = "SELECT khachhang.vai_tro FROM khachhang, vaitro 
-        WHERE khachhang.vai_tro = vaitro.vai_tro_id AND ho_ten= '$userAccount' AND mat_khau ='$password'";
-        $result = $db->pdo_query_one($select);
-        return $result;
-    }
     //lay ID
     public function userid($userAccount, $password)
     {
@@ -92,15 +125,7 @@ class UserFunction
         return $result;
     }
 
-    function getInfoUserName($userAccount, $column)
-    {
-        $db = new connect();
-        $sql = "SELECT * FROM khachhang WHERE ho_ten ='$userAccount'";
-        $result = $db->pdo_query($sql);
-        foreach ($result as $row) {
-            return $row[$column];
-        }
-    }
+
     //tk trung
     public function checkDuplicateUser($userAccount)
     {
@@ -124,18 +149,7 @@ class UserFunction
         return $result;
     }
     //doimk = sét email
-    public function checkDuplicateEmail($userEmail)
-    {
-        $db = new connect();
-        $select = "SELECT * FROM khachhang";
-        $result = $db->pdo_query($select);
-        foreach ($result as $row) {
-            $nw = $row['mail'];
-            if ($userEmail == $nw) {
-                return true;
-            }
-        }
-    }
+    
     //suapass
     function update_Pass($userPass, $userID)
     {
