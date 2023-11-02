@@ -60,7 +60,7 @@ if (isset($_POST["submit"])) {
     }
   }
 }
-?>
+?> 
 
 <?
 // Đăng Ký

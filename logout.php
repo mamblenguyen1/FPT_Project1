@@ -5,4 +5,4 @@ session_start();
     setcookie("userID", '', time() +1 , "/");
     header('location: ./?pages=user&action=home');
   }
-?> 
+?>  
