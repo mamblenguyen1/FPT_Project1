@@ -356,7 +356,7 @@
               </a>
             </li>
           </ul>
-        </li> 
+        </li>
 
         <li class="nav-item">
            <a href="logout.php" class="nav-link">
