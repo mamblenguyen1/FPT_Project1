@@ -112,13 +112,22 @@ if (isset($_GET['pages'])) {
         case 'user':
             switch ($_GET['action']) {
                 case 'home':
-                    include './User/index.php';
+                    include './User/resources/home.php';
                     break;
                 case 'products':
-                    include './User/Product.php';
+                    include './User/resources/products.php';
+                    break;
+                case 'productdetail':
+                    include './User/resources/productdetail.php';
                     break;
                 case 'contact':
-                    include './User/contact.php';
+                    include './User/resources/contact.php';
+                    break;
+                case 'introduce':
+                    include './User/resources/introduce.php';
+                    break;
+                case 'cart':
+                    include './User/resources/cart.php';
                     break;
             }
             break;
