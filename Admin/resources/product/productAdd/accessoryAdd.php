@@ -13,31 +13,13 @@
 
                             <div class="card-header">
                                 <?
-                                $row = $product->category_select_all();
+                                $row = $type->type_select_all();
                                 foreach ($row as $ketqua) {
                                     extract($ketqua);
                                 ?>
-                                    <?
-                                    if ($category_id == 1) {
-                                        $url = 'AccessoryAdd';
-                                        $namebtn = 'Thêm Tay Nghe Có Dây';
-                                    } else if ($category_id == 2) {
-                                        $url = 'AccessoryAdd';
-                                        $namebtn = 'Thêm Tay Nghe Không Dây';
-                                    } else if ($category_id == 3) {
-                                        $url = 'AccessoryAdd';
-                                        $namebtn = 'Thêm Pin Dự Phòng';
-                                    } else if ($category_id == 4) {
-                                        $url = 'AccessoryAdd';
-                                        $namebtn = 'Thêm Chuột Có Dây';
-                                    } else {
-                                        $url = 'AccessoryAdd';
-                                        $namebtn = 'Thêm Chuột Không Dây ';
-                                    }
-                                    ?>
-                                    <form action="index.php?pages=admin&action=<? echo $url ?>" style="display: inline-block;" method="post">
-                                        <input type="hidden" name="category_id" value="<?= $category_id ?>">
-                                        <button type="submit" class="btn btn-outline-primary" name="addproduct"><? echo $namebtn ?></button>
+                                    <form action="index.php?pages=admin&action=<?echo $urlAdd?>" style="display: inline-block;" method="post">
+                                        <input type="hidden" name="category_id" value="<?= $type_id?>">
+                                        <button type="submit" class="btn btn-outline-primary" name="addproduct"><?echo $type_name?></button>
                                     </form>
                                 <?
                                 }

@@ -18,13 +18,13 @@ if (isset($_POST['delete_type'])) {
 ?>
 <?
 if (isset($_POST['editType'])) {
-    $user_updated = 1 ;
+    $user_updated = 1;
     $typeid = $_POST['typeid'] ?? "";
     $type_name = $_POST['typeName'] ?? "";
     $category_id = $_POST['typeCate'] ?? "";
     $is_show = $_POST['typeShow'] ?? "";
     if (!$type_name == "" && !$category_id == "" && !$is_show == "") {
-       $type->update_Type($type_name,$category_id, $is_show, $user_updated, $typeid);
+        $type->update_Type($type_name, $category_id, $is_show, $user_updated, $typeid);
         echo '<script>alert("Cập nhập thành công !!")</script>';
         // exit();
         echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
@@ -46,11 +46,11 @@ if (isset($_POST['editType'])) {
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form action="" method="post">
-                <input name="typeid" type="hidden" class="form-control"  value="<? echo $type->getInfoType($type_id, 'type_id')?>">
+                    <input name="typeid" type="hidden" class="form-control" value="<? echo $type->getInfoType($type_id, 'type_id') ?>">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên danh mục con</label>
-                            <input name="typeName" type="text" class="form-control" value="<? echo $type->getInfoType($type_id, 'type_name')?>" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="typeName" type="text" class="form-control" value="<? echo $type->getInfoType($type_id, 'type_name') ?>" id="exampleInputEmail1" placeholder="Nhập tên. . .">
                             <?
                             if (isset($_POST["typeName"])) {
                                 if (empty($_POST["typeName"])) {
@@ -64,7 +64,7 @@ if (isset($_POST['editType'])) {
                         <div class="form-group">
                             <label>Danh mục</label>
                             <select name="typeCate" class="form-control select2" style="width: 100%;">
-                            <option selected value="<?
+                                <option selected value="<? echo
                                                         $showidCate
                                                         ?>"><? echo
                                                             $showNameCate
@@ -93,7 +93,7 @@ if (isset($_POST['editType'])) {
                         <div class="form-group">
                             <label>Trạng thái</label>
                             <select name="typeShow" class="form-control select2" style="width: 100%;">
-                                <option selected value="<?
+                                <option selected value="<? echo
                                                         $showid
                                                         ?>"><? echo
                                                             $showName
@@ -108,7 +108,7 @@ if (isset($_POST['editType'])) {
                                     }
                                 }
                                 ?>
-                                      ?>
+                                ?>
                             </select>
                             <?
                             if (isset($_POST["typeShow"])) {

@@ -21,7 +21,12 @@ class Type
         $result = $db->pdo_execute($select);
         return $result;
     }
-
+    function type_select_all()
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM category, `type` WHERE category.category_id=type.category_id AND category.category_id NOT IN (1,2)";
+        return $db->pdo_query($sql);
+    }
     function deleteCate($type_id)
     {
         $db = new connect();
