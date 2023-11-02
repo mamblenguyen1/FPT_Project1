@@ -729,6 +729,7 @@ include('style.php');
 								</li>
 								<li><a href="index.php?pages=user&action=contact">Liên hệ</a></li>
 								<li><a href="logout.php">Đăng Xuất</a></li>
+								
 								<!-- <li><a href="contactus.html">Liên hệ</a></li> -->
 								<!-- <li class="menu-item-has-children current-menu-item">
 									<a href=""><i class="icon-menu"></i></a>
