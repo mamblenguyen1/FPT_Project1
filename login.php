@@ -29,14 +29,8 @@
             <a href="#">Quên mật khẩu?</a>
           </div>
         </div>
-        <div class="sign-up-htm">
+        <div class="sign-up-htm" >
           <form action="" method="post">
-
-            <div class="group">
-              <label for="user" class="label">Tên người dùng</label>
-              <input id="user" type="text" class="input">
-            </div>
-
             <div class="group">
               <label for="pass" class="label">Email</label>
               <input id="pass" type="Email" class="input">
@@ -53,15 +47,20 @@
             </div>
 
             <div class="group">
-              <label for="user" class="label">Số điện thoại</label>
+              <label for="user" class="label">Tên người dùng</label>
               <input id="user" type="text" class="input">
             </div>
-
+            
             <div class="group">
               <label for="user" class="label">Địa chỉ</label>
               <input id="user" type="text" class="input">
             </div>
             
+            <div class="group">
+              <label for="user" class="label">Số điện thoại</label>
+              <input id="user" type="text" class="input">
+            </div>
+
             <div class="group">
               <button type="submit" class="button"> Đăng Ký</button>
             </div>

@@ -103,7 +103,7 @@ if (isset($_GET['pages'])) {
                 case 'AccessoryAdd':
                     include './Admin/resources/product/productAdd/accessoryAdd.php';
                     break;
-                default:
+                default: 
                     include './admin/resources/admin/Dashboard.php';
                     break;
             }
