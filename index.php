@@ -12,7 +12,7 @@ $user = new UserFunction();
 $category = new Categories();
 $product = new ProductFunction();
 $type = new Type();
-   
+
 //require('./admin/core/function.php');
 //require('./client/core/FunctionClient.php');
 
@@ -99,13 +99,15 @@ if (isset($_GET['pages'])) {
                 case 'LaptopAdd':
                     include './Admin/resources/product/productAdd/laptopAdd.php';
                     break;
+                case 'wireless':
+                    include './Admin/resources/product/productAdd/wirelessAdd.php';
+                    break;
                 case 'AccessoryAdd':
                     include './Admin/resources/product/productAdd/accessoryAdd.php';
                     break;
                 default:
                     include './admin/resources/admin/Dashboard.php';
                     break;
-             
             }
             break;
 
