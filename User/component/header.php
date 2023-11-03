@@ -53,6 +53,7 @@ include('style.php');
 					<div class="tg-userlogin">
 						<figure><a href=""><img style="height:40px; width:40px" src="../images/user1.jpg" alt="image description"></a></figure>
 						<a href="index.php?pages=user&action=userinformation"><span>Chào ! Minh Quang</span></a>
+
 					</div>
 				</div>
 			</div>
@@ -62,7 +63,7 @@ include('style.php');
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<strong class="tg-logo"><a href="index.php?pages=user&action=home"><img style="height: 50px;" src="../images/logo.png" alt="company name here"></a></strong>
+					<strong class="tg-logo"><a href="index.php?pages=user&action=home"><img style="height: 50px;" src="images/logo.png" alt="company name here"></a></strong>
 					<div class="tg-wishlistandcart">
 						<div class="dropdown tg-themedropdown tg-wishlistdropdown">
 							<a href="" id="tg-wishlisst" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -86,7 +87,7 @@ include('style.php');
 								<div class="tg-minicartbody">
 									<div class="tg-minicarproduct">
 										<figure>
-											<img style="width: 70px; height: 80px;" src="../images/iphone.jpg" alt="image description">
+											<img style="width: 70px; height: 80px;" src="images/iphone.jpg" alt="image description">
 
 										</figure>
 										<div class="tg-minicarproductdata">

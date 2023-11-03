@@ -4,8 +4,8 @@
 require_once './config/pdo.php';
 require_once './Admin/resources/category/CategoryFunction.php';
 require_once './Admin/resources/user/UserFunction.php';
-require_once './Admin/resources/Type/TypeFunction.php';
 require_once './Admin/resources/product/ProductFunction.php';
+require_once './Admin/resources/Type/TypeFunction.php';
 
 $db = new connect();
 $user = new UserFunction();
@@ -24,9 +24,7 @@ if (isset($_GET['pages'])) {
         case 'register':
             include './admin/auth/register.admin.php';
             break;
-
         case 'admin':
-            include 'js.php';
             switch ($_GET['action']) {
                 case 'Dashboard':
                     include './Admin/resources/admin/dashboard.php';
@@ -56,7 +54,7 @@ if (isset($_GET['pages'])) {
                     include './Admin/resources/comment/CommentList.php';
                     break;
                 case 'commentDetail':
-                    include './Admin/resources/comment/CommentDetail.php';
+                    include './Admin/resources/comment/CommentDetail.php'; 
                     break;
                     // detail
                 case 'AccessoryDetail':
@@ -78,6 +76,7 @@ if (isset($_GET['pages'])) {
                 case 'UserEdit':
                     include './Admin/resources/user/UserEdit.php';
                     break;
+                    // order
                 case 'OrderList':
                     include './Admin/resources/order/OrderList.php';
                     break;
@@ -99,6 +98,9 @@ if (isset($_GET['pages'])) {
                     break;
                 case 'LaptopAdd':
                     include './Admin/resources/product/productAdd/laptopAdd.php';
+                    break;
+                case 'wireless':
+                    include './Admin/resources/product/productAdd/wirelessAdd.php';
                     break;
                 case 'AccessoryAdd':
                     include './Admin/resources/product/productAdd/accessoryAdd.php';
@@ -141,8 +143,13 @@ if (isset($_GET['pages'])) {
 
                 case 'changepassword':
                     include './User/resources/changepassword.php';
+
+                case 'login':
+                    include 'login.php';
                     break;
             }
             break;
     }
 }
+
+include 'js.php';
