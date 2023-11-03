@@ -103,12 +103,6 @@ include('user/component/header.php');
                                             </form>
                                         </div>
                                         <!-- Render product -->
-                                        <?
-                                        $product1 = new ProductFunction();
-                                        $row = $product1->product1_select_all();
-                                        foreach ($row as $ketqua) {
-                                            extract($ketqua);
-                                        ?>
                                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
                                                 <div class="tg-postbook">
                                                     <figure class="tg-featureimg">
@@ -143,9 +137,7 @@ include('user/component/header.php');
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?
-                                        }
-                                        ?>
+                                       
                                         <!-- / Render product -->
 
 
