@@ -155,7 +155,7 @@ class ProductFunction
     function getIsWired($product_id, $column)
     {
         $db = new connect();
-        $sql = "SELECT is_wireless, type.type_name as 'typename' , category.category_name as 'catename' FROM wired , `type` , category
+        $sql = "SELECT is_wireless, type.type_name as 'typename' , category.category_name as 'catename' , wired.product_url as 'url' FROM wired , `type` , category
         WHERE category.category_id = wired.category_id
         AND type.type_id = wired.type_id
         AND wired.product_id = $product_id
@@ -168,7 +168,7 @@ class ProductFunction
     function getIsWireLess($product_id, $column)
     {
         $db = new connect();
-        $sql = "SELECT is_wireless, type.type_name as 'typename', category.category_name as 'catename' FROM wireless , `type` , category
+        $sql = "SELECT is_wireless, type.type_name as 'typename', category.category_name as 'catename' , wireless.product_url as 'url' FROM wireless , `type` , category
         WHERE category.category_id = wireless.category_id
         AND type.type_id = wireless.type_id
         AND wireless.product_id = $product_id";
@@ -182,7 +182,7 @@ class ProductFunction
     function getTypeNamePhone($product_id, $column)
     {
         $db = new connect();
-        $sql = "SELECT type.type_name , category.category_name 
+        $sql = "SELECT type.type_name , category.category_name , phone.product_url as 'url'
         FROM type, category, phone
         WHERE type.type_id = phone.type_id
         AND category.category_id = phone.category_id
@@ -196,7 +196,7 @@ class ProductFunction
     function getTypeNameLaptop($product_id, $column)
     {
         $db = new connect();
-        $sql = "SELECT type.type_name , category.category_name 
+        $sql = "SELECT type.type_name , category.category_name , product_url as 'url'
         FROM type, category, laptop
         WHERE type.type_id = laptop.type_id
         AND category.category_id = laptop.category_id
