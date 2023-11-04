@@ -23,99 +23,37 @@ class ProductFunction
         return $db->pdo_query($sql);
     }
 
+    function category_type_select_all()
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM category";
+        return $db->pdo_query($sql);
+    }
 
+    function category_type_con_select_all($typecon)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM  type WHERE category_id=$typecon";
+        return $db->pdo_query($sql);
+    }
 
-        //truy van hien toan bo sp theo hãng
-        function category_type_select_all()
-        {
-            $db = new connect();
-            $sql = "SELECT * FROM category";
-            return $db->pdo_query($sql);
-        }
-
-        //truy van hien toan bo sp theo hãng
-        function category_type_con_select_all($typecon)
-        {
-            $db = new connect();
-            $sql = "SELECT * FROM  type WHERE category_id=$typecon";
-            return $db->pdo_query($sql);
-        }
-  
     function add_phone($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $phone_ram, $phone_screen, $phone_backcam, $phone_frontcam, $phone_chip, $phone_storge, $user_created)
     {
         $db = new connect();
         $sql = "INSERT INTO 
-        phone(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , product_ram, product_screen, product_backcam, product_frontcam, product_chip, product_storge, user_created, is_deleted )
+        phone(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , product_ram, product_screen, product_backcam, product_frontcam, product_chip, product_storge, user_created, is_deleted, is_wireless, product_url )
         VALUES
-        ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$phone_ram', '$phone_screen', '$phone_backcam', '$phone_frontcam', '$phone_chip', '$phone_storge', $user_created,1)";
+        ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$phone_ram', '$phone_screen', '$phone_backcam', '$phone_frontcam', '$phone_chip', '$phone_storge', $user_created,1 , 3 , 'PhoneDetail' )";
         return $db->pdo_execute($sql);
     }
 
-    function add_mickey($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $accessoy_length, $accessoy_port, $accessory_DPI, $user_created)
+    function add_laptop($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_screen, $product_graphic, $product_CPU, $product_storge, $product_ram, $user_created)
     {
         $db = new connect();
         $sql = "INSERT INTO 
-        product(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , accessoy_length, accessoy_port, accessory_DPI, user_created, is_deleted )
+        laptop(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , product_screen, product_graphic, product_CPU, product_storge, product_ram, user_created, is_deleted ,is_wireless,product_url)
         VALUES
-        ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$accessoy_length', '$accessoy_port', '$accessory_DPI', $user_created,1)";
-
-        return $db->pdo_execute($sql);
-    }
-
-    function add_accesssory($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $accessoy_length, $accessoy_port, $accessoy_micro, $accessory_charge, $accessory_use_time, $accessory_capacity, $accessory_DPI, $user_created)
-    {
-        $db = new connect();
-        $sql = "INSERT INTO 
-        product(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , accessoy_length, accessoy_port, accessoy_micro, accessory_charge, accessory_use_time, accessory_capacity , accessory_DPI, user_created, is_deleted )
-        VALUES
-        ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$accessoy_length', '$accessoy_port', '$accessoy_micro', '$accessory_charge', '$accessory_use_time', '$accessory_capacity', '$accessory_DPI', $user_created,1)";
-
-        return $db->pdo_execute($sql);
-    }
-
-    //thêm tai nghe có dây
-    function add_wiredheadphones($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $accessoy_length, $accessoy_port, $accessoy_micro, $user_created)
-    {
-        $db = new connect();
-        $sql = "INSERT INTO 
-    product(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , accessoy_length, accessoy_port, accessoy_micro, user_created, is_deleted )
-    VALUES
-    ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$accessoy_length', '$accessoy_port', '$accessoy_micro', $user_created,1)";
-
-        return $db->pdo_execute($sql);
-    }
-    //thêm tai nghe không dây
-    function add_wirelessheadphones($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $accessoy_port, $accessoy_micro, $accessory_charge, $accessory_use_time, $accessory_capacity, $user_created)
-    {
-        $db = new connect();
-        $sql = "INSERT INTO 
-    product(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , 
-    accessoy_port, accessoy_micro, accessory_charge, accessory_use_time, accessory_capacity , user_created, is_deleted )
-    VALUES
-    ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$accessoy_port', '$accessoy_micro', '$accessory_charge', '$accessory_use_time', '$accessory_capacity', $user_created,1)";
-
-        return $db->pdo_execute($sql);
-    }
-    //thêm pin dự phòng
-    function add_batterybackup($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $accessoy_port, $accessory_charge, $accessory_use_time, $accessory_capacity, $user_created)
-    {
-        $db = new connect();
-        $sql = "INSERT INTO 
-    product(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , 
-    accessoy_port, accessory_charge, accessory_use_time, accessory_capacity , user_created, is_deleted )
-    VALUES
-    ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$accessoy_port', '$accessory_charge', '$accessory_use_time', '$accessory_capacity', $user_created,1)";
-        return $db->pdo_execute($sql);
-    }
-    //---------------//
-
-    function add_laptop($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $laptop_screen, $laptop_graphic, $laptop_CPU, $laptop_storge, $laptop_ram, $user_created)
-    {
-        $db = new connect();
-        $sql = "INSERT INTO 
-        product(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , laptop_screen, laptop_graphic, laptop_CPU, laptop_storge, laptop_ram, user_created, is_deleted )
-        VALUES
-        ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$laptop_screen', '$laptop_graphic', '$laptop_CPU', '$laptop_storge', '$laptop_ram', $user_created,1)";
+        ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$product_screen', '$product_graphic', '$product_CPU', '$product_storge', '$product_ram', $user_created,1 , 3 , 'LaptopDetail')";
         return $db->pdo_execute($sql);
     }
 
@@ -250,10 +188,31 @@ class ProductFunction
             return $row[$column];
         }
     }
-    function deleteProduct($product_id)
+    function deletePhone($product_id)
     {
         $db = new connect();
-        $sql = "UPDATE product SET is_deleted = 0 WHERE product_id = $product_id";
+        $sql = "UPDATE phone SET is_deleted = 0 WHERE product_id = $product_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+    function deleteLaptop($product_id)
+    {
+        $db = new connect();
+        $sql = "UPDATE laptop SET is_deleted = 0 WHERE product_id = $product_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+    function deleteWired($product_id)
+    {
+        $db = new connect();
+        $sql = "UPDATE wired SET is_deleted = 0 WHERE product_id = $product_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+    function deleteWireless($product_id)
+    {
+        $db = new connect();
+        $sql = "UPDATE wireless SET is_deleted = 0 WHERE product_id = $product_id";
         $result = $db->pdo_execute($sql);
         return $result;
     }
