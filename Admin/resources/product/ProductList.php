@@ -29,10 +29,13 @@
                     <?
                     $conn = $db->pdo_get_connection();
                     $stmt = $conn->prepare("SELECT product_id, product_name , category_id , type_id , product_price FROM phone
+                    WHERE is_deleted = 1
                     UNION
                     SELECT product_id,product_name , category_id , type_id , product_price FROM laptop
+                    WHERE is_deleted = 1
                     UNION
                     SELECT product_id,product_name , category_id , type_id , product_price  FROM wired
+                    WHERE is_deleted = 1
                     UNION
                     SELECT product_id,product_name , category_id , type_id , product_price FROM wireless                    
                     WHERE is_deleted = 1");
