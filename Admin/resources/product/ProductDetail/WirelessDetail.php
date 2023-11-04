@@ -52,10 +52,15 @@ if (isset($_POST['deleteproduct'])) {
                                             </td>
                                             <td>' . $row['product_title'] . '</td>
                                             <td>
-                                                <p>Màn Hình: ' . $row['product_range'] . '</p>
-                                                <p>Cam trước: ' . $row['product_port'] . '</p>
-                                                <p>Cam sau: ' . $row['product_weight'] . '</p>
-                                                <p>Chip: ' . $row['product_included'] . '</p>
+
+                                                <p>Khoảng cách kết nối : ' . $row['product_range'] . '</p>
+                                                <p>Cổng kết nối: ' . $row['product_port'] . '</p>
+                                                <p>Khối lượng: ' . $row['product_weight'] . '</p>
+                                                <p>Phụ kiện đi kèm : ' . $row['product_included'] . '</p>
+                                                <p>Dung lượng pin : ' . $row['product_capacity'] . '</p>
+                                                <p>Thời gian sạc: ' . $row['product_charge_time'] . '</p>
+                                                <p>Thời gian sử dụng: ' . $row['product_use_time'] . '</p>
+
                                             </td>
 
                                         </tr>
