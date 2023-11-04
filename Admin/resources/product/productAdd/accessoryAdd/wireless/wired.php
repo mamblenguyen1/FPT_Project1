@@ -7,6 +7,7 @@ if (isset($_POST['addproduct'])) {
 
     // exit();
 }
+
 if (isset($_POST['addPhone'])) {
     $category_id = $_POST['category_id'] ?? "";
     $product_name = $_POST['product_name'] ?? "";
@@ -22,33 +23,6 @@ if (isset($_POST['addPhone'])) {
     $user_created = 1;
     $product_img = $_FILES['product_img']['name'] ?? "";
 
-    // echo $category_id ;
-    // echo '<br/>';
-    // echo $product_name ;
-    // echo '<br/>';
-    // echo $product_title ;
-    // echo '<br/>';
-    // echo $product_price ;
-    // echo '<br/>';
-    // echo $product_sale ;
-    // echo '<br/>';
-    // echo $product_quantily ;
-    // echo '<br/>';
-    echo $type_id ;
-    echo '<br/>';
-    // echo $product_length ;
-    // echo '<br/>';
-    // echo $product_port ;
-    // echo '<br/>';
-    // echo $product_weight ;
-    // echo '<br/>';
-    // echo $product_included ;
-    // echo '<br/>';
-    // echo $user_created ;
-    // echo '<br/>';
-    // echo $product_img ;
-    // echo '<br/>';
-    // exit();
     if (
         !$category_id == "" &&
         !$product_name == "" &&
@@ -65,6 +39,7 @@ if (isset($_POST['addPhone'])) {
         !$product_img == ""
     ) {
         $product->add_Wired($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $type_id, $product_length, $product_port, $product_weight, $product_included,  $user_created);
+
         echo '<script>alert("tạo thành công !!")</script>';
         echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
         $anhne = $_FILES['product_img']['tmp_name'];
@@ -92,12 +67,13 @@ if (isset($_POST['addPhone'])) {
                 </div>
 
                 <form action="" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="category_id" value="<? echo $product->getInfoSP1($category_id, 'category_id') ?>">
+                    <input type="hidden" name="category_id" value="<? echo $product->getInfoWired($ProductId, 'category_id') ?>">
+                    <input type="hidden" name="product_id" class="form-control"  value="<? echo $product->getInfoWired($ProductId, 'product_id')?>">
                     <div class="card-body">
                         <!-- Tên điện thoại -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên thiết bị :  </label>
-                            <input name="product_name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . ." value="<? echo $product->getInfoWired($ProductId, 'product_name')?>">
                             <?
                             if (isset($_POST["product_name"])) {
                                 if (empty($_POST["product_name"])) {
@@ -111,7 +87,7 @@ if (isset($_POST['addPhone'])) {
                         <!-- mô tả điện thoại -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Mô tả thiết bị </label>
-                            <input name="product_title" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_title" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . ." value="<? echo $product->getInfoWired($ProductId, 'product_title')?>">
                             <?
                             if (isset($_POST["product_title"])) {
                                 if (empty($_POST["product_title"])) {
@@ -126,7 +102,7 @@ if (isset($_POST['addPhone'])) {
                         <!-- giá điện thoại -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sản phẩm </label>
-                            <input name="product_price" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_price" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . ." value="<? echo $product->getInfoWired($ProductId, 'product_price')?>">
                             <?
                             if (isset($_POST["product_price"])) {
                                 if (empty($_POST["product_price"])) {
@@ -140,7 +116,7 @@ if (isset($_POST['addPhone'])) {
                         <!-- giá giảm điện thoại -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sau khi giảm </label>
-                            <input name="product_sale" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_sale" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . ." value="<? echo $product->getInfoWired($ProductId, 'product_sale')?>">
                             <?
                             if (isset($_POST["product_sale"])) {
                                 if (empty($_POST["product_sale"])) {
@@ -154,7 +130,7 @@ if (isset($_POST['addPhone'])) {
                         <!-- số lượng điện thoại nhập-->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Số lượng </label>
-                            <input name="product_quantily" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_quantily" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . ." value="<? echo $product->getInfoWired($ProductId, 'product_quantily')?>">
                             <?
                             if (isset($_POST["product_quantily"])) {
                                 if (empty($_POST["product_quantily"])) {
@@ -170,7 +146,7 @@ if (isset($_POST['addPhone'])) {
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Độ dài dây </label>
-                            <input name="product_length" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_length" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . ." value="<? echo $product->getInfoWired($ProductId, 'product_length')?>">
                             <?
                             if (isset($_POST["product_length"])) {
                                 if (empty($_POST["product_length"])) {
@@ -184,7 +160,7 @@ if (isset($_POST['addPhone'])) {
                         <!-- Màn hình điện thoại -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Cổng kết nối </label>
-                            <input name="product_port" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_port" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . ." value="<? echo $product->getInfoWired($ProductId, 'product_port')?>">
                             <?
                             if (isset($_POST["product_port"])) {
                                 if (empty($_POST["product_port"])) {
@@ -198,7 +174,7 @@ if (isset($_POST['addPhone'])) {
                         <!-- Camera sau -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Cân nặng </label>
-                            <input name="product_weight" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_weight" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . ." value="<? echo $product->getInfoWired($ProductId, 'product_weight')?>">
                             <?
                             if (isset($_POST["product_weight"])) {
                                 if (empty($_POST["product_weight"])) {
@@ -212,7 +188,7 @@ if (isset($_POST['addPhone'])) {
                         <!-- Camera sau -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Phụ kiện đi kèm : </label>
-                            <input name="product_included" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_included" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . ." value="<? echo $product->getInfoWired($ProductId, 'product_included')?>">
                             <?
                             if (isset($_POST["product_included"])) {
                                 if (empty($_POST["product_included"])) {
