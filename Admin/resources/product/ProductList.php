@@ -74,6 +74,7 @@
                                                 <td>
                                                   <form action="?pages=admin&action='.$product_url.'" method="post">
                                                     <input type="hidden" value="' . $row['product_id'] . '" name="product_id">
+                                                    <input type="hidden" value="' . $row['category_id'] . '" name="category_id">
                                                   <button type="submit" class="btn btn-block btn-outline-primary" name="detail">Xem chi tiết</button>
                                                 </form>
                                               </td>
