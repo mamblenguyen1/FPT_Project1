@@ -2893,13 +2893,19 @@ li.menu-item-has-mega-menu { position: static; }
 .tg-innerbannercontent{
 	width:100%;
 	float:left;
+
 }
 .tg-innerbannercontent h1{
 	font-size:50px;
 	line-height:40px;
 	font-weight:bold;
-	color: red;
+	color: #7ce630;
+	padding: 10px;
+	border: 1px solid green;
+	background-color: rgba(0, 0, 0, 0.672) ;
+	
 }
+
 /* =============================================
 			About Us Style						
 ============================================= */
@@ -4153,3 +4159,4 @@ body.tg-comingsoonpage:before{
 body.tg-comingsoonpage .tg-footer{border:0;}
 body.tg-comingsoonpage .tg-footerbar{position:static;}
 .tg-userlogin  figure a img {width: 50px; height: 50px;}
+

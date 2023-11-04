@@ -52,7 +52,14 @@ include('style.php');
 							</div> -->
 					<div class="tg-userlogin">
 						<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
-						<span>Chào ! Minh Quang</span>
+						<ul class="menu">
+							<span>Chào ! Minh Quang</span>
+							<ul>
+								<li><a href="">Cập nhật người dùng</a></li>
+								<li><a href="">Đăng Xuất</a></li>
+							</ul>
+						</ul>
+
 					</div>
 				</div>
 			</div>
@@ -77,7 +84,7 @@ include('style.php');
 							</div>
 						</div>
 						<div class="dropdown tg-themedropdown tg-minicartdropdown">
-							<a href="" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="tg-themebadge">3</span>
 								<i class="icon-cart"></i>
 								<span>$123.00</span>
@@ -349,3 +356,39 @@ include('style.php');
 <!--************************************
 				Header End
 		*************************************-->
+		<style>
+			.menu {
+				position: relative;
+				display: block;
+				padding: 20px 30px;
+			}
+			.menu ul{
+				background-color: #504C4C;
+				position: absolute;
+				width: 300px;
+				display: none;
+				opacity: .9;
+			}
+			.menu ul li{
+				margin: 10px 0;
+				list-style: none;
+			}
+			.menu ul li a{
+				display: inline-block;
+				z-index: 1000000;
+				padding: 0px 40px;
+				margin: 0px 20px;
+				color: white;
+
+			}
+			.menu ul li a:hover{
+				background-color: #504C4C;
+				color: black;
+				font-weight: bold;
+			}
+		
+
+			.menu:hover>ul{
+				display: block;
+			}
+		</style>

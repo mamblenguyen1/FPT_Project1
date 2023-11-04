@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="position: fixed; background-color:black">
   <!-- Brand Logo -->
   <a href="index3.html" class="brand-link">
     <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -13,7 +13,7 @@
         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">Nguyễn Minh Quang</a>
+        <a style="text-decoration:none" href="#" class="d-block">Nguyễn Minh Quang</a>
       </div>
     </div>
     <!-- SidebarSearch Form -->
@@ -43,11 +43,11 @@
 
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="fa fa-align-justify"></i>
             <p>
               Danh mục
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">6</span>
+              <span class="badge badge-info right">5</span>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -76,11 +76,11 @@
 
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="fa fa-align-left"></i>
             <p>
               Danh mục con
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">6</span>
+              <span class="badge badge-info right">1</span>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -95,11 +95,11 @@
 
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="fa fa-cubes"></i>
             <p>
               Sản phẩm
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">6</span>
+              <span class="badge badge-info right">2</span>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -122,11 +122,11 @@
 
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="fa fa-comments-o"></i>
             <p>
               Bình luận
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">6</span>
+              <span class="badge badge-info right">1</span>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -140,11 +140,11 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="fa fa-cart-plus"></i>
             <p>
               Đơn hàng
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">6</span>
+              <span class="badge badge-info right">3</span>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -174,11 +174,11 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="fa fa-user-o"></i>
             <p>
               Tài khoản
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">6</span>
+              <span class="badge badge-info right">1</span>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -354,7 +354,7 @@
 
         <li class="nav-item">
            <a href="logout.php" class="nav-link">
-             <i class="nav-icon fas fa-copy"></i>
+             <i class="fa fa-sign-out"></i>
              <p>
                Đăng Xuất
              </p>

@@ -71,7 +71,7 @@ include('user/component/header.php');
                                         </a>
                                     </figure>
                                     <div class="tg-postbookcontent">
-                                        <ul class="tg-bookscategories">
+                                        <ul class="tg-bodradraokscategories">
                                             <li><a href="javascript:void(0);">Laptop</a></li>
                                             <li><a href="javascript:void(0);">Asus</a></li>
                                         </ul>
