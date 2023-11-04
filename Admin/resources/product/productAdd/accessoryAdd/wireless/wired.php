@@ -3,7 +3,8 @@
 <?
 if (isset($_POST['addproduct'])) {
     $category_id = $_POST['category_id'];
-    echo $category_id;
+    // echo $category_id;
+
     // exit();
 }
 if (isset($_POST['addPhone'])) {
@@ -33,8 +34,8 @@ if (isset($_POST['addPhone'])) {
     // echo '<br/>';
     // echo $product_quantily ;
     // echo '<br/>';
-    // echo $type_id ;
-    // echo '<br/>';
+    echo $type_id ;
+    echo '<br/>';
     // echo $product_length ;
     // echo '<br/>';
     // echo $product_port ;
@@ -63,7 +64,7 @@ if (isset($_POST['addPhone'])) {
         !$user_created == "" &&
         !$product_img == ""
     ) {
-        $product->add_Wired($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_length, $product_port, $product_weight, $product_included,  $user_created);
+        $product->add_Wired($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $type_id, $product_length, $product_port, $product_weight, $product_included,  $user_created);
         echo '<script>alert("tạo thành công !!")</script>';
         echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
         $anhne = $_FILES['product_img']['tmp_name'];
