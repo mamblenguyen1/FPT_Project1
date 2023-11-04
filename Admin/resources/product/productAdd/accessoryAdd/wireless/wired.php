@@ -23,6 +23,7 @@ if (isset($_POST['addPhone'])) {
     $user_created = 1;
     $product_img = $_FILES['product_img']['name'] ?? "";
 
+
     if (
         !$category_id == "" &&
         !$product_name == "" &&

@@ -237,7 +237,6 @@ class ProductFunction
 
 
 
-
     function Edit_Phone($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_ram, $product_screen, $product_backcam, $product_frontcam, $product_chip, $product_storge, $user_created, $Product_ID)
     {
         $db = new connect();
