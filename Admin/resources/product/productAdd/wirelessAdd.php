@@ -18,7 +18,7 @@
                                     extract($ketqua);
                                         ?>
                                         <form action="index.php?pages=admin&action=<?echo $wire_url ?>" style="display: inline-block;" method="post">
-                                            <input type="hidden" name="category_id" value="<?= $is_wireless_id ?>">
+                                            <input type="hidden" name="category_id" value="<?= $category_id ?>">
                                             <button type="submit" class="btn btn-outline-primary" name="addproduct"><?echo $is_wireless_name?></button>
                                         </form>
                                     <?

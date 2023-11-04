@@ -38,7 +38,7 @@ if (isset($_POST['deleteproduct'])) {
                                     <tbody>
                                 
                                         <? $conn = $db->pdo_get_connection();
-                                        $stmt = $conn->prepare("SELECT * FROM phone
+                                        $stmt = $conn->prepare("SELECT * FROM wireless
                                          WHERE is_deleted = 1
                                          AND product_id = $product_id
                                          ");
@@ -52,12 +52,14 @@ if (isset($_POST['deleteproduct'])) {
                                             </td>
                                             <td>' . $row['product_title'] . '</td>
                                             <td>
-                                                <p>Màn Hình: ' . $row['product_screen'] . '</p>
-                                                <p>Cam trước: ' . $row['product_frontcam'] . '</p>
-                                                <p>Cam sau: ' . $row['product_backcam'] . '</p>
-                                                <p>Chip: ' . $row['product_chip'] . '</p>
-                                                <p>RAM: ' . $row['product_ram'] . '</p>
-                                                <p>Dung lượng: ' . $row['product_storge'] . '</p>
+                                                <p>Khoảng cách kết nối : ' . $row['product_range'] . '</p>
+                                                <p>Cổng kết nối: ' . $row['product_port'] . '</p>
+                                                <p>Khối lượng: ' . $row['product_weight'] . '</p>
+                                                <p>Phụ kiện đi kèm : ' . $row['product_included'] . '</p>
+                                                <p>Dung lượng pin : ' . $row['product_capacity'] . '</p>
+                                                <p>Thời gian sạc: ' . $row['product_charge_time'] . '</p>
+                                                <p>Thời gian sử dụng: ' . $row['product_use_time'] . '</p>
+
                                             </td>
 
                                         </tr>

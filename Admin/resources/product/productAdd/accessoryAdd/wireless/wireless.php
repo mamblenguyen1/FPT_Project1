@@ -6,18 +6,21 @@ if (isset($_POST['addproduct'])) {
     echo $category_id;
     // exit();
 }
-if (isset($_POST['addPhone'])) {
+if (isset($_POST['addwireless'])) {
     $category_id = $_POST['category_id'] ?? "";
     $product_name = $_POST['product_name'] ?? "";
     $product_title = $_POST['product_title'] ?? "";
     $product_price = $_POST['product_price'] ?? "";
     $product_sale = $_POST['product_sale'] ?? "";
-    $product_quantily = $_POST['product_quantily'] ?? "";
+    $product_quantity = $_POST['product_quantity'] ?? "";
     $type_id = $_POST['type_id'] ?? "";
-    $product_length = $_POST['product_length'] ?? "";
     $product_port = $_POST['product_port'] ?? "";
     $product_weight = $_POST['product_weight'] ?? "";
+    $product_range = $_POST['product_range'] ?? "";
     $product_included = $_POST['product_included'] ?? "";
+    $product_capacity = $_POST['product_capacity'] ?? "";
+    $product_charge_time = $_POST['product_charge_time'] ?? "";
+    $product_use_time = $_POST['product_use_time'] ?? "";
     $user_created = 1;
     $product_img = $_FILES['product_img']['name'] ?? "";
 
@@ -35,13 +38,19 @@ if (isset($_POST['addPhone'])) {
     // echo '<br/>';
     // echo $type_id ;
     // echo '<br/>';
-    // echo $product_length ;
-    // echo '<br/>';
     // echo $product_port ;
     // echo '<br/>';
     // echo $product_weight ;
     // echo '<br/>';
+    // echo $product_range ;
+    // echo '<br/>';
     // echo $product_included ;
+    // echo '<br/>';
+    // echo $product_capacity ;
+    // echo '<br/>';
+    // echo $product_charge_time ;
+    // echo '<br/>';
+    // echo $product_use_time ;
     // echo '<br/>';
     // echo $user_created ;
     // echo '<br/>';
@@ -54,16 +63,20 @@ if (isset($_POST['addPhone'])) {
         !$product_title == "" &&
         !$product_price == "" &&
         !$product_sale == "" &&
-        !$product_quantily == "" &&
+        !$product_quantity == "" &&
         !$type_id == "" &&
-        !$product_length == "" &&
-        !$product_port == "" &&
-        !$product_weight == "" &&
-        !$product_included == "" &&
-        !$user_created == "" &&
+        !$product_port == "" && //công kết nối
+        !$product_weight == "" && //cân nặng
+        !$product_range == "" && //khoản cách kết nối
+        !$product_included == "" && //thiết bị đi kèm
+        !$product_capacity == "" && //dung duong pin
+        !$product_charge_time == "" && //thời gian sạc
+        !$product_use_time == "" && //thôi gian sửu dụng
         !$product_img == ""
+
     ) {
-        $product->add_Wired($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_length, $product_port, $product_weight, $product_included,  $user_created);
+        $product->add_Wireless($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantity, $category_id, $type_id, 
+        $product_range, $product_port, $product_weight, $product_included, $product_capacity,$product_charge_time,$product_use_time, $user_created);
         echo '<script>alert("tạo thành công !!")</script>';
         echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
         $anhne = $_FILES['product_img']['tmp_name'];
@@ -82,20 +95,20 @@ if (isset($_POST['addPhone'])) {
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
-            <h1 style="padding-left: 30px;">Thêm phụ kiện có dây</h1>
+            <h1 style="padding-left: 30px;">Thêm phụ kiện không dây</h1>
         </div>
         <div class="add-cate-form">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Thêm phụ kiện có dây vào hệ thống ! ! !</h3>
+                    <h3 class="card-title">Thêm phụ kiện không dây vào hệ thống ! ! !</h3>
                 </div>
 
                 <form action="" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="category_id" value="<? echo $product->getInfoSP1($category_id, 'category_id') ?>">
                     <div class="card-body">
-                        <!-- Tên điện thoại -->
+                        <!-- Tên thiết bị -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Tên thiết bị :  </label>
+                            <label for="exampleInputEmail1">Tên thiết bị : </label>
                             <input name="product_name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
                             <?
                             if (isset($_POST["product_name"])) {
@@ -121,7 +134,6 @@ if (isset($_POST['addPhone'])) {
                             }
                             ?>
                         </div>
-
                         <!-- giá điện thoại -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sản phẩm </label>
@@ -153,10 +165,10 @@ if (isset($_POST['addPhone'])) {
                         <!-- số lượng điện thoại nhập-->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Số lượng </label>
-                            <input name="product_quantily" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_quantity" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
                             <?
-                            if (isset($_POST["product_quantily"])) {
-                                if (empty($_POST["product_quantily"])) {
+                            if (isset($_POST["product_quantity"])) {
+                                if (empty($_POST["product_quantity"])) {
                                     echo '<span class="vaild">Xin vui lòng nhập số lượng </span>';
                                 } else {
                                     echo '';
@@ -164,23 +176,7 @@ if (isset($_POST['addPhone'])) {
                             }
                             ?>
                         </div>
-                        <!-- Ram điện thoại -->
-
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Độ dài dây </label>
-                            <input name="product_length" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
-                            <?
-                            if (isset($_POST["product_length"])) {
-                                if (empty($_POST["product_length"])) {
-                                    echo '<span class="vaild">Xin vui lòng nhập dung lượng ram </span>';
-                                } else {
-                                    echo '';
-                                }
-                            }
-                            ?>
-                        </div>
-                        <!-- Màn hình điện thoại -->
+                        <!-- cổng kết nối -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Cổng kết nối </label>
                             <input name="product_port" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
@@ -194,7 +190,7 @@ if (isset($_POST['addPhone'])) {
                             }
                             ?>
                         </div>
-                        <!-- Camera sau -->
+                        <!-- cân nặng -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Cân nặng </label>
                             <input name="product_weight" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
@@ -208,7 +204,21 @@ if (isset($_POST['addPhone'])) {
                             }
                             ?>
                         </div>
-                        <!-- Camera sau -->
+                        <!-- khoản cách kết nối -->
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Khoản cách kết nối : </label>
+                            <input name="product_range" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <?
+                            if (isset($_POST["product_range"])) {
+                                if (empty($_POST["product_range"])) {
+                                    echo '<span class="vaild">Xin vui lòng nhập khoản cách kết nối </span>';
+                                } else {
+                                    echo '';
+                                }
+                            }
+                            ?>
+                        </div>
+                        <!-- phụ kiện đi kèm -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Phụ kiện đi kèm : </label>
                             <input name="product_included" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
@@ -222,9 +232,49 @@ if (isset($_POST['addPhone'])) {
                             }
                             ?>
                         </div>
-                        <!-- chip điện thoại -->
-                      
-
+                        <!-- dung lượng pin -->
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Dung lượng pin : </label>
+                            <input name="product_capacity" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <?
+                            if (isset($_POST["product_capacity"])) {
+                                if (empty($_POST["product_capacity"])) {
+                                    echo '<span class="vaild">Xin vui lòng nhập dung lượng pin </span>';
+                                } else {
+                                    echo '';
+                                }
+                            }
+                            ?>
+                        </div>
+                        <!-- thời gian sạc -->
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Thời gian sạc : </label>
+                            <input name="product_charge_time" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <?
+                            if (isset($_POST["product_charge_time"])) {
+                                if (empty($_POST["product_charge_time"])) {
+                                    echo '<span class="vaild">Xin vui lòng nhập thời gian sạc </span>';
+                                } else {
+                                    echo '';
+                                }
+                            }
+                            ?>
+                        </div>
+                        <!-- thời gian sữ dụng -->
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Thời gian sử dụng : </label>
+                            <input name="product_use_time" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <?
+                            if (isset($_POST["product_use_time"])) {
+                                if (empty($_POST["product_use_time"])) {
+                                    echo '<span class="vaild">Xin vui lòng nhập thời gian sử dụng </span>';
+                                } else {
+                                    echo '';
+                                }
+                            }
+                            ?>
+                        </div>
+                        <!--thêm hình ảnh-->
                         <input type="file" name="product_img" id="">
                         <?
                         if (isset($_FILES['product_img']['name'])) {
@@ -236,7 +286,6 @@ if (isset($_POST['addPhone'])) {
                         }
                         ?>
                         <!-- hãng sản phẩm -->
-
                         <div class="form-group">
                             <label>Hãng điện thoại</label>
                             <select name="type_id" class="form-control select2" style="width: 100%;">
@@ -266,7 +315,7 @@ if (isset($_POST['addPhone'])) {
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" name="addPhone" class="btn btn-primary">Lưu danh mục</button>
+                            <button type="submit" name="addwireless" class="btn btn-primary">Lưu danh mục</button>
                         </div>
                 </form>
             </div>
