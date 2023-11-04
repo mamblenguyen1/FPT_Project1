@@ -28,21 +28,48 @@
                   <tbody>
                     <?
                     $conn = $db->pdo_get_connection();
-                    $stmt = $conn->prepare("SELECT * FROM product
+                    $stmt = $conn->prepare("SELECT product_id, product_name , category_id , type_id , product_price FROM phone
+                    UNION
+                    SELECT product_id,product_name , category_id , type_id , product_price FROM laptop
+                    UNION
+                    SELECT product_id,product_name , category_id , type_id , product_price  FROM wired
+                    UNION
+                    SELECT product_id,product_name , category_id , type_id , product_price FROM wireless                    
                     WHERE is_deleted = 1");
                     $stmt->execute();
                     if ($stmt->rowCount() > 0) {
                       foreach ($stmt as $row) {
-                        $TypeName = $product->getTypeName($row['product_id'], 'type_name');
-                        $CateName = $product->getCateName($row['product_id'], 'category_name');
+                       
+                        if($row['category_id'] == 1 ){
+                          $TypeName = $product->getTypeNamePhone($row['product_id'], 'type_name');
+                          $CategoryName = $product->getTypeNamePhone($row['product_id'], 'category_name');
+                          $product_url = $product->getTypeNamePhone($row['product_id'], 'url');
+                        }else if($row['category_id'] == 2){
+                          $TypeName = $product->getTypeNameLaptop($row['product_id'], 'type_name');
+                          $CategoryName = $product->getTypeNameLaptop($row['product_id'], 'category_name');
+                          $product_url = $product->getTypeNameLaptop($row['product_id'], 'url');
+
+                        } else if($row['category_id'] == 3){
+                          if(($product->getIsWired($row['product_id'], 'is_wireless')) == 1 || ($product->getIsWireLess($row['product_id'], 'is_wireless')) == 1){
+                            $TypeName = $product->getIsWired($row['product_id'], 'typename');
+                            $CategoryName = $product->getIsWired($row['product_id'], 'catename');
+                            $product_url = $product->getIsWired($row['product_id'], 'url');
+                          }else{
+                            $TypeName = $product->getIsWireLess($row['product_id'], 'typename');
+                            $CategoryName = $product->getIsWireLess($row['product_id'], 'catename');
+                            $product_url = $product->getIsWireLess($row['product_id'], 'url');
+                          }
+                        }
+                        // $TypeName = $product->getTypeName($row['product_id'], 'type_name');
+                        // $CateName = $product->getCateName($row['product_id'], 'category_name');
                         echo ' 
                                                 <tr>
                                                 <td>' . $row['product_name'] . '</td>
-                                                <td>' . $CateName . '</td>
+                                                <td>' .  $CategoryName . '</td>
                                                 <td>' . $TypeName . '</td>
                                                 <td>' . $row['product_price'] . '</td>
                                                 <td>
-                                                  <form action="?pages=admin&action=PhoneDetail" method="post">
+                                                  <form action="?pages=admin&action='.$product_url.'" method="post">
                                                     <input type="hidden" value="' . $row['product_id'] . '" name="product_id">
                                                   <button type="submit" class="btn btn-block btn-outline-primary" name="detail">Xem chi tiết</button>
                                                 </form>

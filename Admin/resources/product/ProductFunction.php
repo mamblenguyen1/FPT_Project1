@@ -16,12 +16,36 @@ class ProductFunction
         $sql = "SELECT * FROM category";
         return $db->pdo_query($sql);
     }
+    function wireless_select_all()
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM iswireless";
+        return $db->pdo_query($sql);
+    }
+
+
+
+        //truy van hien toan bo sp theo hãng
+        function category_type_select_all()
+        {
+            $db = new connect();
+            $sql = "SELECT * FROM category";
+            return $db->pdo_query($sql);
+        }
+
+        //truy van hien toan bo sp theo hãng
+        function category_type_con_select_all($typecon)
+        {
+            $db = new connect();
+            $sql = "SELECT * FROM  type WHERE category_id=$typecon";
+            return $db->pdo_query($sql);
+        }
   
     function add_phone($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $phone_ram, $phone_screen, $phone_backcam, $phone_frontcam, $phone_chip, $phone_storge, $user_created)
     {
         $db = new connect();
         $sql = "INSERT INTO 
-        product(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , phone_ram, phone_screen, phone_backcam, phone_frontcam, phone_chip, phone_storge, user_created, is_deleted )
+        phone(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , product_ram, product_screen, product_backcam, product_frontcam, product_chip, product_storge, user_created, is_deleted )
         VALUES
         ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$phone_ram', '$phone_screen', '$phone_backcam', '$phone_frontcam', '$phone_chip', '$phone_storge', $user_created,1)";
         return $db->pdo_execute($sql);
@@ -117,18 +141,103 @@ class ProductFunction
             return $row[$column];
         }
     }
-    function getTypeName($product_id, $column)
+    function getInfoWireless($category_id, $column)
     {
         $db = new connect();
-        $sql = "SELECT  * FROM product , `type`
-        WHERE product.type_id = type.type_id
-        AND product.product_id = $product_id       
+        $sql = "SELECT * FROM category , product WHERE category.category_id = product.category_id AND
+        category.category_id = $category_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
+    function getIsWired($product_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT is_wireless, type.type_name as 'typename' , category.category_name as 'catename' , wired.product_url as 'url' FROM wired , `type` , category
+        WHERE category.category_id = wired.category_id
+        AND type.type_id = wired.type_id
+        AND wired.product_id = $product_id
         ";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];
         }
     }
+    function getIsWireLess($product_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT is_wireless, type.type_name as 'typename', category.category_name as 'catename' , wireless.product_url as 'url' FROM wireless , `type` , category
+        WHERE category.category_id = wireless.category_id
+        AND type.type_id = wireless.type_id
+        AND wireless.product_id = $product_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
+
+    function getTypeNamePhone($product_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT type.type_name , category.category_name , phone.product_url as 'url'
+        FROM type, category, phone
+        WHERE type.type_id = phone.type_id
+        AND category.category_id = phone.category_id
+        AND phone.product_id = $product_id
+        ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    function getTypeNameLaptop($product_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT type.type_name , category.category_name , product_url as 'url'
+        FROM type, category, laptop
+        WHERE type.type_id = laptop.type_id
+        AND category.category_id = laptop.category_id
+        AND laptop.product_id = $product_id
+        ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    function getTypeNameWired($product_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT type.type_name , category.category_name 
+        FROM type, category, wired
+        WHERE type.type_id = wired.type_id
+        AND category.category_id = wired.category_id
+        AND wired.product_id = $product_id
+        ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    function getTypeNameWireless($product_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT type.type_name , category.category_name 
+        FROM type, category, wireless
+        WHERE type.type_id = wireless.type_id
+        AND category.category_id = wireless.category_id
+        AND wireless.product_id = $product_id
+        ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
+
+
     function getCateName($product_id, $column)
     {
         $db = new connect();

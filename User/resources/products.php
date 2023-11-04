@@ -103,42 +103,41 @@ include('user/component/header.php');
                                             </form>
                                         </div>
                                         <!-- Render product -->
-                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
-                                            <div class="tg-postbook">
-                                                <figure class="tg-featureimg">
-                                                    <div class="tg-bookimg">
-                                                        <div class="tg-frontcover"><img src="images/iphone.jpg" alt="image description"></div>
-                                                        <!-- <div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div> -->
+                                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+                                                <div class="tg-postbook">
+                                                    <figure class="tg-featureimg">
+                                                        <div class="tg-bookimg">
+                                                            <div class="tg-frontcover"><img src="images/iphone.jpg" alt="image description"></div>
+                                                            <!-- <div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div> -->
+                                                        </div>
+                                                        <a class="tg-btnaddtowishlist" href="">
+                                                            <i class="icon-heart"></i>
+                                                            <span>Yêu thích</span>
+                                                        </a>
+                                                    </figure>
+                                                    <div class="tg-postbookcontent">
+                                                        <ul class="tg-bookscategories">
+                                                            <li><a href="">Điện thoại</a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
+                                                        <div class="tg-booktitle">
+                                                            <h3><a href="index.php?pages=user&action=productdetail">Iphone 15 promax</a></h3>
+                                                        </div>
+                                                        <span class="tg-bookwriter">Hãng: <a href="">Apple</a></span>
+                                                        <span class="tg-stars"><span></span></span>
+                                                        <span class="tg-bookprice">
+                                                            <ins>$25.18</ins>
+                                                            <del>$27.20</del>
+                                                        </span>
+                                                        <a class="tg-btn tg-btnstyletwo" href="">
+                                                            <i class="fa fa-shopping-basket"></i>
+                                                            <em>Thêm giỏ hàng</em>
+                                                        </a>
                                                     </div>
-                                                    <a class="tg-btnaddtowishlist" href="">
-                                                        <i class="icon-heart"></i>
-                                                        <span>Yêu thích</span>
-                                                    </a>
-                                                </figure>
-                                                <div class="tg-postbookcontent">
-                                                    <ul class="tg-bookscategories">
-                                                        <li><a href="">Điện thoại</a>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
-                                                    <div class="tg-booktitle">
-                                                        <h3><a href="index.php?pages=user&action=productdetail">Iphone 15 promax</a></h3>
-                                                    </div>
-                                                    <span class="tg-bookwriter">Hãng: <a href="">Apple</a></span>
-                                                    <span class="tg-stars"><span></span></span>
-                                                    <span class="tg-bookprice">
-                                                        <ins>$25.18</ins>
-                                                        <del>$27.20</del>
-                                                    </span>
-                                                    <a class="tg-btn tg-btnstyletwo" href="">
-                                                        <i class="fa fa-shopping-basket"></i>
-                                                        <em>Thêm giỏ hàng</em>
-                                                    </a>
                                                 </div>
                                             </div>
-                                        </div>
-
-
+                                       
                                         <!-- / Render product -->
 
 
