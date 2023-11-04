@@ -38,7 +38,7 @@ if (isset($_POST['deleteproduct'])) {
                                     <tbody>
                                 
                                         <? $conn = $db->pdo_get_connection();
-                                        $stmt = $conn->prepare("SELECT * FROM phone
+                                        $stmt = $conn->prepare("SELECT * FROM wireless
                                          WHERE is_deleted = 1
                                          AND product_id = $product_id
                                          ");
@@ -52,12 +52,10 @@ if (isset($_POST['deleteproduct'])) {
                                             </td>
                                             <td>' . $row['product_title'] . '</td>
                                             <td>
-                                                <p>Màn Hình: ' . $row['product_screen'] . '</p>
-                                                <p>Cam trước: ' . $row['product_frontcam'] . '</p>
-                                                <p>Cam sau: ' . $row['product_backcam'] . '</p>
-                                                <p>Chip: ' . $row['product_chip'] . '</p>
-                                                <p>RAM: ' . $row['product_ram'] . '</p>
-                                                <p>Dung lượng: ' . $row['product_storge'] . '</p>
+                                                <p>Màn Hình: ' . $row['product_range'] . '</p>
+                                                <p>Cam trước: ' . $row['product_port'] . '</p>
+                                                <p>Cam sau: ' . $row['product_weight'] . '</p>
+                                                <p>Chip: ' . $row['product_included'] . '</p>
                                             </td>
 
                                         </tr>
@@ -72,12 +70,12 @@ if (isset($_POST['deleteproduct'])) {
                                 </table>
                                 <?
                                         echo '
-<form action="" method="post">
-<input type="hidden" name="product_id" value="' . $row['product_id'] . '">
-<button type="submit" name="editproduct" class="btn  btn-outline-primary">Chỉnh Sửa</button>
-<button type="submit" name="deleteproduct" class="btn  btn-outline-danger">Xóa</button>
-</form>
-';
+                                            <form action="index.php?pages=admin&action=WirelessEdit" method="post">
+                                            <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
+                                            <button type="submit" name="WirelessEdit" class="btn  btn-outline-primary">Chỉnh Sửa</button>
+                                            <button type="submit" name="deleteproduct" class="btn  btn-outline-danger">Xóa</button>
+                                            </form>
+                                            ';
                                         ?>
                             
                             </div>
