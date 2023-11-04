@@ -65,20 +65,15 @@ class ProductFunction
         ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, 3 , $type_id, '$product_length', '$product_port', '$product_weight', '$product_included',  $user_created,1 , 1 , 'WiredDetail')";
         return $db->pdo_execute($sql);
     }
-    function add_Wireless($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily,  $type_id, $product_range, $product_port, $product_weight, $product_included,  $product_capacity  , $product_charge_time, $product_use_time ,$user_created)
+    function add_Wireless($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantity,  $type_id, $product_range, $product_port, $product_weight, $product_included,  $product_capacity  , $product_charge_time, $product_use_time ,$user_created)
     {
         $db = new connect();
-        $sql = "INSERT INTO  wired(product_name , product_title,product_img, product_price, product_sale,product_quantity, category_id, type_id , product_range, product_port, product_weight, product_included, product_capacity  ,product_charge_time,product_use_time ,user_created, is_deleted ,is_wireless,product_url)
+        $sql = "INSERT INTO  wireless(product_name , product_title,product_img, product_price, product_sale,product_quantity, category_id, `type_id` , product_range, product_port, product_weight, product_included, product_capacity ,product_charge_time,product_use_time ,user_created, is_deleted ,is_wireless,product_url)
         VALUES
-        ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, 3 , $type_id, '$product_range', '$product_port', '$product_weight', '$product_included', $product_capacity  ,$product_charge_time,$product_use_time , $user_created,1 , 1 , 'WiredDetail')";
+        ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantity, 3 , $type_id, '$product_range', '$product_port', '$product_weight', '$product_included', '$product_capacity','$product_charge_time','$product_use_time', $user_created,1 , 2 , 'WirelessDetail')";
         return $db->pdo_execute($sql);
     }
-
-
-
-
-
-
+    
     function getInfoSP($category_id, $column)
     {
         $db = new connect();
