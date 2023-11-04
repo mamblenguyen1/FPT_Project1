@@ -22,7 +22,7 @@ if (isset($_POST['deleteproduct'])) {
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h1 style="padding-left: 30px;">Chi tiết sản phẩm điện thoại</h1>
+                                <h1 style="padding-left: 30px;">Chi tiết sản phẩm laptop</h1>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">

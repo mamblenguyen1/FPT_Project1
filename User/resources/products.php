@@ -6,7 +6,7 @@ include('user/component/header.php');
     <!--************************************
 				Inner Banner Start
 		*************************************-->
-    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="https://www.anphatpc.com.vn/media/news/1308_Laptop-Gaming-tot-nhat-2022.jpg">
+    <!-- <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="https://www.anphatpc.com.vn/media/news/1308_Laptop-Gaming-tot-nhat-2022.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -20,7 +20,7 @@ include('user/component/header.php');
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--************************************
 				Inner Banner End
 		*************************************-->
@@ -41,7 +41,7 @@ include('user/component/header.php');
                                     <div class="tg-sectionhead">
                                         <h2><span>Danh mục sản phẩm</span>Điện thoại</h2>
                                     </div>
-                                    <div class="tg-featurebook alert" role="alert">
+                                    <!-- <div class="tg-featurebook alert" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -73,7 +73,7 @@ include('user/component/header.php');
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="tg-productgrid">
                                         <div class="tg-refinesearch">
                                             <span>showing 1 to 8 of 20 total</span>
@@ -103,12 +103,79 @@ include('user/component/header.php');
                                             </form>
                                         </div>
                                         <!-- Render product -->
-                                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+                                        <?
+                                        $category_render = 0;
+                                        $type_render = 0;
+                                        if (isset($_GET['category'])) {
+                                            $category_render = $_GET['category'];
+                                            $conn = $db->pdo_get_connection();
+                                            $stmt = $conn->prepare("SELECT product_id, product_name , category_id , type_id , product_price, product_sale, product_img FROM phone
+                                                    WHERE is_deleted = 1 AND category_id = $category_render
+                                                    UNION
+                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale, product_img FROM laptop
+                                                    WHERE is_deleted = 1 AND category_id = $category_render
+                                                    UNION
+                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale,  product_img  FROM wired
+                                                    WHERE is_deleted = 1 AND category_id = $category_render
+                                                    UNION
+                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale, product_img FROM wireless                    
+                                                    WHERE is_deleted = 1 AND category_id = $category_render");
+                                        } else if (isset($_GET['type'])) {
+                                            $type_render = $_GET['type'];
+                                            $conn = $db->pdo_get_connection();
+                                            $stmt = $conn->prepare("SELECT product_id, product_name , category_id , type_id , product_price, product_sale, product_img FROM phone
+                                                    WHERE is_deleted = 1 AND type_id = $type_render
+                                                    UNION
+                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale, product_img FROM laptop
+                                                    WHERE is_deleted = 1 AND type_id = $type_render
+                                                    UNION
+                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale,  product_img  FROM wired
+                                                    WHERE is_deleted = 1 AND type_id = $type_render
+                                                    UNION
+                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale, product_img FROM wireless                    
+                                                    WHERE is_deleted = 1 AND type_id = $type_render");
+                                        } else {
+                                            $conn = $db->pdo_get_connection();
+                                            $stmt = $conn->prepare("SELECT product_id, product_name , category_id , type_id , product_price, product_sale, product_img FROM phone
+                                                    WHERE is_deleted = 1
+                                                    UNION
+                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale, product_img FROM laptop
+                                                    WHERE is_deleted = 1
+                                                    UNION
+                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale,  product_img  FROM wired
+                                                    WHERE is_deleted = 1
+                                                    UNION
+                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale, product_img FROM wireless                    
+                                                    WHERE is_deleted = 1");
+                                        }
+                                        $stmt->execute();
+                                        if ($stmt->rowCount() > 0) {
+                                            foreach ($stmt as $row) {
+                                                if ($row['category_id'] == 1) {
+                                                    $TypeName = $product->getTypeNamePhone($row['product_id'], 'type_name');
+                                                    $CategoryName = $product->getTypeNamePhone($row['product_id'], 'category_name');
+                                                    $product_url = $product->getTypeNamePhone($row['product_id'], 'url');
+                                                } else if ($row['category_id'] == 2) {
+                                                    $TypeName = $product->getTypeNameLaptop($row['product_id'], 'type_name');
+                                                    $CategoryName = $product->getTypeNameLaptop($row['product_id'], 'category_name');
+                                                    $product_url = $product->getTypeNameLaptop($row['product_id'], 'url');
+                                                } else if ($row['category_id'] == 3) {
+                                                    if (($product->getIsWired($row['product_id'], 'is_wireless')) == 1 || ($product->getIsWireLess($row['product_id'], 'is_wireless')) == 1) {
+                                                        $TypeName = $product->getIsWired($row['product_id'], 'typename');
+                                                        $CategoryName = $product->getIsWired($row['product_id'], 'catename');
+                                                        $product_url = $product->getIsWired($row['product_id'], 'url');
+                                                    } else {
+                                                        $TypeName = $product->getIsWireLess($row['product_id'], 'typename');
+                                                        $CategoryName = $product->getIsWireLess($row['product_id'], 'catename');
+                                                        $product_url = $product->getIsWireLess($row['product_id'], 'url');
+                                                    }
+                                                }
+                                                echo '<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
                                                 <div class="tg-postbook">
                                                     <figure class="tg-featureimg">
                                                         <div class="tg-bookimg">
-                                                            <div class="tg-frontcover"><img src="images/iphone.jpg" alt="image description"></div>
-                                                            <!-- <div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div> -->
+                                                            <div class="tg-frontcover"><img src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                                       
                                                         </div>
                                                         <a class="tg-btnaddtowishlist" href="">
                                                             <i class="icon-heart"></i>
@@ -117,18 +184,18 @@ include('user/component/header.php');
                                                     </figure>
                                                     <div class="tg-postbookcontent">
                                                         <ul class="tg-bookscategories">
-                                                            <li><a href="">Điện thoại</a>
+                                                            <li><a href="">' .  $CategoryName . '   </a>
                                                             </li>
                                                         </ul>
                                                         <div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
                                                         <div class="tg-booktitle">
-                                                            <h3><a href="index.php?pages=user&action=productdetail">Iphone 15 promax</a></h3>
+                                                            <h3><a href="index.php?pages=user&action=productdetail&id=' . $row['product_id'] . '">' . $row['product_name'] . '</a></h3>
                                                         </div>
-                                                        <span class="tg-bookwriter">Hãng: <a href="">Apple</a></span>
+                                                        <span class="tg-bookwriter">Hãng: <a href="">' . $TypeName . '</a></span>
                                                         <span class="tg-stars"><span></span></span>
                                                         <span class="tg-bookprice">
-                                                            <ins>$25.18</ins>
-                                                            <del>$27.20</del>
+                                                            <ins>' . number_format($row['product_sale']) . ' đ</ins>
+                                                            <del>' . number_format($row['product_price']) . ' đ</del>
                                                         </span>
                                                         <a class="tg-btn tg-btnstyletwo" href="">
                                                             <i class="fa fa-shopping-basket"></i>
@@ -136,12 +203,10 @@ include('user/component/header.php');
                                                         </a>
                                                     </div>
                                                 </div>
-                                            </div>
-                                       
-                                        <!-- / Render product -->
-
-
-
+                                            </div>';
+                                            };;
+                                        };
+                                        ?>
                                     </div>
                                 </div>
                             </div>

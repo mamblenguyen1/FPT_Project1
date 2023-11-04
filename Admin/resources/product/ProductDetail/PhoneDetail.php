@@ -71,6 +71,7 @@ if (isset($_POST['deleteproduct'])) {
                                 </table>
                                 <?
                                 echo '
+
                                     <form action="index.php?pages=admin&action=PhoneEdit" method="post">
                                     <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
                                     <button type="submit" name="PhoneEdit" class="btn  btn-outline-primary">Chỉnh Sửa</button>
