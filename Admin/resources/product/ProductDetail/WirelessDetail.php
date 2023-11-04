@@ -52,6 +52,7 @@ if (isset($_POST['deleteproduct'])) {
                                             </td>
                                             <td>' . $row['product_title'] . '</td>
                                             <td>
+
                                                 <p>Khoảng cách kết nối : ' . $row['product_range'] . '</p>
                                                 <p>Cổng kết nối: ' . $row['product_port'] . '</p>
                                                 <p>Khối lượng: ' . $row['product_weight'] . '</p>
@@ -74,12 +75,12 @@ if (isset($_POST['deleteproduct'])) {
                                 </table>
                                 <?
                                         echo '
-<form action="" method="post">
-<input type="hidden" name="product_id" value="' . $row['product_id'] . '">
-<button type="submit" name="editproduct" class="btn  btn-outline-primary">Chỉnh Sửa</button>
-<button type="submit" name="deleteproduct" class="btn  btn-outline-danger">Xóa</button>
-</form>
-';
+                                            <form action="index.php?pages=admin&action=WirelessEdit" method="post">
+                                            <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
+                                            <button type="submit" name="WirelessEdit" class="btn  btn-outline-primary">Chỉnh Sửa</button>
+                                            <button type="submit" name="deleteproduct" class="btn  btn-outline-danger">Xóa</button>
+                                            </form>
+                                            ';
                                         ?>
                             
                             </div>

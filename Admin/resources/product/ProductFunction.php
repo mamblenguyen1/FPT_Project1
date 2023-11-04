@@ -71,6 +71,7 @@ class ProductFunction
         $sql = "INSERT INTO  wireless(product_name , product_title,product_img, product_price, product_sale,product_quantity, category_id, `type_id` , product_range, product_port, product_weight, product_included, product_capacity ,product_charge_time,product_use_time ,user_created, is_deleted ,is_wireless,product_url)
         VALUES
 
+
         ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantity, 3 , $type_id, '$product_range', '$product_port', '$product_weight', '$product_included', '$product_capacity','$product_charge_time','$product_use_time', $user_created,1 , 2 , 'WirelessDetail')";
         return $db->pdo_execute($sql);
     }
@@ -91,16 +92,6 @@ class ProductFunction
         $sql = "SELECT * FROM category WHERE
         category.category_id = $category_id
         ";
-        $result = $db->pdo_query($sql);
-        foreach ($result as $row) {
-            return $row[$column];
-        }
-    }
-    function getInfoWireless($category_id, $column)
-    {
-        $db = new connect();
-        $sql = "SELECT * FROM category , product WHERE category.category_id = product.category_id AND
-        category.category_id = $category_id";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];
@@ -240,7 +231,7 @@ class ProductFunction
     function Edit_Phone($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_ram, $product_screen, $product_backcam, $product_frontcam, $product_chip, $product_storge, $user_created, $Product_ID)
     {
         $db = new connect();
-        $select = "UPDATE phone SET product_name  = '$product_name', product_title = '$product_title', product_price = $product_price, product_sale = $product_sale, product_img = '$product_img', product_quantily = '$product_quantily', category_id = $category_id, type_id = $type_id, product_ram = '$product_ram', product_screen = '$product_screen', product_backcam = '$product_backcam', product_frontcam = '$product_frontcam', product_chip = '$product_chip', product_storge = '$product_storge', user_created = '$user_created'  
+        $select = "UPDATE phone SET product_name  = '$product_name', product_title = '$product_title', product_price = $product_price, product_sale = $product_sale, product_img = '$product_img', product_quantily = '$product_quantily', category_id = $category_id, type_id = $type_id, product_ram = '$product_ram', product_screen = '$product_screen', product_backcam = '$product_backcam', product_frontcam = '$product_frontcam', product_chip = '$product_chip', product_storge = '$product_storge', user_created = $user_created  
         WHERE product_id = $Product_ID";
         return $db->pdo_execute($select);
     }
@@ -258,7 +249,7 @@ class ProductFunction
     function Edit_Laptop($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_ram, $product_screen, $product_graphic, $product_CPU,  $product_storge, $user_created, $Product_ID)
     {
         $db = new connect();
-        $select = "UPDATE laptop SET product_name  = '$product_name', product_title = '$product_title', product_price = $product_price, product_sale = $product_sale, product_img = '$product_img', product_quantily = '$product_quantily', category_id = $category_id, type_id = $type_id, product_ram = '$product_ram', product_screen = '$product_screen', product_graphic = '$product_graphic', product_CPU = '$product_CPU', product_storge = '$product_storge', user_created = '$user_created'  
+        $select = "UPDATE laptop SET product_name  = '$product_name', product_title = '$product_title', product_price = $product_price, product_sale = $product_sale, product_img = '$product_img', product_quantily = '$product_quantily', category_id = $category_id, type_id = $type_id, product_ram = '$product_ram', product_screen = '$product_screen', product_graphic = '$product_graphic', product_CPU = '$product_CPU', product_storge = '$product_storge', user_created = $user_created  
         WHERE product_id = $Product_ID";
         return $db->pdo_execute($select);
     }
@@ -273,10 +264,10 @@ class ProductFunction
     }
 
 
-    function Edit_Wired($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_length, $product_port, $product_weight, $product_included, $user_created, $Product_ID)
+    function Edit_Wired($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantity, $category_id, $type_id, $product_length, $product_port, $product_weight, $product_included, $user_created, $Product_ID)
     {
         $db = new connect();
-        $select = "UPDATE wired SET product_name  = '$product_name', product_title = '$product_title', product_price = $product_price, product_sale = $product_sale, product_img = '$product_img', product_quantily = '$product_quantily', category_id = $category_id, type_id = $type_id, product_length = '$product_length', product_port = '$product_port', product_weight = '$product_weight', product_included = '$product_included', user_created = '$user_created'  
+        $select = "UPDATE wired SET product_name  = '$product_name', product_title = '$product_title', product_price = $product_price, product_sale = $product_sale, product_img = '$product_img', product_quantity = $product_quantity, category_id = $category_id, type_id = $type_id, product_length = '$product_length', product_port = '$product_port', product_weight = '$product_weight', product_included = '$product_included', user_created = $user_created  
         WHERE product_id = $Product_ID";
         return $db->pdo_execute($select);
     }
@@ -291,7 +282,22 @@ class ProductFunction
     }
 
 
-
+    function Edit_Wireless($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantity, $category_id, $type_id, $product_range, $product_port, $product_weight, $product_included, $user_created, $Product_ID)
+    {
+        $db = new connect();
+        $select = "UPDATE wireless SET product_name  = '$product_name', product_title = '$product_title', product_price = $product_price, product_sale = $product_sale, product_img = '$product_img', product_quantity = $product_quantity, category_id = $category_id, type_id = $type_id, product_range = '$product_range', product_port = '$product_port', product_weight = '$product_weight', product_included = '$product_included', user_created = $user_created  
+        WHERE product_id = $Product_ID";
+        return $db->pdo_execute($select);
+    }
+    function getInfoWireless($Product_ID, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM wireless WHERE product_id  = $Product_ID";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
 
 
 
