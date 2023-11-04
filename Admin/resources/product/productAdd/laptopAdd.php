@@ -40,8 +40,15 @@ if (
     
     $product->add_laptop($product_name, $product_title,$product_price,$product_sale,$product_img,$product_quantily,$category_id,$type_id,$laptop_screen,$laptop_graphic,$laptop_CPU,$laptop_storge,$laptop_ram,$user_created);
     echo '<script>alert("tạo thành công !!")</script>';
-    // exit();
     echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
+    $anhne = $_FILES['product_img']['tmp_name'];
+    $error = $_FILES['product_img']['error'];
+    $path = 'images/product/' . $product_img . '.png';
+    if (
+        $error === 0
+    ) {
+        move_uploaded_file($anhne, $path);
+    }
 } else {
     $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
 }

@@ -57,6 +57,20 @@ class ProductFunction
         return $db->pdo_execute($sql);
     }
 
+    function add_Wired($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_length, $product_port, $product_weight, $product_included,  $user_created)
+    {
+        $db = new connect();
+        $sql = "INSERT INTO 
+        wired(product_name , product_title,product_img, product_price, product_sale,product_quantily, category_id, type_id , product_length, product_port, product_weight, product_included, user_created, is_deleted ,is_wireless,product_url)
+        VALUES
+        ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, $category_id , $type_id, '$product_length', '$product_port', '$product_weight', '$product_included',  $user_created,1 , 3 , 'WiredDetail')";
+        return $db->pdo_execute($sql);
+    }
+
+
+
+
+
 
     function getInfoSP($category_id, $column)
     {

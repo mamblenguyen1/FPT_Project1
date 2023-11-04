@@ -59,8 +59,11 @@ if (isset($_GET['pages'])) {
                     include './Admin/resources/comment/CommentDetail.php';
                     break;
                     // detail
-                case 'AccessoryDetail':
-                    include './Admin/resources/product/ProductDetail/AccessoryDetail.php';
+                case 'WiredDetail':
+                    include './Admin/resources/product/ProductDetail/WiredDetail.php';
+                    break;
+                case 'WirelessDetail':
+                    include './Admin/resources/product/ProductDetail/WirelessDetail.php';
                     break;
                 case 'LaptopDetail':
                     include './Admin/resources/product/ProductDetail/LaptopDetail.php';
@@ -158,9 +161,6 @@ if (isset($_GET['pages'])) {
                     include './User/resources/home.php';
                     break;
             }
-            break;
-        default:
-            include './User/resources/home.php';
             break;
     }
 }
