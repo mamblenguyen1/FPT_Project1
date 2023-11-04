@@ -103,12 +103,47 @@ include('user/component/header.php');
                                             </form>
                                         </div>
                                         <!-- Render product -->
-                                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+                                        <? $conn = $db->pdo_get_connection();
+                                        $stmt = $conn->prepare("SELECT product_id, product_name , category_id , type_id , product_price, product_img FROM phone
+                                                    WHERE is_deleted = 1
+                                                    UNION
+                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_img FROM laptop
+                                                    WHERE is_deleted = 1
+                                                    UNION
+                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_img  FROM wired
+                                                    WHERE is_deleted = 1
+                                                    UNION
+                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_img FROM wireless                    
+                                                    WHERE is_deleted = 1");
+                                        $stmt->execute();
+                                        if ($stmt->rowCount() > 0) {
+                                            foreach ($stmt as $row) {
+                                                if($row['category_id'] == 1 ){
+                                                    $TypeName = $product->getTypeNamePhone($row['product_id'], 'type_name');
+                                                    $CategoryName = $product->getTypeNamePhone($row['product_id'], 'category_name');
+                                                    $product_url = $product->getTypeNamePhone($row['product_id'], 'url');
+                                                  }else if($row['category_id'] == 2){
+                                                    $TypeName = $product->getTypeNameLaptop($row['product_id'], 'type_name');
+                                                    $CategoryName = $product->getTypeNameLaptop($row['product_id'], 'category_name');
+                                                    $product_url = $product->getTypeNameLaptop($row['product_id'], 'url');
+                          
+                                                  } else if($row['category_id'] == 3){
+                                                    if(($product->getIsWired($row['product_id'], 'is_wireless')) == 1 || ($product->getIsWireLess($row['product_id'], 'is_wireless')) == 1){
+                                                      $TypeName = $product->getIsWired($row['product_id'], 'typename');
+                                                      $CategoryName = $product->getIsWired($row['product_id'], 'catename');
+                                                      $product_url = $product->getIsWired($row['product_id'], 'url');
+                                                    }else{
+                                                      $TypeName = $product->getIsWireLess($row['product_id'], 'typename');
+                                                      $CategoryName = $product->getIsWireLess($row['product_id'], 'catename');
+                                                      $product_url = $product->getIsWireLess($row['product_id'], 'url');
+                                                    }
+                                                  }
+                                                echo '<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
                                                 <div class="tg-postbook">
                                                     <figure class="tg-featureimg">
                                                         <div class="tg-bookimg">
-                                                            <div class="tg-frontcover"><img src="images/iphone.jpg" alt="image description"></div>
-                                                            <!-- <div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div> -->
+                                                            <div class="tg-frontcover"><img src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                                       
                                                         </div>
                                                         <a class="tg-btnaddtowishlist" href="">
                                                             <i class="icon-heart"></i>
@@ -117,14 +152,14 @@ include('user/component/header.php');
                                                     </figure>
                                                     <div class="tg-postbookcontent">
                                                         <ul class="tg-bookscategories">
-                                                            <li><a href="">Điện thoại</a>
+                                                            <li><a href="">' .  $CategoryName . '   </a>
                                                             </li>
                                                         </ul>
                                                         <div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
                                                         <div class="tg-booktitle">
-                                                            <h3><a href="index.php?pages=user&action=productdetail">Iphone 15 promax</a></h3>
+                                                            <h3><a href="index.php?pages=user&action=productdetail=' . $row['product_id'] . '">' . $row['product_name'] . '</a></h3>
                                                         </div>
-                                                        <span class="tg-bookwriter">Hãng: <a href="">Apple</a></span>
+                                                        <span class="tg-bookwriter">Hãng: <a href="">' . $TypeName . '</a></span>
                                                         <span class="tg-stars"><span></span></span>
                                                         <span class="tg-bookprice">
                                                             <ins>$25.18</ins>
@@ -136,8 +171,12 @@ include('user/component/header.php');
                                                         </a>
                                                     </div>
                                                 </div>
-                                            </div>
-                                       
+                                            </div>';
+                                            };;
+                                        }
+                                        ?>
+
+
                                         <!-- / Render product -->
 
 

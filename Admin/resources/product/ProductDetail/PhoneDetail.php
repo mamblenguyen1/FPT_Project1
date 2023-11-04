@@ -90,4 +90,3 @@ if (isset($_POST['deleteproduct'])) {
     </div>
 </div>
 <?php include './admin/componant/footer.php' ?>
-
