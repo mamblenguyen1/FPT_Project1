@@ -70,6 +70,7 @@ class ProductFunction
         $db = new connect();
         $sql = "INSERT INTO  wireless(product_name , product_title,product_img, product_price, product_sale,product_quantity, category_id, `type_id` , product_range, product_port, product_weight, product_included, product_capacity ,product_charge_time,product_use_time ,user_created, is_deleted ,is_wireless,product_url)
         VALUES
+
         ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantity, 3 , $type_id, '$product_range', '$product_port', '$product_weight', '$product_included', '$product_capacity','$product_charge_time','$product_use_time', $user_created,1 , 2 , 'WirelessDetail')";
         return $db->pdo_execute($sql);
     }

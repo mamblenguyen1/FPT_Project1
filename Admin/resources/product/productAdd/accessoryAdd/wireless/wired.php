@@ -1,9 +1,12 @@
 <?php include './Admin/componant/header.php' ?>
 <?php include './admin/componant/sidebar.php' ?>
 <?
-if (isset($_POST['WiredEdit'])) {
-    $ProductId = $_POST['product_id'];
-    $category_id = $product->getInfoWired($ProductId, 'category_id');
+if (isset($_POST['addproduct'])) {
+    $category_id = $_POST['category_id'];
+    // echo $category_id;
+
+    // exit();
+
 }
 
 if (isset($_POST['addPhone'])) {
@@ -20,6 +23,35 @@ if (isset($_POST['addPhone'])) {
     $product_included = $_POST['product_included'] ?? "";
     $user_created = 1;
     $product_img = $_FILES['product_img']['name'] ?? "";
+
+    // echo $category_id ;
+    // echo '<br/>';
+    // echo $product_name ;
+    // echo '<br/>';
+    // echo $product_title ;
+    // echo '<br/>';
+    // echo $product_price ;
+    // echo '<br/>';
+    // echo $product_sale ;
+    // echo '<br/>';
+    // echo $product_quantily ;
+    // echo '<br/>';
+    echo $type_id ;
+    echo '<br/>';
+    // echo $product_length ;
+    // echo '<br/>';
+    // echo $product_port ;
+    // echo '<br/>';
+    // echo $product_weight ;
+    // echo '<br/>';
+    // echo $product_included ;
+    // echo '<br/>';
+    // echo $user_created ;
+    // echo '<br/>';
+    // echo $product_img ;
+    // echo '<br/>';
+    // exit();
+
     if (
         !$category_id == "" &&
         !$product_name == "" &&
@@ -35,8 +67,8 @@ if (isset($_POST['addPhone'])) {
         !$user_created == "" &&
         !$product_img == ""
     ) {
-        $product->Edit_Wired($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, 
-        $product_length, $product_port, $product_weight, $product_included,  $user_created, $ProductId);
+        $product->add_Wired($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $type_id, $product_length, $product_port, $product_weight, $product_included,  $user_created);
+
         echo '<script>alert("tạo thành công !!")</script>';
         echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
         $anhne = $_FILES['product_img']['tmp_name'];

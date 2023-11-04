@@ -16,14 +16,16 @@
                                 $row = $product->wireless_select_all();
                                 foreach ($row as $ketqua) {
                                     extract($ketqua);
-                                        ?>
-                                        <form action="index.php?pages=admin&action=<?echo $wire_url ?>" style="display: inline-block;" method="post">
-                                            <input type="hidden" name="category_id" value="<?= $category_id ?>">
-                                            <button type="submit" class="btn btn-outline-primary" name="addproduct"><?echo $is_wireless_name?></button>
-                                        </form>
-                                    <?
-                                   
-                                    
+                                ?>
+                                    <form action="index.php?pages=admin&action=<? echo $wire_url ?>" style="display: inline-block;" method="post">
+                                        <input type="hidden" name="category_id" value="<?= $category_id ?>">
+                                        <input type="hidden" name="is_wireless_id" value="<?= $is_wireless_id ?>">
+                                        <button type="submit" class="btn btn-outline-primary" name="addproduct"><? echo $is_wireless_name ?></button>
+                                    </form>
+                                <?
+
+
+
                                 }
                                 ?>
                             </div>
