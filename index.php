@@ -26,6 +26,7 @@ if (isset($_GET['pages'])) {
             break;
         case 'admin':
             include 'js.php';
+
             switch ($_GET['action']) {
                 case 'Dashboard':
                     include './Admin/resources/admin/dashboard.php';
@@ -55,7 +56,7 @@ if (isset($_GET['pages'])) {
                     include './Admin/resources/comment/CommentList.php';
                     break;
                 case 'commentDetail':
-                    include './Admin/resources/comment/CommentDetail.php'; 
+                    include './Admin/resources/comment/CommentDetail.php';
                     break;
                     // detail
                 case 'AccessoryDetail':
@@ -100,11 +101,14 @@ if (isset($_GET['pages'])) {
                 case 'LaptopAdd':
                     include './Admin/resources/product/productAdd/laptopAdd.php';
                     break;
+                case 'WiredAdd':
+                    include './Admin/resources/product/productAdd/accessoryAdd/wireless/wired.php';
+                    break;
+                case 'WirelessAdd':
+                    include './Admin/resources/product/productAdd/accessoryAdd/wireless/wireless.php';
+                    break;
                 case 'wireless':
                     include './Admin/resources/product/productAdd/wirelessAdd.php';
-                    break;
-                case 'AccessoryAdd':
-                    include './Admin/resources/product/productAdd/accessoryAdd.php';
                     break;
                 default:
                     include './admin/resources/admin/Dashboard.php';
@@ -114,6 +118,7 @@ if (isset($_GET['pages'])) {
 
         case 'user':
             include 'js.php';
+
             switch ($_GET['action']) {
                 case 'home':
                     include './User/resources/home.php';
@@ -144,11 +149,18 @@ if (isset($_GET['pages'])) {
 
                 case 'changepassword':
                     include './User/resources/changepassword.php';
+                    break;
 
                 case 'login':
                     include 'login.php';
                     break;
+                default:
+                    include './User/resources/home.php';
+                    break;
             }
+            break;
+        default:
+            include './User/resources/home.php';
             break;
     }
 }

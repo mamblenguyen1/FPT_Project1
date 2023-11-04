@@ -6,7 +6,7 @@ if (isset($_POST['detail'])) {
 }
 if (isset($_POST['deleteproduct'])) {
     $product_id = $_POST['product_id'];
-    $product->deleteproduct($product_id);
+    $product->deletePhone($product_id);
     echo '<script>alert("Đã xóa sản phẩm thành công ! ! !")</script>';
     echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
 }
@@ -38,7 +38,7 @@ if (isset($_POST['deleteproduct'])) {
                                     <tbody>
 
                                         <? $conn = $db->pdo_get_connection();
-                                        $stmt = $conn->prepare("SELECT * FROM product
+                                        $stmt = $conn->prepare("SELECT * FROM phone
                                          WHERE is_deleted = 1
                                          AND product_id = $product_id
                                          ");
@@ -46,20 +46,18 @@ if (isset($_POST['deleteproduct'])) {
                                         if ($stmt->rowCount() > 0) {
                                             foreach ($stmt as $row) {
                                                 echo '
-                                        
-
                                         <tr>
                                             <td>' . $row['product_name'] . '</td>
-                                            <td> <img src="images/' . $row['product_img'] . '" alt="">
+                                            <td> <img width="150px" height="200px" src="images/product/' . $row['product_img'] . '.png" alt="">
                                             </td>
                                             <td>' . $row['product_title'] . '</td>
                                             <td>
-                                                <p>Màn Hình: ' . $row['phone_screen'] . '</p>
-                                                <p>Cam trước: ' . $row['phone_frontcam'] . '</p>
-                                                <p>Cam sau: ' . $row['phone_backcam'] . '</p>
-                                                <p>Chip: ' . $row['phone_chip'] . '</p>
-                                                <p>RAM: ' . $row['phone_ram'] . '</p>
-                                                <p>Dung lượng: ' . $row['phone_storge'] . '</p>
+                                                <p>Màn Hình: ' . $row['product_screen'] . '</p>
+                                                <p>Cam trước: ' . $row['product_frontcam'] . '</p>
+                                                <p>Cam sau: ' . $row['product_backcam'] . '</p>
+                                                <p>Chip: ' . $row['product_chip'] . '</p>
+                                                <p>RAM: ' . $row['product_ram'] . '</p>
+                                                <p>Dung lượng: ' . $row['product_storge'] . '</p>
                                             </td>
 
                                         </tr>
@@ -92,3 +90,4 @@ if (isset($_POST['deleteproduct'])) {
     </div>
 </div>
 <?php include './admin/componant/footer.php' ?>
+
