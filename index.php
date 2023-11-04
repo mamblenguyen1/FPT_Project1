@@ -95,6 +95,7 @@ if (isset($_GET['pages'])) {
                 case 'TypeEdit':
                     include './Admin/resources/Type/TypeEdit.php';
                     break;
+                    // ProductAdd
                 case 'PhoneAdd':
                     include './Admin/resources/product/productAdd/phoneAdd.php';
                     break;
@@ -109,6 +110,19 @@ if (isset($_GET['pages'])) {
                     break;
                 case 'wireless':
                     include './Admin/resources/product/productAdd/wirelessAdd.php';
+                    break;
+                    // ProductEdit
+                case 'LaptopEdit':
+                    include './Admin/resources/product/ProductEdit/LaptopEdit.php';
+                    break;
+                case 'PhoneEdit':
+                    include './Admin/resources/product/ProductEdit/PhoneEdit.php';
+                    break;
+                case 'WirelessEdit':
+                    include './Admin/resources/product/ProductEdit/WirelessEdit.php';
+                    break;
+                case 'WiredEdit':
+                    include './Admin/resources/product/ProductEdit/WiredEdit.php';
                     break;
                 default:
                     include './admin/resources/admin/Dashboard.php';
@@ -164,4 +178,3 @@ if (isset($_GET['pages'])) {
             break;
     }
 }
-
