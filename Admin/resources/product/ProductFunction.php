@@ -277,8 +277,22 @@ class ProductFunction
     }
 
 
-
-
+    function Edit_Wired($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_length, $product_port, $product_weight, $product_included, $user_created, $Product_ID)
+    {
+        $db = new connect();
+        $select = "UPDATE wired SET product_name  = '$product_name', product_title = '$product_title', product_price = $product_price, product_sale = $product_sale, product_img = '$product_img', product_quantily = '$product_quantily', category_id = $category_id, type_id = $type_id, product_length = '$product_length', product_port = '$product_port', product_weight = '$product_weight', product_included = '$product_included', user_created = '$user_created'  
+        WHERE product_id = $Product_ID";
+        return $db->pdo_execute($select);
+    }
+    function getInfoWired($Product_ID, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM wired WHERE product_id = $Product_ID";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
 
 
 
