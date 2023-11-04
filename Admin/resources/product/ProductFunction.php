@@ -241,9 +241,40 @@ class ProductFunction
 
 
 
+    function Edit_Phone($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_ram, $product_screen, $product_backcam, $product_frontcam, $product_chip, $product_storge, $user_created, $Product_ID)
+    {
+        $db = new connect();
+        $select = "UPDATE phone SET product_name  = '$product_name', product_title = '$product_title', product_price = $product_price, product_sale = $product_sale, product_img = '$product_img', product_quantily = '$product_quantily', category_id = $category_id, type_id = $type_id, product_ram = '$product_ram', product_screen = '$product_screen', product_backcam = '$product_backcam', product_frontcam = '$product_frontcam', product_chip = '$product_chip', product_storge = '$product_storge', user_created = '$user_created'  
+        WHERE product_id = $Product_ID";
+        return $db->pdo_execute($select);
+    }
+    function getInfoPhone($Product_ID, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM phone WHERE product_id = $Product_ID";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
 
 
-
+    function Edit_Laptop($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_ram, $product_screen, $product_graphic, $product_CPU,  $product_storge, $user_created, $Product_ID)
+    {
+        $db = new connect();
+        $select = "UPDATE laptop SET product_name  = '$product_name', product_title = '$product_title', product_price = $product_price, product_sale = $product_sale, product_img = '$product_img', product_quantily = '$product_quantily', category_id = $category_id, type_id = $type_id, product_ram = '$product_ram', product_screen = '$product_screen', product_graphic = '$product_graphic', product_CPU = '$product_CPU', product_storge = '$product_storge', user_created = '$user_created'  
+        WHERE product_id = $Product_ID";
+        return $db->pdo_execute($select);
+    }
+    function getInfoLaptop($Product_ID, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM laptop WHERE product_id = $Product_ID";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
 
 
 

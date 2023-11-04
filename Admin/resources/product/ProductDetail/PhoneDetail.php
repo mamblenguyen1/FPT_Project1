@@ -36,7 +36,7 @@ if (isset($_POST['deleteproduct'])) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                
+
                                         <? $conn = $db->pdo_get_connection();
                                         $stmt = $conn->prepare("SELECT * FROM phone
                                          WHERE is_deleted = 1
@@ -64,22 +64,22 @@ if (isset($_POST['deleteproduct'])) {
                                        
 ';
                                             }
-                                            
-                                        } 
+                                        }
                                         ?>
                                     </tbody>
-                                  
+
                                 </table>
                                 <?
-                                        echo '
-<form action="" method="post">
-<input type="hidden" name="product_id" value="' . $row['product_id'] . '">
-<button type="submit" name="editproduct" class="btn  btn-outline-primary">Chỉnh Sửa</button>
-<button type="submit" name="deleteproduct" class="btn  btn-outline-danger">Xóa</button>
-</form>
-';
-                                        ?>
-                            
+                                echo '
+
+                                    <form action="index.php?pages=admin&action=PhoneEdit" method="post">
+                                    <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
+                                    <button type="submit" name="PhoneEdit" class="btn  btn-outline-primary">Chỉnh Sửa</button>
+                                    <button type="submit" name="deleteproduct" class="btn  btn-outline-danger">Xóa</button>
+                                    </form>
+                                    ';
+                                ?>
+
                             </div>
 
                         </div>
@@ -91,4 +91,3 @@ if (isset($_POST['deleteproduct'])) {
     </div>
 </div>
 <?php include './admin/componant/footer.php' ?>
-
