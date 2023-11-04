@@ -25,6 +25,7 @@ if (isset($_GET['pages'])) {
             include './admin/auth/register.admin.php';
             break;
         case 'admin':
+            include 'js.php';
             switch ($_GET['action']) {
                 case 'Dashboard':
                     include './Admin/resources/admin/dashboard.php';
@@ -112,7 +113,7 @@ if (isset($_GET['pages'])) {
             break;
 
         case 'user':
-
+            include 'js.php';
             switch ($_GET['action']) {
                 case 'home':
                     include './User/resources/home.php';
@@ -152,4 +153,3 @@ if (isset($_GET['pages'])) {
     }
 }
 
-include 'js.php';
