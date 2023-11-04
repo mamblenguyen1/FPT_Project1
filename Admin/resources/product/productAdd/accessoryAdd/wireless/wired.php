@@ -14,12 +14,10 @@ if (isset($_POST['addPhone'])) {
     $product_sale = $_POST['product_sale'] ?? "";
     $product_quantily = $_POST['product_quantily'] ?? "";
     $type_id = $_POST['type_id'] ?? "";
-    $phone_ram = $_POST['phone_ram'] ?? "";
-    $phone_screen = $_POST['phone_screen'] ?? "";
-    $phone_backcam = $_POST['phone_backcam'] ?? "";
-    $phone_frontcam = $_POST['phone_frontcam'] ?? "";
-    $phone_chip = $_POST['phone_chip'] ?? "";
-    $phone_storge = $_POST['phone_storge'] ?? "";
+    $product_length = $_POST['product_length'] ?? "";
+    $product_port = $_POST['product_port'] ?? "";
+    $product_weight = $_POST['product_weight'] ?? "";
+    $product_included = $_POST['product_included'] ?? "";
     $user_created = 1;
     $product_img = $_FILES['product_img']['name'] ?? "";
 
@@ -37,17 +35,13 @@ if (isset($_POST['addPhone'])) {
     // echo '<br/>';
     // echo $type_id ;
     // echo '<br/>';
-    // echo $phone_ram ;
+    // echo $product_length ;
     // echo '<br/>';
-    // echo $phone_screen ;
+    // echo $product_port ;
     // echo '<br/>';
-    // echo $phone_backcam ;
+    // echo $product_weight ;
     // echo '<br/>';
-    // echo $phone_frontcam ;
-    // echo '<br/>';
-    // echo $phone_chip ;
-    // echo '<br/>';
-    // echo $phone_storge ;
+    // echo $product_included ;
     // echo '<br/>';
     // echo $user_created ;
     // echo '<br/>';
@@ -62,16 +56,14 @@ if (isset($_POST['addPhone'])) {
         !$product_sale == "" &&
         !$product_quantily == "" &&
         !$type_id == "" &&
-        !$phone_ram == "" &&
-        !$phone_screen == "" &&
-        !$phone_backcam == "" &&
-        !$phone_frontcam == "" &&
-        !$phone_chip == "" &&
-        !$phone_storge == "" &&
+        !$product_length == "" &&
+        !$product_port == "" &&
+        !$product_weight == "" &&
+        !$product_included == "" &&
         !$user_created == "" &&
         !$product_img == ""
     ) {
-        $product->add_phone($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $phone_ram, $phone_screen, $phone_backcam, $phone_frontcam, $phone_chip, $phone_storge, $user_created);
+        $product->add_Wired($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_length, $product_port, $product_weight, $product_included,  $user_created);
         echo '<script>alert("tạo thành công !!")</script>';
         echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
         $anhne = $_FILES['product_img']['tmp_name'];
@@ -90,12 +82,12 @@ if (isset($_POST['addPhone'])) {
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
-            <h1 style="padding-left: 30px;">Thêm Điện thoại</h1>
+            <h1 style="padding-left: 30px;">Thêm phụ kiện có dây</h1>
         </div>
         <div class="add-cate-form">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Thêm điện thoại mới vào hệ thống !!!</h3>
+                    <h3 class="card-title">Thêm phụ kiện có dây vào hệ thống ! ! !</h3>
                 </div>
 
                 <form action="" method="post" enctype="multipart/form-data">
@@ -103,7 +95,7 @@ if (isset($_POST['addPhone'])) {
                     <div class="card-body">
                         <!-- Tên điện thoại -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Tên điện thoại </label>
+                            <label for="exampleInputEmail1">Tên thiết bị :  </label>
                             <input name="product_name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
                             <?
                             if (isset($_POST["product_name"])) {
@@ -117,7 +109,7 @@ if (isset($_POST['addPhone'])) {
                         </div>
                         <!-- mô tả điện thoại -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Mô tả điện thoại </label>
+                            <label for="exampleInputEmail1">Mô tả thiết bị </label>
                             <input name="product_title" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
                             <?
                             if (isset($_POST["product_title"])) {
@@ -173,12 +165,14 @@ if (isset($_POST['addPhone'])) {
                             ?>
                         </div>
                         <!-- Ram điện thoại -->
+
+
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Dung lượng Ram </label>
-                            <input name="phone_ram" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <label for="exampleInputEmail1">Độ dài dây </label>
+                            <input name="product_length" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
                             <?
-                            if (isset($_POST["phone_ram"])) {
-                                if (empty($_POST["phone_ram"])) {
+                            if (isset($_POST["product_length"])) {
+                                if (empty($_POST["product_length"])) {
                                     echo '<span class="vaild">Xin vui lòng nhập dung lượng ram </span>';
                                 } else {
                                     echo '';
@@ -188,11 +182,11 @@ if (isset($_POST['addPhone'])) {
                         </div>
                         <!-- Màn hình điện thoại -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Màn hình điện thoại </label>
-                            <input name="phone_screen" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <label for="exampleInputEmail1">Cổng kết nối </label>
+                            <input name="product_port" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
                             <?
-                            if (isset($_POST["phone_screen"])) {
-                                if (empty($_POST["phone_screen"])) {
+                            if (isset($_POST["product_port"])) {
+                                if (empty($_POST["product_port"])) {
                                     echo '<span class="vaild">Xin vui lòng nhập kích cỡ màn hình </span>';
                                 } else {
                                     echo '';
@@ -202,11 +196,11 @@ if (isset($_POST['addPhone'])) {
                         </div>
                         <!-- Camera sau -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Camera sau </label>
-                            <input name="phone_backcam" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <label for="exampleInputEmail1">Cân nặng </label>
+                            <input name="product_weight" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
                             <?
-                            if (isset($_POST["phone_backcam"])) {
-                                if (empty($_POST["phone_backcam"])) {
+                            if (isset($_POST["product_weight"])) {
+                                if (empty($_POST["product_weight"])) {
                                     echo '<span class="vaild">Xin vui lòng nhập thông số camera sau </span>';
                                 } else {
                                     echo '';
@@ -216,11 +210,11 @@ if (isset($_POST['addPhone'])) {
                         </div>
                         <!-- Camera sau -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Camera trước </label>
-                            <input name="phone_frontcam" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <label for="exampleInputEmail1">Phụ kiện đi kèm : </label>
+                            <input name="product_included" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
                             <?
-                            if (isset($_POST["phone_frontcam"])) {
-                                if (empty($_POST["phone_frontcam"])) {
+                            if (isset($_POST["product_included"])) {
+                                if (empty($_POST["product_included"])) {
                                     echo '<span class="vaild">Xin vui lòng nhập thông số camera trước </span>';
                                 } else {
                                     echo '';
@@ -229,34 +223,7 @@ if (isset($_POST['addPhone'])) {
                             ?>
                         </div>
                         <!-- chip điện thoại -->
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Chip điện thoại </label>
-                            <input name="phone_chip" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
-                            <?
-                            if (isset($_POST["phone_chip"])) {
-                                if (empty($_POST["phone_chip"])) {
-                                    echo '<span class="vaild">Xin vui lòng nhập thông số chip điện thoại </span>';
-                                } else {
-                                    echo '';
-                                }
-                            }
-                            ?>
-                        </div>
-                        <!-- dung lượng điện thoại -->
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Dung lượng điện thoại </label>
-                            <input name="phone_storge" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
-                            <?
-                            if (isset($_POST["phone_storge"])) {
-                                if (empty($_POST["phone_storge"])) {
-                                    echo '<span class="vaild">Xin vui lòng nhập dung lượng điện thoại </span>';
-                                } else {
-                                    echo '';
-                                }
-                            }
-                            ?>
-                        </div>
-                        <!-- hình ảnh sản phẩm -->
+                      
 
                         <input type="file" name="product_img" id="">
                         <?
@@ -297,9 +264,6 @@ if (isset($_POST['addPhone'])) {
                             }
                             ?>
                         </div>
-
-
-
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" name="addPhone" class="btn btn-primary">Lưu danh mục</button>
