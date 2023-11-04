@@ -240,7 +240,7 @@ if (isset($_POST['addPhone'])) {
                         <div class="form-group">
                             <label>Hãng điện thoại</label>
                             <select name="type_id" class="form-control select2" style="width: 100%;">
-                                <option selected="selected" value="">Chọn hãng điện thoại</option>
+                                <option selected="selected" value="">Chọn hãng phụ kiện</option>
                                 <?
                                 $conn = $db->pdo_get_connection();
                                 $stmt = $conn->prepare("SELECT * FROM `type`, category 

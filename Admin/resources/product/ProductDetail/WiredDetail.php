@@ -6,7 +6,7 @@ if (isset($_POST['detail'])) {
 }
 if (isset($_POST['deleteproduct'])) {
     $product_id = $_POST['product_id'];
-    $product->deletePhone($product_id);
+    $product->deleteWired($product_id);
     echo '<script>alert("Đã xóa sản phẩm thành công ! ! !")</script>';
     echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
 }
@@ -22,7 +22,7 @@ if (isset($_POST['deleteproduct'])) {
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h1 style="padding-left: 30px;">Chi tiết sản phẩm điện thoại</h1>
+                                <h1 style="padding-left: 30px;">Chi tiết sản phẩm thiết bị có dây</h1>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -38,7 +38,7 @@ if (isset($_POST['deleteproduct'])) {
                                     <tbody>
                                 
                                         <? $conn = $db->pdo_get_connection();
-                                        $stmt = $conn->prepare("SELECT * FROM phone
+                                        $stmt = $conn->prepare("SELECT * FROM wired
                                          WHERE is_deleted = 1
                                          AND product_id = $product_id
                                          ");
@@ -52,12 +52,11 @@ if (isset($_POST['deleteproduct'])) {
                                             </td>
                                             <td>' . $row['product_title'] . '</td>
                                             <td>
-                                                <p>Màn Hình: ' . $row['product_screen'] . '</p>
-                                                <p>Cam trước: ' . $row['product_frontcam'] . '</p>
-                                                <p>Cam sau: ' . $row['product_backcam'] . '</p>
-                                                <p>Chip: ' . $row['product_chip'] . '</p>
-                                                <p>RAM: ' . $row['product_ram'] . '</p>
-                                                <p>Dung lượng: ' . $row['product_storge'] . '</p>
+                                                <p>Độ dài: ' . $row['product_length'] . '</p>
+                                                <p>Cổng kết nối: ' . $row['product_port'] . '</p>
+                                                <p>Cân nặng: ' . $row['product_weight'] . '</p>
+                                                <p>Phụ kiện đi kèm: ' . $row['product_included'] . '</p>
+                                                
                                             </td>
 
                                         </tr>
