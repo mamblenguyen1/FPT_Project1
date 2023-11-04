@@ -71,12 +71,13 @@ if (isset($_POST['deleteproduct'])) {
                                 </table>
                                 <?
                                 echo '
-<form action="" method="post">
-<input type="hidden" name="product_id" value="' . $row['product_id'] . '">
-<button type="submit" name="editproduct" class="btn  btn-outline-primary">Chỉnh Sửa</button>
-<button type="submit" name="deleteproduct" class="btn  btn-outline-danger">Xóa</button>
-</form>
-';
+
+                                    <form action="index.php?pages=admin&action=PhoneEdit" method="post">
+                                    <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
+                                    <button type="submit" name="PhoneEdit" class="btn  btn-outline-primary">Chỉnh Sửa</button>
+                                    <button type="submit" name="deleteproduct" class="btn  btn-outline-danger">Xóa</button>
+                                    </form>
+                                    ';
                                 ?>
 
                             </div>
