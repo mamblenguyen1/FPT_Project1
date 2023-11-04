@@ -1702,7 +1702,7 @@ li.menu-item-has-mega-menu { position: static; }
 	content: '';
 	width: 100%;
 	height: 100%;
-	position: absolute;
+	/* position: relative; */
 	background:
 		-moz-linear-gradient(left,
 		rgba(0,0,0,0) 8%,
@@ -2902,7 +2902,7 @@ li.menu-item-has-mega-menu { position: static; }
 	color: #7ce630;
 	padding: 10px;
 	border: 1px solid green;
-	background-color: rgba(0, 0, 0, 0.672) ;
+	background-color: rgba(255, 255, 255, 0.294) ;
 	
 }
 

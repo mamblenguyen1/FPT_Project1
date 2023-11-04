@@ -13,6 +13,9 @@
                 <h3>Categories</h3>
             </div>
             <div class="tg-widgetcontent">
+                <ul>
+                <li><a href="./?pages=user&action=products"><span>Tất cả sản phẩm</span></a>
+                </ul>
                 <?
                 $product = new ProductFunction();
                 $row = $product->category_type_select_all();
@@ -20,15 +23,16 @@
                     extract($ketqua);
                 ?>
                     <ul>
-                        <li><a href=""><span><?= $category_name ?></span></a>
+                    
+                        <li><a href="./?pages=user&action=products&category=<?= $category_id ?>"><span><?= $category_name ?></span></a>
                             <ul>
                                 <?
                                 $category = new ProductFunction();
-                                $row = $category->category_type_con_select_all($category_id );
+                                $row = $category->category_type_con_select_all($category_id);
                                 foreach ($row as $ketqua) {
                                     extract($ketqua);
                                     echo ' <li>
-                                                <a href="">'.$type_name.'</a>
+                                                <a href="./?pages=user&action=products&type=' . $type_id . '">' . $type_name . '</a>
                                             </li>';
                                 }
                                 ?>
@@ -102,4 +106,4 @@
             </div>
         </div>
     </aside>
-</div> 
+</div>
