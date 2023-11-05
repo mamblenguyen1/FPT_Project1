@@ -66,7 +66,7 @@ include('style.php');
 									</ul>
 								</div>
 								<div class="logout">
-								<a class="logout-btn" href="./?pages=user&action=logout">Đăng Xuất</a>
+								<a class="logout-btn" href="./index.php?pages=user&action=logout">Đăng Xuất</a>
 	
 								</div>
 							</div>
@@ -85,7 +85,7 @@ include('style.php');
 									</ul>
 								</div>
 								<div class="logout">
-									<a class="logout-btn" href="./?pages=user&action=logout">Đăng Xuất</a>
+									<a class="logout-btn" href="./index.php?pages=user&action=logout">Đăng Xuất</a>
 	
 								</div>
 							</div>

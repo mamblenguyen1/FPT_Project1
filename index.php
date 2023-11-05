@@ -178,9 +178,8 @@ if (isset($_GET['pages'])) {
                     include './User/resources/changepassword.php';
                     break;
                 case "logout":
-                    unset($_SESSION['userID']);
-                    setcookie("role", '');
-                    setcookie("userID", '');
+                    setcookie("role", '', time() + 1, "/");
+                    setcookie("userID", '', time() + 1, "/");
                     header("location: index.php?pages=user&action=home");
                     break;
                 case 'login':
