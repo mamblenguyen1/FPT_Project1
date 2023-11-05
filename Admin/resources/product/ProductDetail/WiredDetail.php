@@ -4,12 +4,7 @@
 if (isset($_POST['detail'])) {
     $product_id = $_POST['product_id'];
 }
-if (isset($_POST['deleteproduct'])) {
-    $product_id = $_POST['product_id'];
-    $product->deleteWired($product_id);
-    echo '<script>alert("Đã xóa sản phẩm thành công ! ! !")</script>';
-    echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
-}
+
 ?>
 <div class="main-panel">
     <div class="content-wrapper">

@@ -57,20 +57,7 @@
                 <p>Tất cả danh mục</p>
               </a>
             </li>
-            <li class="nav-item">
-              <?
-              $row = $product->category_select_all();
-              foreach ($row as $ketqua) {
-                extract($ketqua);
-              ?>
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                    <p><?= $category_name ?></p>
-                </a>
-              <?
-              }
-              ?>
-            </li>
+          
           </ul>
         </li>
 

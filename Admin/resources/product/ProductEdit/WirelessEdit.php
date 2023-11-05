@@ -6,7 +6,12 @@ if (isset($_POST['WirelessEdit'])) {
     $ProductId = $_POST['product_id'];
     $category_id = $product->getInfoWireless($ProductId, 'category_id');
 }
-
+if (isset($_POST['deleteproduct'])) {
+    $product_id = $_POST['product_id'];
+    $product->deleteWireless($product_id);
+    echo '<script>alert("Đã xóa sản phẩm thành công ! ! !")</script>';
+    echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
+}
 if (isset($_POST['EditWireless'])) {
     $ProductId = $_POST['product_id'];
     $category_id = $_POST['category_id'] ?? "";

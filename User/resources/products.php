@@ -1,6 +1,7 @@
 <?
 include('user/component/header.php');
 ?>
+
 <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
 
     <!--************************************
@@ -35,7 +36,7 @@ include('user/component/header.php');
             <div class="container">
                 <div class="row">
                     <div id="tg-twocolumns" class="tg-twocolumns">
-                        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9 pull-right">
+                        <div class="col-xs-16 col-sm-16 col-md-16 col-lg-16 pull-right">
                             <div id="tg-content" class="tg-content">
                                 <div class="tg-products">
                                     <div class="tg-sectionhead">

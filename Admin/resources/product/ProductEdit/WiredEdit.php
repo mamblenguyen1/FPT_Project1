@@ -5,7 +5,12 @@ if (isset($_POST['WiredEdit'])) {
     $ProductId = $_POST['product_id'];
     $category_id = $product->getInfoWired($ProductId, 'category_id');
 }
-
+if (isset($_POST['deleteproduct'])) {
+    $product_id = $_POST['product_id'];
+    $product->deleteWired($product_id);
+    echo '<script>alert("Đã xóa sản phẩm thành công ! ! !")</script>';
+    echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
+}
 if (isset($_POST['EditWired'])) {
     $ProductId = $_POST['product_id'];
     $category_id = $_POST['category_id'] ?? "";

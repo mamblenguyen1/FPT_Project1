@@ -52,13 +52,54 @@ include('style.php');
 							</div> -->
 					<div class="tg-userlogin">
 						<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
-						<ul class="menu">
-							<span>Chào ! Minh Quang</span>
-							<ul>
-								<li><a href="">Cập nhật người dùng</a></li>
-								<li><a href="">Đăng Xuất</a></li>
-							</ul>
-						</ul>
+						<?
+						if (isset($_COOKIE['userID'])) {
+							if ($_COOKIE['role'] == 2) {
+								echo '
+								<div class="user">
+								<div class="user-name">
+									<span>Chào ! Minh Quang</span>
+									<ul class="menu">
+										<ul>
+											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
+										</ul>
+									</ul>
+								</div>
+								<div class="logout">
+								<a class="logout-btn" href="./?pages=user&action=logout">Đăng Xuất</a>
+	
+								</div>
+							</div>
+								';
+							} else {
+								echo '
+								<div class="user">
+								<div class="user-name">
+									<span>Chào ! Minh Quang</span>
+									<ul class="menu">
+										<ul>
+											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
+											<li><a href="index.php?pages=admin&action=dashboard">Vào trang quản trị</a></li>
+	
+										</ul>
+									</ul>
+								</div>
+								<div class="logout">
+									<a class="logout-btn" href="./?pages=user&action=logout">Đăng Xuất</a>
+	
+								</div>
+							</div>
+								';
+							}
+						} else {
+							echo '
+							<a class="login-btn" href="index.php?pages=user&action=login">Đăng nhập</a>
+							';
+						}
+						?>
+
+
+
 
 					</div>
 				</div>
@@ -356,39 +397,64 @@ include('style.php');
 <!--************************************
 				Header End
 		*************************************-->
-		<style>
-			.menu {
-				position: relative;
-				display: block;
-				padding: 20px 30px;
-			}
-			.menu ul{
-				background-color: #504C4C;
-				position: absolute;
-				width: 300px;
-				display: none;
-				opacity: .9;
-			}
-			.menu ul li{
-				margin: 10px 0;
-				list-style: none;
-			}
-			.menu ul li a{
-				display: inline-block;
-				z-index: 1000000;
-				padding: 0px 40px;
-				margin: 0px 20px;
-				color: white;
+<style>
+	.tg-userlogin {
+		padding: 30px 0;
+	}
 
-			}
-			.menu ul li a:hover{
-				background-color: #504C4C;
-				color: black;
-				font-weight: bold;
-			}
-		
+	.menu {
+		position: relative;
+		display: block;
+		padding: 20px 30px;
+	}
 
-			.menu:hover>ul{
-				display: block;
-			}
-		</style>
+	.login-btn {
+		display: inline-block;
+		padding: 5px 15px;
+	}
+
+	.user {
+		width: 250px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.logout {
+		padding-bottom: 8.5px;
+	}
+
+	.menu ul {
+		background-color: #504C4C;
+		position: absolute;
+		width: 300px;
+		display: none;
+		opacity: .9;
+		top: 10px;
+	}
+
+	.menu ul li {
+		margin: 10px 0;
+		list-style: none;
+	}
+
+	.menu ul li a {
+		display: inline-block;
+		z-index: 1000000;
+		padding: 0px 40px;
+		margin: 0px 20px;
+		color: white;
+
+	}
+
+	.menu ul li a:hover {
+		background-color: #504C4C;
+		color: black;
+		font-weight: bold;
+	}
+
+
+	.menu:hover>ul {
+		display: block;
+	}
+</style>

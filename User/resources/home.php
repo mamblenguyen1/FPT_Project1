@@ -468,7 +468,7 @@ include('user/component/header.php');
         <section class="tg-sectionspace tg-haslayout">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-16 col-sm-16 col-md-16 col-lg-16">
                         <div class="tg-sectionhead">
                             <h2><span>Some Great Books</span>Picked By Authors</h2>
                             <a class="tg-btn" href="javascript:void(0);">View All</a>
@@ -478,7 +478,7 @@ include('user/component/header.php');
                         <div class="item">
                             <div class="tg-postbook">
                                 <figure class="tg-featureimg">
-                                    <div class="tg-bookimg">
+                                    <div class="tg-bookimg" style="background: white;">
                                         <div class="tg-frontcover"><img src="images/iphone.jpg" alt="image description"></div>
                                     </div>
                                     <div class="tg-hovercontent">

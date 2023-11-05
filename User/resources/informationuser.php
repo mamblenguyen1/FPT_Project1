@@ -9,7 +9,7 @@ include('User/component/header.php');
         <div class="row no-gutters row-bordered row-border-light">
             <div class="col-md-3 pt-0">
                 <div class="list-group list-group-flush account-settings-links">
-                    <a class="list-group-item list-group-item-action active " href="index.php?pages=user&action=informationuser">Thông tin tài khoản</a>
+                    <a class="list-group-item list-group-item-action active" href="index.php?pages=user&action=informationuser">Thông tin tài khoản</a>
                     <a class="list-group-item list-group-item-action " href="index.php?pages=user&action=updateuser">Cập nhật tài khoản</a>
                     <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=changepassword">Đổi mật khẩu</a>
                     <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=history">Lịch sử đơn hàng</a>
@@ -17,51 +17,29 @@ include('User/component/header.php');
             </div>
             <div class="col-md-9">
                 <div class="tab-content">
-                    <h3>Lịch sử đơn hàng</h3>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="example2" class="table table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Tên sản phẩm</th>
-                                                    <th>Tên danh mục</th>
-                                                    <th>Hãng</th>
-                                                    <th>Đơn giá</th>
-                                                    <th>Chi tiết sản phẩm</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Iphone 15 Promax</td>
-                                                    <td>3</td>
-                                                    <td>30/10/2023</td>
-                                                    <td>31/10/2023</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-outline-primary">Chi tiết bình luận</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Laptop ROG Strix G15</td>
-                                                    <td>3</td>
-                                                    <td>30/10/2023</td>
-                                                    <td>31/10/2023</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-outline-primary">Chi tiết bình luận</button>
-                                                    </td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                    <h3>Thông tin người dùng</h3>
+                    <div id="General">
+                        <div class="card-body media align-items-center">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="d-block ui-w-80">
+                            <div class="media-body ml-4">
+                                   
                             </div>
                         </div>
+                        <br>
+                <?
+                    echo '
+                    <label for="">Họ và tên : <span>'.$user->getInfouser($_COOKIE['userID'], 'user_name').'</span></label>
+                    <label for="">Email     : <span>'.$user->getInfouser($_COOKIE['userID'], 'email').'</span></label>
+                    <label for="">Địa chỉ   : <span>'.$user->getInfouser($_COOKIE['userID'], 'user_address').'</span></label>
+                    <label for="">Số điện thoại : <span>'.$user->getInfouser($_COOKIE['userID'], 'user_phone_number').'</span></label>
+                    <label for="">Mật khẩu : <span>******</span></label>
+
+                   
+                    ';
+                ?>
+
+                     
+
                     </div>
 
                 </div>

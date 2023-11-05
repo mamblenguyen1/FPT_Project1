@@ -1,36 +1,3 @@
-<link rel="stylesheet" href="css/login.css">
-<style>
-  .danger {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #d32535;
-    font-size: 20px;
-    position: relative;
-    padding: 0.75rem 1.25rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-  }
-
-  .success {
-    color: #fff;
-    background-color: #28a745;
-    border-color: #23923d;
-    font-size: 20px;
-    position: relative;
-    padding: 0.75rem 1.25rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-  }
-
-  .val-log {
-    color: #00ffdc;
-    display: block;
-    margin-top: 15px;
-  }
-  .foot-lnk a:hover {
-    color: #00ffdc;
-  }
-</style>
 <?
 // Đăng Nhập
 if (isset($_POST["submit"])) {
@@ -47,7 +14,7 @@ if (isset($_POST["submit"])) {
           setcookie("role", '1', time() + 3600, "/");
           $userid = $kh->getInfoUserEmail($email, 'user_id');
           setcookie("userID", $userid, time() + 3600, "/");
-          header('location: index.php?pages=admin&action=dashboard');
+          header('location: ./?pages=user&action=home');
         } else {
           $result = $kh->userid($email, $pass);
           $_SESSION['user'] = $email;
@@ -190,3 +157,36 @@ if (isset($_POST["submitreg"])) {
     </div>
   </div>
 </div>
+<link rel="stylesheet" href="css/login.css">
+<style>
+  .danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #d32535;
+    font-size: 20px;
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+  }
+
+  .success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #23923d;
+    font-size: 20px;
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+  }
+
+  .val-log {
+    color: #00ffdc;
+    display: block;
+    margin-top: 15px;
+  }
+  .foot-lnk a:hover {
+    color: #00ffdc;
+  }
+</style>
