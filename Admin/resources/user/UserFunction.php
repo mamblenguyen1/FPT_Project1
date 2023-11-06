@@ -25,6 +25,30 @@ class UserFunction
         $result = $db->pdo_execute($select);
         return $result;
     }
+    //cập nhật tài khoản bên user
+    function update_user1($user_name, $user_phone_number, $user_address, $user_id)
+    {
+        $db = new connect();
+        $select = "UPDATE `user` SET user_name = '$user_name' , user_phone_number = '$user_phone_number', user_address = '$user_address'  WHERE user_id = $user_id";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
+    //đổi mật khẩu bên user
+    function getInfouser2($user_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `user` WHERE user_id = $user_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    function update_Pass_user($user_password, $user_id)
+    {
+        $db = new connect();
+        $select = "UPDATE `user` SET user_password = '$user_password' WHERE user_id = $user_id ";
+        return $db->pdo_execute($select);
+    }
     //
     function deleteuser($user_id)
     {
@@ -38,6 +62,16 @@ class UserFunction
     {
         $db = new connect();
         $sql = "SELECT * FROM user, status WHERE status.status_id= user.is_deleted AND user_id = $user_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    //hiện thông tin tài khoản bên user
+    function getInfo_user($user_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM user WHERE user_id = $user_id";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];
@@ -94,7 +128,7 @@ class UserFunction
     }
 
 
-    
+
     // CSDL cu~
     function khach_hang_exist($user_id)
     {
@@ -150,7 +184,7 @@ class UserFunction
         return $result;
     }
     //doimk = sét email
-    
+
     //suapass
     function update_Pass($userPass, $userID)
     {
