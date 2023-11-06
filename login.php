@@ -4,8 +4,8 @@ if (isset($_POST["submit"])) {
   $email = $_POST["email"];
   $pass = $_POST["pass"];
   $kh = new UserFunction();
-  if (empty($email) && empty($pass)) {
-    echo '<div class="danger" role="alert"> Sai tên tài khoản hoặc mật khẩu! </div>';
+  if (empty($email) || empty($pass)) {
+    echo '<div class="danger" role="alert"> Điền đầy đủ email và mật khẩu! </div>';
   } else {
     if ($kh->checkUser($email, $pass)) {
       foreach (($kh->checkRole($email, $pass)) as $row) {
@@ -24,6 +24,8 @@ if (isset($_POST["submit"])) {
           header('location: ./?pages=user&action=home');
         }
       }
+    }else{
+    echo '<div class="danger" role="alert"> Sai tên tài khoản hoặc mật khẩu! </div>';
     }
   }
 }

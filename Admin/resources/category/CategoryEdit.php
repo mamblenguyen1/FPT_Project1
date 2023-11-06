@@ -54,7 +54,7 @@ if (isset($_POST['edit'])) {
                         <div class="form-group">
                             <label>Trạng thái</label>
                             <select name="cateShow" class="form-control select2" style="width: 100%;">
-                                <option selected value="<?
+                                <option selected value="<? echo
                                   $showid
                                   ?>"><? echo
                                   $showName

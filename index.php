@@ -169,6 +169,9 @@ if (isset($_GET['pages'])) {
                 case 'informationuser':
                     include './User/resources/informationuser.php';
                     break;
+                case 'thanks':
+                    include './User/resources/thanks.php';
+                    break;
 
                 case 'history':
                     include './User/resources/history.php';

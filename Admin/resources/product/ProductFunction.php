@@ -2,13 +2,36 @@
 class ProductFunction
 {
     //truy van hien toan bo sp
-    function product_select_all()
+    // function product_select_all()
+    // {
+    //     $db = new connect();
+    //     $sql = "SELECT * FROM product, category, `type` WHERE product.category_id=category.category_id AND category.category_id=type.category_id";
+    //     return $db->pdo_query($sql);
+    // }
+
+    function all_product_category($category_id, $product_id, $column)
     {
         $db = new connect();
-        $sql = "SELECT * FROM product, category, `type` WHERE product.category_id=category.category_id AND category.category_id=type.category_id";
-        return $db->pdo_query($sql);
+        $sql = "SELECT product_id, product_name , category.category_id, category.category_name , type.type_id , type.type_name,  product_price, product_sale, product_img ,product_title, is_wireless 
+        FROM phone, category,type
+        WHERE phone.type_id = type.type_id AND phone.category_id = category.category_id AND phone.is_deleted = 1 AND phone.category_id = $category_id AND phone.product_id = $product_id
+        UNION
+        SELECT product_id,product_name , category.category_id, category.category_name , type.type_id , type.type_name, product_price, product_sale, product_img ,product_title, is_wireless 
+        FROM laptop , category,type
+        WHERE laptop.type_id = type.type_id AND laptop.category_id = category.category_id AND laptop.is_deleted = 1 AND laptop.category_id = $category_id AND laptop.product_id = $product_id
+        UNION
+        SELECT product_id,product_name , category.category_id , category.category_name , type.type_id , type.type_name, product_price, product_sale,  product_img  ,product_title, is_wireless 
+        FROM wired , category,type
+        WHERE wired.type_id = type.type_id AND wired.category_id = category.category_id AND wired.is_deleted = 1 AND wired.category_id = $category_id AND wired.product_id = $product_id
+        UNION
+        SELECT  product_id,product_name , category.category_id , category.category_name, type.type_id , type.type_name, product_price, product_sale, product_img ,product_title, is_wireless 
+        FROM wireless, category,type
+        WHERE wireless.type_id = type.type_id AND wireless.category_id = category.category_id AND wireless.is_deleted = 1 AND wireless.category_id = $category_id AND wireless.product_id = $product_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
     }
-
     //truy van hien toan bo sp
     function category_select_all()
     {
@@ -65,7 +88,7 @@ class ProductFunction
         ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantily, 3 , $type_id, '$product_length', '$product_port', '$product_weight', '$product_included',  $user_created,1 , 1 , 'WiredDetail')";
         return $db->pdo_execute($sql);
     }
-    function add_Wireless($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantity,  $type_id, $product_range, $product_port, $product_weight, $product_included,  $product_capacity  , $product_charge_time, $product_use_time ,$user_created)
+    function add_Wireless($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantity,  $type_id, $product_range, $product_port, $product_weight, $product_included,  $product_capacity, $product_charge_time, $product_use_time, $user_created)
     {
         $db = new connect();
         $sql = "INSERT INTO  wireless(product_name , product_title,product_img, product_price, product_sale,product_quantity, category_id, `type_id` , product_range, product_port, product_weight, product_included, product_capacity ,product_charge_time,product_use_time ,user_created, is_deleted ,is_wireless,product_url)
@@ -75,7 +98,7 @@ class ProductFunction
         ('$product_name', '$product_title','$product_img' , $product_price, $product_sale, $product_quantity, 3 , $type_id, '$product_range', '$product_port', '$product_weight', '$product_included', '$product_capacity','$product_charge_time','$product_use_time', $user_created,1 , 2 , 'WirelessDetail')";
         return $db->pdo_execute($sql);
     }
-    
+
     function getInfoSP($category_id, $column)
     {
         $db = new connect();
@@ -371,5 +394,16 @@ class ProductFunction
         $sql = "SELECT * FROM sanpham WHERE ma_hh=" . $ma_hh;
         $result =  $db->pdo_query_one($sql);
         return $result;
+    }
+
+    function substringtext($text, $maxLength)
+    {
+        if (strlen($text) > $maxLength) {
+            $shortenedText = substr($text, 0, $maxLength) . '...';
+        } else {
+            $shortenedText = $text;
+        }
+
+        return $shortenedText;
     }
 }

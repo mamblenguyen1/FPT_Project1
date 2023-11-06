@@ -1,7 +1,6 @@
 <!--************************************
 				Footer Start
 		*************************************-->
-
 <footer id="tg-footer" class="tg-footer tg-haslayout">
 	<div class="tg-footerarea">
 		<div class="row" style="width: 90%; display: block ; margin: 0 auto;">
