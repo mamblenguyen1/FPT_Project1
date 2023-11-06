@@ -22,24 +22,19 @@ include('User/component/header.php');
                         <div class="card-body media align-items-center">
                             <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="d-block ui-w-80">
                             <div class="media-body ml-4">
-                                   
+
                             </div>
                         </div>
                         <br>
-                <?
-                    echo '
-                    <label for="">Họ và tên : <span>'.$user->getInfouser($_COOKIE['userID'], 'user_name').'</span></label>
-                    <label for="">Email     : <span>'.$user->getInfouser($_COOKIE['userID'], 'email').'</span></label>
-                    <label for="">Địa chỉ   : <span>'.$user->getInfouser($_COOKIE['userID'], 'user_address').'</span></label>
-                    <label for="">Số điện thoại : <span>'.$user->getInfouser($_COOKIE['userID'], 'user_phone_number').'</span></label>
-                    <label for="">Mật khẩu : <span>******</span></label>
-
-                   
+                        <?
+                        echo '
+                    <label for=""><b>Họ và tên <span class="span0" style="margin-left: 3%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'user_name') . '</span></label>
+                    <label for=""><b>Email <span class="span1" style="margin-left: 6%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'email') . '</span></label>
+                    <label for=""><b>Địa chỉ <span class="span2" style="margin-left: 5%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'user_address') . '</span></label>
+                    <label for=""><b>Số điện thoại <span class="span3" style="margin-left: 0%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'user_phone_number') . '</span></label>
+                    <label for=""><b>Mật khẩu <span class="span4" style="margin-left: 3%;">:</span></b> <span>******</span></label>
                     ';
-                ?>
-
-                     
-
+                        ?>
                     </div>
 
                 </div>

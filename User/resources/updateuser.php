@@ -1,6 +1,25 @@
 <?
 include('User/component/header.php');
 ?>
+<?
+$user_id = $_COOKIE['userID'];
+if (isset($_POST['edit'])) {
+    $user_id = $_POST['user_id'];
+}
+if (isset($_POST['luu_user'])) {
+    $user_id = $_POST['user_id'];
+    $user_name = $_POST['user_name'] ?? "";
+    $user_phone_number = $_POST['user_phone_number'] ?? "";
+    $user_address = $_POST['user_address'] ?? "";
+    if (!$user_name == "" && !$user_phone_number == "" && !$user_address == "") {
+        $user->update_user1($user_name, $user_phone_number, $user_address, $user_id);
+        echo '<script>alert("Cập nhật tài khoản thành công")</script>';
+        echo '<script>window.location.href="index.php?pages=user&action=updateuser"</script>';
+    } else {
+        $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
+    }
+}
+?>
 <div class="container light-style flex-grow-1 container-p-y">
     <h4 class="font-weight-bold py-3 mb-4" style="color: white;">
         .
@@ -20,9 +39,9 @@ include('User/component/header.php');
                     <h3>Thông tin người dùng</h3>
                     <div id="General">
                         <div class="card-body media align-items-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="d-block ui-w-80">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="d-block ui-w-80" style="margin-left: 3%; padding-bottom: 10px;">
                             <div class="media-body ml-4">
-                                <label class="btn btn-outline-primary">
+                                <label class="btn btn-outline-primary" style="width: 16.5%;">
                                     Upload new photo
                                     <input type="file" class="account-settings-fileinput">
                                 </label> &nbsp;
@@ -30,26 +49,51 @@ include('User/component/header.php');
                             </div>
                         </div>
                         <br>
-                        <form class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Username</label>
-                                <input type="text" class="form-control mb-1">
-                            </div>
+
+                        <form class="card-body" method="post">
+                            <input type="hidden" name="user_id" value="<? echo $user->getInfo_user($user_id, 'user_id'); ?>">
                             <div class="form-group">
                                 <label class="form-label">Name</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control mb-1" name="user_name" value="<? echo $user->getInfo_user($user_id, 'user_name'); ?>">
+                                <?
+                                if (isset($_POST["user_name"])) {
+                                    if (empty($_POST["user_name"])) {
+                                        echo '<span class="vaild">Xin vui lòng nhập tên người dùng</span>';
+                                    } else {
+                                        echo '';
+                                    }
+                                }
+                                ?>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">E-mail</label>
-                                <input type="text" class="form-control mb-1">
+                                <label class="form-label">Số điện thoại</label>
+                                <input type="text" class="form-control" name="user_phone_number" value="<? echo $user->getInfo_user($user_id, 'user_phone_number'); ?>">
+                                <?
+                                if (isset($_POST["user_phone_number"])) {
+                                    if (empty($_POST["user_phone_number"])) {
+                                        echo '<span class="vaild">Xin vui lòng nhập tên người dùng</span>';
+                                    } else {
+                                        echo '';
+                                    }
+                                }
+                                ?>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Company</label>
-                                <input type="text" class="form-control">
+                                <label class="form-label">Địa chỉ</label>
+                                <input type="text" class="form-control" name="user_address" value="<? echo $user->getInfo_user($user_id, 'user_address'); ?>">
+                                <?
+                                if (isset($_POST["user_address"])) {
+                                    if (empty($_POST["user_address"])) {
+                                        echo '<span class="vaild">Xin vui lòng nhập tên người dùng</span>';
+                                    } else {
+                                        echo '';
+                                    }
+                                }
+                                ?>
                             </div>
                             <div class="text-right mt-3">
-                                <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-                                <button type="button" class="btn btn-default">Cancel</button>
+                                <button type="submit" class="tg-btn tg-active" name="luu_user">Lưu</button>&nbsp;
+                                <button type="submit" class="btn btn-default">Hủy</button>
                             </div>
                             <br>
                         </form>
@@ -64,6 +108,9 @@ include('User/component/header.php');
 include('user/component/footer.php');
 ?>
 <style>
+    .vaild{
+        color: red;
+    }
     .ui-w-80 {
         width: 80px !important;
         height: auto;

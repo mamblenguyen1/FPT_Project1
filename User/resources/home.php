@@ -28,7 +28,7 @@ include('user/component/header.php');
                                     <span class="tg-bookprice">
                                         <ins>$23.18</ins>
                                         <del>$30.20</del>
-                                    </span> 
+                                    </span>
                                     <a class="tg-btn tg-btnstyletwo tg-active" href="javascript:void(0);">
                                         <i class="fa fa-shopping-basket"></i>
                                         <em>Add To Basket</em>
@@ -676,28 +676,6 @@ include('user/component/header.php');
         <!--************************************
                 Testimonials End
         *************************************-->
-
-        <!--************************************
-                Call to Action Start
-        *************************************-->
-        <section class="tg-parallax tg-bgcalltoaction tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="https://cutewallpaper.org/28/coffee-and-laptop-wallpaper/146069268.jpg">
-            <div class="tg-sectionspace tg-haslayout">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="tg-calltoaction">
-                                <h2>Open Discount For All</h2>
-                                <h3>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore.</h3>
-                                <a class="tg-btn tg-active" href="javascript:void(0);">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--************************************
-                Call to Action End
-        *************************************-->
         <!--************************************
                 Latest News Start
         *************************************-->
@@ -783,8 +761,8 @@ include('user/component/header.php');
                                 </ul>
                             </div>
                         </article>
-                        
-                       
+
+
                     </div>
                 </div>
             </div>

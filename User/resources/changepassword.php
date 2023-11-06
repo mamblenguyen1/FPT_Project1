@@ -1,6 +1,39 @@
 <?
 include('User/component/header.php');
 ?>
+<?
+$user_id = $_COOKIE['userID'];
+if (isset($_POST['submituser'])) {
+    $OldPass = $_POST['Old'];
+    $NewPass = $_POST['New'];
+    $NewPassAg = $_POST["Again"];
+    if (!empty($OldPass) && !empty($NewPass) && !empty($NewPassAg)) {
+        if ($OldPass === ($user->getInfouser2($user_id, 'user_password'))) {
+            if ($NewPass != $NewPassAg) {
+                // echo '<script>alert("Nhập lại mật khẩu không đúng")</script>';
+                // echo '<script>window.location.href="index.php?pages=user&action=changepassword"</script>';
+                echo ' <div class="alert alert-warning">
+                <strong>Lỗi !</strong> Nhập lại mật khẩu cũ không đúng</div>';
+            } else {
+                $user->update_Pass_user($NewPass, $user_id);
+    echo ' <div class="alert alert-success">
+        <strong>Chúc mừng !</strong> Bạn đã đổi mật khẩu thành công</div>';
+            }
+        } else {
+            // echo '<script>alert("Mật khẩu cũ không đúng")</script>';
+            // echo '<script>window.location.href="index.php?pages=user&action=changepassword"</script>';
+            echo ' <div class="alert alert-warning">
+            <strong>Lỗi !</strong> Mật khẩu cũ không đúng</div>';
+        }
+    } else {
+        // echo '<script>alert("Xin lòng nhập đầy đủ thông tin")</script>';
+        // echo '<script>window.location.href="index.php?pages=user&action=changepassword"</script>';
+        echo ' <div class="alert alert-warning">
+        <strong>Lỗi !</strong> Vui lòng nhập đầy đủ thông tin</div>';
+    }
+}
+
+?>
 <div class="container light-style flex-grow-1 container-p-y">
     <h4 class="font-weight-bold py-3 mb-4" style="color: white;">
         .
@@ -20,22 +53,52 @@ include('User/component/header.php');
                     <h3>Đổi mật khẩu</h3>
                     <div id="General">
                         <br>
-                        <form class="card-body">
+                        <form class="card-body" method="post">
                             <div class="form-group">
-                                <label class="form-label">Username</label>
-                                <input type="text" class="form-control mb-1">
+                                <label class="form-label">Mật khẩu cũ</label>
+                                <input type="password" class="form-control mb-1" name="Old">
+                                <?
+                                if (isset($_POST["submituser"])) {
+                                    $OldPass = $_POST["Old"];
+                                    if ($OldPass == "") {
+                                        echo "";
+                                    } else {
+                                        echo '';
+                                    }
+                                }
+                                ?>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Name</label>
-                                <input type="text" class="form-control">
+                                <label class="form-label">Mật khẩu mới</label>
+                                <input type="password" class="form-control" name="New">
+                                <?
+                                if (isset($_POST["submituser"])) {
+                                    $NewPass = $_POST["New"];
+                                    if ($NewPass == "") {
+                                        echo "";
+                                    } else {
+                                        echo '';
+                                    }
+                                }
+                                ?>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">E-mail</label>
-                                <input type="text" class="form-control mb-1">
+                                <label class="form-label">Nhập lại mật khẩu mới</label>
+                                <input type="password" class="form-control mb-1" name="Again">
+                                <?
+                                if (isset($_POST["submituser"])) {
+                                    $NewPassAg = $_POST["Again"];
+                                    if ($NewPassAg == "") {
+                                        echo "";
+                                    } else {
+                                        echo '';
+                                    }
+                                }
+                                ?>
                             </div>
                             <div class="text-right mt-3">
-                                <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-                                <button type="button" class="btn btn-default">Cancel</button>
+                                <button type="submit" class="tg-btn tg-active" name="submituser">Lưu</button>&nbsp;
+                                <button type="submit" class="btn btn-default">hủy</button>
                             </div>
                             <br>
                         </form>

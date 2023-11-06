@@ -176,7 +176,10 @@ if (isset($_GET['pages'])) {
                 case 'history':
                     include './User/resources/history.php';
                     break;
-
+                    //checkout
+                case 'checkout':
+                    include './User/resources/checkout.php';
+                    break;
                 case 'changepassword':
                     include './User/resources/changepassword.php';
                     break;
