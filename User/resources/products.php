@@ -51,67 +51,32 @@ include('user/component/header.php');
                                         if (isset($_GET['category'])) {
                                             $category_render = $_GET['category'];
                                             $conn = $db->pdo_get_connection();
-                                            $stmt = $conn->prepare("SELECT product_id, product_name , category_id , type_id , product_price, product_sale, product_img FROM phone
-                                                    WHERE is_deleted = 1 AND category_id = $category_render
-                                                    UNION
-                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale, product_img FROM laptop
-                                                    WHERE is_deleted = 1 AND category_id = $category_render
-                                                    UNION
-                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale,  product_img  FROM wired
-                                                    WHERE is_deleted = 1 AND category_id = $category_render
-                                                    UNION
-                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale, product_img FROM wireless                    
-                                                    WHERE is_deleted = 1 AND category_id = $category_render");
+                                            $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                                            type.type_id = products.type_id
+                                            AND 
+                                            category.category_id = products.category_id
+                                            AND products.is_deleted = 1 AND products.category_id = $category_render");
                                         } else if (isset($_GET['type'])) {
                                             $type_render = $_GET['type'];
                                             $conn = $db->pdo_get_connection();
-                                            $stmt = $conn->prepare("SELECT product_id, product_name , category_id , type_id , product_price, product_sale, product_img FROM phone
-                                                    WHERE is_deleted = 1 AND type_id = $type_render
-                                                    UNION
-                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale, product_img FROM laptop
-                                                    WHERE is_deleted = 1 AND type_id = $type_render
-                                                    UNION
-                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale,  product_img  FROM wired
-                                                    WHERE is_deleted = 1 AND type_id = $type_render
-                                                    UNION
-                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale, product_img FROM wireless                    
-                                                    WHERE is_deleted = 1 AND type_id = $type_render");
+                                            $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                                            type.type_id = products.type_id
+                                            AND 
+                                            category.category_id = products.category_id
+                                            AND products.is_deleted = 1 AND products.type_id = $type_render");
                                         } else {
                                             $conn = $db->pdo_get_connection();
-                                            $stmt = $conn->prepare("SELECT product_id, product_name , category_id , type_id , product_price, product_sale, product_img FROM phone
-                                                    WHERE is_deleted = 1
-                                                    UNION
-                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale, product_img FROM laptop
-                                                    WHERE is_deleted = 1
-                                                    UNION
-                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale,  product_img  FROM wired
-                                                    WHERE is_deleted = 1
-                                                    UNION
-                                                    SELECT product_id,product_name , category_id , type_id , product_price, product_sale, product_img FROM wireless                    
-                                                    WHERE is_deleted = 1");
+                                            $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                                            type.type_id = products.type_id
+                                            AND 
+                                            category.category_id = products.category_id
+                                            AND
+                                            products.is_deleted = 1 ");
                                         }
                                         $stmt->execute();
                                         if ($stmt->rowCount() > 0) {
                                             foreach ($stmt as $row) {
-                                                if ($row['category_id'] == 1) {
-                                                    $TypeName = $product->getTypeNamePhone($row['product_id'], 'type_name');
-                                                    $CategoryName = $product->getTypeNamePhone($row['product_id'], 'category_name');
-                                                    $product_url = $product->getTypeNamePhone($row['product_id'], 'url');
-                                                } else if ($row['category_id'] == 2) {
-                                                    $TypeName = $product->getTypeNameLaptop($row['product_id'], 'type_name');
-                                                    $CategoryName = $product->getTypeNameLaptop($row['product_id'], 'category_name');
-                                                    $product_url = $product->getTypeNameLaptop($row['product_id'], 'url');
-                                                } else if ($row['category_id'] == 3) {
-                                                    if (($product->getIsWired($row['product_id'], 'is_wireless')) == 1 || ($product->getIsWireLess($row['product_id'], 'is_wireless')) == 1) {
-                                                        $TypeName = $product->getIsWired($row['product_id'], 'typename');
-                                                        $CategoryName = $product->getIsWired($row['product_id'], 'catename');
-                                                        $product_url = $product->getIsWired($row['product_id'], 'url');
-                                                    } else {
-                                                        $TypeName = $product->getIsWireLess($row['product_id'], 'typename');
-                                                        $CategoryName = $product->getIsWireLess($row['product_id'], 'catename');
-                                                        $product_url = $product->getIsWireLess($row['product_id'], 'url');
-                                                    }
-                                                }
+                                              
                                                 $product_name_text = $product->substringtext($row['product_name'], 25);
                                                 echo '<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
                                                 <div class="tg-postbook">
@@ -127,7 +92,7 @@ include('user/component/header.php');
                                                     </figure>
                                                     <div class="tg-postbookcontent">
                                                         <ul class="tg-bookscategories">
-                                                            <li><a href="">' .  $CategoryName . '   </a>
+                                                            <li><a href="">' .  $row['category_name'] . '   </a>
                                                             </li>
                                                         </ul>
                                                         <div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
@@ -139,7 +104,7 @@ include('user/component/header.php');
                                                              
                                                         </h3>
                                                         </div>
-                                                        <span class="tg-bookwriter">Hãng: <a href="">' . $TypeName . '</a></span>
+                                                        <span class="tg-bookwriter">Hãng: <a href="">' . $row['type_name'] . '</a></span>
                                                         <span class="tg-stars"><span></span></span>
                                                         <span class="tg-bookprice">
                                                             <ins>' . number_format($row['product_sale']) . ' đ</ins>
