@@ -67,6 +67,13 @@ class UserFunction
             return $row[$column];
         }
     }
+    function update_NewPass($userPass , $userEmail)
+    {
+        $db = new connect();
+        $select = "UPDATE user SET  user_password = '$userPass' WHERE email = '$userEmail'";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
     //hiện thông tin tài khoản bên user
     function getInfo_user($user_id, $column)
     {

@@ -5,18 +5,17 @@ class Categories
     var $category_name = null;
     var $created_at = null;
     var $updated_at = null;
-    var $is_show = null;
-    function create_category($category_name, $is_show)
+    function create_category($category_name)
     {
         $db = new connect();
-        $select = "INSERT INTO category(category_name, is_show,is_deleted, category_display, urlAdd ) VALUES ('$category_name' ,$is_show , 1, '$category_name', 'AccessoryAdd' )";
+        $select = "INSERT INTO category(category_name, is_deleted, category_display, urlAdd ) VALUES ('$category_name', 1, '$category_name', 'AccessoryAdd' )";
         $result = $db->pdo_execute($select);
         return $result;
     }
-    function update_category($category_name, $is_show, $userid, $cateid)
+    function update_category($category_name, $userid, $cateid)
     {
         $db = new connect();
-        $select = "UPDATE category SET category_name = '$category_name' , is_show = $is_show , user_updated = $userid WHERE category_id = $cateid";
+        $select = "UPDATE category SET category_name = '$category_name' , user_updated = $userid WHERE category_id = $cateid";
         $result = $db->pdo_execute($select);
         return $result;
     }
@@ -32,7 +31,7 @@ class Categories
     function getInfoCate($cateID, $column)
     {
         $db = new connect();
-        $sql = "SELECT * FROM category, isshow WHERE isshow.show_id= category.is_show AND category_id = $cateID";
+        $sql = "SELECT * FROM category WHERE category_id = $cateID";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];

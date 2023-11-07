@@ -91,7 +91,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="?pages=admin&action=listpro" class="nav-link">
+              <a href="?pages=admin&action=productList" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Tất cả Sản phẩm</p>
               </a>
@@ -99,7 +99,7 @@
           </ul>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="?pages=admin&action=addpro" class="nav-link">
+              <a href="?pages=admin&action=ProductAdd" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Thêm Sản phẩm</p>
               </a>

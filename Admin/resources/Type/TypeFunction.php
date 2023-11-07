@@ -5,19 +5,18 @@ class Type
     var $type_name = null;
     var $created_at = null;
     var $is_deleted = null;
-    var $is_show = null;
     var $category_id = null;
-    function create_Type($type_name, $category_id,$user_created, $is_show)
+    function create_Type($type_name, $category_id,$user_created)
     {
         $db = new connect();
-        $select = "INSERT INTO `type`(type_name, category_id , is_show ,user_created,is_deleted ) VALUES ('$type_name',$category_id ,$is_show ,$user_created, 1 )";
+        $select = "INSERT INTO `type`(type_name, category_id,user_created,is_deleted ) VALUES ('$type_name',$category_id ,$user_created, 1 )";
         $result = $db->pdo_execute($select);
         return $result;
     }
-    function update_Type($type_name,$category_id, $is_show, $user_updated, $type_id)
+    function update_Type($type_name,$category_id, $user_updated, $type_id)
     {
         $db = new connect();
-        $select = "UPDATE `type` SET type_name = '$type_name' , category_id = $category_id, is_show = $is_show , user_updated = $user_updated WHERE type_id = $type_id";
+        $select = "UPDATE `type` SET type_name = '$type_name' , category_id = $category_id, user_updated = $user_updated WHERE type_id = $type_id";
         $result = $db->pdo_execute($select);
         return $result;
     }
@@ -38,8 +37,8 @@ class Type
     function getInfoType($type_id, $column)
     {
         $db = new connect();
-        $sql = "SELECT * FROM `type`, isshow, category WHERE isshow.show_id= type.is_show 
-        AND category.category_id = type.category_id
+        $sql = "SELECT * FROM `type`, category 
+        WHERE category.category_id = type.category_id
         AND type_id = $type_id";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {

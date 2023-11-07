@@ -3,25 +3,20 @@
 <?
 if (isset($_POST['edit_cate'])) {
     $cateId = $_POST['cate_id'];
-    $showid = $category->getInfoCate($cateId, 'show_id');
-    $showName = $category->getInfoCate($cateId, 'show_name');
 }
 if (isset($_POST['delete_cate'])) {
     $cateId = $_POST['cate_id'];
     $category->deleteCate($cateId);
     echo '<script>alert("Đã xóa danh mục ! ! !")</script>';
     echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
-   
-
 }
 
 if (isset($_POST['edit'])) {
-    $userId = 1 ;   //Nhớ sửa cái này lại khi hoàn thành xong chức năng user nhé hihi
+    $userId = 1;   //Nhớ sửa cái này lại khi hoàn thành xong chức năng user nhé hihi
     $cateId = $_POST['cateId'];
     $category_name = $_POST['cateName'] ?? "";
-    $category_show = $_POST['cateShow'] ?? "";
     if (!$category_name == "" || !$category_cnt == "") {
-        $category->update_category($category_name, $category_show, $userId, $cateId);
+        $category->update_category($category_name, $userId, $cateId);
         echo '<script>alert("Cập nhật thành công")</script>';
         echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
     } else {
@@ -44,32 +39,13 @@ if (isset($_POST['edit'])) {
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form action="" method="post">
-                <input name="cateId" type="hidden" class="form-control"  value="<? echo $category->getInfoCate($cateId, 'category_id')?>">
+                    <input name="cateId" type="hidden" class="form-control" value="<? echo $category->getInfoCate($cateId, 'category_id') ?>">
 
                     <div class="card-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên danh mục</label>
-                            <input name="cateName" type="text" class="form-control" value="<? echo $category->getInfoCate($cateId, 'category_name')?>" id="exampleInputEmail1" placeholder="Nhập tên. . .">
-                        </div>
-                        <div class="form-group">
-                            <label>Trạng thái</label>
-                            <select name="cateShow" class="form-control select2" style="width: 100%;">
-                                <option selected value="<? echo
-                                  $showid
-                                  ?>"><? echo
-                                  $showName
-                             ?></option>
-                                <?
-                                $conn = $db->pdo_get_connection();
-                                $stmt = $conn->prepare("SELECT * FROM isshow WHERE isshow.show_id <> $showid");
-                                $stmt->execute();
-                                if ($stmt->rowCount() > 0) {
-                                    foreach ($stmt as $row) {
-                                        echo ' <option value="' . $row['show_id'] . '" >' . $row['show_name'] . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
+
+                            <input name="cateName" type="text" class="form-control" value="<? echo $category->getInfoCate($cateId, 'category_name') ?>" id="exampleInputEmail1" placeholder="Nhập tên. . .">
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

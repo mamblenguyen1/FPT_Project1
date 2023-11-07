@@ -110,7 +110,7 @@ if (isset($_POST["submitreg"])) {
 
           <!-- Quên Mật Khẩu -->
           <div class="foot-lnk">
-            <a href="#">Quên mật khẩu?</a>
+            <a href="index.php?pages=user&action=forget">Quên mật khẩu?</a>
           </div>
 
         </div>
