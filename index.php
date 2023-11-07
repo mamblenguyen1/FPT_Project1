@@ -6,12 +6,15 @@ require_once './Admin/resources/category/CategoryFunction.php';
 require_once './Admin/resources/user/UserFunction.php';
 require_once './Admin/resources/product/ProductFunction.php';
 require_once './Admin/resources/Type/TypeFunction.php';
+require_once './mail/forgot.php';
+
 
 $db = new connect();
 $user = new UserFunction();
 $category = new Categories();
 $product = new ProductFunction();
 $type = new Type();
+$mail = new Mailer();
 
 //require('./admin/core/function.php');
 //require('./client/core/FunctionClient.php');
@@ -38,11 +41,8 @@ if (isset($_GET['pages'])) {
                             include './Admin/resources/admin/dashboard.php';
                             break;
                             // products
-                        case 'listpro':
+                        case 'productList':
                             include './admin/resources/product/ProductList.php';
-                            break;
-                        case 'addpro':
-                            include './admin/resources/product/ProductAdd.php';
                             break;
                         case 'editpro':
                             include './admin/resources/product/ProductEdit.php';
@@ -65,17 +65,9 @@ if (isset($_GET['pages'])) {
                             include './Admin/resources/comment/CommentDetail.php';
                             break;
                             // detail
-                        case 'WiredDetail':
-                            include './Admin/resources/product/ProductDetail/WiredDetail.php';
-                            break;
-                        case 'WirelessDetail':
-                            include './Admin/resources/product/ProductDetail/WirelessDetail.php';
-                            break;
-                        case 'LaptopDetail':
-                            include './Admin/resources/product/ProductDetail/LaptopDetail.php';
-                            break;
-                        case 'PhoneDetail':
-                            include './Admin/resources/product/ProductDetail/PhoneDetail.php';
+                        case 'productDetail':
+                            include './Admin/resources/product/productDetail.php';
+                            
                             break;
                             // user 
                         case 'UserList':
@@ -105,34 +97,15 @@ if (isset($_GET['pages'])) {
                             include './Admin/resources/Type/TypeEdit.php';
                             break;
                             // ProductAdd
-                        case 'PhoneAdd':
-                            include './Admin/resources/product/productAdd/phoneAdd.php';
+                        case 'ProductAdd':
+                            include './Admin/resources/product/ProductAdd.php';
                             break;
-                        case 'LaptopAdd':
-                            include './Admin/resources/product/productAdd/laptopAdd.php';
-                            break;
-                        case 'WiredAdd':
-                            include './Admin/resources/product/productAdd/accessoryAdd/wireless/wired.php';
-                            break;
-                        case 'WirelessAdd':
-                            include './Admin/resources/product/productAdd/accessoryAdd/wireless/wireless.php';
-                            break;
-                        case 'wireless':
-                            include './Admin/resources/product/productAdd/wirelessAdd.php';
-                            break;
+                       
                             // ProductEdit
-                        case 'LaptopEdit':
-                            include './Admin/resources/product/ProductEdit/LaptopEdit.php';
+                        case 'ProductEdit':
+                            include './Admin/resources/product/ProductEdit.php';
                             break;
-                        case 'PhoneEdit':
-                            include './Admin/resources/product/ProductEdit/PhoneEdit.php';
-                            break;
-                        case 'WirelessEdit':
-                            include './Admin/resources/product/ProductEdit/WirelessEdit.php';
-                            break;
-                        case 'WiredEdit':
-                            include './Admin/resources/product/ProductEdit/WiredEdit.php';
-                            break;
+
                         default:
                             include './admin/resources/admin/Dashboard.php';
                             break;
@@ -187,6 +160,9 @@ if (isset($_GET['pages'])) {
                     setcookie("role", '', time() + 1, "/");
                     setcookie("userID", '', time() + 1, "/");
                     header("location: index.php?pages=user&action=home");
+                    break;
+                case "forget":
+                    include './User/resources/forgotPass.php';
                     break;
                 case 'login':
                     include 'login.php';

@@ -99,93 +99,95 @@ if (isset($_GET['category_id'])) {
 												<div class="tg-sectionhead">
 													<h2>Thông tin chi tiết</h2>
 												</div>
-												<?
-												if ($category_id == 1) {
-													$conn = $db->pdo_get_connection();
-													$stmt = $conn->prepare("SELECT * FROM phone
-													 WHERE is_deleted = 1
-													 AND product_id = $product_id
-													 ");
-													$stmt->execute();
-													if ($stmt->rowCount() > 0) {
-														foreach ($stmt as $row) {
-															echo '
-															<ul class="tg-productinfo">
-															<li><span>Màn hình:</span><span>' . $row['product_screen'] . '</span></li>
-															<li><span>Camera sau:</span><span>' . $row['product_backcam'] . '</span></li>
-															<li><span>Camera trước:</span><span>' . $row['product_frontcam'] . '</span></li>
-															<li><span>Chip:</span><span>' . $row['product_chip'] . '</span></li>
-															<li><span>RAM:</span><span>' . $row['product_ram'] . '</span></li>
-															<li><span>Dung lượng lưu trữ:</span><span>' . $row['product_storge'] . '</span></li>
-														</ul>
-														';
-														}
-													}
-												} else if ($category_id == 2) {
-													$conn = $db->pdo_get_connection();
-													$stmt = $conn->prepare("SELECT * FROM laptop
-													 WHERE is_deleted = 1
-													 AND product_id = $product_id
-													 ");
-													$stmt->execute();
-													if ($stmt->rowCount() > 0) {
-														foreach ($stmt as $row) {
-															echo '
-															<ul class="tg-productinfo">
-															<li><span>Màn hình:</span><span>' . $row['product_screen'] . '</span></li>
-															<li><span>Card Đồ họa:</span><span>' . $row['product_graphic'] . '</span></li>
-															<li><span>CPU :</span><span>' . $row['product_CPU'] . '</span></li>
-															<li><span>RAM:</span><span>' . $row['product_ram'] . '</span></li>
-															<li><span>Dung lượng lưu trữ:</span><span>' . $row['product_storge'] . '</span></li>
-														</ul>
-														';
-														}
-													}
-												} else {
-													if ($product->all_product_category($category_id, $product_id, 'is_wireless') == 1) {
-														$conn = $db->pdo_get_connection();
-														$stmt = $conn->prepare("SELECT * FROM wired
-														 WHERE is_deleted = 1
-														 AND product_id = $product_id
-														 ");
-														$stmt->execute();
-														if ($stmt->rowCount() > 0) {
-															foreach ($stmt as $row) {
-																echo '
-																<ul class="tg-productinfo">
-																<li><span>Độ dài dây :</span><span>' . $row['product_length'] . '</span></li>
-																<li><span>Cổng kết nối :</span><span>' . $row['product_port'] . '</span></li>
-																<li><span>Trọng lượng :</span><span>' . $row['product_weight'] . '</span></li>
-																<li><span>Phụ kiện đi kèm:</span><span>' . $row['product_included'] . '</span></li>
-															</ul>
-															';
-															}
-														}
-													} else {
-														$conn = $db->pdo_get_connection();
-														$stmt = $conn->prepare("SELECT * FROM wireless
-														 WHERE is_deleted = 1
-														 AND product_id = $product_id
-														 ");
-														$stmt->execute();
-														if ($stmt->rowCount() > 0) {
-															foreach ($stmt as $row) {
-																echo '
-																<ul class="tg-productinfo">
-																<li><span>Phạm vi kết nối  :</span><span>' . $row['product_range'] . '</span></li>
-																<li><span>Cổng kết nối :</span><span>' . $row['product_port'] . '</span></li>
-																<li><span>Trọng lượng :</span><span>' . $row['product_weight'] . '</span></li>
-																<li><span>Dung lượng PIN:</span><span>' . $row['product_capacity'] . '</span></li>
-																<li><span>Thời gian sạc đầy:</span><span>' . $row['product_charge_time'] . '</span></li>
-																<li><span>Thời gian sử dụng:</span><span>' . $row['product_use_time'] . '</span></li>
-																<li><span>Phụ kiện đi kèm:</span><span>' . $row['product_included'] . '</span></li>
 
-															</ul>
-															';
-															}
-														}
-													}
-												}
+												<?
+												 echo $product->all_product_category($category_id, $product_id, 'product_title');
+												// if ($category_id == 1) {
+												// 	$conn = $db->pdo_get_connection();
+												// 	$stmt = $conn->prepare("SELECT * FROM phone
+												// 	 WHERE is_deleted = 1
+												// 	 AND product_id = $product_id
+												// 	 ");
+												// 	$stmt->execute();
+												// 	if ($stmt->rowCount() > 0) {
+												// 		foreach ($stmt as $row) {
+												// 			echo '
+												// 			<ul class="tg-productinfo">
+												// 			<li><span>Màn hình:</span><span>' . $row['product_screen'] . '</span></li>
+												// 			<li><span>Camera sau:</span><span>' . $row['product_backcam'] . '</span></li>
+												// 			<li><span>Camera trước:</span><span>' . $row['product_frontcam'] . '</span></li>
+												// 			<li><span>Chip:</span><span>' . $row['product_chip'] . '</span></li>
+												// 			<li><span>RAM:</span><span>' . $row['product_ram'] . '</span></li>
+												// 			<li><span>Dung lượng lưu trữ:</span><span>' . $row['product_storge'] . '</span></li>
+												// 		</ul>
+												// 		';
+												// 		}
+												// 	}
+												// } else if ($category_id == 2) {
+												// 	$conn = $db->pdo_get_connection();
+												// 	$stmt = $conn->prepare("SELECT * FROM laptop
+												// 	 WHERE is_deleted = 1
+												// 	 AND product_id = $product_id
+												// 	 ");
+												// 	$stmt->execute();
+												// 	if ($stmt->rowCount() > 0) {
+												// 		foreach ($stmt as $row) {
+												// 			echo '
+												// 			<ul class="tg-productinfo">
+												// 			<li><span>Màn hình:</span><span>' . $row['product_screen'] . '</span></li>
+												// 			<li><span>Card Đồ họa:</span><span>' . $row['product_graphic'] . '</span></li>
+												// 			<li><span>CPU :</span><span>' . $row['product_CPU'] . '</span></li>
+												// 			<li><span>RAM:</span><span>' . $row['product_ram'] . '</span></li>
+												// 			<li><span>Dung lượng lưu trữ:</span><span>' . $row['product_storge'] . '</span></li>
+												// 		</ul>
+												// 		';
+												// 		}
+												// 	}
+												// } else {
+												// 	if ($product->all_product_category($category_id, $product_id, 'is_wireless') == 1) {
+												// 		$conn = $db->pdo_get_connection();
+												// 		$stmt = $conn->prepare("SELECT * FROM wired
+												// 		 WHERE is_deleted = 1
+												// 		 AND product_id = $product_id
+												// 		 ");
+												// 		$stmt->execute();
+												// 		if ($stmt->rowCount() > 0) {
+												// 			foreach ($stmt as $row) {
+												// 				echo '
+												// 				<ul class="tg-productinfo">
+												// 				<li><span>Độ dài dây :</span><span>' . $row['product_length'] . '</span></li>
+												// 				<li><span>Cổng kết nối :</span><span>' . $row['product_port'] . '</span></li>
+												// 				<li><span>Trọng lượng :</span><span>' . $row['product_weight'] . '</span></li>
+												// 				<li><span>Phụ kiện đi kèm:</span><span>' . $row['product_included'] . '</span></li>
+												// 			</ul>
+												// 			';
+												// 			}
+												// 		}
+												// 	} else {
+												// 		$conn = $db->pdo_get_connection();
+												// 		$stmt = $conn->prepare("SELECT * FROM wireless
+												// 		 WHERE is_deleted = 1
+												// 		 AND product_id = $product_id
+												// 		 ");
+												// 		$stmt->execute();
+												// 		if ($stmt->rowCount() > 0) {
+												// 			foreach ($stmt as $row) {
+												// 				echo '
+												// 				<ul class="tg-productinfo">
+												// 				<li><span>Phạm vi kết nối  :</span><span>' . $row['product_range'] . '</span></li>
+												// 				<li><span>Cổng kết nối :</span><span>' . $row['product_port'] . '</span></li>
+												// 				<li><span>Trọng lượng :</span><span>' . $row['product_weight'] . '</span></li>
+												// 				<li><span>Dung lượng PIN:</span><span>' . $row['product_capacity'] . '</span></li>
+												// 				<li><span>Thời gian sạc đầy:</span><span>' . $row['product_charge_time'] . '</span></li>
+												// 				<li><span>Thời gian sử dụng:</span><span>' . $row['product_use_time'] . '</span></li>
+												// 				<li><span>Phụ kiện đi kèm:</span><span>' . $row['product_included'] . '</span></li>
+
+												// 			</ul>
+												// 			';
+												// 			}
+												// 		}
+												// 	}
+												// }
 												?>
 
 
