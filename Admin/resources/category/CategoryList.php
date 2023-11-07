@@ -23,15 +23,14 @@
                                         <th>Số loại danh mục</th>
                                         <th>Số lượng tất cả sản phẩm</th>
                                         <th>Thời gian tạo</th>
-                                        <th>Trạng thái</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?
                                     $conn = $db->pdo_get_connection();
-                                    $stmt = $conn->prepare("SELECT * FROM `category` , isshow 
-                                    WHERE category.is_show = isshow.show_id AND is_deleted = 1");
+                                    $stmt = $conn->prepare("SELECT * FROM `category`
+                                    WHERE is_deleted = 1");
                                     $stmt->execute();
                                     if ($stmt->rowCount() > 0) {
                                         foreach ($stmt as $row) {
@@ -41,7 +40,6 @@
                                         <td>' . $category->CountTypeCategories($row['category_id']) . '</td>
                                         <td>' . $category->CountProduct($row['category_id']) . '</td>
                                         <td>' . $row['created_at'] . '</td>
-                                        <th>' . $row['show_name'] . '</th>
                                         <td>
                                         <form action="index.php?pages=admin&action=editcate" method="post">
                                              <input type="hidden" value="' . $row['category_id'] . '" name="cate_id">

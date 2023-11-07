@@ -3,9 +3,8 @@
 <?
 if (isset($_POST['addCate'])) {
     $category_name = $_POST['cateName'] ?? "";
-    $category_show = $_POST['cateShow'] ?? "";
-    if (!$category_name == "" && !$category_show == "") {
-        $category->create_category($category_name, $category_show);
+    if (!$category_name == "" ) {
+        $category->create_category($category_name);
         echo '<script>alert("tạo thành công !!")</script>';
         echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
     } else {
@@ -40,31 +39,7 @@ if (isset($_POST['addCate'])) {
                             }
                             ?>
                         </div>
-                        <div class="form-group">
-                            <label>Trạng thái</label>
-                            <select name="cateShow" class="form-control select2" style="width: 100%;">
-                                <option selected="selected" value="">Chọn trang thái hiển thị</option>
-                                <?
-                                $conn = $db->pdo_get_connection();
-                                $stmt = $conn->prepare("SELECT * FROM isshow");
-                                $stmt->execute();
-                                if ($stmt->rowCount() > 0) {
-                                    foreach ($stmt as $row) {
-                                        echo ' <option value="' . $row['show_id'] . '" >' . $row['show_name'] . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
-                            <?
-                            if (isset($_POST["cateShow"])) {
-                                if (empty($_POST["cateShow"])) {
-                                    echo '<span class="vaild">Xin vui lòng nhập tên danh mục </span>';
-                                } else {
-                                    echo '';
-                                }
-                            }
-                            ?>
-                        </div>
+         
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" name="addCate" class="btn btn-primary">Lưu danh mục</button>

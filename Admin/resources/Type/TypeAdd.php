@@ -5,9 +5,8 @@ if (isset($_POST['addType'])) {
     $user_created = 1 ;
     $typeName = $_POST['typeName'] ?? "";
     $typeCate = $_POST['typeCate'] ?? "";
-    $typeShow = $_POST['typeShow'] ?? "";
-    if (!$typeName == "" && !$typeCate == "" && !$typeShow == "") {
-        $type->create_Type($typeName, $typeCate, $typeShow,$user_created);
+    if (!$typeName == "" && !$typeCate == "" ) {
+        $type->create_Type($typeName, $typeCate,$user_created);
         echo '<script>alert("tạo thành công !!")</script>';
         // exit();
         echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
@@ -61,31 +60,6 @@ if (isset($_POST['addType'])) {
                             <?
                             if (isset($_POST["typeCate"])) {
                                 if (empty($_POST["typeCate"])) {
-                                    echo '<span class="vaild">Xin vui lòng nhập tên danh mục </span>';
-                                } else {
-                                    echo '';
-                                }
-                            }
-                            ?>
-                        </div>
-                        <div class="form-group">
-                            <label>Trạng thái</label>
-                            <select name="typeShow" class="form-control select2" style="width: 100%;">
-                                <option selected="selected" value="">Chọn trang thái hiển thị</option>
-                                <?
-                                $conn = $db->pdo_get_connection();
-                                $stmt = $conn->prepare("SELECT * FROM isshow");
-                                $stmt->execute();
-                                if ($stmt->rowCount() > 0) {
-                                    foreach ($stmt as $row) {
-                                        echo ' <option value="' . $row['show_id'] . '" >' . $row['show_name'] . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
-                            <?
-                            if (isset($_POST["typeShow"])) {
-                                if (empty($_POST["typeShow"])) {
                                     echo '<span class="vaild">Xin vui lòng nhập tên danh mục </span>';
                                 } else {
                                     echo '';
