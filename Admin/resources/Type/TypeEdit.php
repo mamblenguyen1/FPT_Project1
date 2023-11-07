@@ -3,8 +3,6 @@
 <?
 if (isset($_POST['edit_type'])) {
     $type_id = $_POST['type_id'];
-    $showid = $type->getInfoType($type_id, 'show_id');
-    $showName = $type->getInfoType($type_id, 'show_name');
     $showNameCate = $type->getInfoType($type_id, 'category_name');
     $showidCate = $type->getInfoType($type_id, 'category_id');
 }
@@ -23,8 +21,8 @@ if (isset($_POST['editType'])) {
     $type_name = $_POST['typeName'] ?? "";
     $category_id = $_POST['typeCate'] ?? "";
     $is_show = $_POST['typeShow'] ?? "";
-    if (!$type_name == "" && !$category_id == "" && !$is_show == "") {
-        $type->update_Type($type_name, $category_id, $is_show, $user_updated, $typeid);
+    if (!$type_name == "" && !$category_id == "" ) {
+        $type->update_Type($type_name, $category_id, $user_updated, $typeid);
         echo '<script>alert("Cập nhập thành công !!")</script>';
         // exit();
         echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
@@ -90,37 +88,7 @@ if (isset($_POST['editType'])) {
                             }
                             ?>
                         </div>
-                        <div class="form-group">
-                            <label>Trạng thái</label>
-                            <select name="typeShow" class="form-control select2" style="width: 100%;">
-                                <option selected value="<? echo
-                                                        $showid
-                                                        ?>"><? echo
-                                                            $showName
-                                                            ?></option>
-                                <?
-                                $conn = $db->pdo_get_connection();
-                                $stmt = $conn->prepare("SELECT * FROM isshow WHERE isshow.show_id <> $showid");
-                                $stmt->execute();
-                                if ($stmt->rowCount() > 0) {
-                                    foreach ($stmt as $row) {
-                                        echo ' <option value="' . $row['show_id'] . '" >' . $row['show_name'] . '</option>';
-                                    }
-                                }
-                                ?>
-                                ?>
-                            </select>
-                            <?
-                            if (isset($_POST["typeShow"])) {
-                                if (empty($_POST["typeShow"])) {
-                                    echo '<span class="vaild">Xin vui lòng chọn trạng thái hiển thị </span>';
-                                } else {
-                                    echo '';
-                                }
-                            }
-                            ?>
-                            </select>
-                        </div>
+              
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" name="editType" class="btn btn-primary">Lưu danh mục</button>

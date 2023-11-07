@@ -45,7 +45,7 @@ if (isset($_POST['EditWireless'])) {
         
         $product->Edit_Wireless($product_name, $product_title, $product_price, $product_sale, $product_img, $product_quantity, $category_id, $type_id, $product_range, $product_port, $product_weight, $product_included,  $user_created, $ProductId);
         echo '<script>alert("tạo thành công !!")</script>';
-        // echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
+        echo '<script>window.location.href="index.php?pages=admin&action=listpro"</script>';
         $anhne = $_FILES['product_img']['tmp_name'];
         $error = $_FILES['product_img']['error'];
         $path = 'images/product/' . $product_img . '.png';

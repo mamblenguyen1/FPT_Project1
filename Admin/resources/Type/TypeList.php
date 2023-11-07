@@ -23,15 +23,14 @@
                                             <th>Tên danh mục con</th>
                                             <th>Số lượng sản phẩm</th>
                                             <th>Ngày tạo</th>
-                                            <th>Trạng thái</th>
                                             <th>Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?
                                         $conn = $db->pdo_get_connection();
-                                        $stmt = $conn->prepare("SELECT * FROM `type` , isshow
-                                    WHERE type.is_show = isshow.show_id AND is_deleted = 1");
+                                        $stmt = $conn->prepare("SELECT * FROM `type`
+                                    WHERE  is_deleted = 1");
                                         $stmt->execute();
                                         if ($stmt->rowCount() > 0) {
                                             foreach ($stmt as $row) {
@@ -40,7 +39,6 @@
                                             <td>' . $row['type_name'] . '</td>
                                             <td>' . $type->CountProduct($row['category_id']) . '</td>
                                             <td>' . $row['created_at'] . '</td>
-                                            <th>' . $row['show_name'] . '</th>
                                             <td>
                                             <form action="index.php?pages=admin&action=TypeEdit" method="post">
                                             <input type="hidden" value="' . $row['type_id'] . '" name="type_id">
