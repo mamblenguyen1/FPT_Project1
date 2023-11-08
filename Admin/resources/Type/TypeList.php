@@ -37,7 +37,7 @@
                                                 echo ' 
                                         <tr>
                                             <td>' . $row['type_name'] . '</td>
-                                            <td>' . $type->CountProduct($row['category_id']) . '</td>
+                                            <td>' . $type->CountProduct_type($row['type_id']) . '</td>
                                             <td>' . $row['created_at'] . '</td>
                                             <td>
                                             <form action="index.php?pages=admin&action=TypeEdit" method="post">

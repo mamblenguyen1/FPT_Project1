@@ -27,26 +27,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Iphone 15 Promax</td>
-                                        <td>3</td>
-                                        <td>30/10/2023</td>
-                                        <td>31/10/2023</td>
-                                        <td>
-                                            <button type="button" class="btn btn-outline-primary">Chi tiết bình luận</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Laptop ROG Strix G15</td>
-                                        <td>3</td>
-                                        <td>30/10/2023</td>
-                                        <td>31/10/2023</td>
-                                        <td>
-                                            <button type="button" class="btn btn-outline-primary">Chi tiết bình luận</button>
-                                        </td>
-                                    </tr>
-
-                                    </tfoot>
+                                    <?
+                                    $sql = $comment->show_comment();
+                                        foreach ($sql as $row) {
+                                            extract ($sql);
+                                            echo ' 
+                                                <tr>
+                                                <td>' . $row['product_name'] . '</td>
+                                                <td>' . $comment->CountComment($row['comment_id']) . '</td>
+                                                <td>' . $comment->NewestCmt($row['comment_id']) . '</td>
+                                                <td>' . $comment->LastestCmt($row['comment_id']) . '</td>
+                                                <td>
+                                                  <form action="index.php?pages=admin&action=commentDetail" method="post">
+                                                    <input type="hidden" value="' . $row['product_id'] . '" name="product_id">
+                                                    <input type="hidden" value="' . $row['comment_id'] . '" name="comment_id">
+                                                    <input type="hidden" value="' . $row['product_name'] . '" name="product_name">
+                                                    <a class="btn btn-block btn-outline-primary" href="index.php?pages=admin&action=commentDetail&product_id=' . $row['product_id'] . '">Xem chi tiết</a>
+                                                </form>
+                                              </td>
+                                              </tr>
+                                        ';
+                                        }
+                                        ?>
+                                </tbody>
                             </table>
                         </div>
                         <!-- /.card-body -->

@@ -56,39 +56,15 @@ class Type
             return $row[$column];
         }
     }
-
-
-    
-    function CountProduct($cateId)
+    function CountProduct_type($type_id)
     {
         $db = new connect();
-        $sql = "SELECT COUNT(product.product_id) FROM category, type , product
-        WHERE category.category_id = type.category_id
-        AND product.type_id = type.type_id 
-        AND type.type_id = $cateId";
-        $result = $db->pdo_query($sql);
+        $sql = "SELECT COUNT(*) FROM products WHERE type_id = $type_id AND is_deleted = 1";
+        $result   = $db->pdo_query($sql);
         foreach ($result as $row) {
-            return $row['COUNT(product.product_id)'];
+            return $row['COUNT(*)'];
         }
     }
-    function CountTypeCategories($cateId)
-    {
-        $db = new connect();
-        $sql = "SELECT COUNT(type.type_id) FROM category, type , product
-        WHERE category.category_id = type.category_id
-        AND product.type_id = type.type_id
-        AND category.category_id = $cateId
-        ";
-        $result = $db->pdo_query($sql);
-        foreach ($result as $row) {
-            return $row['COUNT(type.type_id)'];
-        }
-    }
-
-
-
-
-  
 }
 
 ?>
