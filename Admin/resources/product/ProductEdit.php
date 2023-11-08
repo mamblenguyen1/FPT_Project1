@@ -155,23 +155,12 @@ if (isset($_POST['editProduct'])) {
 
                         <div class="form-group">
                             <label>Danh mục sản phẩm</label>
-                            <select name="category_id" class="form-control select2" style="width: 100%;">
+                            <select name="category_id" id="category" class="form-control select2" style="width: 100%;">
                                 <option selected="selected" value="<? echo $product->getInfoSP1($ProductId, 'category_id') ?>"><? echo $product->getInfoSP1($ProductId, 'category_name') ?></option>
-                                <?
-                                $catechoose = $product->getInfoSP1($ProductId, 'category_id');
-                                $conn = $db->pdo_get_connection();
-                                $stmt = $conn->prepare("SELECT * FROM category WHERE category.category_id <> $catechoose");
-                                $stmt->execute();
-                                if ($stmt->rowCount() > 0) {
-                                    foreach ($stmt as $row) {
-                                        echo ' <option value="' . $row['category_id'] . '" >' . $row['category_name'] . '</option>';
-                                    }
-                                }
-                                ?>
                             </select>
                             <?
-                            if (isset($_POST["type_id"])) {
-                                if (empty($_POST["type_id"])) {
+                            if (isset($_POST["category_id"])) {
+                                if (empty($_POST["category_id"])) {
                                     echo '<span class="vaild">Xin vui lòng nhập tên danh mục </span>';
                                 } else {
                                     echo '';
@@ -181,19 +170,8 @@ if (isset($_POST['editProduct'])) {
                         </div>
                         <div class="form-group">
                             <label>Hãng sản phẩm</label>
-                            <select name="type_id" class="form-control select2" style="width: 100%;">
+                            <select name="type_id" id="type" class="form-control select2" style="width: 100%;">
                                 <option selected="selected" value="<? echo $product->getInfoSP1($ProductId, 'type_id') ?>"><? echo $product->getInfoSP1($ProductId, 'type_name') ?></option>
-                                <?
-                                $typechoose = $product->getInfoSP1($ProductId, 'type_id');
-                                $conn = $db->pdo_get_connection();
-                                $stmt = $conn->prepare("SELECT * FROM `type` WHERE type.type_id <> $typechoose");
-                                $stmt->execute();
-                                if ($stmt->rowCount() > 0) {
-                                    foreach ($stmt as $row) {
-                                        echo ' <option value="' . $row['type_id'] . '" >' . $row['type_name'] . '</option>';
-                                    }
-                                }
-                                ?>
                             </select>
                             <?
                             if (isset($_POST["type_id"])) {
@@ -229,5 +207,44 @@ if (isset($_POST['editProduct'])) {
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://fptproject1/admin/resources/product/category.php",
+            dataType: 'json',
+            success: function(data) {
+                $("#category").html("");
+                for (i = 0; i < data.length; i++) {
+                    var category = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
+                    var str = ` 
+                <option value="${category['category_id']}"> ${category['category_name']} </option>
+                   `;
+                    $("#category").append(str);
+                }
+                $("#category").on("change", function(e) {
+                    layHuyen();
+                });
+            }
+        });
+    })
+</script>
+<script>
+    function layHuyen() {
+        var category_id = $("#category").val();
+        $.ajax({
+            url: "http://fptproject1/admin/resources/type/type.php?category_id=" + category_id,
+            dataType: 'json',
+            success: function(data) {
+                $("#type").html("");
+                for (i = 0; i < data.length; i++) {
+                    var type = data[i];
+                    var str = ` 
+                <option  value="${type['type_id']}">${type['type_name']} </option>`;
+                    $("#type").append(str);
+                }
 
+            }
+        });
+    }
+</script>
 <?php include './admin/componant/footer.php' ?>

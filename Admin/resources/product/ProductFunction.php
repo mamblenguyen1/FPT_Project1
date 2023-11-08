@@ -35,12 +35,15 @@ class ProductFunction
         $sql = "SELECT * FROM category";
         return $db->pdo_query($sql);
     }
-    function wireless_select_all()
+
+    function take_category()
     {
         $db = new connect();
-        $sql = "SELECT * FROM iswireless";
-        return $db->pdo_query($sql);
+        $sql = "SELECT * FROM category";
+         $rs = $db->pdo_query($sql);
+        echo json_encode($rs);
     }
+
 
     function category_type_select_all()
     {
@@ -49,10 +52,12 @@ class ProductFunction
         return $db->pdo_query($sql);
     }
 
-    function category_type_con_select_all($typecon)
+    
+
+    function category_type_con_select_all($category_id)
     {
         $db = new connect();
-        $sql = "SELECT * FROM  type WHERE category_id=$typecon AND is_deleted = 1";
+        $sql = "SELECT * FROM  type WHERE category_id=$category_id AND is_deleted = 1";
         return $db->pdo_query($sql);
     }
 
@@ -85,7 +90,7 @@ class ProductFunction
     function deleteProduct($product_id)
     {
         $db = new connect();
-        $sql = "UPDATE products SET is_deleted = 0 WHERE product_id = $product_id";
+        $sql = "UPDATE products SET is_deleted = 2 WHERE product_id = $product_id";
         $result = $db->pdo_execute($sql);
         return $result;
     }
