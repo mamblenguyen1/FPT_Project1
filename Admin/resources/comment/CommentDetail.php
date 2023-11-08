@@ -2,8 +2,12 @@
 
 <?php include './admin/componant/sidebar.php' ?>
 <?
-if(isset($_GET['product_id'])){
- $product_id = $_GET['product_id'];
+if(isset($_POST['details'])){
+ $product_id = $_POST['product_id'];
+ $product_id = $_POST['comment_id'];
+
+
+
 };
 ?>
 <div class="main-panel">

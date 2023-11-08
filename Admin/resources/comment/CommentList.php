@@ -42,7 +42,7 @@
                                                     <input type="hidden" value="' . $row['product_id'] . '" name="product_id">
                                                     <input type="hidden" value="' . $row['comment_id'] . '" name="comment_id">
                                                     <input type="hidden" value="' . $row['product_name'] . '" name="product_name">
-                                                    <a class="btn btn-block btn-outline-primary" href="index.php?pages=admin&action=commentDetail&product_id=' . $row['product_id'] . '">Xem chi tiết</a>
+                                                    <button type="submit" name="details" class="btn  btn-outline-primary">Chi tiết</button>
                                                 </form>
                                               </td>
                                               </tr>

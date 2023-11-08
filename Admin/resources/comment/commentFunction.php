@@ -198,10 +198,13 @@ class comment
         }
     }
 
-    function CountComment()
+    function CountComment($comment_id)
     {
         $db = new connect();
-        $sql = "SELECT COUNT(*) FROM comment";
+        $sql = "SELECT COUNT(*) FROM comment, comment_detail where
+        comment.comment_id = comment_detail.comment_id
+        AND
+        comment_detail.comment_id = $comment_id";
         $result   = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row['COUNT(*)'];
@@ -215,13 +218,14 @@ class comment
         return $result;
     }
 
-    function show_Comment_Detail($product_id)
+    function show_Comment_Detail($comment_id)
     {
         $db = new connect();
         $sql = "SELECT * FROM comment_detail, products, comment, user
         WHERE comment_detail.comment_id = comment.comment_id AND
         products.product_id = comment.product_id AND
-        user.user_id = comment_detail.user_id";
+        user.user_id = comment_detail.user_id AND 
+        comment_detail.comment_id = $comment_id";
         $result = $db->pdo_query($sql);
         return $result;
     }
