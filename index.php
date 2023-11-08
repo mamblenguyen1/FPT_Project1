@@ -67,7 +67,7 @@ if (isset($_GET['pages'])) {
                             // detail
                         case 'productDetail':
                             include './Admin/resources/product/productDetail.php';
-                            
+
                             break;
                             // user 
                         case 'UserList':
@@ -100,7 +100,7 @@ if (isset($_GET['pages'])) {
                         case 'ProductAdd':
                             include './Admin/resources/product/ProductAdd.php';
                             break;
-                       
+
                             // ProductEdit
                         case 'ProductEdit':
                             include './Admin/resources/product/ProductEdit.php';
@@ -148,6 +148,9 @@ if (isset($_GET['pages'])) {
 
                 case 'history':
                     include './User/resources/history.php';
+                    break;
+                case 'order':
+                    include './User/resources/order.php';
                     break;
                     //checkout
                 case 'checkout':

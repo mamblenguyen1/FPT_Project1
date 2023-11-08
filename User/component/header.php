@@ -64,6 +64,7 @@ include('style.php');
 											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
 										</ul>
 									</ul>
+									
 								</div>
 								<div class="logout">
 								<a class="logout-btn" href="./index.php?pages=user&action=logout">Đăng Xuất</a>
@@ -130,6 +131,7 @@ include('style.php');
 								<i class="icon-cart"></i>
 								<span>$123.00</span>
 							</a>
+							
 							<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">
 								<div class="tg-minicartbody">
 									<div class="tg-minicarproduct">
@@ -155,8 +157,11 @@ include('style.php');
 										<a class="tg-btn" href="">Thanh toán</a>
 									</div>
 								</div>
+								<a href="index.php?pages=user&action=order&userID=' . isset($_COOKIE['userID']) . '">Đơn mua</a>
 							</div>
+
 						</div>
+						
 					</div>
 					<div class="tg-searchbox">
 						<form class="tg-formtheme tg-formsearch">
