@@ -6,6 +6,7 @@ require_once './Admin/resources/category/CategoryFunction.php';
 require_once './Admin/resources/user/UserFunction.php';
 require_once './Admin/resources/product/ProductFunction.php';
 require_once './Admin/resources/Type/TypeFunction.php';
+require_once './Admin/resources/comment/commentFunction.php';
 require_once './mail/forgot.php';
 require_once './Admin/resources/comment/commentFunction.php';
 
@@ -15,6 +16,7 @@ $db = new connect();
 $user = new UserFunction();
 $category = new Categories();
 $product = new ProductFunction();
+$comment = new comment();
 $type = new Type();
 $mail = new Mailer();
 $comment = new comment();

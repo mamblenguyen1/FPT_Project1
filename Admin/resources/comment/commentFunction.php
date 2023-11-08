@@ -88,8 +88,8 @@ class comment
     function LastestCmt($productId)
     {
         $db = new connect();
-        $sql = "SELECT MIN(detailcomments.created_at) AS 'lasted' FROM detailcomments
-        WHERE detailcomments.cmtId = $productId
+        $sql = "SELECT MIN(comment_detail.comment_date) AS 'lasted' FROM comment_detail
+        WHERE comment_detail.comment_id = $productId
         ";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
@@ -101,8 +101,8 @@ class comment
     function NewestCmt($productId)
     {
         $db = new connect();
-        $sql = "SELECT MAX(detailcomments.created_at) AS 'newest' FROM detailcomments
-        WHERE detailcomments.cmtId = $productId
+        $sql = "SELECT MAX(comment_detail.comment_date) AS 'newest' FROM comment_detail
+        WHERE comment_detail.comment_id = $productId
         ";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
@@ -129,7 +129,8 @@ class comment
         }
     }
 
-    function existTable($productId){
+    function existTable($productId)
+    {
         $db = new connect();
         $select = "SELECT count(comment.cmtId) FROM comment, detailcomments
         WHERE comment.cmtId = detailcomments.cmtId
@@ -138,7 +139,6 @@ class comment
         foreach ($result as $row) {
             return $row['count(comment.cmtId)'];
         }
-      
     }
     function deleteComment($productID)
     {
@@ -196,6 +196,34 @@ class comment
         foreach ($result as $row) {
             return $row['COUNT(cartId)'];
         }
+    }
+
+    function CountComment()
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(*) FROM comment";
+        $result   = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(*)'];
+        }
+    }
+    function show_comment()
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM products INNER JOIN comment WHERE products.product_id=comment.product_id;";
+        $result   = $db->pdo_query($sql);
+        return $result;
+    }
+
+    function show_Comment_Detail($product_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM comment_detail, products, comment, user
+        WHERE comment_detail.comment_id = comment.comment_id AND
+        products.product_id = comment.product_id AND
+        user.user_id = comment_detail.user_id";
+        $result = $db->pdo_query($sql);
+        return $result;
     }
 }
 // include('../../database/pdo.php');
