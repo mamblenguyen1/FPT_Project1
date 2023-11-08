@@ -9,29 +9,25 @@ class ProductFunction
     //     return $db->pdo_query($sql);
     // }
 
-    // function all_product_category($category_id, $product_id, $column)
-    // {
-    //     $db = new connect();
-    //     $sql = "SELECT product_id, product_name , category.category_id, category.category_name , type.type_id , type.type_name,  product_price, product_sale, product_im, is_wireless 
-    //     FROM phone, category,type
-    //     WHERE phone.type_id = type.type_id AND phone.category_id = category.category_id AND phone.is_deleted = 1 AND phone.category_id = $category_id AND phone.product_id = $product_id
-    //     UNION
-    //     SELECT product_id,product_name , category.category_id, category.category_name , type.type_id , type.type_name, product_price, product_sale, product_im, is_wireless 
-    //     FROM laptop , category,type
-    //     WHERE laptop.type_id = type.type_id AND laptop.category_id = category.category_id AND laptop.is_deleted = 1 AND laptop.category_id = $category_id AND laptop.product_id = $product_id
-    //     UNION
-    //     SELECT product_id,product_name , category.category_id , category.category_name , type.type_id , type.type_name, product_price, product_sale,  product_img, is_wireless 
-    //     FROM wired , category,type
-    //     WHERE wired.type_id = type.type_id AND wired.category_id = category.category_id AND wired.is_deleted = 1 AND wired.category_id = $category_id AND wired.product_id = $product_id
-    //     UNION
-    //     SELECT  product_id,product_name , category.category_id , category.category_name, type.type_id , type.type_name, product_price, product_sale, product_im, is_wireless 
-    //     FROM wireless, category,type
-    //     WHERE wireless.type_id = type.type_id AND wireless.category_id = category.category_id AND wireless.is_deleted = 1 AND wireless.category_id = $category_id AND wireless.product_id = $product_id";
-    //     $result = $db->pdo_query($sql);
-    //     foreach ($result as $row) {
-    //         return $row[$column];
-    //     }
-    // }
+    function all_product_category($category_id, $product_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM products, type, category WHERE
+        type.type_id = products.type_id
+        AND 
+        category.category_id = products.category_id
+        AND
+        products.is_deleted = 1 
+        AND
+        products.category_id = $category_id
+        AND
+        products.product_id = $product_id
+        ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
     //truy van hien toan bo sp
     function category_select_all()
     {
@@ -56,7 +52,7 @@ class ProductFunction
     function category_type_con_select_all($typecon)
     {
         $db = new connect();
-        $sql = "SELECT * FROM  type WHERE category_id=$typecon";
+        $sql = "SELECT * FROM  type WHERE category_id=$typecon AND is_deleted = 1";
         return $db->pdo_query($sql);
     }
 
