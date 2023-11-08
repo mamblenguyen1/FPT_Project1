@@ -8,14 +8,14 @@ class comment
     var $content = null;
     var $created_at  = null;
 
-    function addComment($sachma, $userid, $content)
+    function addComment($product_id , $user_id, $content)
     {
         $db = new connect();
-        $select = " INSERT INTO comment(sachma) 
-        VALUES ($sachma);
+        $select = " INSERT INTO comment(product_id , is_deleted) 
+        VALUES ($product_id, 1);
         SET @product_id = LAST_INSERT_ID();
-        INSERT INTO detailcomments (cmtId, userid, content) 
-        VALUES (@product_id, $userid, '$content')
+        INSERT INTO comment_detail (comment_id, user_id, comment_content, is_deleted) 
+        VALUES (@product_id, $user_id, '$content' , 1)
         ";
         $result = $db->pdo_execute($select);
         return $result;
@@ -26,12 +26,42 @@ class comment
         $db = new connect();
         $id = $this->DuplicateColumnCmt($productId);
         $newid = intval($id);
-        $select = " INSERT INTO detailcomments(cmtId, userid, content) 
-        VALUES ($newid ,$userid, '$content')
+        $select = " INSERT INTO comment_detail(comment_id , user_id , comment_content ,is_deleted) 
+        VALUES ($newid ,$userid, '$content' ,1)
         ";
         $result = $db->pdo_execute($select);
         return $result;
     }
+
+
+    public function DuplicateColumnCmt($product_id)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM comment WHERE product_id  = $product_id ";
+        $result = $db->pdo_query($select);
+        foreach ($result as $row) {
+            return $row['comment_id'];
+        }
+    }
+
+
+    public function DuplicateColumn($product_id)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM comment";
+        $result = $db->pdo_query($select);
+        foreach ($result as $row) {
+            $nw = $row['product_id'];
+            if ($product_id == $nw) {
+                return true;
+            }
+        }
+    }
+
+
+
+
+
 
     function getInfoComment()
     {
@@ -41,28 +71,7 @@ class comment
         return $result;
     }
 
-    public function DuplicateColumn($productid)
-    {
-        $db = new connect();
-        $select = "SELECT * FROM comment";
-        $result = $db->pdo_query($select);
-        foreach ($result as $row) {
-            $nw = $row['sachma'];
-            if ($productid == $nw) {
-                return true;
-            }
-        }
-    }
 
-    public function DuplicateColumnCmt($productId)
-    {
-        $db = new connect();
-        $select = "SELECT * FROM comment WHERE sachma = $productId";
-        $result = $db->pdo_query($select);
-        foreach ($result as $row) {
-            return $row['cmtId'];
-        }
-    }
 
     function CountDetails($productId)
     {

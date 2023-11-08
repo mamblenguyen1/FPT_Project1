@@ -7,6 +7,8 @@ require_once './Admin/resources/user/UserFunction.php';
 require_once './Admin/resources/product/ProductFunction.php';
 require_once './Admin/resources/Type/TypeFunction.php';
 require_once './mail/forgot.php';
+require_once './Admin/resources/comment/commentFunction.php';
+
 
 
 $db = new connect();
@@ -15,6 +17,7 @@ $category = new Categories();
 $product = new ProductFunction();
 $type = new Type();
 $mail = new Mailer();
+$comment = new comment();
 
 //require('./admin/core/function.php');
 //require('./client/core/FunctionClient.php');
