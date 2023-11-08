@@ -24,14 +24,14 @@ include('User/component/header.php');
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label for="phonenumber">Phone Number</label>
+                    <label for="phonenumber">Số điện thoại</label>
                     <input type="text" class="form-control rounded-2xl" id="phonenumber" placeholder="" value="" required>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="country">Country</label>
+                    <label for="country">TỈnh thành</label>
                     <select class="form-select d-block w-100 rounded-2xl" id="country" required>
                         <option value="">Tỉnh Bà Rịa Vũng Tàu</option>
                     </select>

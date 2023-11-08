@@ -5,11 +5,9 @@ include('user/component/header.php');
 
 if (isset($_GET['product_id'])) {
 	$product_id = $_GET['product_id'];
-	echo $product_id;
 }
 if (isset($_GET['category_id'])) {
 	$category_id = $_GET['category_id'];
-	echo $category_id;
 }
 
 ?>
@@ -92,7 +90,7 @@ if (isset($_GET['category_id'])) {
 													</ul>
 												</div>
 												<div class="tg-description">
-													Mô tả ngắn sản phẩm 
+													Mô tả ngắn sản phẩm
 													<p>
 														<? echo $product->substringtext($product->all_product_category($category_id, $product_id, 'product_short_description'), 100)  ?>
 													</p>
@@ -100,9 +98,9 @@ if (isset($_GET['category_id'])) {
 												<div class="tg-sectionhead">
 													<h2>Thông tin chi tiết</h2>
 												</div>
-												<ul class="tg-productinfo" >							
-																			<?
-												echo($product->all_product_category($category_id, $product_id, 'product_description')) ;
+												<ul class="tg-productinfo">
+													<?
+													echo ($product->all_product_category($category_id, $product_id, 'product_description'));
 
 													?>
 
@@ -131,54 +129,151 @@ if (isset($_GET['category_id'])) {
 															</form> -->
 															<!-- comment -->
 															<div class="">Nhận xét</div>
+															<?
+															// if (isset($_POST['AddComment'])) {
+															// 	if (isset($_COOKIE['userID'])) {
+															// 		$product_id = $_POST['product_id'];
+															// 		$user_id = $_COOKIE['userID'];
+															// 		$content = $_COOKIE['content'];
+
+
+
+
+
+															if (isset($_POST['AddComment'])) {
+																if (isset($_COOKIE['userID'])) {
+																	$product_id = $_POST['product_id'];
+																	$user_id = $_COOKIE['userID'];
+																	$content = $_POST['content'];
+																	if ($comment->DuplicateColumn($product_id)) {
+																		$comment->addCommentDetails($product_id, $user_id, $content);
+																		echo '<script>alert("Cảm ơn bạn đã để lại bình luận trùng ! !")</script>';
+																	} else {
+																		$comment->addComment($product_id, $user_id, $content);
+																		echo '<script>alert("Cảm ơn bạn đã để lại bình luận ! !")</script>';
+																	}
+																} else {
+																	echo '<script>alert("Xin vui lòng đăng nhập để bình luận !!")</script>';
+																}
+															}
+															?>
+
 															<form class="review-form" method="post">
-																<div class="form-group">
-																</div>
-																<div class="form-group">
+																<div class="form-group p-20">
 																	<label>Your message</label>
-																	<textarea class="form-control" rows="10" name="noi_dung"></textarea>
+																	<textarea class="form-control" rows="10" name="content"></textarea>
 																</div>
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="form-group">
-																			<input type="hidden" class="form-control" placeholder="Name" name="ma_kh" value="<?= $_COOKIE['user'] ?>">
-																			<input type="hidden" name="ma_hh" value="<?= $ID ?>">
+																			<input type="hidden" name="product_id" value="<?= $product->all_product_category($category_id, $product_id, 'product_id') ?>">
 																		</div>
 																	</div>
 																</div>
-																<button class="round-black-btn btn btn-primary" name="binh_luan">Gửi bình luận</button>
+																<button class="round-black-btn btn btn-primary" name="AddComment">Gửi bình luận</button>
 															</form>
 															<!-- thêm bình luận -->
 
 															<p></p>
-															<h6>Tất cả comment:</h6>
-															<div class="comment">
-																<div class="comment-info">
-																	<p> <strong>Nguyễn Minh Quang : </strong>
-																	</p>
-																	<p>Cmt của user có thể sửa hoặc xóa</p>
-																</div>
-																<br>
-																<div class="comment-method">
-																	<div class="item1">
-																		<div class="item-header btn btn-primary" class="editcmt">Sửa</div>
-																		<button class="btn btn-danger"> Xóa</button>
-																		<div class="item-content">
-																			<form action="componant/editcmt.php" method="post">
-																				<input type="hidden" name="pid" value="' . $row['sachma'] . '" id="">
-																				<input type="hidden" name="detailCommentId" value="' . $row['detailCommentId'] . '" id="">
-																				<input type="text" class="inp-cmt" name="content" value="' . $row['content'] . '" id="">
-																				<button type="submit" class="btn-cmt" name="edituser">Sửa Bình Luận</button>
-																			</form>
-																		</div>
-
-																	</div>
-																</div>
+															<h4>Tất cả comment:</h4>
+															<?
+															if(isset($_COOKIE['userID'])){
+																$conn = $db->pdo_get_connection();
+																$stmt = $conn->prepare("SELECT * FROM comment , comment_detail, user
+																Where comment.comment_id = comment_detail.comment_id
+																AND
+																comment_detail.user_id = user.user_id
+																AND
+																comment_detail.is_deleted = 1
+																AND 
+																comment.product_id = $product_id
+																AND 
+																user.user_id = ($_COOKIE[userID]) 
+																");
+																$stmt->execute();
+																if ($stmt->rowCount() > 0) {
+																	foreach ($stmt as $row) {
+																		echo '
+													<div class="comment">
+													<div class="comment-info">
+													<div class="user_cmt">
+													<p> <strong>' . $row['user_name'] . ': </strong>
+													</p>
+													<p>' . $row['comment_date'] . '</p>
+												</div>
+	
+														<p>' . $row['comment_content'] . ' </p>
+													</div>
+													<br>
+													<div class="comment-method">
+														<div class="item1">
+															<div class="item-header btn btn-primary" class="editcmt"><i class="fa fa-edit"></i></div>
+															<button class="btn btn-danger"> <i class="fa fa-trash"></i></button>
+															<div class="item-content">
+																<form action="" method="post">
+																	<input type="hidden" name="pid" value="' . $row['product_id'] . '" id="">
+																	<input type="hidden" name="detailCommentId" value="' . $row['comment_detail_id'] . '" id="">
+																	<input type="text" style=" width : 500px" class="inp-cmt" name="content" value="' . $row['comment_content'] . '" id="">
+																	<button type="submit" class="btn btn-primary" name="editcomment"><i class="fa fa-send-o"></i></button>
+																	</form>
 															</div>
+	
+														</div>
+													</div>
+												</div>
+												<hr>
+														';
+																	}
+																}
+															}else{
+
+															};
+																$conn = $db->pdo_get_connection();
+																$stmt = $conn->prepare("SELECT * FROM comment , comment_detail, user
+																Where comment.comment_id = comment_detail.comment_id
+																AND
+																comment_detail.user_id = user.user_id
+																AND
+																comment_detail.is_deleted = 1
+																AND 
+																comment.product_id = $product_id
+																AND 
+																user.user_id <>($_COOKIE[userID]) 
+																");
+																$stmt->execute();
+																if ($stmt->rowCount() > 0) {
+																	foreach ($stmt as $row) {
+																		echo '
+													<div class="comment">
+													<div class="comment-info">
+													<div class="user_cmt">
+													<p> <strong>' . $row['user_name'] . ': </strong>
+													</p>
+													<p>' . $row['comment_date'] . '</p>
+												</div>
+	
+														<p>' . $row['comment_content'] . ' </p>
+													</div>
+													<br>
+												
+												</div>
+												<hr>
+														';
+																	}
+																}
+
+															
+													
+															?>
+
 															<div class="comment">
 																<div class="comment-info">
-																	<p> <strong>Nguyễn Minh Quang 1: </strong>
-																	</p>
+																	<div class="user_cmt">
+																		<p> <strong>Nguyễn Minh Quang 1: </strong>
+																		</p>
+																		<p>23 - 11 - 2023</p>
+																	</div>
+
 																	<p>cmt k phải của user , có thể trả lời</p>
 																	<div class="replay-cmt">
 																		<p> <strong>Tài khoản trả lời: </strong>
@@ -436,6 +531,7 @@ if (isset($_GET['category_id'])) {
 								</div>
 							</div>
 						</div>
+
 						<?
 						include('user/component/sidebar.php');
 						?>
@@ -452,9 +548,15 @@ if (isset($_GET['category_id'])) {
 		*************************************-->
 
 </div>
+
 <style>
 	.comment-method {
 		padding: 10px 0;
+	}
+
+	.user_cmt {
+		display: flex;
+		justify-content: space-between;
 	}
 
 	.tg-description p {

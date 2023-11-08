@@ -1,7 +1,11 @@
 <?php include './Admin/componant/header.php' ?>
 
 <?php include './admin/componant/sidebar.php' ?>
-
+<?
+if(isset($_GET['product_id'])){
+ $product_id = $_GET['product_id'];
+};
+?>
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -12,7 +16,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Các bình luận về sản phẩm <strong>Iphone 15 Promax</strong></h3>
+                            <h3 class="card-title">Bình luận về sản phẩm</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -26,28 +30,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Minh Quang</td>
-                                        <td>31/10/2023</td>
-                                        <td>Sản phẩm tốt</td>
-                                        <td>
-                                            <button type="button" class="btn btn-outline-primary">Trả lời</button>
-                                            <button type="button" class="btn btn-outline-danger">Ẩn</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <tr>
-                                        <td>Minh Quang</td>
-                                        <td>31/10/2023</td>
-                                        <td>Giao hàng nhanh</td>
-                                        <td>
-                                            <button type="button" class="btn btn-outline-primary">Trả lời</button>
-                                            <button type="button" class="btn btn-outline-danger">Ẩn</button>
-                                        </td>
-                                    </tr>
-                                    </tr>
-
-                                    </tfoot>
+                                <?
+                                    $sql = $comment->show_Comment_Detail($product_id);
+                                        foreach ($sql as $row) {
+                                            extract ($sql);
+                                            echo ' 
+                                                <tr>
+                                                <td>' . $row['user_name'] . '</td>
+                                                <td>' . $row['comment_date'] . '</td>
+                                                <td>' . $row['comment_content'] . '</td>
+                                                <td>
+                                                  <form action="index.php?pages=admin&action=commentDetail" method="post">
+                                                    <input type="hidden" value="' . $row['product_id'] . '" name="product_id">
+                                                    <input type="hidden" value="' . $row['comment_id'] . '" name="comment_id">
+                                                    <input type="hidden" value="' . $row['product_name'] . '" name="product_name">
+                                                    <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
+                                                    <button type="submit" name="ProductEdit" class="btn  btn-outline-primary">Trả lời</button>
+                                                    <button type="submit" name="deleteproduct" class="btn  btn-outline-danger">Ẩn</button>
+                                                </form>
+                                              </td>
+                                              </tr>
+                                        ';
+                                        }
+                                        ?>
+                                </tbody>
                             </table>
                         </div>
                         <!-- /.card-body -->

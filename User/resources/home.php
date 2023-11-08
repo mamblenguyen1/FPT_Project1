@@ -3,12 +3,7 @@ include('user/component/header.php');
 ?>
 
 <body class="tg-home tg-homeone">
-
     <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
-
-        <!--************************************
-                Featured Item Start
-        *************************************-->
         <section class="tg-bglight tg-haslayout">
             <div class="container">
                 <div class="row">
@@ -31,7 +26,7 @@ include('user/component/header.php');
                                     </span>
                                     <a class="tg-btn tg-btnstyletwo tg-active" href="javascript:void(0);">
                                         <i class="fa fa-shopping-basket"></i>
-                                        <em>Add To Basket</em>
+                                        <em>Mua Ngay</em>
                                     </a>
                                 </div>
                             </div>
@@ -53,7 +48,7 @@ include('user/component/header.php');
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="tg-sectionhead">
                             <h2><span>Các</span>Sản phẩm bán chạy</h2>
-                            <a class="tg-btn" href="index.php?pages=user&action=products">Xem tất cả sản phẩm</a>
+                            <a class="tg-btn" href="index.php?pages=user&action=products">Xem tất cả sản phẩm</a>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -65,9 +60,9 @@ include('user/component/header.php');
                                             <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
                                             <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
                                         </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
                                             <i class="icon-heart"></i>
-                                            <span>add to wishlist</span>
+                                            <span>Thêm giỏ hàng</span>
                                         </a>
                                     </figure>
                                     <div class="tg-postbookcontent">
@@ -85,9 +80,9 @@ include('user/component/header.php');
                                             <ins>$25.18</ins>
                                             <del>$27.20</del>
                                         </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
                                             <i class="fa fa-shopping-basket"></i>
-                                            <em>Add To Basket</em>
+                                            <em>Thêm Giỏ Hàng</em>
                                         </a>
                                     </div>
                                 </div>
@@ -99,9 +94,9 @@ include('user/component/header.php');
                                             <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
                                             <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
                                         </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
                                             <i class="icon-heart"></i>
-                                            <span>add to wishlist</span>
+                                            <span>Thêm giỏ hàng</span>
                                         </a>
                                     </figure>
                                     <div class="tg-postbookcontent">
@@ -119,9 +114,9 @@ include('user/component/header.php');
                                             <ins>$25.18</ins>
                                             <del>$27.20</del>
                                         </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
                                             <i class="fa fa-shopping-basket"></i>
-                                            <em>Add To Basket</em>
+                                            <em>Thêm Giỏ Hàng</em>
                                         </a>
                                     </div>
                                 </div>
@@ -133,9 +128,9 @@ include('user/component/header.php');
                                             <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
                                             <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
                                         </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
                                             <i class="icon-heart"></i>
-                                            <span>add to wishlist</span>
+                                            <span>Thêm giỏ hàng</span>
                                         </a>
                                     </figure>
                                     <div class="tg-postbookcontent">
@@ -152,9 +147,9 @@ include('user/component/header.php');
                                             <ins>$25.18</ins>
                                             <del>$27.20</del>
                                         </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
                                             <i class="fa fa-shopping-basket"></i>
-                                            <em>Add To Basket</em>
+                                            <em>Thêm Giỏ Hàng</em>
                                         </a>
                                     </div>
                                 </div>
@@ -166,9 +161,9 @@ include('user/component/header.php');
                                             <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
                                             <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
                                         </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
                                             <i class="icon-heart"></i>
-                                            <span>add to wishlist</span>
+                                            <span>Thêm giỏ hàng</span>
                                         </a>
                                     </figure>
                                     <div class="tg-postbookcontent">
@@ -186,9 +181,9 @@ include('user/component/header.php');
                                             <ins>$25.18</ins>
                                             <del>$27.20</del>
                                         </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
                                             <i class="fa fa-shopping-basket"></i>
-                                            <em>Add To Basket</em>
+                                            <em>Thêm Giỏ Hàng</em>
                                         </a>
                                     </div>
                                 </div>
@@ -200,9 +195,9 @@ include('user/component/header.php');
                                             <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
                                             <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
                                         </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
                                             <i class="icon-heart"></i>
-                                            <span>add to wishlist</span>
+                                            <span>Thêm giỏ hàng</span>
                                         </a>
                                     </figure>
                                     <div class="tg-postbookcontent">
@@ -219,9 +214,9 @@ include('user/component/header.php');
                                             <ins>$25.18</ins>
                                             <del>$27.20</del>
                                         </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
                                             <i class="fa fa-shopping-basket"></i>
-                                            <em>Add To Basket</em>
+                                            <em>Thêm Giỏ Hàng</em>
                                         </a>
                                     </div>
                                 </div>
@@ -233,9 +228,9 @@ include('user/component/header.php');
                                             <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
                                             <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
                                         </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
                                             <i class="icon-heart"></i>
-                                            <span>add to wishlist</span>
+                                            <span>Thêm giỏ hàng</span>
                                         </a>
                                     </figure>
                                     <div class="tg-postbookcontent">
@@ -253,9 +248,9 @@ include('user/component/header.php');
                                             <ins>$25.18</ins>
                                             <del>$27.20</del>
                                         </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);"style="width: 105%;">
                                             <i class="fa fa-shopping-basket"></i>
-                                            <em>Add To Basket</em>
+                                            <em>Thêm Giỏ Hàng</em>
                                         </a>
                                     </div>
                                 </div>
@@ -267,9 +262,9 @@ include('user/component/header.php');
                                             <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
                                             <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
                                         </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
                                             <i class="icon-heart"></i>
-                                            <span>add to wishlist</span>
+                                            <span>Thêm giỏ hàng</span>
                                         </a>
                                     </figure>
                                     <div class="tg-postbookcontent">
@@ -286,9 +281,9 @@ include('user/component/header.php');
                                             <ins>$25.18</ins>
                                             <del>$27.20</del>
                                         </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
                                             <i class="fa fa-shopping-basket"></i>
-                                            <em>Add To Basket</em>
+                                            <em>Thêm Giỏ Hàng</em>
                                         </a>
                                     </div>
                                 </div>
@@ -302,7 +297,6 @@ include('user/component/header.php');
                 Best Selling End
         *************************************-->
 
-
         <!--************************************
                 New Release Start
         *************************************-->
@@ -315,11 +309,17 @@ include('user/component/header.php');
                                 <h2><span>Trải nghiệm cảm giác mới</span>Sản phẩm vừa ra mắt</h2>
                             </div>
                             <div class="tg-description">
-                                <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoiars nisiuip commodo consequat aute irure dolor in aprehenderit aveli esseati cillum dolor fugiat nulla pariatur cepteur sint occaecat cupidatat.</p>
+                                <p>Sản phẩm của chúng tôi không chỉ là một sản phẩm công nghệ, mà còn là một 
+                                    trợ thủ đắc lực trong cuộc sống hàng ngày. Bất kể bạn là một người 
+                                    yêu công nghệ, một doanh nhân hay một người yêu thể thao, sản phẩm của tôi 
+                                    sẽ làm thay đổi cách bạn làm việc và giải trí. Đừng bỏ lỡ cơ hội sở hữu sản 
+                                    phẩm tuyệt vời này. Hãy truy cập vào sản phẩm để biết 
+                                    thêm thông tin chi tiết và giá cả. Sẽ thay đổi cuộc sống của bạn, 
+                                    và chúng tôi rất tự hào về điều đó.</p>
                             </div>
                             <div class="tg-btns">
-                                <a class="tg-btn tg-active" href="javascript:void(0);">View All</a>
-                                <a class="tg-btn" href="javascript:void(0);">Read More</a>
+                                <a class="tg-btn tg-active" href="javascript:void(0);">Xem Tất Cả</a>
+                                <a class="tg-btn" href="javascript:void(0);">Thêm</a>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -334,18 +334,18 @@ include('user/component/header.php');
                                                 </div>
                                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                     <i class="icon-heart"></i>
-                                                    <span>add to wishlist</span>
+                                                    <span>Thêm giỏ hàng</span>
                                                 </a>
                                             </figure>
                                             <div class="tg-postbookcontent">
                                                 <ul class="tg-bookscategories">
                                                     <li><a href="javascript:void(0);">Laptop</a></li>
-                                                    <li><a href="javascript:void(0);">Fun</a></li>
+                                                    <li><a href="javascript:void(0);">Hãng</a></li>
                                                 </ul>
                                                 <div class="tg-booktitle">
-                                                    <h3><a href="javascript:void(0);">Help Me Find My Stomach</a></h3>
+                                                    <h3><a href="javascript:void(0);">Name</a></h3>
                                                 </div>
-                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
+                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Hàng VN chất lượng cao</a></span>
                                                 <span class="tg-stars"><span></span></span>
                                             </div>
                                         </div>
@@ -359,18 +359,18 @@ include('user/component/header.php');
                                                 </div>
                                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                     <i class="icon-heart"></i>
-                                                    <span>add to wishlist</span>
+                                                    <span>Thêm giỏ hàng</span>
                                                 </a>
                                             </figure>
                                             <div class="tg-postbookcontent">
                                                 <ul class="tg-bookscategories">
                                                     <li><a href="javascript:void(0);">Laptop</a></li>
-                                                    <li><a href="javascript:void(0);">Fun</a></li>
+                                                    <li><a href="javascript:void(0);">Hãng</a></li>
                                                 </ul>
                                                 <div class="tg-booktitle">
-                                                    <h3><a href="javascript:void(0);">Drive Safely, No Bumping</a></h3>
+                                                    <h3><a href="javascript:void(0);">Name</a></h3>
                                                 </div>
-                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Sunshine Orlando</a></span>
+                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Hàng VN chất lượng cao</a></span>
                                                 <span class="tg-stars"><span></span></span>
                                             </div>
                                         </div>
@@ -384,7 +384,7 @@ include('user/component/header.php');
                                                 </div>
                                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                     <i class="icon-heart"></i>
-                                                    <span>add to wishlist</span>
+                                                    <span>Thêm giỏ hàng</span>
                                                 </a>
                                             </figure>
                                             <div class="tg-postbookcontent">
@@ -393,9 +393,9 @@ include('user/component/header.php');
                                                     <li><a href="javascript:void(0);">Fun</a></li>
                                                 </ul>
                                                 <div class="tg-booktitle">
-                                                    <h3><a href="javascript:void(0);">Let The Good Times Roll Up</a></h3>
+                                                    <h3><a href="javascript:void(0);">Name</a></h3>
                                                 </div>
-                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Elisabeth Ronning</a></span>
+                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Hàng VN chất lượng cao</a></span>
                                                 <span class="tg-stars"><span></span></span>
                                             </div>
                                         </div>
@@ -410,6 +410,7 @@ include('user/component/header.php');
         <!--************************************
                 New Release End
         *************************************-->
+đang làm
         <!--************************************
                 Collection Count Start
         *************************************-->
@@ -471,7 +472,7 @@ include('user/component/header.php');
                     <div class="col-xs-16 col-sm-16 col-md-16 col-lg-16">
                         <div class="tg-sectionhead">
                             <h2><span>Some Great Books</span>Picked By Authors</h2>
-                            <a class="tg-btn" href="javascript:void(0);">View All</a>
+                            <a class="tg-btn" href="javascript:void(0);" style="margin-right: 2%;">Xem Tất Cả</a>
                         </div>
                     </div>
                     <div id="tg-pickedbyauthorslider" class="tg-pickedbyauthor tg-pickedbyauthorslider owl-carousel">
@@ -498,7 +499,7 @@ include('user/component/header.php');
                                     <span class="tg-bookwriter">By: <a href="javascript:void(0);">Sunshine Orlando</a></span>
                                     <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
                                         <i class="fa fa-shopping-basket"></i>
-                                        <em>Add To Basket</em>
+                                        <em>Thêm Giỏ Hàng</em>
                                     </a>
                                 </div>
                             </div>
@@ -526,7 +527,7 @@ include('user/component/header.php');
                                     <span class="tg-bookwriter">By: <a href="javascript:void(0);">Drusilla Glandon</a></span>
                                     <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
                                         <i class="fa fa-shopping-basket"></i>
-                                        <em>Add To Basket</em>
+                                        <em>Thêm Giỏ Hàng</em>
                                     </a>
                                 </div>
                             </div>
@@ -554,7 +555,7 @@ include('user/component/header.php');
                                     <span class="tg-bookwriter">By: <a href="javascript:void(0);">Patrick Seller</a></span>
                                     <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
                                         <i class="fa fa-shopping-basket"></i>
-                                        <em>Add To Basket</em>
+                                        <em>Thêm Giỏ Hàng</em>
                                     </a>
                                 </div>
                             </div>
@@ -582,7 +583,7 @@ include('user/component/header.php');
                                     <span class="tg-bookwriter">By: <a href="javascript:void(0);">Sunshine Orlando</a></span>
                                     <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
                                         <i class="fa fa-shopping-basket"></i>
-                                        <em>Add To Basket</em>
+                                        <em>Thêm Giỏ Hàng</em>
                                     </a>
                                 </div>
                             </div>
@@ -610,7 +611,7 @@ include('user/component/header.php');
                                     <span class="tg-bookwriter">By: <a href="javascript:void(0);">Drusilla Glandon</a></span>
                                     <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
                                         <i class="fa fa-shopping-basket"></i>
-                                        <em>Add To Basket</em>
+                                        <em>Thêm Giỏ Hàng</em>
                                     </a>
                                 </div>
                             </div>
@@ -636,7 +637,6 @@ include('user/component/header.php');
                                     <blockquote style="color: white;"><q>Chúng tôi luôn mang đến những sản phẩm mới nhất, chất lượng nhất đến khách hàng</q></blockquote>
                                     <div class="tg-testimonialauthor">
                                         <h3 style="color: white;">Nguyễn Minh Quang</h3>
-                                        <span>Manager @ CIFP</span>
                                     </div>
                                 </div>
 
@@ -645,7 +645,6 @@ include('user/component/header.php');
                                     <blockquote style="color: white;"><q>Chúng tôi luôn mang đến những sản phẩm mới nhất, chất lượng nhất đến khách hàng</q></blockquote>
                                     <div class="tg-testimonialauthor">
                                         <h3 style="color: white;">Nguyễn Văn Đặng</h3>
-                                        <span>Manager @ CIFP</span>
                                     </div>
                                 </div>
 
@@ -654,7 +653,6 @@ include('user/component/header.php');
                                     <blockquote style="color: white;"><q>Chúng tôi luôn mang đến những sản phẩm mới nhất, chất lượng nhất đến khách hàng</q></blockquote>
                                     <div class="tg-testimonialauthor">
                                         <h3 style="color: white;">Quách Thanh Tú</h3>
-                                        <span>Manager @ CIFP</span>
                                     </div>
                                 </div>
 
@@ -663,7 +661,6 @@ include('user/component/header.php');
                                     <blockquote style="color: white;"><q>Chúng tôi luôn mang đến những sản phẩm mới nhất, chất lượng nhất đến khách hàng</q></blockquote>
                                     <div class="tg-testimonialauthor">
                                         <h3 style="color: white;">Võ Phan Hoàng Sang</h3>
-                                        <span>Manager @ CIFP</span>
                                     </div>
                                 </div>
 
@@ -684,8 +681,8 @@ include('user/component/header.php');
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="tg-sectionhead">
-                            <h2><span>Latest News &amp; Articles</span>What's Hot in The News</h2>
-                            <a class="tg-btn" href="javascript:void(0);">View All</a>
+                            <h2><span>Tin Tức</span>Bài viết mới</h2>
+                            <a class="tg-btn" href="javascript:void(0);">Xem Tất Cả</a>
                         </div>
                     </div>
                     <div id="tg-postslider" class="tg-postslider tg-blogpost owl-carousel">

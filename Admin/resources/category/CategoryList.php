@@ -37,8 +37,8 @@
                                             echo ' 
                                         <tr>
                                         <td>' . $row['category_name'] . '</td>
-                                        <td>' . $category->CountTypeCategories($row['category_id']) . '</td>
-                                        <td>' . $category->CountProduct($row['category_id']) . '</td>
+                                        <td>'.$category->CountType($row['category_id']).'</td>
+                                        <td>'.$category->CountProduct($row['category_id']).'</td>
                                         <td>' . $row['created_at'] . '</td>
                                         <td>
                                         <form action="index.php?pages=admin&action=editcate" method="post">

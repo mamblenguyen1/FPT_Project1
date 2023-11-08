@@ -43,29 +43,29 @@ include('user/component/header.php');
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                         <h6 class="section-title bg-white text-start text-primary pe-3">Giới thiệu</h6>
                         <h1 class="mb-4">Welcome</h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                        <p class="mb-4">Chào mừng bạn đến với trang web công nghệ của chúng tôi! Đây là nơi bạn có thể khám phá những xu hướng công nghệ mới nhất, cùng những sản phẩm và dịch vụ tiên tiến nhất trong thế giới kỹ thuật số. </p>
+                        <p class="mb-4">Chúng tôi tự hào đem đến cho bạn những thông tin, hướng dẫn và sự hiểu biết cần thiết để bạn có thể tận dụng tối đa tiềm năng của công nghệ trong cuộc sống hàng ngày. Hãy cùng chúng tôi khám phá và trải nghiệm cuộc hành trình đầy kỳ thú trong thế giới công nghệ!</p>
                         <div class="row gy-2 gx-4 mb-4">
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Skilled Instructors</p>
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i> Chất lượng sản phẩm</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Online Classes</p>
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i> Hỗ trợ tận tình</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>International Certificate</p>
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i> Đổi trả trong ngày</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Skilled Instructors</p>
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i> Giao hàng nhanh chóng</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Online Classes</p>
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i> Chất lượng dịch vụ hàng đầu</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>International Certificate</p>
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i> Đội ngũ nhân viên trình độ cao</p>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5 mt-2" href="">Read More</a>
+                        <!-- <a class="btn btn-primary py-3 px-5 mt-2" href="">Xem Ngay</a> -->
                     </div>
                 </div>
             </div>

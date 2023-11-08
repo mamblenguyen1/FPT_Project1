@@ -86,7 +86,7 @@ include('User/component/header.php');
                         </div>
                     </div>
 
-                    <a class="btn btn-primary" style="display: block ; margin: 20px auto; width: 200px; padding: 15px 25px;" href="index.php?pages=user&action=home">Về trang chủ</a>
+                    <a class="btn btn-primary" style="display: block ; margin: 20px auto; width: 200px; padding: 15px 25px;" href="index.php?pages=user&action=home">Về Trang Lịch Sử</a>
                 </div>
             </div>
         </div>
