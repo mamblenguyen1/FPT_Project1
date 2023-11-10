@@ -15,7 +15,7 @@ include('user/component/header.php');
                             <div id="tg-content" class="tg-content">
                                 <div class="tg-products">
                                     <div class="tg-sectionhead">
-                                        <h2><span>Danh mục sản phẩm</span>Điện thoại</h2>
+                                        <h2><span>Danh mục sản phẩm</span></h2>
                                     </div>
                                     <div class="tg-productgrid">
                                         <div class="tg-refinesearch">

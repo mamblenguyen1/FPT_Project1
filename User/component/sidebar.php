@@ -10,7 +10,7 @@
         </div>
         <div class="tg-widget tg-catagories">
             <div class="tg-widgettitle">
-                <h3>Categories</h3>
+                <h3>Danh mục sản phẩm</h3>
             </div>
             <div class="tg-widgetcontent">
                 <ul>

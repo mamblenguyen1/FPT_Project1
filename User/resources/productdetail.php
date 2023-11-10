@@ -10,6 +10,22 @@ if (isset($_GET['category_id'])) {
 	$category_id = $_GET['category_id'];
 }
 
+
+
+
+// đếm view
+$user_id = isset($_COOKIE['userID']) ? $_COOKIE['userID'] : null;
+if ($product->count_view($user_id, $product_id) == 0) {
+	$db = new connect();
+	$sql_insert = "INSERT INTO user_views (user_id, product_id) VALUES ($user_id, $product_id)";
+	$result = $db->pdo_execute($sql_insert);
+	if ($product->count_view($user_id, $product_id) == 1) {
+		$update_view = "UPDATE products SET product_view = product_view + 1 WHERE product_id = $product_id";
+		$result = $db->pdo_execute($update_view);
+	}
+}
+
+
 ?>
 <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
 
@@ -234,6 +250,7 @@ if (isset($_GET['category_id'])) {
 															$conn = $db->pdo_get_connection();
 															if (isset($_COOKIE['userID'])) {
 																$stmt = $conn->prepare("SELECT * FROM comment , comment_detail, user
+
 																Where comment.comment_id = comment_detail.comment_id
 																AND
 																comment_detail.user_id = user.user_id
@@ -244,10 +261,10 @@ if (isset($_GET['category_id'])) {
 																AND 
 																user.user_id <>($_COOKIE[userID]) 
 																");
-																$stmt->execute();
-																if ($stmt->rowCount() > 0) {
-																	foreach ($stmt as $row) {
-																		echo '
+															$stmt->execute();
+															if ($stmt->rowCount() > 0) {
+																foreach ($stmt as $row) {
+																	echo '
 													<div class="comment">
 													<div class="comment-info">
 													<div class="user_cmt">
@@ -308,12 +325,8 @@ if (isset($_GET['category_id'])) {
 												</div>
 												<hr>
 														';
-																	}
 																}
 															}
-
-
-
 
 															?>
 

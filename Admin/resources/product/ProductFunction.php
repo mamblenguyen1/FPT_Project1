@@ -71,11 +71,15 @@ class ProductFunction
         return $db->pdo_execute($sql);
     }
 
-
-
-
-
-
+    function count_view($user_id,$product_id)
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(*) FROM user_views WHERE user_id = $user_id AND product_id = $product_id";
+        $result   = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(*)'];
+        }
+    }
 
     function Edit_Product($product_name, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id,$product_short_description ,$product_description, $user_updated, $Product_ID)
     {

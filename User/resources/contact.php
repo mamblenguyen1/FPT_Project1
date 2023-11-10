@@ -2,7 +2,7 @@
 include('User/component/header.php');
 ?>
 
-<div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="https://c1.wallpaperflare.com/preview/551/930/440/contact-us-contact-call-us-phone-communication.jpg">
+<!-- <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="https://c1.wallpaperflare.com/preview/551/930/440/contact-us-contact-call-us-phone-communication.jpg">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -17,7 +17,7 @@ include('User/component/header.php');
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 <!--************************************
 				Inner Banner End
 		*************************************-->

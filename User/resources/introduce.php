@@ -12,18 +12,18 @@ include('user/component/header.php');
 <!-- Template Stylesheet -->
 <br><br><br><br><br><br><br><br><br>
 <!-- Header Start -->
-<div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="https://www.elementum.com/app/uploads/elementor/thumbs/BigCompanies-pqlonwmmm1rmykr8uirglaeg053alprtnca06xq1ss.png">
+<!-- <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="https://www.elementum.com/app/uploads/elementor/thumbs/BigCompanies-pqlonwmmm1rmykr8uirglaeg053alprtnca06xq1ss.png"> -->
 <div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="tg-innerbannercontent">
+				<!-- <div class="tg-innerbannercontent">
 					<h1 >Giới thiệu về chúng tôi</h1>
 
 					<ol class="tg-breadcrumb">
 						<li><a href="javascript:void(0);">Trang chủ</a></li>
 						<li class="tg-active">Giới thiệu</li>
 					</ol>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
