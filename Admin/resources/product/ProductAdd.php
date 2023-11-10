@@ -4,6 +4,9 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
 <?
+// echo json_encode($product->category_select_all());
+// echo json_encode($product->category_type_con_select_all(3));
+//  $product->take_category();
 
 if (isset($_POST['addProductbtn'])) {
     $category_id = $_POST['category_id'] ?? "";
@@ -156,18 +159,8 @@ if (isset($_POST['addProductbtn'])) {
                         <!-- hãng sản phẩm -->
                         <div class="form-group">
                             <label>Danh mục sản phẩm : </label>
-                            <select name="category_id" class="form-control select2" style="width: 100%;">
-                                <option selected="selected" value="">Chọn Danh mục</option>
-                                <?
-                                $conn = $db->pdo_get_connection();
-                                $stmt = $conn->prepare("SELECT * FROM category");
-                                $stmt->execute();
-                                if ($stmt->rowCount() > 0) {
-                                    foreach ($stmt as $row) {
-                                        echo ' <option value="' . $row['category_id'] . '" >' . $row['category_name'] . '</option>';
-                                    }
-                                }
-                                ?>
+                            <select  name="category_id" id="category" class="form-control select2" style="width: 100%;">
+                                <option selected  value="0">Chọn Danh mục</option>
                             </select>
                             <?
                             if (isset($_POST["category_id"])) {
@@ -181,18 +174,8 @@ if (isset($_POST['addProductbtn'])) {
                         </div>
                         <div class="form-group">
                             <label>Hãng sản phẩm</label>
-                            <select name="type_id" class="form-control select2" style="width: 100%;">
-                                <option selected="selected" value="">Chọn hãng Laptop</option>
-                                <?
-                                $conn = $db->pdo_get_connection();
-                                $stmt = $conn->prepare("SELECT * FROM `type`");
-                                $stmt->execute();
-                                if ($stmt->rowCount() > 0) {
-                                    foreach ($stmt as $row) {
-                                        echo ' <option value="' . $row['type_id'] . '" >' . $row['type_name'] . '</option>';
-                                    }
-                                }
-                                ?>
+                            <select name="type_id" id="type" class="form-control select2" style="width: 100%;">
+                                <option selected  value="0">Chọn hãng</option>
                             </select>
                             <?
                             if (isset($_POST["type_id"])) {
@@ -248,3 +231,41 @@ if (isset($_POST['addProductbtn'])) {
 </div>
 
 <?php include './admin/componant/footer.php' ?>
+<script>
+$(document).ready(function(){    
+    $.ajax({
+        url: "http://fptproject1/admin/resources/product/category.php",       
+        dataType:'json',         
+        success: function(data){     
+            $("#category").html("");
+            for (i=0; i<data.length; i++){            
+                var category = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
+                var str = ` 
+                <option value="${category['category_id']}"> ${category['category_name']} </option>
+                   `;
+                $("#category").append(str);
+            }
+            $("#category").on("change", function(e) { layHuyen();  });
+        }
+    });
+})
+
+</script>
+<script>
+function layHuyen(){
+    var category_id = $("#category").val();
+    $.ajax({
+        url: "http://fptproject1/admin/resources/type/type.php?category_id=" + category_id,
+        dataType:'json',         
+        success: function(data){     
+            $("#type").html("");
+            for (i=0; i<data.length; i++){            
+                var type = data[i]; 
+                var str = ` 
+                <option  value="${type['type_id']}">${type['type_name']} </option>`;
+                $("#type").append(str);
+            }            
+        }
+    });
+}
+</script>

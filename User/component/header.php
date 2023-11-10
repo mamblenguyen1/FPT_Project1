@@ -226,8 +226,8 @@ include('style.php');
 										<li><a href="authordetail.html">Author Detail</a></li>
 									</ul>
 								</li> -->
-								<li><a href="index.php?pages=user&action=products">Sản phẩm</a></li>
-								<li><a href="index.php?pages=user&action=introduce">Giới thiệu</a></li>
+								<li> <a class="link-header" href="index.php?pages=user&action=products">Sản phẩm</a></li>
+								<li><a class="link-header" href="index.php?pages=user&action=introduce">Giới thiệu</a></li>
 								<li class="menu-item-has-children">
 									<a href="">Tin tức công nghệ</a>
 									<ul class="sub-menu">
@@ -236,7 +236,7 @@ include('style.php');
 										<li><a href="newsdetail.html">News Detail</a></li>
 									</ul>
 								</li>
-								<li><a href="index.php?pages=user&action=contact">Liên hệ</a></li>
+								<li><a class="link-header" href="index.php?pages=user&action=contact">Liên hệ</a></li>
 								<!-- <li><a href="contactus.html">Liên hệ</a></li> -->
 								<!-- <li class="menu-item-has-children current-menu-item">
 									<a href=""><i class="icon-menu"></i></a>

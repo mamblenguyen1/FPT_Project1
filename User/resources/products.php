@@ -2,6 +2,7 @@
 include('user/component/header.php');
 ?>
 
+
 <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
 
     <main id="tg-main" class="tg-main tg-haslayout">
@@ -76,7 +77,7 @@ include('user/component/header.php');
                                         $stmt->execute();
                                         if ($stmt->rowCount() > 0) {
                                             foreach ($stmt as $row) {
-                                              
+
                                                 $product_name_text = $product->substringtext($row['product_name'], 25);
                                                 echo '<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
                                                 <div class="tg-postbook">
