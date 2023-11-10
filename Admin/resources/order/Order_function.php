@@ -157,10 +157,10 @@ class ORDER
     //     return $result;
     // }
 
-    function updateCartQty($detailCommentId, $cartQty)
+    function updateCartQty($detailorderId, $cartQty)
     {
         $db = new connect();
-        $select = "UPDATE cartdetail SET soluong = $cartQty  WHERE cartDetailId   = $detailCommentId";
+        $select = "UPDATE cartdetail SET soluong = $cartQty  WHERE cartDetailId   = $detailorderId";
         $result = $db->pdo_execute($select);
         return $result;
     }
@@ -241,14 +241,14 @@ class ORDER
         $result = $db->pdo_execute($sql);
         return $result;
     }
-    // Function comment
+    // Function order
 
 
 
-    function getInfoComment()
+    function getInfoorder()
     {
         $db = new connect();
-        $sql = "SELECT * FROM comment";
+        $sql = "SELECT * FROM order";
         $result = $db->pdo_query($sql);
         return $result;
     }
@@ -256,7 +256,7 @@ class ORDER
     public function DuplicateColumn($productid)
     {
         $db = new connect();
-        $select = "SELECT * FROM comment";
+        $select = "SELECT * FROM order";
         $result = $db->pdo_query($select);
         foreach ($result as $row) {
             $nw = $row['sachma'];
@@ -275,7 +275,7 @@ class ORDER
     function getInfoUserCmtAll($productId, $column)
     {
         $db = new connect();
-        $sql = "SELECT * FROM comment cmt , detailcomments dt WHERE dt.cmtId = cmt.cmtId AND sachma = '$productId'";
+        $sql = "SELECT * FROM order cmt , detailorders dt WHERE dt.cmtId = cmt.cmtId AND sachma = '$productId'";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];
@@ -284,49 +284,83 @@ class ORDER
     function getInfoUserCmt($productId)
     {
         $db = new connect();
-        $sql = "SELECT cmtId FROM comment WHERE sachma = '$productId'";
+        $sql = "SELECT cmtId FROM order WHERE sachma = '$productId'";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row['cmtId'];
         }
     }
 
-    function update_cmt($detailCommentId, $content)
+    function update_cmt($detailorderId, $content)
     {
         $db = new connect();
-        $select = "UPDATE detailcomments SET content = '$content'  WHERE detailCommentId  = $detailCommentId";
+        $select = "UPDATE detailorders SET content = '$content'  WHERE detailorderId  = $detailorderId";
         $result = $db->pdo_execute($select);
         return $result;
     }
     function CountAllCmtDetails()
     {
         $db = new connect();
-        $sql = "SELECT COUNT(detailcommentId) FROM detailcomments";
+        $sql = "SELECT COUNT(detailorderId) FROM detailorders";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
-            return $row['COUNT(detailcommentId)'];
+            return $row['COUNT(detailorderId)'];
+        }
+    }
+
+    function CountOrder($order_id)
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(*) FROM `order`, order_detail WHERE
+        `order`.order_id = order_detail.order_id
+    AND
+    `order_detail`.order_id = $order_id";
+        $result   = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(*)'];
+        }
+    }
+    function Count_Order_Detail($product_id)
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(*) FROM `products`, order_detail WHERE
+        `products`.product_id = order_detail.product_id
+    AND
+    `order_detail`.product_id = $product_id";
+        $result   = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(*)'];
+        }
+    }
+    function Show_Order()
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM user INNER JOIN `order` WHERE user.user_id=`order`.user_id
+        ";
+        $result   = $db->pdo_query($sql);
+        return $result;
+    }
+    function Show_Order_Detail($order_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM order_detail, products, `order`, user
+        WHERE order_detail.order_id = `order`.order_id AND
+        products.product_id = `order_detail`.product_id AND
+        user.user_id = `order`.user_id AND 
+        order_detail.order_id = $order_id";
+        $result = $db->pdo_query($sql);
+        return $result;
+    }
+    function LastestOrder($orderID)
+    {
+        $db = new connect();
+        $sql = "SELECT MIN(order_detail.order_date) AS 'lasted' FROM order_detail
+        WHERE order_detail.order_id = $orderID
+        ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['lasted'];
         }
     }
 }
-// include('../../database/pdo.php');
-
-// $cmt = new comment();
-// echo $cmt->DuplicateColumnCmt(26);
-// if($cmt->DuplicateColumn(23)){
-//     echo 'đúng';
-// }else{
-//     echo 'sai';
-
-// }
-
-
-?>
-
-<?
-// INSERT INTO comment (sachma) 
-// VALUES (24);
-// SET @product_id = LAST_INSERT_ID();
-// INSERT INTO detailcomments (cmtId, userid, content) 
-// VALUES (@product_id, 6, 'Giá trị 1'),
-//        (@product_id, 1, 'Giá trị 2');
 ?>
