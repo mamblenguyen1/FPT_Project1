@@ -210,7 +210,7 @@ if (isset($_POST['editProduct'])) {
 <script>
     $(document).ready(function() {
         $.ajax({
-            url: "http://fptproject1/admin/resources/product/category.php",
+            url: "./admin/resources/product/category.php",
             dataType: 'json',
             success: function(data) {
                 $("#category").html("");
@@ -232,7 +232,7 @@ if (isset($_POST['editProduct'])) {
     function layHuyen() {
         var category_id = $("#category").val();
         $.ajax({
-            url: "http://fptproject1/admin/resources/type/type.php?category_id=" + category_id,
+            url: "./admin/resources/type/type.php?category_id=" + category_id,
             dataType: 'json',
             success: function(data) {
                 $("#type").html("");
