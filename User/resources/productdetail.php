@@ -327,7 +327,7 @@ if ($product->count_view($user_id, $product_id) == 0) {
 														';
 																}
 															}
-
+														}
 															?>
 
 															<div class="comment">
