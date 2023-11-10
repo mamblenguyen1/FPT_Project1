@@ -1,6 +1,10 @@
 <?php include './Admin/componant/header.php' ?>
 <?php include './admin/componant/sidebar.php' ?>
-
+<?
+if (isset($_POST['detail_order'])) {
+  $product_idd = $_POST['order_id'];
+};
+?>
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="row">
@@ -29,37 +33,31 @@
                       <th>Thao Tác</th>
                     </tr>
                   </thead>
-                  <tbody>
-
-                    <tr>
-                      <td>Đơn hàng 1</td>
-                      <td>50,000</td>
-                      <td>5</td>
-                      <td>250,000</td>
-                      <td>Chuyển Khoản</td>
-                      <td>15/12/2022</td>
-                      <td>Đang giao</td>
-                      <td>
-                        <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
-                        <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>Đơn hàng 2</td>
-                      <td>100,000</td>
-                      <td>3</td>
-                      <td>300,000</td>
-                      <td>Tiền mặt</td>
-                      <td>1/1/2023</td>
-                      <td>Chưa giao</td>
-                      <td>
-                        <button type="button" class="btn btn-block btn-outline-primary">Chỉnh Sửa</button>
-                        <button type="button" class="btn btn-block btn-outline-danger">Xóa</button>
-                      </td>
-                    </tr>
-
-                    </tfoot>
+                  <tbody style="text-align: center;">
+                    <?
+                    $tong = 0;
+                    $sql = $order->Show_Order_Detail($product_idd);
+                    foreach ($sql as $row) {
+                      extract($sql);
+                      echo ' 
+                          <tr>
+                          <td>' . $row['product_name'] . '</td>
+                          <td>' . $row['product_price'] . '</td>
+                          <td>' . $row['order_quantity'] . '</td>
+                          <td>' . $row['product_price'] * $row['order_quantity'] . '</td>
+                          <td></td>
+                          <td>' . $row['order_date'] . '</td>
+                          <td></td>
+                          <td>
+                                <form action="index.php?pages=admin&action=OrderDetail" method="post">
+                                  <button type="submit" class="btn btn-danger" name="detail_order"> <i class="fa fa-trash"></i></button>
+                                </form>
+                          </td>
+                          </tr>
+                          ';
+                    }
+                    ?>
+                  </tbody>
                 </table>
               </div>
             </div>

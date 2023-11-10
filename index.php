@@ -8,8 +8,7 @@ require_once './Admin/resources/product/ProductFunction.php';
 require_once './Admin/resources/Type/TypeFunction.php';
 require_once './Admin/resources/comment/commentFunction.php';
 require_once './mail/forgot.php';
-require_once './Admin/resources/comment/commentFunction.php';
-require_once './Admin/resources/order/Order_function.php';
+require_once './Admin/resources/order/Order_Function.php';
 
 
 
@@ -20,7 +19,6 @@ $product = new ProductFunction();
 $comment = new comment();
 $type = new Type();
 $mail = new Mailer();
-$comment = new comment();
 $order = new ORDER();
 
 //require('./admin/core/function.php');

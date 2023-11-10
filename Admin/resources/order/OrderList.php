@@ -20,6 +20,7 @@
                                         <tr>
                                             <th>Tên khách hàng</th>
                                             <th>Số lượng sản phẩm</th>
+                                            <th>Thời gian đặt hàng</th>
                                             <th>Tổng tiền</th>
                                             <th>Số điện thoại</th>
                                             <th>Địa chỉ</th>
@@ -28,54 +29,29 @@
                                     </thead>
                                     <tbody>
                                         <?
-                                        $conn = $db->pdo_get_connection();
-                                        $stmt = $conn->prepare("SELECT * FROM `order` , `user`
-                                        WHERE `order`.user_id = `user`.user_id
-                                        ");
-                                        $stmt->execute();
-                                        if ($stmt->rowCount() > 0) {
-                                            foreach ($stmt as $row) {
-                                                echo '
+                                        $sql = $order->Show_Order();
+                                        foreach ($sql as $row) {
+                                            extract($sql);
+                                            echo ' 
                                                 <tr>
                                                 <td>' . $row['user_name'] . '</td>
-                                                <td>0</td>
-                                                <td> 0 </td>
-                                                <td>' . $row['user_phone_number'] . '</td>
-                                                <td>' . $row['user_address'] . '</td>
+                                                <td>' . $order->CountOrder($row['order_id']) . '</td>
+                                                <td>' . $order->LastestOrder($row['order_id']) . '</td>
+                                                <td>'. number_format($row['order_total_payment']).' đ</td>
+                                                <td>' . $row['user_phone_number'].'</td>
+                                                <td>' . $row['user_address'] .'</td>
                                                 <td>
-                                                    <a href="?pages=admin&action=OrderDetail">
-                                                        <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
-                                                    </a>
-                                                </td>
-                                            </tr>';
-                                            }
-                                        };
+                                                  <form action="index.php?pages=admin&action=OrderDetail" method="post">
+                                                  <input type="hidden" value="' . $row['order_id'] . '" name="order_id">
+
+                                                    <button type="submit" name="detail_order" class="btn  btn-outline-primary">Chi tiết</button>
+                                                </form>
+                                              </td>
+                                              </tr>
+                                            ';
+                                        }
                                         ?>
-
-                                        <!-- <tr>
-                                            <td>Khách hàng 1</td>
-                                            <td>2</td>
-                                            <td>350,000</td>
-                                            <td>123456</td>
-                                            <td>Cần Thơ</td>
-                                            <td>
-                                                <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
-                                            </td>
-                                        </tr> -->
-
-                                        <!-- <tr>
-                                            <td>Khách hàng 2</td>
-                                            <td>3</td>
-                                            <td>50,000</td>
-                                            <td>987654</td>
-                                            <td>Hậu Giang</td>
-                                            <td>
-                                                <button type="button" class="btn btn-block btn-outline-primary">Chi tiết đơn hàng</button>
-                                            </td>
-                                        </tr> -->
-
-
-                                        </tfoot>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
