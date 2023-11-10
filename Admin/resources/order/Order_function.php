@@ -14,11 +14,11 @@ class ORDER
     function addCart($userid, $sachma, $qty)
     {
         $db = new connect();
-        $select = " INSERT INTO cart (userId , total) 
+        $select = " INSERT INTO `order` (user_id , order_total_payment) 
         VALUES ($userid,0);
         SET @product_id = LAST_INSERT_ID();
-        INSERT INTO cartdetail (cartId, sachma, soluong,`created_at`) 
-        VALUES (@product_id, $sachma, $qty, CURRENT_TIMESTAMP)
+        INSERT INTO order_detail (order_id , product_id, order_quantity) 
+        VALUES (@product_id, $sachma, $qty)
         ";
         $result = $db->pdo_execute($select);
         return $result;
@@ -30,7 +30,7 @@ class ORDER
         $db = new connect();
         $idn = $this->DuplicateColumnCart($userid);
         $newidn = intval($idn);
-        $select = "INSERT INTO `cartdetail` (`cartId` ,  `sachma` ,  `soluong`) 
+        $select = "INSERT INTO `order_detail` (`order_id` ,  `product_id` ,  `order_quantity`) 
         VALUES ('$newidn' ,'$sachma', '$soluong')
         ";
         $result = $db->pdo_execute($select);
@@ -39,26 +39,63 @@ class ORDER
     public function DuplicateColumnCart($userid)
     {
         $db = new connect();
-        $select = "SELECT * FROM cart WHERE userId  = $userid";
+        $select = "SELECT * FROM `order` WHERE user_id  = $userid";
         $result = $db->pdo_query($select);
         foreach ($result as $row) {
-            return $row['cartId'];
+            return $row['order_id'];
         }
     }
+    public function DuplicateCartPro($productId, $userid)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM order_detail ,`order` 
+        WHERE `order`.order_id = order_detail.order_id 
+        AND `order`.user_id = $userid
+        ";
+        $result = $db->pdo_query($select);
+        foreach ($result as $row) {
+            $nw = $row['product_id'];
+            if ($productId == $nw) {
+                return true;
+            }
+        }
+    }
+    public function DuplicateCart($user_id)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM `order`";
+        $result = $db->pdo_query($select);
+        foreach ($result as $row) {
+            $nw = $row['user_id'];
+            if ($user_id == $nw) {
+                return true;
+            }
+        }
+    }
+    function updateCartQty($detailCommentId, $cartQty)
+    {
+        $db = new connect();
+        $select = "UPDATE `order_detail` SET order_quantity = $cartQty  WHERE order_detail_id    = $detailCommentId";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
+    
+    function updateCartQtyDup($product_id, $cartQty)
+    {
+        $db = new connect();
+        $select = "UPDATE order_detail SET order_quantity = order_quantity + $cartQty WHERE order_detail.product_id = $product_id
+        ";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
 
-    // function AddPayment($userId)
-    // {
-    //     $db = new connect();
-    //     $select = "INSERT INTO payment (cartdetailId , cartId , sachma ,soluong, created_at)
-    //     SELECT cartdetailId , cartId , sachma ,soluong, created_at
-    //     FROM cartdetail
-    //     WHERE cartdetail.cartId IN (
-    //     SELECT cartId FROM cart WHERE userId = $userId
-    //     ) ";
-    //     $result = $db->pdo_execute($select);
-    //     return $result;
-    // }
-
+    function updateCartTotal($userId, $total)
+    {
+        $db = new connect();
+        $select = "UPDATE `order` SET order_total_payment = order_total_payment + $total  WHERE user_id  = $userId";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
     function AddPayment2($userId)
     {
         $db = new connect();
@@ -76,12 +113,12 @@ class ORDER
     function getInfoPayment($userid, $column)
     {
         $db = new connect();
-        $sql = "SELECT * FROM user , cart , cartdetail
-        WHERE user.userid = cart.userId
-        AND cartdetail.cartId = cart.cartId
+        $sql = "SELECT * FROM user , order , order_detail
+        WHERE user.user_id = order.user_id
+        AND order_detail.order_id = order.order_id
         AND cart.cartId IN (
-            SELECT cartId FROM payment
-            WHERE cartId = $userid
+            SELECT order_id FROM payment
+            WHERE order.user_id = $userid
             )";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
@@ -89,31 +126,21 @@ class ORDER
         }
     }
 
-    public function DuplicateCart($userid)
-    {
-        $db = new connect();
-        $select = "SELECT * FROM cart";
-        $result = $db->pdo_query($select);
-        foreach ($result as $row) {
-            $nw = $row['userId'];
-            if ($userid == $nw) {
-                return true;
-            }
-        }
-    }
-
-
     function existTable($userid)
     {
         $db = new connect();
-        $select = "SELECT count(cart.cartId) FROM cart, cartdetail
-        WHERE cart.cartId = cartdetail.cartId
+        $select = "SELECT count(order.order_id) FROM order, order_id
+        WHERE order.order_id = order_detail.order_id
         AND cart.userId = $userid";
         $result = $db->pdo_query($select);
         foreach ($result as $row) {
-            return $row['count(cart.cartId)'];
+            return $row['count(order.order_id)'];
         }
     }
+
+
+
+
     function deleteCart($userid)
     {
         $db = new connect();
@@ -121,10 +148,14 @@ class ORDER
         $result = $db->pdo_execute($sql);
         return $result;
     }
-    function getInfoUserCartAll($userid, $column)
+    function getInfoUserOrder($userid, $column)
     {
         $db = new connect();
-        $sql = "SELECT * FROM cart , cartdetail, user WHERE cart.cartId = cartdetail.cartId AND cart.userId = user.userid  AND cart.userId = $userid";
+        $sql = "SELECT * FROM user , `order` , order_detail
+        WHERE user.user_id = `order`.user_id
+        AND `order`.order_id = order_detail.order_id
+        AND
+        `order`.`user_id` = $userid";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];
@@ -157,44 +188,8 @@ class ORDER
     //     return $result;
     // }
 
-    function updateCartQty($detailCommentId, $cartQty)
-    {
-        $db = new connect();
-        $select = "UPDATE cartdetail SET soluong = $cartQty  WHERE cartDetailId   = $detailCommentId";
-        $result = $db->pdo_execute($select);
-        return $result;
-    }
-    function updateCartTotal($userId, $total)
-    {
-        $db = new connect();
-        $select = "UPDATE cart SET total = total + $total  WHERE userId  = $userId";
-        $result = $db->pdo_execute($select);
-        return $result;
-    }
 
-    public function DuplicateCartPro($productId, $userid)
-    {
-        $db = new connect();
-        $select = "SELECT * FROM cartdetail ,cart 
-        WHERE cart.cartId = cartdetail.cartId 
-        AND cart.userid = $userid
-        ";
-        $result = $db->pdo_query($select);
-        foreach ($result as $row) {
-            $nw = $row['sachma'];
-            if ($productId == $nw) {
-                return true;
-            }
-        }
-    }
-    // function updateCartQtyDup($sachma, $cartQty)
-    // {
-    //     $db = new connect();
-    //     $select = "UPDATE cartDetail SET soluong = soluong + $cartQtyWHERE cartDetail.sachma = $sachma
-    //     ";
-    //     $result = $db->pdo_execute($select);
-    //     return $result;
-    // }
+
 
     function CountCart($userID)
     {

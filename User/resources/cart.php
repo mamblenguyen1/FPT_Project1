@@ -1,60 +1,137 @@
 <?
 include('user/component/header.php');
 ?>
-
 <?
-    // if(isset($_POST['buy'])){
-    //     $qty = $_POST['qty'];
-    //     echo $qty;
-    // }
+if (isset($_POST['buy'])) {
+  $product_id = $_POST['product_id'];
+  $qty = $_POST['qty'];
+  //
+  // exit();
+  if (isset($_COOKIE['userID'])) {
+    $userid = $_COOKIE['userID'];
+    $qty = intval($qty);
+    if ($order->DuplicateCartPro($product_id, $userid)) {
+      $order->updateCartQtyDup($product_id, $qty);
+    } else {
+      if ($order->DuplicateCart($userid)) {
+        $order->addCartDetails($userid, $product_id, $qty);
+        // echo '<script>alert("Thêm vào chi tiết giỏ hàng thành công ! !")</script>';
+      } else {
+        $order->addCart($userid, $product_id, $qty);
+        // echo '<script>alert("Thêm giỏ hành thành công ! !")</script>';
+      }
+    }
+  } else {
+    echo '<script>alert("Xin vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng ! !")</script>';
+    echo '<script>window.location.href="index.php?act=products"</script>';
+  }
+}
+
+
+
+
 ?>
+
 <link rel="stylesheet" href="../../css/cart.css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-  <table id="cart" class="table table-hover table-condensed" style="width: 80%; margin: 0 auto;">
-    <thead>
-      <tr>
-        <th style="width:50%">Sản phẩm</th>
-        <th style="width:10%">Giá</th>
-        <th style="width:8%">Số lượng</th>
-        <th style="width:22%" class="text-center">Tổng cộng</th>
-        <th style="width:10%"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td data-th="Product">
-          <div class="row">
-            <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" /></div>
-            <div class="col-sm-10">
-              <h4 class="nomargin">Product 1</h4>
-              <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+<table id="cart" class="table table-hover table-condensed" style="width: 80%; margin: 0 auto;">
+
+
+  <?
+  // $id = $_POST['idcmt'];
+  $conn = $db->pdo_get_connection();
+  $stmt = $conn->prepare("SELECT * FROM `order`, order_detail , user, products
+      WHERE
+      `order`.order_id = order_detail.order_id
+      AND
+      `order`.user_id = user.user_id
+      AND
+      order_detail.product_id = products.product_id
+      AND user.user_id = $_COOKIE[userID];
+    ");
+  $stmt->execute();
+  if ($stmt->rowCount() > 0) {
+    echo '  <thead>
+        <tr>
+          <th style="width:50%">Sản phẩm</th>
+          <th style="width:10%">Giá</th>
+          <th style="width:8%">Số lượng</th>
+          <th style="width:22%" class="text-center">Tổng cộng</th>
+          <th style="width:10%"></th>
+        </tr>
+      </thead>
+      <tbody>';
+    foreach ($stmt as $row) {
+      echo '
+          <tr>
+          <td data-th="Product">
+            <div class="row">
+              <div class="col-sm-2 hidden-xs"><img src="/images/product/' . $row['product_img'] . '.png" alt="..." class="img-responsive" /></div>
+              <div class="col-sm-10">
+                <h4 class="nomargin">' . $row['product_name'] . '</h4>
+                <p>' . $row['product_short_description'] . '.</p>
+              </div>
             </div>
-          </div>
-        </td>
-        <td data-th="Price">$1.99</td>
-        <td data-th="Quantity">
-          <input type="number" class="form-control text-center" value="1">
-        </td>
-        <td data-th="Subtotal" class="text-center">1.99</td>
-        <td class="actions" data-th="">
-          <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-          <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr class="visible-xs">
-        <td class="text-center"><strong>Total 1.99</strong></td>
-      </tr>
-      <tr>
-        <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-        <td colspan="2" class="hidden-xs"></td>
-        <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
-        <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
-      </tr>
-    </tfoot>
-  </table>
+          </td>
+          <td data-th="Price">' . $row['product_price'] . '</td>
+          <td data-th="Quantity">
+            <input type="number" value="' . $row['order_quantity'] . '" class="form-control text-center" value="1">
+          </td>
+          <td data-th="Subtotal" class="text-center">' . $row['order_quantity'] * $row['product_price'] . '</td>
+          <td class="actions" data-th="">
+            <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+            <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+          </td>
+        </tr>
+          ';
+    }
+
+    echo '
+        </tbody>
+        <tfoot>
+          <tr class="visible-xs">
+            <td class="text-center"><strong>Total 1.99</strong></td>
+          </tr>
+          <tr>
+            <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+            <td colspan="2" class="hidden-xs"></td>
+            <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+            <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+          </tr>
+        </tfoot>
+        ';
+  } else {
+    echo '</table>
+    <div class="alert-cart">
+  Bạn chưa có sản phẩm trong giỏ hàng ! ! !
+</div>
+<a name="" id="" class=" btn btn-primary" href="index.php?pages=user&action=home" role="button">Trở về trang sản phẩm</a>
+        ';
+  }
+
+
+  ?>
+
+
+</table>
 <!-- <script src="../../js/cart.js"></script> -->
+
+
 <?
 include('user/component/footer.php');
 ?>
+
+
+
+
+<!-- <script src="../../js/cart.js"></script> -->
+
+
+  
+<style>
+  .alert-cart {
+    text-align: center;
+    font-size: 30px;
+    margin: 30px auto;
+  }
+</style>

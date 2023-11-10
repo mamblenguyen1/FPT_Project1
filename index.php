@@ -9,6 +9,7 @@ require_once './Admin/resources/Type/TypeFunction.php';
 require_once './Admin/resources/comment/commentFunction.php';
 require_once './mail/forgot.php';
 require_once './Admin/resources/comment/commentFunction.php';
+require_once './Admin/resources/order/Order_function.php';
 
 
 
@@ -20,6 +21,7 @@ $comment = new comment();
 $type = new Type();
 $mail = new Mailer();
 $comment = new comment();
+$order = new ORDER();
 
 //require('./admin/core/function.php');
 //require('./client/core/FunctionClient.php');
@@ -181,3 +183,5 @@ if (isset($_GET['pages'])) {
 } else {
     include './User/resources/home.php';
 }
+?>
+

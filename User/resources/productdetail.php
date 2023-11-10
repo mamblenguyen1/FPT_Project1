@@ -54,12 +54,12 @@ if (isset($_GET['category_id'])) {
 													</ul>
 													<div class="tg-quantityholder">
 														<form action="index.php?pages=user&action=cart" method="post">
+															<input type="hidden" value="<?= $product_id?>" name="product_id">
 															<a class="btn btn-primary" onclick="giamSoLuong()">-</a>
 															<input type="number" id="hien-thi-gio-hang" name="qty">
 															<a class="btn btn-primary" onclick="tangSoLuong()">+</a>
-															<button type="submit" class="tg-btn tg-active tg-btn-lg" name="buy">Thêm vào giỏ hàng</button>
+															<button type="submit" class="tg-btn tg-active tg-btn-lg" name="buy">Mua ngay  </button>
 														</form>
-
 													</div>
 													<button class="tg-btnaddtowishlist" href="">
 														<span>Yêu thích</span>
@@ -145,12 +145,16 @@ if (isset($_GET['category_id'])) {
 																	$product_id = $_POST['product_id'];
 																	$user_id = $_COOKIE['userID'];
 																	$content = $_POST['content'];
-																	if ($comment->DuplicateColumn($product_id)) {
-																		$comment->addCommentDetails($product_id, $user_id, $content);
-																		echo '<script>alert("Cảm ơn bạn đã để lại bình luận trùng ! !")</script>';
+																	if ($content == '') {
+																		echo '<script>alert("Xin vui lòng nhập nội dung bình luận ! !")</script>';
 																	} else {
-																		$comment->addComment($product_id, $user_id, $content);
-																		echo '<script>alert("Cảm ơn bạn đã để lại bình luận ! !")</script>';
+																		if ($comment->DuplicateColumn($product_id)) {
+																			$comment->addCommentDetails($product_id, $user_id, $content);
+																			echo '<script>alert("Cảm ơn bạn đã để lại bình luận  ! !")</script>';
+																		} else {
+																			$comment->addComment($product_id, $user_id, $content);
+																			echo '<script>alert("Cảm ơn bạn đã để lại bình luận ! !")</script>';
+																		}
 																	}
 																} else {
 																	echo '<script>alert("Xin vui lòng đăng nhập để bình luận !!")</script>';
@@ -177,7 +181,7 @@ if (isset($_GET['category_id'])) {
 															<p></p>
 															<h4>Tất cả comment:</h4>
 															<?
-															if(isset($_COOKIE['userID'])){
+															if (isset($_COOKIE['userID'])) {
 																$conn = $db->pdo_get_connection();
 																$stmt = $conn->prepare("SELECT * FROM comment , comment_detail, user
 																Where comment.comment_id = comment_detail.comment_id
@@ -225,10 +229,10 @@ if (isset($_GET['category_id'])) {
 														';
 																	}
 																}
-															}else{
-
+															} else {
 															};
-																$conn = $db->pdo_get_connection();
+															$conn = $db->pdo_get_connection();
+															if (isset($_COOKIE['userID'])) {
 																$stmt = $conn->prepare("SELECT * FROM comment , comment_detail, user
 																Where comment.comment_id = comment_detail.comment_id
 																AND
@@ -255,15 +259,62 @@ if (isset($_GET['category_id'])) {
 														<p>' . $row['comment_content'] . ' </p>
 													</div>
 													<br>
+													<div class="comment-method">
+														<div class="item1">
+															<div class="item-header btn btn-primary" class="editcmt"><i class="fa fa-edit"></i></div>
+															<button class="btn btn-danger"> <i class="fa fa-trash"></i></button>
+															<div class="item-content">
+																<form action="" method="post">
+																	<input type="hidden" name="pid" value="' . $row['product_id'] . '" id="">
+																	<input type="hidden" name="detailCommentId" value="' . $row['comment_detail_id'] . '" id="">
+																	<input type="text" style=" width : 500px" class="inp-cmt" name="content" value="' . $row['comment_content'] . '" id="">
+																	<button type="submit" class="btn btn-primary" name="editcomment"><i class="fa fa-send-o"></i></button>
+																	</form>
+															</div>
+	
+														</div>
+													</div>
+												</div>
+												<hr>
+														';
+																	}
+																}
+															} else {
+																$stmt = $conn->prepare("SELECT * FROM comment , comment_detail, user
+																Where comment.comment_id = comment_detail.comment_id
+																AND
+																comment_detail.user_id = user.user_id
+																AND
+																comment_detail.is_deleted = 1
+																AND 
+																comment.product_id = $product_id
+																");
+																$stmt->execute();
+																if ($stmt->rowCount() > 0) {
+																	foreach ($stmt as $row) {
+																		echo '
+													<div class="comment">
+													<div class="comment-info">
+													<div class="user_cmt">
+													<p> <strong>' . $row['user_name'] . ': </strong>
+													</p>
+													<p>' . $row['comment_date'] . '</p>
+												</div>
+	
+														<p>' . $row['comment_content'] . ' </p>
+													</div>
+													<br>
 												
 												</div>
 												<hr>
 														';
 																	}
 																}
+															}
 
-															
-													
+
+
+
 															?>
 
 															<div class="comment">

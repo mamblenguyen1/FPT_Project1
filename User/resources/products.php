@@ -130,14 +130,12 @@ include('user/component/header.php');
                         <?
                         include('user/component/sidebar.php');
                         ?>
-
                     </div>
                 </div>
 
             </div>
     </main>
 </div>
-
 <?
 include('user/component/footer.php');
 ?>
