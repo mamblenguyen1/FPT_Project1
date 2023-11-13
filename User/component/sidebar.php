@@ -4,7 +4,7 @@
             <form class="tg-formtheme tg-formsearch">
                 <div class="form-group">
                     <button type="submit"><i class="icon-magnifier"></i></button>
-                    <input type="search" name="search" class="form-group" placeholder="Search by title, author, key...">
+                    <input type="search" name="search" class="form-group" placeholder="Tìm kiếm ...">
                 </div>
             </form>
         </div>
@@ -14,7 +14,7 @@
             </div>
             <div class="tg-widgetcontent">
                 <ul>
-                <li><a href="./?pages=user&action=products"><span>Tất cả sản phẩm</span></a>
+                    <li><a href="./?pages=user&action=products"><span>Tất cả sản phẩm</span></a>
                 </ul>
                 <?
                 $product = new ProductFunction();
@@ -23,7 +23,7 @@
                     extract($ketqua);
                 ?>
                     <ul>
-                    
+
                         <li><a href="./?pages=user&action=products&category=<?= $category_id ?>"><span><?= $category_name ?></span></a>
                             <ul>
                                 <?
@@ -46,62 +46,40 @@
         </div>
         <div class="tg-widget tg-widgettrending">
             <div class="tg-widgettitle">
-                <h3>Trending Products</h3>
+                <h3>Sản phẩm nổi bật</h3>
             </div>
             <div class="tg-widgetcontent">
                 <ul>
-                    <li>
+                    <?
+                    $conn = $db->pdo_get_connection();
+                    $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                                                    type.type_id = products.type_id
+                                                    AND 
+                                                    category.category_id = products.category_id
+                                                    AND
+                                                    products.is_deleted = 1
+                                                    ORDER BY products.product_view DESC LIMIT 4");
+                    $stmt->execute();
+                    if ($stmt->rowCount() > 0) {
+                        foreach ($stmt as $row) {
+
+                            $product_name_text = $product->substringtext($row['product_name'], 25);
+                            echo '
+                            <li>
                         <article class="tg-post">
-                            <figure><a href=""><img src="images/iphone.jpg" alt="image description"></a></figure>
+                            <figure><a href=""><img src="images/product/' . $row['product_img'] . '.png" alt="image description"></a></figure>
                             <div class="tg-postcontent">
                                 <div class="tg-posttitle">
-                                    <h3><a href="">Where The Wild Things
-                                            Are</a></h3>
+                                    <h3><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' "> ' . $row['product_name'] . '</a></h3>
                                 </div>
-                                <span class="tg-bookwriter">By: <a href="">Kathrine
-                                        Culbertson</a></span>
+                                <span class="tg-bookwriter">By: <a href="">' . $row['type_name'] . '</a></span>
                             </div>
                         </article>
                     </li>
-                    <li>
-                        <article class="tg-post">
-                            <figure><a href=""><img src="images/iphone.jpg" alt="image description"></a></figure>
-                            <div class="tg-postcontent">
-                                <div class="tg-posttitle">
-                                    <h3><a href="">Where The Wild Things
-                                            Are</a></h3>
-                                </div>
-                                <span class="tg-bookwriter">By: <a href="">Kathrine
-                                        Culbertson</a></span>
-                            </div>
-                        </article>
-                    </li>
-                    <li>
-                        <article class="tg-post">
-                            <figure><a href=""><img src="images/iphone.jpg" alt="image description"></a></figure>
-                            <div class="tg-postcontent">
-                                <div class="tg-posttitle">
-                                    <h3><a href="">Where The Wild Things
-                                            Are</a></h3>
-                                </div>
-                                <span class="tg-bookwriter">By: <a href="">Kathrine
-                                        Culbertson</a></span>
-                            </div>
-                        </article>
-                    </li>
-                    <li>
-                        <article class="tg-post">
-                            <figure><a href=""><img src="images/iphone.jpg" alt="image description"></a></figure>
-                            <div class="tg-postcontent">
-                                <div class="tg-posttitle">
-                                    <h3><a href="">Where The Wild Things
-                                            Are</a></h3>
-                                </div>
-                                <span class="tg-bookwriter">By: <a href="">Kathrine
-                                        Culbertson</a></span>
-                            </div>
-                        </article>
-                    </li>
+                            ';
+                        }
+                    }
+                    ?>
                 </ul>
             </div>
         </div>

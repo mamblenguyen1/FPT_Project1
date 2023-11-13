@@ -83,9 +83,9 @@ include('user/component/header.php');
                                                 <div class="tg-postbook">
                                                     <figure class="tg-featureimg">
                                                         <div class="tg-bookimg">
-                                                            <div class="tg-frontcover">		<img  style="width: 300px; height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description">
+                                                            <div class="tg-frontcover"><img  style="width: 300px; height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                                            <div class="tg-backcover"><img  style="width: 300px; height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
                                                             </div>
-                                                        </div>
                                                         <a class="tg-btnaddtowishlist" href="">
                                                             <i class="icon-heart"></i>
                                                             <span>Yêu thích</span>

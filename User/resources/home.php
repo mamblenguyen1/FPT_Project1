@@ -40,25 +40,40 @@ include('user/component/header.php');
         *************************************-->
 
         <!--************************************
-                Best Selling Start
+                Best View Start
         *************************************-->
         <section class="tg-sectionspace tg-haslayout">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="tg-sectionhead">
-                            <h2><span>Các</span>Sản phẩm bán chạy</h2>
+                            <h2><span>Các</span>Sản phẩm được xem nhiều nhất</h2>
                             <a class="tg-btn" href="index.php?pages=user&action=products">Xem tất cả sản phẩm</a>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div id="tg-bestsellingbooksslider" class="tg-bestsellingbooksslider tg-bestsellingbooks owl-carousel">
-                            <div class="item">
+                            <?
+                            $conn = $db->pdo_get_connection();
+                            $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                                                    type.type_id = products.type_id
+                                                    AND 
+                                                    category.category_id = products.category_id
+                                                    AND
+                                                    products.is_deleted = 1
+                                                    ORDER BY products.product_view DESC LIMIT 10");
+                            $stmt->execute();
+                            if ($stmt->rowCount() > 0) {
+                                foreach ($stmt as $row) {
+
+                                    $product_name_text = $product->substringtext($row['product_name'], 25);
+                                    echo '
+                                    <div class="item">
                                 <div class="tg-postbook">
                                     <figure class="tg-featureimg">
                                         <div class="tg-bookimg">
-                                            <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
-                                            <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
+                                            <div class="tg-frontcover"><img src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                            <div class="tg-backcover"><img src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
                                         </div>
                                         <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
                                             <i class="icon-heart"></i>
@@ -67,18 +82,18 @@ include('user/component/header.php');
                                     </figure>
                                     <div class="tg-postbookcontent">
                                         <ul class="tg-bookscategories">
-                                            <li><a href="javascript:void(0);">Laptop</a></li>
-                                            <li><a href="javascript:void(0);">Asus</a></li>
+                                            <li><a href="javascript:void(0);">' .  $row['category_name'] . '</a></li>
+                                            <li><a href="javascript:void(0);">' . $row['type_name'] . '</a></li>
                                         </ul>
                                         <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                                         <div class="tg-booktitle">
-                                            <h3><a href="javascript:void(0);">Laptop Asus Gaming ROG Strix G614JI</a></h3>
+                                            <h3><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a></h3>
                                         </div>
-                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
+                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">' .  $row['type_name'] . '</a></span>
                                         <span class="tg-stars"><span></span></span>
                                         <span class="tg-bookprice">
-                                            <ins>$25.18</ins>
-                                            <del>$27.20</del>
+                                            <ins>' . number_format($row['product_sale']) . ' đ</ins>
+                                            <del>' . number_format($row['product_price']) . ' đ</del>
                                         </span>
                                         <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
                                             <i class="fa fa-shopping-basket"></i>
@@ -87,207 +102,12 @@ include('user/component/header.php');
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
-                                <div class="tg-postbook">
-                                    <figure class="tg-featureimg">
-                                        <div class="tg-bookimg">
-                                            <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
-                                            <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
-                                        </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="icon-heart"></i>
-                                            <span>Thêm giỏ hàng</span>
-                                        </a>
-                                    </figure>
-                                    <div class="tg-postbookcontent">
-                                        <ul class="tg-bookscategories">
-                                            <li><a href="javascript:void(0);">Laptop</a></li>
-                                            <li><a href="javascript:void(0);">Asus</a></li>
-                                        </ul>
-                                        <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
-                                        <div class="tg-booktitle">
-                                            <h3><a href="javascript:void(0);">Laptop Asus Gaming ROG Strix G614JI</a></h3>
-                                        </div>
-                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
-                                        <span class="tg-stars"><span></span></span>
-                                        <span class="tg-bookprice">
-                                            <ins>$25.18</ins>
-                                            <del>$27.20</del>
-                                        </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="fa fa-shopping-basket"></i>
-                                            <em>Thêm Giỏ Hàng</em>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="tg-postbook tg-notag">
-                                    <figure class="tg-featureimg">
-                                        <div class="tg-bookimg">
-                                            <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
-                                            <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
-                                        </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="icon-heart"></i>
-                                            <span>Thêm giỏ hàng</span>
-                                        </a>
-                                    </figure>
-                                    <div class="tg-postbookcontent">
-                                        <ul class="tg-bookscategories">
-                                            <li><a href="javascript:void(0);">Laptop</a></li>
-                                            <li><a href="javascript:void(0);">Asus</a></li>
-                                        </ul>
-                                        <div class="tg-booktitle">
-                                            <h3><a href="javascript:void(0);">Laptop Asus Gaming ROG Strix G614JI</a></h3>
-                                        </div>
-                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
-                                        <span class="tg-stars"><span></span></span>
-                                        <span class="tg-bookprice">
-                                            <ins>$25.18</ins>
-                                            <del>$27.20</del>
-                                        </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="fa fa-shopping-basket"></i>
-                                            <em>Thêm Giỏ Hàng</em>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="tg-postbook">
-                                    <figure class="tg-featureimg">
-                                        <div class="tg-bookimg">
-                                            <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
-                                            <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
-                                        </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="icon-heart"></i>
-                                            <span>Thêm giỏ hàng</span>
-                                        </a>
-                                    </figure>
-                                    <div class="tg-postbookcontent">
-                                        <ul class="tg-bookscategories">
-                                            <li><a href="javascript:void(0);">Laptop</a></li>
-                                            <li><a href="javascript:void(0);">Asus</a></li>
-                                        </ul>
-                                        <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
-                                        <div class="tg-booktitle">
-                                            <h3><a href="javascript:void(0);">Laptop Asus Gaming ROG Strix G614JI</a></h3>
-                                        </div>
-                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
-                                        <span class="tg-stars"><span></span></span>
-                                        <span class="tg-bookprice">
-                                            <ins>$25.18</ins>
-                                            <del>$27.20</del>
-                                        </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="fa fa-shopping-basket"></i>
-                                            <em>Thêm Giỏ Hàng</em>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="tg-postbook tg-notag">
-                                    <figure class="tg-featureimg">
-                                        <div class="tg-bookimg">
-                                            <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
-                                            <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
-                                        </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="icon-heart"></i>
-                                            <span>Thêm giỏ hàng</span>
-                                        </a>
-                                    </figure>
-                                    <div class="tg-postbookcontent">
-                                        <ul class="tg-bookscategories">
-                                            <li><a href="javascript:void(0);">Laptop</a></li>
-                                            <li><a href="javascript:void(0);">Asus</a></li>
-                                        </ul>
-                                        <div class="tg-booktitle">
-                                            <h3><a href="javascript:void(0);">Laptop Asus Gaming ROG Strix G614JI</a></h3>
-                                        </div>
-                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
-                                        <span class="tg-stars"><span></span></span>
-                                        <span class="tg-bookprice">
-                                            <ins>$25.18</ins>
-                                            <del>$27.20</del>
-                                        </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="fa fa-shopping-basket"></i>
-                                            <em>Thêm Giỏ Hàng</em>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="tg-postbook">
-                                    <figure class="tg-featureimg">
-                                        <div class="tg-bookimg">
-                                            <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
-                                            <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
-                                        </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="icon-heart"></i>
-                                            <span>Thêm giỏ hàng</span>
-                                        </a>
-                                    </figure>
-                                    <div class="tg-postbookcontent">
-                                        <ul class="tg-bookscategories">
-                                            <li><a href="javascript:void(0);">Laptop</a></li>
-                                            <li><a href="javascript:void(0);">Asus</a></li>
-                                        </ul>
-                                        <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
-                                        <div class="tg-booktitle">
-                                            <h3><a href="javascript:void(0);">Laptop Asus Gaming ROG Strix G614JI</a></h3>
-                                        </div>
-                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
-                                        <span class="tg-stars"><span></span></span>
-                                        <span class="tg-bookprice">
-                                            <ins>$25.18</ins>
-                                            <del>$27.20</del>
-                                        </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);"style="width: 105%;">
-                                            <i class="fa fa-shopping-basket"></i>
-                                            <em>Thêm Giỏ Hàng</em>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="tg-postbook tg-notag">
-                                    <figure class="tg-featureimg">
-                                        <div class="tg-bookimg">
-                                            <div class="tg-frontcover"><img src="images/rogStrix.webp" alt="image description"></div>
-                                            <div class="tg-backcover"><img src="images/rogStrix2.webp" alt="image description"></div>
-                                        </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="icon-heart"></i>
-                                            <span>Thêm giỏ hàng</span>
-                                        </a>
-                                    </figure>
-                                    <div class="tg-postbookcontent">
-                                        <ul class="tg-bookscategories">
-                                            <li><a href="javascript:void(0);">Laptop</a></li>
-                                            <li><a href="javascript:void(0);">Asus</a></li>
-                                        </ul>
-                                        <div class="tg-booktitle">
-                                            <h3><a href="javascript:void(0);">Laptop Asus Gaming ROG Strix G614JI</a></h3>
-                                        </div>
-                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
-                                        <span class="tg-stars"><span></span></span>
-                                        <span class="tg-bookprice">
-                                            <ins>$25.18</ins>
-                                            <del>$27.20</del>
-                                        </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="fa fa-shopping-basket"></i>
-                                            <em>Thêm Giỏ Hàng</em>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                                    ';
+                                }
+                            };
+
+
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -309,12 +129,12 @@ include('user/component/header.php');
                                 <h2><span>Trải nghiệm cảm giác mới</span>Sản phẩm vừa ra mắt</h2>
                             </div>
                             <div class="tg-description">
-                                <p>Sản phẩm của chúng tôi không chỉ là một sản phẩm công nghệ, mà còn là một 
-                                    trợ thủ đắc lực trong cuộc sống hàng ngày. Bất kể bạn là một người 
-                                    yêu công nghệ, một doanh nhân hay một người yêu thể thao, sản phẩm của tôi 
-                                    sẽ làm thay đổi cách bạn làm việc và giải trí. Đừng bỏ lỡ cơ hội sở hữu sản 
-                                    phẩm tuyệt vời này. Hãy truy cập vào sản phẩm để biết 
-                                    thêm thông tin chi tiết và giá cả. Sẽ thay đổi cuộc sống của bạn, 
+                                <p>Sản phẩm của chúng tôi không chỉ là một sản phẩm công nghệ, mà còn là một
+                                    trợ thủ đắc lực trong cuộc sống hàng ngày. Bất kể bạn là một người
+                                    yêu công nghệ, một doanh nhân hay một người yêu thể thao, sản phẩm của tôi
+                                    sẽ làm thay đổi cách bạn làm việc và giải trí. Đừng bỏ lỡ cơ hội sở hữu sản
+                                    phẩm tuyệt vời này. Hãy truy cập vào sản phẩm để biết
+                                    thêm thông tin chi tiết và giá cả. Sẽ thay đổi cuộc sống của bạn,
                                     và chúng tôi rất tự hào về điều đó.</p>
                             </div>
                             <div class="tg-btns">
@@ -410,7 +230,7 @@ include('user/component/header.php');
         <!--************************************
                 New Release End
         *************************************-->
-đang làm
+        đang làm
         <!--************************************
                 Collection Count Start
         *************************************-->

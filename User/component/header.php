@@ -51,11 +51,12 @@ include('style.php');
 								</ul>
 							</div> -->
 					<div class="tg-userlogin">
-						<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
+						
 						<?
 						if (isset($_COOKIE['userID'])) {
 							if ($_COOKIE['role'] == 2) {
 								echo '
+								<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
 								<div class="user">
 								<div class="user-name">
 									<span>Chào ! Minh Quang</span>
@@ -74,6 +75,7 @@ include('style.php');
 								';
 							} else {
 								echo '
+								<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
 								<div class="user">
 								<div class="user-name">
 									<span>Chào ! Minh Quang</span>
