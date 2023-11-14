@@ -33,14 +33,32 @@ include('User/component/header.php');
                 <div class="col-md-6 mb-3">
                     <label for="country">TỈnh thành</label>
                     <select class="form-select d-block w-100 rounded-2xl" id="country" required>
-                        <option value="">Tỉnh Bà Rịa Vũng Tàu</option>
+                        <?
+                        $conn = $db->pdo_get_connection();
+                        $stmt = $conn->prepare("SELECT * FROM province");
+                        $stmt->execute();
+                        if ($stmt->rowCount() > 0) {
+                            foreach ($stmt as $row) {
+                                echo ' <option value="' . $row['province_id'] . '">' . $row['name'] . '</option>';
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label for="country">Quận / Huyện</label>
                     <select class="form-select d-block w-100 rounded-2xl" id="country" required>
-                        <option value="">Huyện Châu Đức</option>
+                        <?
+                        $conn = $db->pdo_get_connection();
+                        $stmt = $conn->prepare("SELECT * FROM district");
+                        $stmt->execute();
+                        if ($stmt->rowCount() > 0) {
+                            foreach ($stmt as $row) {
+                                echo ' <option value="' . $row['district_id'] . '">' . $row['name'] . '</option>';
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
@@ -49,7 +67,16 @@ include('User/component/header.php');
                 <div class="col-md-6 mb-3">
                     <label for="country">Phường</label>
                     <select class="form-select d-block w-100 rounded-2xl" id="country" required>
-                        <option value="">Xã Tham Đôn</option>
+                    <?
+                        $conn = $db->pdo_get_connection();
+                        $stmt = $conn->prepare("SELECT * FROM wards");
+                        $stmt->execute();
+                        if ($stmt->rowCount() > 0) {
+                            foreach ($stmt as $row) {
+                                echo ' <option value="' . $row['province_id'] . '">' . $row['name'] . '</option>';
+                            }
+                        }
+                        ?> 
                     </select>
                 </div>
 
@@ -95,40 +122,23 @@ include('User/component/header.php');
         </h4>
         <div class="flex relative py-7">
             <div class="">
-                <img src="https://routine.vn/media/catalog/product/cache/a2fcefb561dcc03dd69ce08e688653ae/1/0/10s22ttow013_-_green_3__1.jpg" class="image-checkout h-full w-full object-contain object-center" style="width: 17rem;height: 20rem;">
+                <img height="50px" src="https://routine.vn/media/catalog/product/cache/a2fcefb561dcc03dd69ce08e688653ae/1/0/10s22ttow013_-_green_3__1.jpg" class="image-checkout h-full w-full object-contain object-center" style="width: 17rem;height: 130px;">
             </div>
             <div class="product ml-3 sm:ml-6 flex flex-1 flex-col">
-                <div class="">
-                    <div class="flex justify-between">
-                        <div class="info">
-                            <h4>Iphone 20 pro</h4>
-                            <div class="flex">
-                                <p><span style="padding: 0 5px;font-weight: 500;">Black</span></p>
-                                <span class="mx-4 border-l"></span>
-                                <p><span style="padding: 0 5px;font-weight: 500;">XXL</span></p>
-                            </div>
-                            <div class="pricee  ">
-                                <h3 class="price1" style="color:red"> 15.000.000<span>đ</span></h3>
-                                <h4 class="price2" style="text-decoration-line:line-through;"> 17.000.000<span>đ</span></h4>
-                            </div>
-                            <div class="note">
-                                <p>Hàng VN chất lượng cao</p>
-                            </div>
+                <div class="flex justify-between">
+                    <div class="info">
+                        <h4>Iphone 20 pro<strong> X 1</strong></h4>
+                        <div class="pricee  ">
+                            <h3 class="price1" style="color:red"> 15.000.000<span>đ</span></h3>
                         </div>
                     </div>
                 </div>
-                <div class="flex items-end justify-between pt-4 mt-auto" style="margin-top: 0%;">
-                    <div class="content">
-                        <span class="qt-minus">-</span>
-                        <span class="qt">2</span>
-                        <span class="qt-plus">+</span>
-                    </div>
-                    <a href="">Xóa</a>
-                </div>
             </div>
         </div>
+
+
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <label style="margin-top: -5%;"><b>Thành tiền</b></label>
+            <label><b>Thành tiền</b></label>
         </h4>
         <form class="card p-2 border-0">
 
@@ -186,10 +196,6 @@ include('User/component/header.php');
         padding-bottom: 2%
     }
 
-    .py-7 {
-        height: 50%;
-    }
-
     .border-0 {
         border: none !important;
     }
@@ -200,6 +206,10 @@ include('User/component/header.php');
 
     .ml-3 {
         margin-left: .75rem;
+    }
+
+    .product {
+        display: block;
     }
 
     .mt-1\.5 {
