@@ -172,7 +172,7 @@ include('style.php');
 									<option value="0">Tất cả</option>
 									<?
 									$product = new ProductFunction();
-									$row = $product->category_type_select_all();
+									$row = $product->category_type_select_all($category_name);
 									foreach ($row as $ketqua) {
 										extract($ketqua);
 									?>
@@ -185,7 +185,6 @@ include('style.php');
 								<button name="search-btn" type="submit"><i class="icon-magnifier"></i></button>
 							</fieldset>
 
-							<!-- <a href="">+ Advanced Search</a> -->
 						</form>
 						<style>
 							#category-select {

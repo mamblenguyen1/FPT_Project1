@@ -18,7 +18,7 @@
                 </ul>
                 <?
                 $product = new ProductFunction();
-                $row = $product->category_type_select_all();
+                $row = $product->category_select_all();
                 foreach ($row as $ketqua) {
                     extract($ketqua);
                 ?>
