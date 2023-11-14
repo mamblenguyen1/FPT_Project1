@@ -171,7 +171,6 @@ include('style.php');
 								<input type="text" name="search" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
 								<button type="submit"><i class="icon-magnifier"></i></button>
 							</fieldset>
-							<!-- <a href="">+ Advanced Search</a> -->
 						</form>
 					</div>
 				</div>
