@@ -51,7 +51,7 @@ include('style.php');
 								</ul>
 							</div> -->
 					<div class="tg-userlogin">
-						
+
 						<?
 						if (isset($_COOKIE['userID'])) {
 							if ($_COOKIE['role'] == 2) {
@@ -166,13 +166,45 @@ include('style.php');
 
 					</div>
 					<div class="tg-searchbox">
-						<form class="tg-formtheme tg-formsearch">
+						<form class="tg-formtheme tg-formsearch" method="POST" action="./?pages=user&action=products">
 							<fieldset>
-								<input type="text" name="search" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
-								<button type="submit"><i class="icon-magnifier"></i></button>
+								<select id="category-select" name="cate">
+									<option value="0">Tất cả</option>
+									<?
+									$product = new ProductFunction();
+									$row = $product->category_type_select_all();
+									foreach ($row as $ketqua) {
+										extract($ketqua);
+									?>
+										<option value="<?= $category_id ?>"><?= $category_name ?></option>
+									<?
+									}
+									?>
+								</select>
+								<input id="search-input" type="text" name="keyword" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
+								<button name="search-btn" type="submit"><i class="icon-magnifier"></i></button>
 							</fieldset>
+
 							<!-- <a href="">+ Advanced Search</a> -->
 						</form>
+						<style>
+							#category-select {
+								width: 20%;
+								flex: 1;
+								border: 1px solid #ccc;
+								border-radius: 4px 0 0 4px;
+								padding: 8px;
+								height: 44px;
+							}
+
+							#search-input {
+								width: 72%;
+								flex: 1;
+								border: 1px solid #ccc;
+								border-radius: 0 0 0 0;
+								margin-left: -4;
+							}
+						</style>
 					</div>
 				</div>
 			</div>
