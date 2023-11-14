@@ -65,6 +65,32 @@ include('user/component/header.php');
                                             AND 
                                             category.category_id = products.category_id
                                             AND products.is_deleted = 1 AND products.type_id = $type_render");
+                                        } else if (isset($_POST['search-btn'])) {
+                                            $keyword_render = $_POST['keyword'];
+                                            $category_render = $_POST['cate'];
+                                            if ($category_render == 0) {
+                                                $conn = $db->pdo_get_connection();
+                                                $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                                            type.type_id = products.type_id
+                                            AND 
+                                            category.category_id = products.category_id
+                                            AND
+                                            products.is_deleted = 1 
+                                            AND 
+                                            products.product_name LIKE '%$keyword_render%'");
+                                            } else {
+                                                $conn = $db->pdo_get_connection();
+                                                $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                                            type.type_id = products.type_id
+                                            AND 
+                                            category.category_id = products.category_id
+                                            AND
+                                            products.is_deleted = 1 
+                                            AND
+                                            category.category_id = $category_render
+                                            AND 
+                                            products.product_name LIKE '%$keyword_render%' OR type.type_name LIKE '%$keyword_render%' OR category.category_name LIKE '%$keyword_render%'");
+                                            }
                                         } else {
                                             $conn = $db->pdo_get_connection();
                                             $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
@@ -120,7 +146,13 @@ include('user/component/header.php');
                                                     </div>
                                                 </div>
                                             </div>';
-                                            };;
+                                            };
+                                        } else {
+                                            if ($category_render == 0) {
+                                                echo '<h4>Không tìm thấy sản phẩm <strong>' . $keyword_render . '</strong></h4>';
+                                            } else {
+                                                echo '<h4>Không tìm thấy sản phẩm <strong>' . $keyword_render . '</strong> theo danh mục trên   </h4>';
+                                            }
                                         };
                                         ?>
                                     </div>
