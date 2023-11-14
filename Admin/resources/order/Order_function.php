@@ -72,10 +72,10 @@ class ORDER
             }
         }
     }
-    function updateCartQty($detailCommentId, $cartQty)
+    function updateCartQty($order_detail_id , $cartQty)
     {
         $db = new connect();
-        $select = "UPDATE `order_detail` SET order_quantity = $cartQty  WHERE order_detail_id    = $detailCommentId";
+        $select = "UPDATE `order_detail` SET order_quantity = $cartQty  WHERE order_detail_id = $order_detail_id ";
         $result = $db->pdo_execute($select);
         return $result;
     }
@@ -88,7 +88,13 @@ class ORDER
         $result = $db->pdo_execute($select);
         return $result;
     }
-
+    function deleteCartDetailAd($productID)
+    {
+        $db = new connect();
+        $sql = "DELETE FROM order_detail WHERE order_detail.order_detail_id  = $productID";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
     function updateCartTotal($userId, $total)
     {
         $db = new connect();
@@ -243,13 +249,7 @@ class ORDER
     }
 
 
-    function deleteCartDetailAd($productID)
-    {
-        $db = new connect();
-        $sql = "DELETE FROM cartdetail WHERE cartdetail.cartDetailId = $productID";
-        $result = $db->pdo_execute($sql);
-        return $result;
-    }
+
     // Function order
 
 

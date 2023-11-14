@@ -5,8 +5,6 @@ include('user/component/header.php');
 if (isset($_POST['buy'])) {
   $product_id = $_POST['product_id'];
   $qty = $_POST['qty'];
-  //
-  // exit();
   if (isset($_COOKIE['userID'])) {
     $userid = $_COOKIE['userID'];
     $qty = intval($qty);
@@ -26,6 +24,19 @@ if (isset($_POST['buy'])) {
     echo '<script>window.location.href="index.php?act=products"</script>';
   }
 }
+if (isset($_POST['deleteCart'])) {
+  $cartdeId = $_POST['cartDetailId'];
+  $order->deleteCartDetailAd($cartdeId);
+}
+if (isset($_POST['updateQty'])) {
+  $cartdeId = $_POST['cartDetailId'];
+  $cartdeQty = $_POST['cartqty'];
+  echo $cartdeId, $cartdeQty;
+  // exit();
+  $order->updateCartQty($cartdeId, $cartdeQty);
+}
+
+
 
 
 
@@ -61,8 +72,10 @@ if (isset($_POST['buy'])) {
         </tr>
       </thead>
       <tbody>';
+      $total_price = 0;
     foreach ($stmt as $row) {
       echo '
+      <form action="" method="post">
           <tr>
           <td data-th="Product">
             <div class="row">
@@ -75,15 +88,19 @@ if (isset($_POST['buy'])) {
           </td>
           <td data-th="Price">' . $row['product_price'] . '</td>
           <td data-th="Quantity">
-            <input type="number" value="' . $row['order_quantity'] . '" class="form-control text-center" value="1">
+            <input type="number" value="' . $row['order_quantity'] . '" class="form-control text-center" name="cartqty">
           </td>
           <td data-th="Subtotal" class="text-center">' . $row['order_quantity'] * $row['product_price'] . '</td>
           <td class="actions" data-th="">
-            <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-            <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+          <input type="hidden" name="cartDetailId" value="' . $row['order_detail_id'] . '" id="">
+          <button name="updateQty" type="submit" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+          <button name="deleteCart" type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>    
+          </form>        
           </td>
         </tr>
           ';
+          $total_product = $row['order_quantity'] * $row['product_price'];
+          $total_price = $total_price + $total_product;
     }
 
     echo '
@@ -95,7 +112,7 @@ if (isset($_POST['buy'])) {
           <tr>
             <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
             <td colspan="2" class="hidden-xs"></td>
-            <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+            <td class="hidden-xs text-center"><strong>Total '.$total_price.'</strong></td>
             <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
           </tr>
         </tfoot>
@@ -106,12 +123,12 @@ if (isset($_POST['buy'])) {
   Bạn chưa có sản phẩm trong giỏ hàng ! ! !
 </div>
 <a name="" id="" class=" btn btn-primary" href="index.php?pages=user&action=home" role="button">Trở về trang sản phẩm</a>
-        ';
+      
+';
   }
 
 
   ?>
-
 
 </table>
 <!-- <script src="../../js/cart.js"></script> -->
@@ -127,7 +144,6 @@ include('user/component/footer.php');
 <!-- <script src="../../js/cart.js"></script> -->
 
 
-  
 <style>
   .alert-cart {
     text-align: center;
