@@ -18,7 +18,7 @@ if (isset($_POST['addType'])) {
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
-            <h1 style="padding-left: 30px;">Thêm danh mục con(Hãng , phụ kiện)</h1>
+            <h1 style="padding-left: 30px;">Thêm danh mục con (Hãng , phụ kiện)</h1>
         </div>
         <div class="add-cate-form">
             <div class="card card-primary">

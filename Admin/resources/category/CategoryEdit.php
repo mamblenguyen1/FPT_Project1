@@ -29,12 +29,12 @@ if (isset($_POST['edit'])) {
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
-            <h1 style="padding-left: 30px;">Thêm danh mục</h1>
+            <h1 style="padding-left: 30px;">Chỉnh sửa danh mục</h1>
         </div>
         <div class="add-cate-form">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Thêm danh mục mới vào hệ thống !!!</h3>
+                    <h3 class="card-title">Chỉnh sửa danh mục từ hệ thống !!!</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->

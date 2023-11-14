@@ -1,13 +1,10 @@
 <?php include './Admin/componant/header.php' ?>
-
 <?php include './admin/componant/sidebar.php' ?>
+
 <?
 if(isset($_POST['details'])){
  $product_id = $_POST['product_id'];
  $product_id = $_POST['comment_id'];
-
-
-
 };
 ?>
 <div class="main-panel">
@@ -44,12 +41,12 @@ if(isset($_POST['details'])){
                                                 <td>' . $row['comment_date'] . '</td>
                                                 <td>' . $row['comment_content'] . '</td>
                                                 <td>
-                                                  <form action="index.php?pages=admin&action=commentDetail" method="post">
+                                                  <form action="index.php?pages=admin&action=commentReply" method="post">
                                                     <input type="hidden" value="' . $row['product_id'] . '" name="product_id">
                                                     <input type="hidden" value="' . $row['comment_id'] . '" name="comment_id">
                                                     <input type="hidden" value="' . $row['product_name'] . '" name="product_name">
                                                     <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
-                                                    <button type="submit" name="ProductEdit" class="btn  btn-outline-primary">Trả lời</button>
+                                                    <button type="submit" name="CommentReply" class="btn  btn-outline-primary">Trả lời</button>
                                                     <button type="submit" name="deleteproduct" class="btn  btn-outline-danger">Ẩn</button>
                                                 </form>
                                               </td>
