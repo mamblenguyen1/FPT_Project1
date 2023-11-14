@@ -344,35 +344,6 @@ if ($product->count_view($user_id, $product_id) == 0) {
 															}
 															?>
 
-															<div class="comment">
-																<div class="comment-info">
-																	<div class="user_cmt">
-																		<p> <strong>Nguyễn Minh Quang 1: </strong>
-																		</p>
-																		<p>23 - 11 - 2023</p>
-																	</div>
-
-																	<p>cmt k phải của user , có thể trả lời</p>
-																	<div class="replay-cmt">
-																		<p> <strong>Tài khoản trả lời: </strong>
-																		</p>
-																		<p>trả lời của user khác</p>
-																	</div>
-
-																</div>
-																<br>
-																<div class="item1">
-																	<div class="item-header btn btn-primary" class="editcmt">Trả lời</div>
-																	<div class="item-content">
-																		<form action="componant/editcmt.php" method="post">
-																			<input type="hidden" name="pid" value="' . $row['sachma'] . '" id="">
-																			<input type="hidden" name="detailCommentId" value="' . $row['detailCommentId'] . '" id="">
-																			<input type="text" class="inp-cmt" name="content" value="' . $row['content'] . '" id="">
-																			<button type="submit" class="btn-cmt" name="edituser">Sửa Bình Luận</button>
-																		</form>
-																	</div>
-																</div>
-															</div>
 
 														</div>
 													</div>

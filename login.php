@@ -38,14 +38,13 @@ if (isset($_POST["submitreg"])) {
   $pass1 = $_POST["pass1"];
   $pass2 = $_POST["pass2"];
   $username = $_POST["username"];
-  $address = $_POST["address"];
   $phone = $_POST["phone"];
   $kh = new UserFunction();
-  if (!empty($regEmail) && !empty($pass1) && !empty($pass2) && !empty($username) && !empty($address) && !empty($phone) && $pass1 == $pass2) {
+  if (!empty($regEmail) && !empty($pass1) && !empty($pass2) && !empty($username) && !empty($phone) && $pass1 == $pass2) {
     if ($kh->checkDuplicateEmail($regEmail)) {
       echo '<div class="danger" role="alert"> Email đã tồn tại! </div>';
     } else {
-      $kh->user_create($username, $regEmail, $phone, $address, $pass1);
+      $kh->user_create($username, $regEmail, $phone, $pass1);
       echo '<div class="success" role="alert"> Chúc mừng bạn đã đăng ký thành công! </div>';
     }
   } else {
@@ -137,11 +136,6 @@ if (isset($_POST["submitreg"])) {
             <div class="group">
               <label for="user" class="label">Tên người dùng</label>
               <input id="user" name="username" type="text" class="input">
-            </div>
-
-            <div class="group">
-              <label for="user" class="label">Địa chỉ</label>
-              <input id="user" name="address" type="text" class="input">
             </div>
 
             <div class="group">
