@@ -11,7 +11,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <button type="button" class="btn btn-outline-primary"><a href="?pages=admin&action=UserAdd">Thêm Tài Khoản</a></button>
+                            <a href="?pages=admin&action=UserAdd"><button type="button" class="btn btn-outline-primary">Thêm Tài Khoản</button></a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -45,7 +45,7 @@
                                                 <td><?= $created_at ?></td>
                                                 <td>
                                                     <form action="index.php?pages=admin&action=UserEdit" method="post">
-                                                        <input type="hidden" value="<? echo $user_id ?>" name="user_id">
+                                                        <input type="hidden" value="<?= $user_id ?>" name="user_id">
                                                         <button type="submit" name="edit" class="btn btn-outline-primary">Chỉnh sửa</button>
                                                         <button type="submit" onclick="return confirm('Bạn Có đồng ý xóa không ?')" name="delete" class="btn btn-outline-danger">Xóa</button>
                                                     </form>

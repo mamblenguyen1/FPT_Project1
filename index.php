@@ -69,6 +69,9 @@ if (isset($_GET['pages'])) {
                         case 'commentDetail':
                             include './Admin/resources/comment/CommentDetail.php';
                             break;
+                        case 'commentReply':
+                            include './Admin/resources/comment/CommentReply.php';
+                            break;
                             // detail
                         case 'productDetail':
                             include './Admin/resources/product/productDetail.php';
@@ -185,4 +188,3 @@ if (isset($_GET['pages'])) {
     include './User/resources/home.php';
 }
 ?>
-

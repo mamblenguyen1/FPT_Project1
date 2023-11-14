@@ -2,26 +2,26 @@
 class UserFunction
 {
     //thêm
-    function user_insert($user_name, $email, $user_phone_number, $user_address, $user_password, $role_id)
+    function user_insert($user_name, $email, $user_phone_number, $province , $district , $wards, $Stress ,$user_password, $role_id)
     {
         $db = new connect();
-        $sql = "INSERT INTO user(user_name, email, user_phone_number, user_address, user_password, role_id, is_deleted) VALUES ('$user_name','$email' , '$user_phone_number', '$user_address', '$user_password', $role_id, 1)";
+        $sql = "INSERT INTO user(user_name, email, user_phone_number, province_id, district_id , wards_id, user_stress,user_password, role_id, is_deleted) VALUES ('$user_name','$email' , '$user_phone_number', $province , $district, $wards, '$Stress', '$user_password', $role_id, 1)";
         $result = $db->pdo_execute($sql);
         return $result;
     }
 
-    function user_create($user_name, $email, $user_phone_number, $user_address, $user_password)
+    function user_create($user_name, $email, $user_phone_number, $user_password)
     {
         $db = new connect();
-        $sql = "INSERT INTO user(user_name, email, user_phone_number, user_address, user_password, role_id, is_deleted) VALUES ('$user_name','$email' , '$user_phone_number', '$user_address', '$user_password', 2, 1)";
+        $sql = "INSERT INTO user(user_name, email, user_phone_number, user_password, role_id, is_deleted) VALUES ('$user_name','$email' , '$user_phone_number', '$user_password', 2, 1)";
         $result = $db->pdo_execute($sql);
         return $result;
     }
     //
-    function update_user($user_name, $user_password, $user_phone_number, $user_address, $role_id, $user_id)
+    function update_user($user_name, $user_password, $user_phone_number, $province, $district,  $wards,  $Stress, $role_id, $user_id)
     {
         $db = new connect();
-        $select = "UPDATE `user` SET user_name = '$user_name' , user_password = '$user_password', user_phone_number = '$user_phone_number', user_address = '$user_address', role_id = $role_id  WHERE user_id = $user_id";
+        $select = "UPDATE `user` SET user_name = '$user_name' , user_password = '$user_password', user_phone_number = '$user_phone_number', province_id = $province, district_id = $district, wards_id = $wards, user_stress = '$Stress', role_id = $role_id  WHERE user_id = $user_id";
         $result = $db->pdo_execute($select);
         return $result;
     }
@@ -43,6 +43,48 @@ class UserFunction
             return $row[$column];
         }
     }
+
+    function getInfoProvince($userID, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `user`, province WHERE province.province_id = user.province_id AND user_id = $userID";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    
+    function getInfoDistrict($userID, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `user`, district WHERE district.district_id  = user.district_id  AND user_id = $userID";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
+    function getInfoWards($userID, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `user`, wards WHERE wards.wards_id = user.wards_id AND user_id = $userID";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
+    function getInfo($userID, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `user` WHERE user_id = $userID";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
+
     function update_Pass_user($user_password, $user_id)
     {
         $db = new connect();

@@ -64,11 +64,11 @@ if (isset($_POST['editProduct'])) {
         <div class="add-cate-form">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Thêm sản phẩm mới vào hệ thống !!!</h3>
+                    <h3 class="card-title">Sửa sản phẩm từ hệ thống !!!</h3>
                 </div>
 
                 <form action="" method="post" enctype="multipart/form-data">
-                    <input name="product_id" type="text" class="form-control" value="<? echo $product->getInfoSP1($ProductId, 'product_id') ?>">
+                    <input name="product_id" type="hidden" class="form-control" value="<? echo $product->getInfoSP1($ProductId, 'product_id') ?>">
 
                     <div class="card-body">
                         <!-- Tên Laptop -->
