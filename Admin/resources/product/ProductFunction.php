@@ -29,12 +29,6 @@ class ProductFunction
         }
     }
     //truy van hien toan bo sp
-    function category_select_all()
-    {
-        $db = new connect();
-        $sql = "SELECT * FROM category";
-        return $db->pdo_query($sql);
-    }
 
     function take_category()
     {
@@ -45,10 +39,17 @@ class ProductFunction
     }
 
 
-    function category_type_select_all()
+    function category_select_all()
     {
         $db = new connect();
         $sql = "SELECT * FROM category";
+        return $db->pdo_query($sql);
+    }
+
+    function category_type_select_all($category_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM category, type WHERE category.category_id=type.category_id AND category.category_id=$category_id";
         return $db->pdo_query($sql);
     }
 

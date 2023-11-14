@@ -51,7 +51,7 @@ include('style.php');
 								</ul>
 							</div> -->
 					<div class="tg-userlogin">
-						
+
 						<?
 						if (isset($_COOKIE['userID'])) {
 							if ($_COOKIE['role'] == 2) {
@@ -166,13 +166,44 @@ include('style.php');
 
 					</div>
 					<div class="tg-searchbox">
-						<form class="tg-formtheme tg-formsearch">
+						<form class="tg-formtheme tg-formsearch" method="POST" action="./?pages=user&action=products">
 							<fieldset>
-								<input type="text" name="search" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
-								<button type="submit"><i class="icon-magnifier"></i></button>
+								<select id="category-select" name="cate">
+									<option value="0">Tất cả</option>
+									<?
+									$product = new ProductFunction();
+									$row = $product->category_type_select_all($category_name);
+									foreach ($row as $ketqua) {
+										extract($ketqua);
+									?>
+										<option value="<?= $category_id ?>"><?= $category_name ?></option>
+									<?
+									}
+									?>
+								</select>
+								<input id="search-input" type="text" name="keyword" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
+								<button name="search-btn" type="submit"><i class="icon-magnifier"></i></button>
 							</fieldset>
-							<!-- <a href="">+ Advanced Search</a> -->
+
 						</form>
+						<style>
+							#category-select {
+								width: 20%;
+								flex: 1;
+								border: 1px solid #ccc;
+								border-radius: 4px 0 0 4px;
+								padding: 8px;
+								height: 44px;
+							}
+
+							#search-input {
+								width: 72%;
+								flex: 1;
+								border: 1px solid #ccc;
+								border-radius: 0 0 0 0;
+								margin-left: -4;
+							}
+						</style>
 					</div>
 				</div>
 			</div>
@@ -194,67 +225,62 @@ include('style.php');
 						<div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
 							<ul>
 								<li class="menu-item-has-children menu-item-has-mega-menu">
-									<a href="">Tất cả danh mục</a>
+									<a href="javascript:void(0);">Tất cả danh mục</a>
+
 									<div class="mega-menu">
-										<div class="tg-widgetcontent">
-											<?
-											$product = new ProductFunction();
-											$row = $product->category_type_select_all();
-											foreach ($row as $ketqua) {
-												extract($ketqua);
-											?>
-												<ul>
-													<li><a href="./?pages=user&action=products&category=<?= $category_id ?>"><span><?= $category_name ?></span></a>
-													</li>
-												</ul>
-											<?
-											}
-											?>
-										</div>
+										<?
+										$row = $product->category_select_all();
+										foreach ($row as $ketqua) {
+											extract($ketqua);
+										?>
+											<ul class="tg-themetabnav" role="tablist">
+												<li role="presentation" class="active">
+													<a href="./?pages=user&action=products&category=<?= $category_id ?>" aria-controls="artandphotography" role="tab" data-toggle="tab"><span><?= $category_name ?></span></a>
+												</li>
+											</ul>
+											<div class="tab-content tg-themetabcontent">
+												<div role="tabpanel" class="tab-pane active" id="artandphotography">
+													<ul>
+														<li>
+															<div class="tg-linkstitle">
+																<h2>Hãng</h2>
+															</div>
+															<?
+															$row1 = $product->category_type_select_all($category_id);
+															foreach ($row1 as $ketqua1) {
+																extract($ketqua1);
+															?>
+																<ul>
+																	<li><a href=""><?=$type_name?></a></li>
+																</ul>
+															<?
+															}
+															?>
+														</li>
+													</ul>
+												</div>
+											</div>
+										<?
+										}
+										?>
 									</div>
 								</li>
+
+								<li class="">
+									<a href="index.php?pages=user&action=home">Trang Chủ</a>
+								</li>
+
+								<li class="">
+									<a href="index.php?pages=user&action=products">Sản Phẩm</a>
+								</li>
+
 								<li>
-									<a href="index.php?pages=user&action=home">Trang chủ</a>
-									<!-- <ul class="sub-menu">
-										<li class="current-menu-item"><a href="index-2.html">Home V one</a></li>
-										<li><a href="indexv2.html">Home V two</a></li>
-										<li><a href="indexv3.html">Home V three</a></li>
-									</ul> -->
+									<a href="#">Tin Tức Công Nghệ</a>
 								</li>
-								<!-- <li class="menu-item-has-children">
-									<a href="">Authors</a>
-									<ul class="sub-menu">
-										<li><a href="authors.html">Authors</a></li>
-										<li><a href="authordetail.html">Author Detail</a></li>
-									</ul>
-								</li> -->
-								<li> <a class="link-header" href="index.php?pages=user&action=products">Sản phẩm</a></li>
-								<li><a class="link-header" href="index.php?pages=user&action=introduce">Giới thiệu</a></li>
-								<li class="menu-item-has-children">
-									<a href="">Tin tức công nghệ</a>
-									<ul class="sub-menu">
-										<li><a href="newslist.html">News List</a></li>
-										<li><a href="newsgrid.html">News Grid</a></li>
-										<li><a href="newsdetail.html">News Detail</a></li>
-									</ul>
+
+								<li>
+									<a href="">Liên Hệ</a>
 								</li>
-								<li><a class="link-header" href="index.php?pages=user&action=contact">Liên hệ</a></li>
-								<!-- <li><a href="contactus.html">Liên hệ</a></li> -->
-								<!-- <li class="menu-item-has-children current-menu-item">
-									<a href=""><i class="icon-menu"></i></a>
-									<ul class="sub-menu">
-										<li class="menu-item-has-children">
-											<a href="aboutus.html">Products</a>
-											<ul class="sub-menu">
-												<li><a href="products.html">Products</a></li>
-												<li><a href="productdetail.html">Product Detail</a></li>
-											</ul>
-										</li>
-										<li><a href="aboutus.html">About Us</a></li>
-										<li><a href="404error.html">404 Error</a></li>
-										<li><a href="comingsoon.html">Coming Soon</a></li>
-									</ul>
-								</li> -->
 							</ul>
 						</div>
 					</nav>
