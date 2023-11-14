@@ -10,9 +10,23 @@ if (isset($_GET['category_id'])) {
 	$category_id = $_GET['category_id'];
 }
 
+if (isset($_POST['editcomment'])) {
+	if (isset($_GET['product_id'])) {
+		$product_id = $_GET['product_id'];
+	}
+	if (isset($_GET['category_id'])) {
+		$category_id = $_GET['category_id'];
+	}
+	$content = $_POST['content'];
+	$comment_detail_id = $_POST['detailCommentId'];
 
-
-
+	if (empty($content)) {
+	} else {
+			$comment->update_cmt($comment_detail_id , $content);
+			echo '<script>alert("Chỉnh sửa bình luận thành công")</script>';
+		   echo '<script>window.location.href="index.php?pages=user&action=productdetail&category_id='.$category_id.'&product_id='.$product_id.'"</script>';
+	}
+}
 // đếm view
 $user_id = isset($_COOKIE['userID']) ? $_COOKIE['userID'] : null;
 if ($product->count_view($user_id, $product_id) == 0) {
@@ -70,11 +84,11 @@ if ($product->count_view($user_id, $product_id) == 0) {
 													</ul>
 													<div class="tg-quantityholder">
 														<form action="index.php?pages=user&action=cart" method="post">
-															<input type="hidden" value="<?= $product_id?>" name="product_id">
+															<input type="hidden" value="<?= $product_id ?>" name="product_id">
 															<a class="btn btn-primary" onclick="giamSoLuong()">-</a>
 															<input type="number" id="hien-thi-gio-hang" name="qty">
 															<a class="btn btn-primary" onclick="tangSoLuong()">+</a>
-															<button type="submit" class="tg-btn tg-active tg-btn-lg" name="buy">Mua ngay  </button>
+															<button type="submit" class="tg-btn tg-active tg-btn-lg" name="buy">Mua ngay </button>
 														</form>
 													</div>
 													<button class="tg-btnaddtowishlist" href="">
@@ -261,10 +275,10 @@ if ($product->count_view($user_id, $product_id) == 0) {
 																AND 
 																user.user_id <>($_COOKIE[userID]) 
 																");
-															$stmt->execute();
-															if ($stmt->rowCount() > 0) {
-																foreach ($stmt as $row) {
-																	echo '
+																$stmt->execute();
+																if ($stmt->rowCount() > 0) {
+																	foreach ($stmt as $row) {
+																		echo '
 													<div class="comment">
 													<div class="comment-info">
 													<div class="user_cmt">
@@ -325,9 +339,9 @@ if ($product->count_view($user_id, $product_id) == 0) {
 												</div>
 												<hr>
 														';
+																	}
 																}
 															}
-														}
 															?>
 
 															<div class="comment">

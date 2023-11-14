@@ -44,7 +44,13 @@ class comment
         }
     }
 
-
+    function update_cmt($detailCommentId, $content)
+    {
+        $db = new connect();
+        $select = "UPDATE comment_detail SET comment_content = '$content'  WHERE comment_detail_id   = $detailCommentId";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
     public function DuplicateColumn($product_id)
     {
         $db = new connect();
@@ -154,13 +160,7 @@ class comment
         $result = $db->pdo_execute($sql);
         return $result;
     }
-    function update_cmt($detailCommentId, $content)
-    {
-        $db = new connect();
-        $select = "UPDATE detailcomments SET content = '$content'  WHERE detailCommentId  = $detailCommentId";
-        $result = $db->pdo_execute($select);
-        return $result;
-    }
+ 
     function CountAllCmtDetails()
     {
         $db = new connect();

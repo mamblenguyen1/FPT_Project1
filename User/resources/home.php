@@ -49,6 +49,7 @@ include('user/component/header.php');
                         <div class="tg-sectionhead">
                             <h2><span>Các</span>Sản phẩm được xem nhiều nhất</h2>
                             <a class="tg-btn" href="index.php?pages=user&action=products">Xem tất cả sản phẩm</a>
+
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -66,14 +67,14 @@ include('user/component/header.php');
                             if ($stmt->rowCount() > 0) {
                                 foreach ($stmt as $row) {
 
-                                    $product_name_text = $product->substringtext($row['product_name'], 25);
+                                    $product_name_text = $product->substringtext($row['product_name'], 22);
                                     echo '
                                     <div class="item">
                                 <div class="tg-postbook">
                                     <figure class="tg-featureimg">
                                         <div class="tg-bookimg">
-                                            <div class="tg-frontcover"><img src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
-                                            <div class="tg-backcover"><img src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                        <div class="tg-frontcover"><img style="height: 150px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                        <div class="tg-backcover"><img style="height: 150px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
                                         </div>
                                         <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
                                             <i class="icon-heart"></i>
