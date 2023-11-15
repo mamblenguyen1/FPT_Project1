@@ -66,9 +66,9 @@ include('user/component/header.php');
                                             AND 
                                             category.category_id = products.category_id
                                             AND products.is_deleted = 1 AND products.type_id = $type_render");
-                                        } else if (isset($_POST['search-btn'])) {
-                                            $keyword_render = $_POST['keyword'];
-                                            $category_render = $_POST['cate'];
+                                        } else if (isset($_GET['search'])) {
+                                            $keyword_render = $_GET['search'];
+                                            $category_render = $_GET['id'];
                                             if ($category_render == 0) {
                                                 $conn = $db->pdo_get_connection();
                                                 $stmt = $conn->prepare("SELECT * FROM products , category , type
@@ -111,6 +111,7 @@ include('user/component/header.php');
                                                 AND products.is_deleted = 1                                                
                                                 AND type.type_name LIKE '%$keyword_render%'
                                                     )");
+
                                             }
                                         } else {
                                             $conn = $db->pdo_get_connection();
