@@ -1,8 +1,6 @@
 <?
 include('user/component/header.php');
 ?>
-
-
 <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
 
     <main id="tg-main" class="tg-main tg-haslayout">
