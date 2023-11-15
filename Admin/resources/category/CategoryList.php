@@ -12,7 +12,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header" style="width: 200px;">
-                            <button type="button" class="btn btn-block btn-outline-primary"><a href="?pages=admin&action=addcate">Thêm danh mục</a></button>
+                        <a href="?pages=admin&action=addcate" class="btn btn-block btn-outline-primary">Thêm danh mục</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

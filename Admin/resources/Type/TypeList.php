@@ -13,7 +13,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <button type="button" class="btn btn-outline-primary"><a href="?pages=admin&action=TypeAdd">Thêm danh mục con</a></button>
+                            <a href="?pages=admin&action=TypeAdd" class="btn btn-outline-primary">Thêm danh mục con</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">

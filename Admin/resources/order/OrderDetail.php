@@ -47,7 +47,13 @@ if (isset($_POST['detail_order'])) {
                           <td>' . $row['product_price'] * $row['order_quantity'] . '</td>
                           <td></td>
                           <td>' . $row['order_date'] . '</td>
-                          <td></td>
+                          <td>
+                            <select name="role_id" id="" class="form-control select2" style="width: 100%;">
+                            <option selected value="2">Đã giao</option>
+                            <option selected value="1">Đang giao</option>
+                            <option selected value="0">Chưa giao</option>
+                            </select>
+                          </td>
                           <td>
                                 <form action="index.php?pages=admin&action=OrderDetail" method="post">
                                   <button type="submit" class="btn btn-danger" name="detail_order"> <i class="fa fa-trash"></i></button>

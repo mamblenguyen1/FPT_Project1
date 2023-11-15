@@ -11,7 +11,7 @@ if (isset($_POST['them_user'])) {
   $district = $_POST['district'];
   $wards = $_POST['wards'];
   $role_id = $_POST['role_id'];
-  $Stress = $_POST['Stress'];
+  $Street = $_POST['Street'];
 
   // echo $user_name;
   // echo $email;
@@ -22,8 +22,8 @@ if (isset($_POST['them_user'])) {
   // echo $wards;
   // echo $role_id;
   // exit();
-  if (($user_name != '') && ($email != '') && ($user_password != '') && ($Stress != '') && ($user_phone_number != '') && ($Province != '') && ($district != '') && ($wards != '') && ($user_password != '') && ($role_id != '')) {
-    $user->user_insert($user_name, $email, $user_phone_number, $Province, $district, $wards, $Stress ,$user_password, $role_id);
+  if (($user_name != '') && ($email != '') && ($user_password != '') && ($Street != '') && ($user_phone_number != '') && ($Province != '') && ($district != '') && ($wards != '') && ($user_password != '') && ($role_id != '')) {
+    $user->user_insert($user_name, $email, $user_phone_number, $Province, $district, $wards, $Street ,$user_password, $role_id);
     echo '<script>alert("Thêm tài khoản thành công !!!")</script>';
     echo '<script>window.location.href="index.php?pages=admin&action=UserList</script>';
   }
@@ -207,11 +207,11 @@ if (isset($_POST['them_user'])) {
 
             <div class="form-group">
               <label>Đường</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" name="Stress">
+              <input type="text" class="form-control" id="exampleInputEmail1" name="Street">
             </div>
             <?
-            if (isset($_POST["Stress"])) {
-              if (empty($_POST["Stress"])) {
+            if (isset($_POST["Street"])) {
+              if (empty($_POST["Street"])) {
                 echo '<span class="vaild">Xin vui lòng nhập đường</span>';
               } else {
                 echo '';

@@ -21,13 +21,13 @@ if (isset($_POST['sua_user'])) {
   $Province = $_POST['Province'] ?? "";
   $district = $_POST['district'] ?? "";
   $wards = $_POST['wards'] ?? "";
-  $Stress = $_POST['Stress'] ?? "";
+  $Street = $_POST['Street'] ?? "";
   $role_id = $_POST['role_id'] ?? "";
-    if (!$user_name == "" && !$user_password == "" && !$user_phone_number == "" && !$Province == ""  && !$district == ""  && !$wards == ""  && !$Stress == "" && !$role_id == "") {
+    if (!$user_name == "" && !$user_password == "" && !$user_phone_number == "" && !$Province == ""  && !$district == ""  && !$wards == ""  && !$Street == "" && !$role_id == "") {
 
-    $user->update_user($user_name, $user_password, $user_phone_number, $Province, $district, $wards, $Stress, $role_id, $user_id);
-    // echo '<script>alert("Cập nhật tài khoản thành công")</script>';
-    // echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
+    $user->update_user($user_name, $user_password, $user_phone_number, $Province, $district, $wards, $Street, $role_id, $user_id);
+    echo '<script>alert("Cập nhật tài khoản thành công")</script>';
+    echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
   } else {
     $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
   }
@@ -189,11 +189,11 @@ if (isset($_POST['sua_user'])) {
 
             <div class="form-group">
               <label>Đường</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" name="Stress" value="<? echo $user->getInfouser2($user_id, 'user_stress'); ?>">
+              <input type="text" class="form-control" id="exampleInputEmail1" name="Street" value="<? echo $user->getInfouser2($user_id, 'user_street'); ?>">
             </div>
             <?
-            if (isset($_POST["Stress"])) {
-              if (empty($_POST["Stress"])) {
+            if (isset($_POST["Street"])) {
+              if (empty($_POST["Street"])) {
                 echo '<span class="vaild">Xin vui lòng nhập đường</span>';
               } else {
                 echo '';
