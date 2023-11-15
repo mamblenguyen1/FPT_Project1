@@ -2,10 +2,10 @@
 class UserFunction
 {
     //thêm
-    function user_insert($user_name, $email, $user_phone_number, $province , $district , $wards, $Stress ,$user_password, $role_id)
+    function user_insert($user_name, $email, $user_phone_number, $province , $district , $wards, $Street ,$user_password, $role_id)
     {
         $db = new connect();
-        $sql = "INSERT INTO user(user_name, email, user_phone_number, province_id, district_id , wards_id, user_stress,user_password, role_id, is_deleted) VALUES ('$user_name','$email' , '$user_phone_number', $province , $district, $wards, '$Stress', '$user_password', $role_id, 1)";
+        $sql = "INSERT INTO user(user_name, email, user_phone_number, province_id, district_id , wards_id, user_street,user_password, role_id, is_deleted) VALUES ('$user_name','$email' , '$user_phone_number', $province , $district, $wards, '$Street', '$user_password', $role_id, 1)";
         $result = $db->pdo_execute($sql);
         return $result;
     }
@@ -18,10 +18,10 @@ class UserFunction
         return $result;
     }
     //
-    function update_user($user_name, $user_password, $user_phone_number, $province, $district,  $wards,  $Stress, $role_id, $user_id)
+    function update_user($user_name, $user_password, $user_phone_number, $province, $district,  $wards,  $Street, $role_id, $user_id)
     {
         $db = new connect();
-        $select = "UPDATE `user` SET user_name = '$user_name' , user_password = '$user_password', user_phone_number = '$user_phone_number', province_id = $province, district_id = $district, wards_id = $wards, user_stress = '$Stress', role_id = $role_id  WHERE user_id = $user_id";
+        $select = "UPDATE `user` SET user_name = '$user_name' , user_password = '$user_password', user_phone_number = '$user_phone_number', province_id = $province, district_id = $district, wards_id = $wards, user_street = '$Street', role_id = $role_id  WHERE user_id = $user_id";
         $result = $db->pdo_execute($select);
         return $result;
     }
