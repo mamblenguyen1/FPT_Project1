@@ -161,9 +161,7 @@ include('style.php');
 								</div>
 								<a href="index.php?pages=user&action=order&userID=' . isset($_COOKIE['userID']) . '">Đơn mua</a>
 							</div>
-
 						</div>
-
 					</div>
 					<div class="tg-searchbox">
 						<form class="tg-formtheme tg-formsearch" method="POST" action="./?pages=user&action=products">
@@ -172,7 +170,7 @@ include('style.php');
 									<option value="0">Tất cả</option>
 									<?
 									$product = new ProductFunction();
-									$row = $product->category_type_select_all($category_name);
+									$row = $product->category_select_all();
 									foreach ($row as $ketqua) {
 										extract($ketqua);
 									?>
@@ -234,32 +232,22 @@ include('style.php');
 											extract($ketqua);
 										?>
 											<ul class="tg-themetabnav" role="tablist">
-												<li role="presentation" class="active">
-													<a href="./?pages=user&action=products&category=<?= $category_id ?>" aria-controls="artandphotography" role="tab" data-toggle="tab"><span><?= $category_name ?></span></a>
+												<li role="presentation" class="active render-type">
+													<a class="category" href="./?pages=user&action=products&category=<?= $category_id ?>"><span><?= $category_name ?></span></a>
+													<ul>
+														<?
+														$row = $product->category_type_select_all($category_id);
+														foreach ($row as $ketqua) {
+															extract($ketqua);
+														?>
+															<li><a href="index.php?pages=user&action=products&type=<?= $type_id ?>"><?= $type_name ?></a></li>
+														<?
+														}
+														?>
+													</ul>
 												</li>
 											</ul>
-											<div class="tab-content tg-themetabcontent">
-												<div role="tabpanel" class="tab-pane active" id="artandphotography">
-													<ul>
-														<li>
-															<div class="tg-linkstitle">
-																<h2>Hãng</h2>
-															</div>
-															<?
-															$row1 = $product->category_type_select_all($category_id);
-															foreach ($row1 as $ketqua1) {
-																extract($ketqua1);
-															?>
-																<ul>
-																	<li><a href=""><?=$type_name?></a></li>
-																</ul>
-															<?
-															}
-															?>
-														</li>
-													</ul>
-												</div>
-											</div>
+
 										<?
 										}
 										?>
@@ -313,6 +301,15 @@ include('style.php');
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+	}
+
+.category{
+	font-weight: bold;
+}
+	.render-type ul li a:hover {
+		text-decoration: underline;
+		background-color: #77B748 !important;
+		color: white;
 	}
 
 	.logout {

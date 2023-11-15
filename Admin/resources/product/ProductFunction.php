@@ -42,7 +42,7 @@ class ProductFunction
     function category_select_all()
     {
         $db = new connect();
-        $sql = "SELECT * FROM category";
+        $sql = "SELECT * FROM category ";
         return $db->pdo_query($sql);
     }
 
