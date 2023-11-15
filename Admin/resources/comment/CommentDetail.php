@@ -42,10 +42,7 @@ if(isset($_POST['details'])){
                                                 <td>' . $row['comment_content'] . '</td>
                                                 <td>
                                                   <form action="index.php?pages=admin&action=commentReply" method="post">
-                                                    <input type="hidden" value="' . $row['product_id'] . '" name="product_id">
-                                                    <input type="hidden" value="' . $row['comment_id'] . '" name="comment_id">
-                                                    <input type="hidden" value="' . $row['product_name'] . '" name="product_name">
-                                                    <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
+                                                    <input type="hidden" value="' . $row['comment_detail_id'] . '" name="comment_detail_id">
                                                     <button type="submit" name="CommentReply" class="btn  btn-outline-primary">Trả lời</button>
                                                     <button type="submit" name="deleteproduct" class="btn  btn-outline-danger">Ẩn</button>
                                                 </form>

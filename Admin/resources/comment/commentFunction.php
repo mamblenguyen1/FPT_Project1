@@ -66,7 +66,13 @@ class comment
 
 
 
-
+    function Reply_comment($comment_detail_id, $content)
+    {
+        $db = new connect();
+        $select = "INSERT INTO `comment_reply` (`comment_detail_id`, `content`) VALUES ($comment_detail_id, '$content');";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
 
 
     function getInfoComment()
@@ -229,28 +235,32 @@ class comment
         $result = $db->pdo_query($sql);
         return $result;
     }
+    
+    function Rep_Show_Comment_Detail($comment_id, $user_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM comment_detail, comment, user WHERE 
+        comment_detail.comment_id = comment.comment_id AND
+       user.user_id = comment_detail.user_id AND
+       comment.comment_id = $comment_id AND
+       comment_detail.user_id =$user_id";
+        $result = $db->pdo_query_one($sql);
+        return $result;
+    }
+    function getInfoCommentDetail($comment_detail_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM comment , comment_detail,user
+        WHERE comment_detail.user_id = user.user_id
+        AND `comment`.comment_id = comment_detail.comment_id
+        AND comment_detail.comment_detail_id = $comment_detail_id
+        ";
+         $result   = $db->pdo_query($sql);
+         foreach ($result as $row) {
+             return $row[$column];
+         }
+    }
 }
-// include('../../database/pdo.php');
-
-// $cmt = new comment();
-// echo $cmt->DuplicateColumnCmt(26);
-// if($cmt->DuplicateColumn(23)){
-//     echo 'đúng';
-// }else{
-//     echo 'sai';
-
-// }
-
-
-?>
-
-<?
-// INSERT INTO comment (sachma) 
-// VALUES (24);
-// SET @product_id = LAST_INSERT_ID();
-// INSERT INTO detailcomments (cmtId, userid, content) 
-// VALUES (@product_id, 6, 'Giá trị 1'),
-//        (@product_id, 1, 'Giá trị 2');
 ?>
 
 
