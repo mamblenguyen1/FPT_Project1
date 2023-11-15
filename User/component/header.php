@@ -166,13 +166,13 @@ include('style.php');
 
 					</div>
 					<div class="tg-searchbox">
-						<form class="tg-formtheme tg-formsearch" method="POST" action="./?pages=user&action=products">
+						<form class="tg-formtheme tg-formsearch" method="POST" action="">
 							<fieldset>
 								<select id="category-select" name="cate">
 									<option value="0">Tất cả</option>
 									<?
 									$product = new ProductFunction();
-									$row = $product->category_type_select_all($category_name);
+									$row = $product->category_select_all();
 									foreach ($row as $ketqua) {
 										extract($ketqua);
 									?>
@@ -186,6 +186,13 @@ include('style.php');
 							</fieldset>
 
 						</form>
+						<?
+						if (isset($_POST['search-btn'])) {
+							$id = $_POST['cate'];
+							$search = $_POST['keyword'];
+							echo "<script>window.location.href = './?pages=user&action=products&id=$id&search=$search'</script>";
+						};
+						?>
 						<style>
 							#category-select {
 								width: 20%;
@@ -251,7 +258,7 @@ include('style.php');
 																extract($ketqua1);
 															?>
 																<ul>
-																	<li><a href=""><?=$type_name?></a></li>
+																	<li><a href=""><?= $type_name ?></a></li>
 																</ul>
 															<?
 															}
