@@ -274,12 +274,16 @@ include('style.php');
 									<a href="index.php?pages=user&action=products">Sản Phẩm</a>
 								</li>
 
+								<li class="">
+									<a href="index.php?pages=user&action=introduce">Giới thiệu</a>
+								</li>
+
 								<li>
 									<a href="#">Tin Tức Công Nghệ</a>
 								</li>
 
 								<li>
-									<a href="">Liên Hệ</a>
+									<a href="index.php?pages=user&action=introduce">Liên Hệ</a>
 								</li>
 							</ul>
 						</div>
