@@ -17,15 +17,12 @@ include './Admin/componant/sidebar.php';
                         <div class="card text-white bg-primary o-hidden h-100">
                             <div class="card-body">
                                 <div class="card-body-icon">
-                                    <i class="fa fa-fw fa-comments"></i>
+                                    <i class="fa fa-user-o"></i>
                                 </div>
-                                <div class="mr-5"><strong>50</strong> phản hồi</div>
+                                <div class="mr-5"><strong><? echo $user->Countuser() ?></strong> Tài khoản</div>
                             </div>
                             <a class="card-footer text-white clearfix small z-1" href="#">
-                                <span class="float-left">View Details</span>
-                                <span class="float-right">
-                                    <i class="fa fa-angle-right"></i>
-                                </span>
+                                <a href="index.php?pages=admin&action=UserList"><span class="float-left">Xem Ngay </span><i class="fa fa-angle-right" style="margin-left:65%"></i></a>
                             </a>
                         </div>
                     </div>
@@ -35,13 +32,11 @@ include './Admin/componant/sidebar.php';
                                 <div class="card-body-icon">
                                     <i class="fa fa-fw fa-list"></i>
                                 </div>
-                                <div class="mr-5"><strong>50</strong> Danh mục</div>
+
+                                <div class="mr-5"><strong><? echo $category->Countcategory() ?></strong> Danh mục</div>
                             </div>
                             <a class="card-footer text-white clearfix small z-1" href="#">
-                                <span class="float-left">View Details</span>
-                                <span class="float-right">
-                                    <i class="fa fa-angle-right"></i>
-                                </span>
+                                <a href="index.php?pages=admin&action=UserList"><span class="float-left">Xem Ngay </span><i class="fa fa-angle-right" style="margin-left:65%"></i></a>
                             </a>
                         </div>
                     </div>
@@ -51,13 +46,10 @@ include './Admin/componant/sidebar.php';
                                 <div class="card-body-icon">
                                     <i class="fa fa-fw fa-shopping-cart"></i>
                                 </div>
-                                <div class="mr-5"><strong>50</strong> Đơn hàng</div>
+                                <div class="mr-5"><strong><? echo $product->CountProducts() ?></strong> Sản phẩm</div>
                             </div>
                             <a class="card-footer text-white clearfix small z-1" href="#">
-                                <span class="float-left">View Details</span>
-                                <span class="float-right">
-                                    <i class="fa fa-angle-right"></i>
-                                </span>
+                                <a href="index.php?pages=admin&action=UserList"><span class="float-left">Xem Ngay </span><i class="fa fa-angle-right" style="margin-left:65%"></i></a>
                             </a>
                         </div>
                     </div>
@@ -70,28 +62,28 @@ include './Admin/componant/sidebar.php';
                                 <div class="mr-5"><strong>50</strong> Sản phẩm mới</div>
                             </div>
                             <a class="card-footer text-white clearfix small z-1" href="#">
-                                <span class="float-left">View Details</span>
-                                <span class="float-right">
-                                    <i class="fa fa-angle-right"></i>
-                                </span>
+                                <a href="index.php?pages=admin&action=UserList"><span class="float-left">Xem Ngay </span><i class="fa fa-angle-right" style="margin-left:65%"></i></a>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="chart">
                 <?php
                 $dataPoints = array(
-                    array("label" => "Danh mục 1", "y" => 30),
-                    array("label" => "Danh mục 2", "y" => 40),
-                    array("label" => "Danh mục 3", "y" => 30),
-                    array("label" => "Danh mục 4", "y" => 20),
-                    array("label" => "Danh mục 5", "y" => 10),
-                    array("label" => "Danh mục 6", "y" => 20),
-                    array("label" => "Danh mục 7", "y" => 30),
-                    array("label" => "Danh mục 8", "y" => 40),
-                    array("label" => "Danh mục 9", "y" => 50),
-                    array("label" => "Danh mục 10", "y" => 60)
+                    array("label" => "Tháng 1", "y" => $comment->CountDetailsOfMonth(1)),
+                    array("label" => "Tháng 2", "y" => $comment->CountDetailsOfMonth(2)),
+                    array("label" => "Tháng 3", "y" => $comment->CountDetailsOfMonth(3)),
+                    array("label" => "Tháng 4", "y" => $comment->CountDetailsOfMonth(4)),
+                    array("label" => "Tháng 5", "y" => $comment->CountDetailsOfMonth(5)),
+                    array("label" => "Tháng 6", "y" => $comment->CountDetailsOfMonth(6)),
+                    array("label" => "Tháng 7", "y" => $comment->CountDetailsOfMonth(7)),
+                    array("label" => "Tháng 8", "y" => $comment->CountDetailsOfMonth(8)),
+                    array("label" => "Tháng 9", "y" => $comment->CountDetailsOfMonth(9)),
+                    array("label" => "Tháng 10", "y" => $comment->CountDetailsOfMonth(10)),
+                    array("label" => "Tháng 11", "y" => $comment->CountDetailsOfMonth(11)),
+                    array("label" => "Tháng 12", "y" => $comment->CountDetailsOfMonth(12))
                 );
                 ?>
                 <script>
@@ -101,10 +93,10 @@ include './Admin/componant/sidebar.php';
                             animationEnabled: true,
                             theme: "light2", // "light1", "light2", "dark1", "dark2"
                             title: {
-                                text: "Số lượng sản phẩm theo danh mục tháng 11"
+                                text: "Thống kê số bình luận theo tháng"
                             },
                             axisY: {
-                                title: "Số lượng bán"
+                                title: "Số lượng bình luận"
                             },
                             data: [{
                                 type: "column",
@@ -117,134 +109,131 @@ include './Admin/componant/sidebar.php';
                 </script>
                 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-
-                </html>
             </div>
             <div class="table-order" style="width: 100%;">
-            <div class="card" >
-              <div class="card-header">
-                <h3 class="card-title">Thống kê đơn hàng trong tháng</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Tên khách hàng</th>
-                    <th>Số lượng </th>
-                    <th>Thời gian đặt</th>
-                    <th>Tổng tiền</th>
-                    <th>Thao tác</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>Nguyễn Minh Quang</td>
-                    <td>8</td>
-                    <td>30/10/2023</td>
-                    <td>6.000.000</td>
-                    <td>
-                        <div class="d-grid gap-2">
-                          <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Nguyễn Minh Quang</td>
-                    <td>8</td>
-                    <td>30/10/2023</td>
-                    <td>6.000.000</td>
-                    <td>
-                        <div class="d-grid gap-2">
-                          <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Nguyễn Minh Quang</td>
-                    <td>8</td>
-                    <td>30/10/2023</td>
-                    <td>6.000.000</td>
-                    <td>
-                        <div class="d-grid gap-2">
-                          <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Nguyễn Minh Quang</td>
-                    <td>8</td>
-                    <td>30/10/2023</td>
-                    <td>6.000.000</td>
-                    <td>
-                        <div class="d-grid gap-2">
-                          <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Nguyễn Minh Quang</td>
-                    <td>8</td>
-                    <td>30/10/2023</td>
-                    <td>6.000.000</td>
-                    <td>
-                        <div class="d-grid gap-2">
-                          <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Nguyễn Minh Quang</td>
-                    <td>8</td>
-                    <td>30/10/2023</td>
-                    <td>6.000.000</td>
-                    <td>
-                        <div class="d-grid gap-2">
-                          <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Nguyễn Minh Quang</td>
-                    <td>8</td>
-                    <td>30/10/2023</td>
-                    <td>6.000.000</td>
-                    <td>
-                        <div class="d-grid gap-2">
-                          <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Nguyễn Minh Quang</td>
-                    <td>8</td>
-                    <td>30/10/2023</td>
-                    <td>6.000.000</td>
-                    <td>
-                        <div class="d-grid gap-2">
-                          <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Nguyễn Minh Quang</td>
-                    <td>8</td>
-                    <td>30/10/2023</td>
-                    <td>6.000.000</td>
-                    <td>
-                        <div class="d-grid gap-2">
-                          <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
-                        </div>
-                    </td>
-                  </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Thống kê bình luận trong tháng</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Tên khách hàng</th>
+                                    <th>Số lượng </th>
+                                    <th>Thời gian đặt</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Nguyễn Minh Quang</td>
+                                    <td>8</td>
+                                    <td>30/10/2023</td>
+                                    <td>6.000.000</td>
+                                    <td>
+                                        <div class="d-grid gap-2">
+                                            <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nguyễn Minh Quang</td>
+                                    <td>8</td>
+                                    <td>30/10/2023</td>
+                                    <td>6.000.000</td>
+                                    <td>
+                                        <div class="d-grid gap-2">
+                                            <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nguyễn Minh Quang</td>
+                                    <td>8</td>
+                                    <td>30/10/2023</td>
+                                    <td>6.000.000</td>
+                                    <td>
+                                        <div class="d-grid gap-2">
+                                            <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nguyễn Minh Quang</td>
+                                    <td>8</td>
+                                    <td>30/10/2023</td>
+                                    <td>6.000.000</td>
+                                    <td>
+                                        <div class="d-grid gap-2">
+                                            <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nguyễn Minh Quang</td>
+                                    <td>8</td>
+                                    <td>30/10/2023</td>
+                                    <td>6.000.000</td>
+                                    <td>
+                                        <div class="d-grid gap-2">
+                                            <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nguyễn Minh Quang</td>
+                                    <td>8</td>
+                                    <td>30/10/2023</td>
+                                    <td>6.000.000</td>
+                                    <td>
+                                        <div class="d-grid gap-2">
+                                            <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nguyễn Minh Quang</td>
+                                    <td>8</td>
+                                    <td>30/10/2023</td>
+                                    <td>6.000.000</td>
+                                    <td>
+                                        <div class="d-grid gap-2">
+                                            <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nguyễn Minh Quang</td>
+                                    <td>8</td>
+                                    <td>30/10/2023</td>
+                                    <td>6.000.000</td>
+                                    <td>
+                                        <div class="d-grid gap-2">
+                                            <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nguyễn Minh Quang</td>
+                                    <td>8</td>
+                                    <td>30/10/2023</td>
+                                    <td>6.000.000</td>
+                                    <td>
+                                        <div class="d-grid gap-2">
+                                            <button type="button" name="" id="" class="btn btn-primary">Chi tiết</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
             </div>
         </div>
-
     </div>
 </div>
 

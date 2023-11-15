@@ -66,28 +66,13 @@ class Categories
             return $row['COUNT(*)'];
         }
     }
-    // function getInfoCateAll($column)
-    // {
-    //     try {
-    //         $db = new connect();
-    //         $conn = $db->pdo_get_connection();
-    //         $stmt = $conn->prepare("SELECT * FROM loaisach");
-    //         $stmt->execute();
-    //         if($stmt->rowCount()>0){
-    //         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    //             foreach ($row as $kq){
-    //                 echo $kq[$column]; ;
-    //             }
-    //         }
-    //         }
-    //     } catch (PDOException $e) {
-    //         echo "Connection failed: " . $e->getMessage();
-    //     }
-    // }
-
-
-
-
-
-  
+    function Countcategory()
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(category.category_id) FROM category ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(category.category_id)'];
+        }
+    }
 }

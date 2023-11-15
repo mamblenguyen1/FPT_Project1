@@ -260,4 +260,14 @@ class UserFunction
             return $row[$column];
         }
     }
+// tổng tk
+    function Countuser()
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(user.user_id) FROM user ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(user.user_id)'];
+        }
+    }
 }
