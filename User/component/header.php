@@ -267,7 +267,10 @@ include('style.php');
 								</li>
 
 								<li>
-									<a href="">Liên Hệ</a>
+									<a href="index.php?pages=user&action=contact">Liên Hệ</a>
+								</li>
+								<li>
+									<a href="index.php?pages=user&action=introduce">Giới thiệu</a>
 								</li>
 							</ul>
 						</div>
