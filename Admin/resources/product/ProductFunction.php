@@ -251,4 +251,20 @@ class ProductFunction
             return $row['COUNT(products.product_id)'];
         }
     }
+    //khôi phục sản phẩm ẩn
+    function RestoreProduct($product_id)
+    {
+        $db = new connect();
+        $sql = "UPDATE `products` SET is_deleted = 1 WHERE product_id = $product_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+        //xóa vĩnh viễn sản phẩm ẩn
+        function permanently_deleted_product($product_id)
+        {
+            $db = new connect();
+            $sql = "DELETE FROM `products` WHERE product_id = $product_id";
+            $result = $db->pdo_execute($sql);
+            return $result;
+        }
 }

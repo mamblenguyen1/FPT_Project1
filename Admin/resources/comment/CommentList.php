@@ -34,7 +34,7 @@
                                             echo ' 
                                                 <tr>
                                                 <td>' . $row['product_name'] . '</td>
-                                                <td>' . $comment->CountComment($row['comment_id']) . '</td>
+                                                <td>' . $comment->Count_comment($row['comment_id']) . '</td>
                                                 <td>' . $comment->NewestCmt($row['comment_id']) . '</td>
                                                 <td>' . $comment->LastestCmt($row['comment_id']) . '</td>
                                                 <td>

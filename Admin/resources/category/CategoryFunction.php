@@ -100,4 +100,12 @@ class Categories
             return $row['COUNT(category.category_id)'];
         }
     }
+        //xóa vĩnh viễn danh mục ẩn
+        function permanently_deleted_cate($category_id)
+        {
+            $db = new connect();
+            $sql = "DELETE FROM category WHERE category_id = $category_id";
+            $result = $db->pdo_execute($sql);
+            return $result;
+        }
 }

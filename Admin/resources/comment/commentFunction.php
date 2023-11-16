@@ -244,7 +244,8 @@ class comment
         WHERE comment_detail.comment_id = comment.comment_id AND
         products.product_id = comment.product_id AND
         user.user_id = comment_detail.user_id AND 
-        comment_detail.comment_id = $comment_id";
+        comment_detail.comment_id = $comment_id
+        AND comment_detial.is_deleted= 1";
         $result = $db->pdo_query($sql);
         return $result;
     }
@@ -284,10 +285,12 @@ class comment
         }
     }
 
-    function Count_comment()
+    function Count_comment($comment_id)
     {
         $db = new connect();
-        $sql = "SELECT COUNT(comment.comment_id) FROM comment ";
+        $sql = "SELECT COUNT(comment.comment_id) FROM comment, comment_detail WhERE comment.comment_id=comment_detail.comment_id
+        AND comment.comment_id = $comment_id
+        AND comment_detail.is_deleted = 1";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row['COUNT(comment.comment_id)'];
@@ -302,6 +305,22 @@ class comment
         foreach ($result as $row) {
             return $row['COUNT(comment.comment_id)'];
         }
+    }
+//khôi phục bl
+function RestoreComment($commentID)
+{
+    $db = new connect();
+    $sql = "UPDATE comment_detail SET is_deleted = 1 WHERE comment_detail_id = $commentID";
+    $result = $db->pdo_execute($sql);
+    return $result;
+}
+    //xóa vĩnh viễn bình luận ẩn
+    function permanently_deleted_comment_detail($comment_detail_id)
+    {
+        $db = new connect();
+        $sql = "DELETE FROM comment_detail WHERE comment_detail_id = $comment_detail_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
     }
 }
 ?>

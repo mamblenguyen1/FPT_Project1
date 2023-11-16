@@ -1,5 +1,13 @@
 <?php include './Admin/componant/header.php' ?>
 <?php include './admin/componant/sidebar.php' ?>
+<?
+if (isset($_POST['restore_product'])) {
+    $productID = $_POST['product_id'];
+    $product->RestoreProduct($productID);
+    echo '<script>alert("Đã khôi phục danh mục ! ! !")</script>';
+    echo '<script>window.location.href="index.php?pages=admin&action=productList"</script>';
+}
+?>
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -41,9 +49,10 @@
                                                 <td>' . $row['type_name'] . '</td>
                                                 <td>' . $row['product_price'] . '</td>
                                                 <td>
-                                                  <form action="?pages=admin&action=productDetail" method="post">
-                                                  <button type="submit" name="" class="btn btn-outline-primary">Khôi phục</button>
-                                            <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="" class="btn btn-outline-danger">Xóa</button>
+                                                  <form action="" method="post">
+                                                  <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
+                                                  <button type="submit" name="restore_product" class="btn btn-outline-primary">Khôi phục</button>
+                                                  <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="" class="btn btn-outline-danger">Xóa</button>
                                                 </form>
                                               </td>
                                               </tr>

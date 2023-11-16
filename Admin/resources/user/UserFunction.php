@@ -295,4 +295,20 @@ class UserFunction
             return $row['COUNT(user.user_id)'];
         }
     }
+        //khôi phục tài khoản ẩn
+        function RestoreUser($user_id)
+        {
+            $db = new connect();
+            $sql = "UPDATE `user` SET is_deleted = 1 WHERE user_id = $user_id";
+            $result = $db->pdo_execute($sql);
+            return $result;
+        }
+        //xóa vĩnh viễn tài khoản ẩn
+        function permanently_deleted_user($user_id)
+        {
+            $db = new connect();
+            $sql = "DELETE FROM user WHERE user_id = $user_id";
+            $result = $db->pdo_execute($sql);
+            return $result;
+        }
 }

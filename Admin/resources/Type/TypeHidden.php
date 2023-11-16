@@ -1,5 +1,20 @@
 <?php include './Admin/componant/header.php' ?>
 <?php include './admin/componant/sidebar.php' ?>
+<?
+if (isset($_POST['restore_type'])) {
+    $typeID = $_POST['type_id'];
+    $type->RestoreType($typeID);
+    echo '<script>alert("Đã khôi phục danh mục ! ! !")</script>';
+    echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+}
+//xóa vĩnh viễn
+if (isset($_POST['permanently_deleted_type'])) {
+    $typepermanently = $_POST['user_id'];
+    $type->permanently_deleted_type($typepermanently);
+    echo '<script>alert("Xóa danh mục con thành công ! ! !")</script>';
+    echo '<script>window.location.href="index.php?pages=admin&action=TypeHidden"</script>';
+}
+?>
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -39,9 +54,10 @@
                                             <td>' . $type->CountProduct_type($row['type_id']) . '</td>
                                             <td>' . $row['created_at'] . '</td>
                                             <td>
-                                            <form action="index.php?pages=admin&action=TypeEdit" method="post">
-                                            <button type="submit" name="" class="btn btn-outline-primary">Khôi phục</button>
-                                            <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="" class="btn btn-outline-danger">Xóa</button>
+                                            <form action="" method="post">
+                                            <input type="hidden" name="type_id" value="' . $row['type_id'] . '">
+                                            <button type="submit" name="restore_type" class="btn btn-outline-primary">Khôi phục</button>
+                                            <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="permanently_deleted_type" class="btn btn-outline-danger">Xóa</button>
                                            </form>
                                             </td>
                                         ';
