@@ -260,6 +260,16 @@ class comment
              return $row[$column];
          }
     }
+
+    function CountDetailsOfMonth($month){
+        $db = new connect();
+        $sql = "SELECT COUNT(MONTH(comment_detail.comment_date)) FROM comment_detail
+        WHERE MONTH(comment_detail.comment_date) = $month";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(MONTH(comment_detail.comment_date))'];
+        }
+    }
 }
 ?>
 

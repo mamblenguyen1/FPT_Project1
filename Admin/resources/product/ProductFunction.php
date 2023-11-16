@@ -231,4 +231,14 @@ class ProductFunction
 
         return $shortenedText;
     }
+    // tổng sp
+    function CountProducts()
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(products.product_id) FROM products ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(products.product_id)'];
+        }
+    }
 }
