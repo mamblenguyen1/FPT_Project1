@@ -22,9 +22,9 @@ if (isset($_POST['editcomment'])) {
 
 	if (empty($content)) {
 	} else {
-			$comment->update_cmt($comment_detail_id , $content);
-			echo '<script>alert("Chỉnh sửa bình luận thành công")</script>';
-		   echo '<script>window.location.href="index.php?pages=user&action=productdetail&category_id='.$category_id.'&product_id='.$product_id.'"</script>';
+		$comment->update_cmt($comment_detail_id, $content);
+		echo '<script>alert("Chỉnh sửa bình luận thành công")</script>';
+		echo '<script>window.location.href="index.php?pages=user&action=productdetail&category_id=' . $category_id . '&product_id=' . $product_id . '"</script>';
 	}
 }
 // đếm view
@@ -252,11 +252,28 @@ if ($product->count_view($user_id, $product_id) == 0) {
 																	</form>
 															</div>
 	
-														</div>
-													</div>
-												</div>
-												<hr>
+													
 														';
+																		$stmt1  = $conn->prepare("SELECT * FROM comment_reply
+														WHere comment_reply.comment_detail_id = $row[comment_detail_id]");
+																		$stmt1->execute();
+																		if ($stmt1->rowCount() > 0) {
+																			foreach ($stmt1 as $row1) {
+																				echo '
+																			<div class="reply-comment">
+																			<p> <i class="fa fa-reply"></i>
+																			<strong>Trả lời từ ADMIN</strong>
+																			</p>
+																			<span>' . $row1['content'] . '</span>
+																			</div>';
+																			}
+																		}
+																		echo '
+																		</div>
+																		</div>
+																	</div>
+																	<hr>
+																		';
 																	}
 																}
 															} else {
@@ -302,13 +319,28 @@ if ($product->count_view($user_id, $product_id) == 0) {
 																	<button type="submit" class="btn btn-primary" name="editcomment"><i class="fa fa-send-o"></i></button>
 																	</form>
 															</div>
-	
+															';
+															$stmt1  = $conn->prepare("SELECT * FROM comment_reply
+											WHere comment_reply.comment_detail_id = $row[comment_detail_id]");
+															$stmt1->execute();
+															if ($stmt1->rowCount() > 0) {
+																foreach ($stmt1 as $row1) {
+																	echo '
+																<div class="reply-comment">
+																<p> <i class="fa fa-reply"></i>
+																<strong>Trả lời từ ADMIN</strong>
+																</p>
+																<span>' . $row1['content'] . '</span>
+																</div>';
+																}
+															}
+															echo '
+															</div>
+															</div>
 														</div>
-													</div>
-												</div>
-												<hr>
-														';
-																	}
+														<hr>
+															';
+														}
 																}
 															} else {
 																$stmt = $conn->prepare("SELECT * FROM comment , comment_detail, user
@@ -602,7 +634,13 @@ if ($product->count_view($user_id, $product_id) == 0) {
 	.comment-method {
 		padding: 10px 0;
 	}
+.reply-comment{
+	padding: 5px 30px;
+}
+.reply-comment span{
+	padding: 5px;
 
+}
 	.user_cmt {
 		display: flex;
 		justify-content: space-between;

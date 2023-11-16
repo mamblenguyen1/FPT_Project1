@@ -33,6 +33,19 @@ class comment
         return $result;
     }
 
+    // public function Comment_reply_exist($comment_detail_id)
+    // {
+    //     $db = new connect();
+    //     $select = "SELECT * FROM comment_reply
+    //     WHere comment_reply.comment_detail_id = $comment_detail_id";
+    //     $result = $db->pdo_query($select);
+    //     foreach ($result as $row) {
+    //         $nw = $row['product_id'];
+    //         if ($product_id == $nw) {
+    //             return true;
+    //         }
+    //     }
+    // }
 
     public function DuplicateColumnCmt($product_id)
     {
