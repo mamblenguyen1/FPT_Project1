@@ -275,10 +275,22 @@ class ORDER
         }
     }
 
+    function OrderInformation($user_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM order_detail, products, `order`, user
+        WHERE order_detail.order_id = `order`.order_id AND
+        products.product_id = `order_detail`.product_id AND
+        user.user_id = `order`.user_id AND 
+        order.user_id = $user_id";
+        $result = $db->pdo_query($sql);
+        return $result;
+    }
 
 
 
 
+   
 
 
     function getInfoUserCmtAll($productId, $column)

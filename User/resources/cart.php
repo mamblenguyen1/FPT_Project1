@@ -2,6 +2,37 @@
 include('user/component/header.php');
 ?>
 <?
+
+
+if (isset($_POST['addoneproduct'])) {
+  $product_id = $_POST['product_id'];
+  $qty = $_POST['qty'];
+  if (isset($_COOKIE['userID'])) {
+    $userid = $_COOKIE['userID'];
+    $qty = intval($qty);
+    if ($order->DuplicateCartPro($product_id, $userid)) {
+      $order->updateCartQtyDup($product_id, $qty);
+      echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng ! !")</script>';
+      echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
+    } else {
+      if ($order->DuplicateCart($userid)) {
+        $order->addCartDetails($userid, $product_id, $qty);
+        echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng ! !")</script>';
+        echo '<script>window.location.href="index.php?pages=user&action=products"</script>';     
+       } else {
+        $order->addCart($userid, $product_id, $qty);
+        echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng ! !")</script>';
+        echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
+      }
+    }
+  } else {
+    echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng ! !")</script>';
+    echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
+  }
+}
+
+
+
 if (isset($_POST['buy'])) {
   $product_id = $_POST['product_id'];
   $qty = $_POST['qty'];
@@ -110,10 +141,10 @@ if (isset($_POST['updateQty'])) {
             <td class="text-center"><strong>Total 1.99</strong></td>
           </tr>
           <tr>
-            <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+            <td><a href="index.php?pages=user&action=products" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a></td>
             <td colspan="2" class="hidden-xs"></td>
             <td class="hidden-xs text-center"><strong>Total '.$total_price.'</strong></td>
-            <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+            <td><a href="#" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a></td>
           </tr>
         </tfoot>
         ';
@@ -122,7 +153,7 @@ if (isset($_POST['updateQty'])) {
     <div class="alert-cart">
   Bạn chưa có sản phẩm trong giỏ hàng ! ! !
 </div>
-<a name="" id="" class=" btn btn-primary" href="index.php?pages=user&action=home" role="button">Trở về trang sản phẩm</a>
+<a name="" id="" class=" btn btn-primary" href="index.php?pages=user&action=products" role="button">Trở về trang sản phẩm</a>
       
 ';
   }

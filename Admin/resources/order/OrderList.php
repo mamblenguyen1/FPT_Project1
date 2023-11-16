@@ -46,7 +46,7 @@
                                                     <button type="submit" name="detail_order" class="btn  btn-outline-primary">Chi tiết</button>
                                                 </form>
                                               </td>
-                                              </tr>
+                                              </tr> 
                                             ';
                                         }
                                         ?>

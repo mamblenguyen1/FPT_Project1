@@ -17,115 +17,97 @@ include('user/component/header.php');
                                     </div>
                                     <div class="tg-productgrid">
                                         <div class="tg-refinesearch">
-                                            <span>showing 1 to 8 of 20 total</span>
-                                            <form class="tg-formtheme tg-formsortshoitems">
-                                                <fieldset>
-                                                    <div class="form-group">
-                                                        <label></label>
-                                                        <select>
-                                                            <option>Sắp xếp theo:</option>
-                                                            <option>Giá</option>
-                                                            <option>Hãng</option>
-                                                            <option>Năm</option>
-                                                        </select>
-                                                        </span>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <!-- <span class="tg-select"> -->
-                                                        <select>
-                                                            <option>Hiển thị:</option>
-                                                            <option>8</option>
-                                                            <option>16</option>
-                                                            <option>20</option>
-                                                        </select>
-                                                        <!-- </span> -->
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                        <!-- Render product -->
-                                        <?
-                                        $category_render = 0;
-                                        $type_render = 0;
-                                        $keyword_render  = 0;
-                                        if (isset($_GET['category'])) {
-                                            $category_render = $_GET['category'];
-                                            $conn = $db->pdo_get_connection();
-                                            $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
-                                            type.type_id = products.type_id
-                                            AND 
-                                            category.category_id = products.category_id
-                                            AND products.is_deleted = 1 AND products.category_id = $category_render");
-                                        } else if (isset($_GET['type'])) {
-                                            $type_render = $_GET['type'];
-                                            $conn = $db->pdo_get_connection();
-                                            $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
-                                            type.type_id = products.type_id
-                                            AND 
-                                            category.category_id = products.category_id
-                                            AND products.is_deleted = 1 AND products.type_id = $type_render");
-                                        } else if (isset($_GET['search'])) {
-                                            $keyword_render = $_GET['search'];
-                                            $category_render = $_GET['id'];
-                                            if ($category_render == 0) {
+                                            <?
+                                            $category_render = 0;
+                                            $type_render = 0;
+                                            $keyword_render  = 0;
+                                            if (isset($_GET['category'])) {
+                                                $category_render = $_GET['category'];
                                                 $conn = $db->pdo_get_connection();
-                                                $stmt = $conn->prepare("SELECT * FROM products , category , type
-                                                WHERE products.category_id = category.category_id
-                                                AND products.type_id = type.type_id
-                                                AND products.is_deleted = 1
-                                                AND products.product_id IN
-                                                (
-                                                SELECT  products.product_id FROM products , category
-                                                WHERE
-                                                category.category_id = products.category_id
-                                                AND products.is_deleted = 1
-                                                AND category.category_name LIKE '%$keyword_render%'
-                                                    UNION
-                                                SELECT  products.product_id FROM products , type
-                                                WHERE
-                                                type.type_id = products.type_id
-                                                AND products.is_deleted = 1                                                
-                                                AND type.type_name LIKE '%$keyword_render%'
-                                                    )");
+                                                $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                                                    type.type_id = products.type_id
+                                                    AND 
+                                                    category.category_id = products.category_id
+                                                    AND products.is_deleted = 1 AND products.category_id = $category_render");
+                                            } else if (isset($_GET['type'])) {
+                                                $type_render = $_GET['type'];
+                                                $conn = $db->pdo_get_connection();
+                                                $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                                                    type.type_id = products.type_id
+                                                    AND 
+                                                    category.category_id = products.category_id
+                                                    AND products.is_deleted = 1 AND products.type_id = $type_render");
+                                            } else if (isset($_GET['search'])) {
+                                                $keyword_render = $_GET['search'];
+                                                $category_render = $_GET['id'];
+                                                if ($category_render == 0) {
+                                                    $conn = $db->pdo_get_connection();
+                                                    $stmt = $conn->prepare("SELECT * FROM products , category , type
+                                                        WHERE products.category_id = category.category_id
+                                                        AND products.type_id = type.type_id
+                                                        AND products.is_deleted = 1
+                                                        AND products.product_id IN
+                                                        (
+                                                        SELECT  products.product_id FROM products , category
+                                                        WHERE
+                                                        category.category_id = products.category_id
+                                                        AND products.is_deleted = 1
+                                                        AND category.category_name LIKE '%$keyword_render%'
+                                                            UNION
+                                                        SELECT  products.product_id FROM products , type
+                                                        WHERE
+                                                        type.type_id = products.type_id
+                                                        AND products.is_deleted = 1                                                
+                                                        AND type.type_name LIKE '%$keyword_render%'
+                                                        UNION
+                                                        SELECT  products.product_id FROM products 
+                                                        WHERE products.is_deleted = 1                                                
+                                                        AND products.product_name LIKE '%$keyword_render%'
+                                                            )");
+                                                } else {
+                                                    $conn = $db->pdo_get_connection();
+                                                    $stmt = $conn->prepare("SELECT * FROM products , category , type
+                                                        WHERE products.category_id = category.category_id
+                                                        AND products.type_id = type.type_id
+                                                        AND products.is_deleted = 1
+                                                        AND products.category_id = $category_render
+                                                        AND products.product_id IN
+                                                        
+                                                        (
+                                                        SELECT  products.product_id FROM products , category
+                                                        WHERE
+                                                        category.category_id = products.category_id
+                                                        AND products.is_deleted = 1
+                                                        AND category.category_name LIKE '%$keyword_render%'
+                                                            UNION
+                                                        SELECT  products.product_id FROM products , type
+                                                        WHERE
+                                                        type.type_id = products.type_id
+                                                        AND products.is_deleted = 1                                                
+                                                        AND type.type_name LIKE '%$keyword_render%'
+                                                            )");
+                                                }
                                             } else {
                                                 $conn = $db->pdo_get_connection();
-                                                $stmt = $conn->prepare("SELECT * FROM products , category , type
-                                                WHERE products.category_id = category.category_id
-                                                AND products.type_id = type.type_id
-                                                AND products.is_deleted = 1
-                                                AND products.category_id = $category_render
-                                                AND products.product_id IN
-                                                
-                                                (
-                                                SELECT  products.product_id FROM products , category
-                                                WHERE
-                                                category.category_id = products.category_id
-                                                AND products.is_deleted = 1
-                                                AND category.category_name LIKE '%$keyword_render%'
-                                                    UNION
-                                                SELECT  products.product_id FROM products , type
-                                                WHERE
-                                                type.type_id = products.type_id
-                                                AND products.is_deleted = 1                                                
-                                                AND type.type_name LIKE '%$keyword_render%'
-                                                    )");
-
+                                                $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                                                    type.type_id = products.type_id
+                                                    AND 
+                                                    category.category_id = products.category_id
+                                                    AND
+                                                    products.is_deleted = 1 ");
                                             }
-                                        } else {
-                                            $conn = $db->pdo_get_connection();
-                                            $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
-                                            type.type_id = products.type_id
-                                            AND 
-                                            category.category_id = products.category_id
-                                            AND
-                                            products.is_deleted = 1 ");
-                                        }
-                                        $stmt->execute();
-                                        if ($stmt->rowCount() > 0) {
-                                            foreach ($stmt as $row) {
+                                            $stmt->execute();
+                                            if ($stmt->rowCount() > 0) {
+                                            ?>
+                                                <span>Đã tìm thấy <? echo $stmt->rowCount()?> sản phẩm </span>
+                                        </div>
+                                        <!-- Render product -->
+                                    <?
 
-                                                $product_name_text = $product->substringtext($row['product_name'], 25);
-                                                echo '<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+                                                foreach ($stmt as $row) {
+
+                                                    $product_name_text = $product->substringtext($row['product_name'], 22);
+                                                    echo '<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
                                                 <div class="tg-postbook">
                                                     <figure class="tg-featureimg">
                                                         <div class="tg-bookimg">
@@ -158,27 +140,28 @@ include('user/component/header.php');
                                                             <br>
                                                             <del>' . number_format($row['product_price']) . ' đ</del>
                                                         </span>
-                                                        <form action="" method="post">
+                                                        <form action="index.php?pages=user&action=cart" method="post">
                                                         <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
-                                                        <button type="submit" class="tg-btn tg-btnstyletwo" ><i class="fa fa-shopping-basket"></i>
+                                                        <input type="hidden" name="qty" value="1">
+                                                        <button type="submit" class="tg-btn tg-btnstyletwo" name="addoneproduct" ><i class="fa fa-shopping-basket"></i>
                                                             Thêm giỏ hàng</button>
                                                     </form>
                                                     </div>
                                                 </div>
                                             </div>';
-                                            };
-                                        } else {
-                                            if (isset($keyword_render)) {
-                                                if ($category_render == 0) {
-                                                    echo '<h4>Không tìm thấy sản phẩm <strong>' . $keyword_render . '</strong></h4>';
-                                                } else {
-                                                    echo '<h4>Không tìm thấy sản phẩm <strong>' . $keyword_render . '</strong> theo danh mục trên   </h4>';
-                                                }
+                                                };
                                             } else {
-                                                echo '<h4>Danh mục chưa có sản phẩm !</h4>';
-                                            }
-                                        };
-                                        ?>
+                                                if (isset($keyword_render)) {
+                                                    if ($category_render == 0) {
+                                                        echo '<h4>Không tìm thấy sản phẩm <strong>' . $keyword_render . '</strong></h4>';
+                                                    } else {
+                                                        echo '<h4>Không tìm thấy sản phẩm <strong>' . $keyword_render . '</strong> theo danh mục trên   </h4>';
+                                                    }
+                                                } else {
+                                                    echo '<h4>Danh mục chưa có sản phẩm !</h4>';
+                                                }
+                                            };
+                                    ?>
                                     </div>
                                 </div>
                             </div>

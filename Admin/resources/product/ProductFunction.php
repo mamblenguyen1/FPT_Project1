@@ -235,7 +235,8 @@ class ProductFunction
     function CountProducts()
     {
         $db = new connect();
-        $sql = "SELECT COUNT(products.product_id) FROM products ";
+        $sql = "SELECT COUNT(products.product_id) FROM products WHERE 
+        products.is_deleted = 1";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row['COUNT(products.product_id)'];

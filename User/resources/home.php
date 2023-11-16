@@ -94,12 +94,15 @@ include('user/component/header.php');
                                         <span class="tg-stars"><span></span></span>
                                         <span class="tg-bookprice">
                                             <ins>' . number_format($row['product_sale']) . ' đ</ins>
+                                            <br>
                                             <del>' . number_format($row['product_price']) . ' đ</del>
                                         </span>
-                                        <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="fa fa-shopping-basket"></i>
-                                            <em>Thêm Giỏ Hàng</em>
-                                        </a>
+                                        <form action="index.php?pages=user&action=cart" method="post">
+                                        <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
+                                        <input type="hidden" name="qty" value="1">
+                                        <button style="width: 100%  " type="submit" class="tg-btn tg-btnstyletwo" name="addoneproduct" ><i class="fa fa-shopping-basket"></i>
+                                            Mua ngay</button>
+                                    </form>
                                     </div>
                                 </div>
                             </div>
