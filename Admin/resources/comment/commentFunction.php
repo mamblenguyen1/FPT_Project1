@@ -219,7 +219,7 @@ class comment
     function show_comment()
     {
         $db = new connect();
-        $sql = "SELECT * FROM products INNER JOIN comment WHERE products.product_id=comment.product_id;";
+        $sql = "SELECT * FROM products INNER JOIN comment WHERE products.product_id=comment.product_id AND products.is_deleted = 1";
         $result   = $db->pdo_query($sql);
         return $result;
     }
@@ -268,6 +268,26 @@ class comment
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row['COUNT(MONTH(comment_detail.comment_date))'];
+        }
+    }
+
+    function Count_comment()
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(comment.comment_id) FROM comment ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(comment.comment_id)'];
+        }
+    }
+// tổng bl không có ẩn
+    function Count_comment1()
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(comment.comment_id) FROM comment WHERE is_deleted = 1";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(comment.comment_id)'];
         }
     }
 }

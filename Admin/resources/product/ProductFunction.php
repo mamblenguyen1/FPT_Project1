@@ -241,4 +241,14 @@ class ProductFunction
             return $row['COUNT(products.product_id)'];
         }
     }
+    // tổng sp không có ẩn
+    function CountProducts1()
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(products.product_id) FROM products WHERE is_deleted = 1";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(products.product_id)'];
+        }
+    }
 }

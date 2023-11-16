@@ -108,10 +108,33 @@ if (isset($_GET['pages'])) {
                         case 'ProductAdd':
                             include './Admin/resources/product/ProductAdd.php';
                             break;
-
                             // ProductEdit
                         case 'ProductEdit':
                             include './Admin/resources/product/ProductEdit.php';
+                            break;
+                            //danh sách ẩn danh mục
+                        case 'CategoryHidden':
+                            include './Admin/resources/category/CategoryHidden.php';
+                            break;
+                            //danh sách ẩn danh mục con
+                        case 'TypeHidden':
+                            include './Admin/resources/type/TypeHidden.php';
+                            break;
+                            //danh sách ẩn sản phẩm
+                        case 'ProductHidden':
+                            include './Admin/resources/product/ProductHidden.php';
+                            break;
+                            //danh sách ẩn bình luận
+                        case 'CommentHidden':
+                            include './Admin/resources/comment/CommentHidden.php';
+                            break;
+                            //danh sách ẩn tài khoản
+                        case 'UserHidden':
+                            include './Admin/resources/user/UserHidden.php';
+                            break;
+                            //danh sách đơn hàng đã hủy
+                        case 'OrderHidden':
+                            include './Admin/resources/category/CategoryHidden.php';
                             break;
 
                         default:

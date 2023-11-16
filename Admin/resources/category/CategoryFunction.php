@@ -27,7 +27,22 @@ class Categories
         $result = $db->pdo_execute($sql);
         return $result;
     }
-
+    //khôi phục
+    function RestoreCate($cateID)
+    {
+        $db = new connect();
+        $sql = "UPDATE category SET is_deleted = 1 WHERE category_id = $cateID";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+    //xóa vĩnh viễn
+    function Permanentlydelete($cateID)
+    {
+        $db = new connect();
+        $sql = "UPDATE category SET is_deleted = 0 WHERE category_id = $cateID";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
     function getInfoCate($cateID, $column)
     {
         $db = new connect();
@@ -70,6 +85,16 @@ class Categories
     {
         $db = new connect();
         $sql = "SELECT COUNT(category.category_id) FROM category ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(category.category_id)'];
+        }
+    }
+//tổng danh mục không có ẩn
+    function Countcategory1()
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(category.category_id) FROM category WHERE is_deleted = 1";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row['COUNT(category.category_id)'];
