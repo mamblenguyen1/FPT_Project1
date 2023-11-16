@@ -108,19 +108,10 @@ if (isset($_POST['sua_user'])) {
 
             <div class="form-group">
               <label>Tỉnh / Thành Phố</label>
-              <select name="Province" id="" class="form-control select2" style="width: 100%;">
+              <select name="Province" id="Province" class="form-control select2" style="width: 100%;">
                 <option selected value="<? echo $user->getInfoProvince($user_id, 'province_id'); ?>"> <? echo $user->getInfoProvince($user_id, 'name'); ?></option>
 
-                <?
-                $conn = $db->pdo_get_connection();
-                $stmt = $conn->prepare("SELECT * FROM province");
-                $stmt->execute();
-                if ($stmt->rowCount() > 0) {
-                  foreach ($stmt as $row) {
-                    echo ' <option value="' . $row['province_id'] . '">' . $row['name'] . '</option>';
-                  }
-                }
-                ?>
+         
 
               </select>
             </div>
@@ -136,18 +127,9 @@ if (isset($_POST['sua_user'])) {
 
             <div class="form-group">
               <label>Quận / Huyện</label>
-              <select name="district" id="" class="form-control select2" style="width: 100%;">
+              <select name="district" id="district" class="form-control select2" style="width: 100%;">
               <option selected value="<? echo $user->getInfoDistrict($user_id, 'district_id'); ?>"> <? echo $user->getInfoDistrict($user_id, 'name'); ?></option>
-                <?
-                $conn = $db->pdo_get_connection();
-                $stmt = $conn->prepare("SELECT * FROM district");
-                $stmt->execute();
-                if ($stmt->rowCount() > 0) {
-                  foreach ($stmt as $row) {
-                    echo ' <option value="' . $row['district_id'] . '">' . $row['name'] . '</option>';
-                  }
-                }
-                ?>
+          
               </select>
             </div>
             <?
@@ -162,19 +144,10 @@ if (isset($_POST['sua_user'])) {
 
             <div class="form-group">
               <label>Phường / Xã</label>
-              <select name="wards" id="" class="form-control select2" style="width: 100%;">
+              <select name="wards" id="wards" class="form-control select2" style="width: 100%;">
               <option selected value="<? echo $user->getInfoWards($user_id, 'wards_id'); ?>"> <? echo $user->getInfoWards($user_id, 'name'); ?></option>
                 
-                <?
-                $conn = $db->pdo_get_connection();
-                $stmt = $conn->prepare("SELECT * FROM wards");
-                $stmt->execute();
-                if ($stmt->rowCount() > 0) {
-                  foreach ($stmt as $row) {
-                    echo ' <option value="' . $row['wards_id'] . '">' . $row['name'] . '</option>';
-                  }
-                }
-                ?>
+              
               </select>
             </div>
             <?
@@ -214,5 +187,61 @@ if (isset($_POST['sua_user'])) {
 
 </div>
 
+<script>
+$(document).ready(function(){    
+    $.ajax({
+        url: "./admin/resources/address/province.php",       
+        dataType:'json',         
+        success: function(data){     
+            $("#Province").html("");
+            for (i=0; i<data.length; i++){            
+                var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
+                var str = ` 
+                <option value="${Province['province_id']}"> ${Province['name']} </option>
+                   `;
+                $("#Province").append(str);
+            }
+            $("#Province").on("change", function(e) { layHuyen();  });
+        }
+    });
+})
 
+</script>
+<script>
+function layHuyen(){
+    var province_id = $("#Province").val();
+    $.ajax({
+        url: "./admin/resources/address/district.php?province_id=" + province_id,
+        dataType:'json',         
+        success: function(data){     
+            $("#district").html("");
+            for (i=0; i<data.length; i++){            
+                var district = data[i]; 
+                var str = ` 
+                <option  value="${district['district_id']}">${district['name']} </option>`;
+                $("#district").append(str);
+            }       
+            $("#district").on("change", function(e) { layXa();  });     
+        }
+    });
+}
+</script>
+<script>
+function layXa(){
+    var district_id = $("#district").val();
+    $.ajax({
+        url: "./admin/resources/address/wards.php?district_id=" + district_id,
+        dataType:'json',         
+        success: function(data){     
+            $("#wards").html("");
+            for (i=0; i<data.length; i++){            
+                var wards = data[i]; 
+                var str = ` 
+                <option  value="${wards['wards_id']}">${wards['name']} </option>`;
+                $("#wards").append(str);
+            }            
+        }
+    });
+}
+</script>
 <?php include './admin/componant/footer.php' ?>

@@ -182,6 +182,13 @@ include('style.php');
 								<input id="search-input" type="text" name="keyword" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
 								<button name="search-btn" type="submit"><i class="icon-magnifier"></i></button>
 							</fieldset>
+							<?
+						if (isset($_POST['search-btn'])) {
+							$id = $_POST['cate'];
+							$search = $_POST['keyword'];
+							echo "<script>window.location.href = './?pages=user&action=products&id=$id&search=$search'</script>";
+						};
+						?>
 
 						</form>
 						<style>

@@ -30,8 +30,8 @@ include('User/component/header.php');
                         echo '
                     <label for=""><b>Họ và tên <span class="span0" style="margin-left: 3%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'user_name') . '</span></label>
                     <label for=""><b>Email <span class="span1" style="margin-left: 6%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'email') . '</span></label>
-                    <label for=""><b>Địa chỉ <span class="span2" style="margin-left: 5%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'user_address') . '</span></label>
-                    <label for=""><b>Số điện thoại <span class="span3" style="margin-left: 0%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'user_phone_number') . '</span></label>
+                    <label for=""><b>Địa chỉ <span class="span2" style="margin-left: 5%;">:</span></b> <span>' . $user->getInfo_address($_COOKIE['userID'], 'user_street') . ' - ' . $user->getInfo_address($_COOKIE['userID'], 'xa') . ' -  ' . $user->getInfo_address($_COOKIE['userID'], 'huyen') . ' -  ' . $user->getInfo_address($_COOKIE['userID'], 'thanhpho') . '</span></label>                 
+                       <label for=""><b>Số điện thoại <span class="span3" style="margin-left: 0%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'user_phone_number') . '</span></label>
                     <label for=""><b>Mật khẩu <span class="span4" style="margin-left: 3%;">:</span></b> <span>******</span></label>
                     ';
                         ?>

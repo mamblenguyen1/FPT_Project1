@@ -31,52 +31,25 @@ include('User/component/header.php');
 
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="country">TỈnh thành</label>
-                    <select class="form-select d-block w-100 rounded-2xl" id="country" required>
-                        <?
-                        $conn = $db->pdo_get_connection();
-                        $stmt = $conn->prepare("SELECT * FROM province");
-                        $stmt->execute();
-                        if ($stmt->rowCount() > 0) {
-                            foreach ($stmt as $row) {
-                                echo ' <option value="' . $row['province_id'] . '">' . $row['name'] . '</option>';
-                            }
-                        }
-                        ?>
+                    <label for="Province">TỈnh thành</label>
+                    <select class="form-select d-block w-100 rounded-2xl" name="Province" id="Province" required>
+                        <option selected value="0">Chọn tỉnh / thành phố</option>
                     </select>
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label for="country">Quận / Huyện</label>
-                    <select class="form-select d-block w-100 rounded-2xl" id="country" required>
-                        <?
-                        $conn = $db->pdo_get_connection();
-                        $stmt = $conn->prepare("SELECT * FROM district");
-                        $stmt->execute();
-                        if ($stmt->rowCount() > 0) {
-                            foreach ($stmt as $row) {
-                                echo ' <option value="' . $row['district_id'] . '">' . $row['name'] . '</option>';
-                            }
-                        }
-                        ?>
+                    <label for="district">Quận, huyện</label>
+                    <select class="form-select d-block w-100 rounded-2xl" name="district" id="district" required>
+                        <option selected value="0">Chọn Quận / huyện</option>
                     </select>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="country">Phường</label>
-                    <select class="form-select d-block w-100 rounded-2xl" id="country" required>
-                    <?
-                        $conn = $db->pdo_get_connection();
-                        $stmt = $conn->prepare("SELECT * FROM wards");
-                        $stmt->execute();
-                        if ($stmt->rowCount() > 0) {
-                            foreach ($stmt as $row) {
-                                echo ' <option value="' . $row['province_id'] . '">' . $row['name'] . '</option>';
-                            }
-                        }
-                        ?> 
+            <div class="col-md-6 mb-3">
+                    <label for="wards">Xã , phường</label>
+                    <select class="form-select d-block w-100 rounded-2xl" name="wards" id="wards" required>
+                        <option selected value="0">Chọn Quận / huyện</option>
                     </select>
                 </div>
 
@@ -165,6 +138,63 @@ include('User/component/header.php');
         </ul>
     </div>
 </div>
+<script>
+$(document).ready(function(){    
+    $.ajax({
+        url: "./admin/resources/address/province.php",       
+        dataType:'json',         
+        success: function(data){     
+            $("#Province").html("");
+            for (i=0; i<data.length; i++){            
+                var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
+                var str = ` 
+                <option value="${Province['province_id']}"> ${Province['name']} </option>
+                   `;
+                $("#Province").append(str);
+            }
+            $("#Province").on("change", function(e) { layHuyen();  });
+        }
+    });
+})
+
+</script>
+<script>
+function layHuyen(){
+    var province_id = $("#Province").val();
+    $.ajax({
+        url: "./admin/resources/address/district.php?province_id=" + province_id,
+        dataType:'json',         
+        success: function(data){     
+            $("#district").html("");
+            for (i=0; i<data.length; i++){            
+                var district = data[i]; 
+                var str = ` 
+                <option  value="${district['district_id']}">${district['name']} </option>`;
+                $("#district").append(str);
+            }       
+            $("#district").on("change", function(e) { layXa();  });     
+        }
+    });
+}
+</script>
+<script>
+function layXa(){
+    var district_id = $("#district").val();
+    $.ajax({
+        url: "./admin/resources/address/wards.php?district_id=" + district_id,
+        dataType:'json',         
+        success: function(data){     
+            $("#wards").html("");
+            for (i=0; i<data.length; i++){            
+                var wards = data[i]; 
+                var str = ` 
+                <option  value="${wards['wards_id']}">${wards['name']} </option>`;
+                $("#wards").append(str);
+            }            
+        }
+    });
+}
+</script>
 <style>
     img {
         width: 100px;
