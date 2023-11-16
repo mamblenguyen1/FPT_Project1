@@ -65,6 +65,15 @@ class Type
             return $row['COUNT(*)'];
         }
     }
+    function Counttype()
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(type.type_id) FROM type WHERE is_deleted = 1";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(type.type_id)'];
+        }
+    }
 }
 
 ?>

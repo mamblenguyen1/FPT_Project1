@@ -10,7 +10,6 @@ if (isset($_POST['delete_cate'])) {
     echo '<script>alert("Đã xóa danh mục ! ! !")</script>';
     echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
 }
-
 if (isset($_POST['edit'])) {
     $userId = 1;   //Nhớ sửa cái này lại khi hoàn thành xong chức năng user nhé hihi
     $cateId = $_POST['cateId'];

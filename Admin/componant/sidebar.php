@@ -47,7 +47,7 @@
             <p>
               Danh mục
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">5</span>
+              <span class="badge badge-info right"><? echo $category->Countcategory1() ?></span>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -56,8 +56,12 @@
                 <i class="far fa-circle nav-icon"></i>
                 <p>Tất cả danh mục</p>
               </a>
+
+              <a href="?pages=admin&action=CategoryHidden" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh mục đã ẩn</p>
+              </a>
             </li>
-          
           </ul>
         </li>
 
@@ -67,7 +71,7 @@
             <p>
               Danh mục con
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">1</span>
+              <span class="badge badge-info right"><? echo $type->Counttype() ?></span>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -75,6 +79,11 @@
               <a href="?pages=admin&action=TypeList" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Tất cả danh mục con</p>
+              </a>
+
+              <a href="?pages=admin&action=TypeHidden" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh mục con đã ẩn</p>
               </a>
             </li>
           </ul>
@@ -86,7 +95,7 @@
             <p>
               Sản phẩm
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">2</span>
+              <span class="badge badge-info right"><? echo $product->CountProducts1() ?></span>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -103,6 +112,11 @@
                 <i class="far fa-circle nav-icon"></i>
                 <p>Thêm Sản phẩm</p>
               </a>
+
+              <a href="?pages=admin&action=ProductHidden" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Sản phẩm đã ẩn</p>
+              </a>
             </li>
           </ul>
         </li>
@@ -113,7 +127,7 @@
             <p>
               Bình luận
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">1</span>
+              <span class="badge badge-info right"><? echo $comment->Count_comment1() ?></span>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -121,6 +135,11 @@
               <a href="index.php?pages=admin&action=commentList" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Tất cả bình luận</p>
+              </a>
+
+              <a href="index.php?pages=admin&action=CommentHidden" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Bình luận đã ẩn</p>
               </a>
             </li>
           </ul>
@@ -140,6 +159,11 @@
                 <i class="far fa-circle nav-icon"></i>
                 <p>Tất cả đơn hàng</p>
               </a>
+
+              <a href="?pages=admin&action=OrderHidden" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Đơn hàng đã hủy</p>
+              </a>
             </li>
           </ul>
         </li>
@@ -149,7 +173,7 @@
             <p>
               Tài khoản
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">1</span>
+              <span class="badge badge-info right"><? echo $user->Countuser1() ?></span>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -157,6 +181,11 @@
               <a href="?pages=admin&action=UserList" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Tất cả tài Khoản</p>
+              </a>
+
+              <a href="?pages=admin&action=UserHidden" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Tài Khoản đã ẩn</p>
               </a>
             </li>
           </ul>

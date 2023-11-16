@@ -133,6 +133,13 @@ class UserFunction
         $sql = "SELECT * FROM user WHERE is_deleted = 1";
         return $db->pdo_query($sql);
     }
+//hiển thị bình luận ẩn
+    function user_select_all_hidden()
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM user WHERE is_deleted = 2";
+        return $db->pdo_query($sql);
+    }
 
     public function checkUser($Email, $password)
     {
@@ -265,6 +272,17 @@ class UserFunction
     {
         $db = new connect();
         $sql = "SELECT COUNT(user.user_id) FROM user ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(user.user_id)'];
+        }
+    }
+
+    // tổng tk không có ẩn
+    function Countuser1()
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(user.user_id) FROM user WHERE is_deleted = 1";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row['COUNT(user.user_id)'];
