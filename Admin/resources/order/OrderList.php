@@ -42,7 +42,6 @@
                                                 <td>' . $user->getInfo_address($row['user_id'], 'user_street') . ' -  ' . $user->getInfo_address($row['user_id'], 'xa') . ' - ' . $user->getInfo_address($row['user_id'], 'huyen') . ' - ' . $user->getInfo_address($row['user_id'], 'thanhpho') . '</td>                                                <td>
                                                   <form action="index.php?pages=admin&action=OrderDetail" method="post">
                                                   <input type="hidden" value="' . $row['order_id'] . '" name="order_id">
-
                                                     <button type="submit" name="detail_order" class="btn  btn-outline-primary">Chi tiết</button>
                                                 </form>
                                               </td>

@@ -12,6 +12,7 @@ if(isset($_POST['Replycomment'])){
         echo '<script>window.location.href="index.php?pages=admin&action=commentList"</script>';
     }
 }
+
 ?>
 <div class="main-panel">
     <div class="content-wrapper">
