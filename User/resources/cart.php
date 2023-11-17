@@ -18,8 +18,8 @@ if (isset($_POST['addoneproduct'])) {
       if ($order->DuplicateCart($userid)) {
         $order->addCartDetails($userid, $product_id, $qty);
         echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng ! !")</script>';
-        echo '<script>window.location.href="index.php?pages=user&action=products"</script>';     
-       } else {
+        echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
+      } else {
         $order->addCart($userid, $product_id, $qty);
         echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng ! !")</script>';
         echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
@@ -81,8 +81,9 @@ if (isset($_POST['updateQty'])) {
 
   <?
   // $id = $_POST['idcmt'];
-  $conn = $db->pdo_get_connection();
-  $stmt = $conn->prepare("SELECT * FROM `order`, order_detail , user, products
+  if (isset($_COOKIE['userID'])) {
+    $conn = $db->pdo_get_connection();
+    $stmt = $conn->prepare("SELECT * FROM `order`, order_detail , user, products
       WHERE
       `order`.order_id = order_detail.order_id
       AND
@@ -91,9 +92,9 @@ if (isset($_POST['updateQty'])) {
       order_detail.product_id = products.product_id
       AND user.user_id = $_COOKIE[userID];
     ");
-  $stmt->execute();
-  if ($stmt->rowCount() > 0) {
-    echo '  <thead>
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+      echo '  <thead>
         <tr>
           <th style="width:50%">Sản phẩm</th>
           <th style="width:10%">Giá</th>
@@ -104,8 +105,8 @@ if (isset($_POST['updateQty'])) {
       </thead>
       <tbody>';
       $total_price = 0;
-    foreach ($stmt as $row) {
-      echo '
+      foreach ($stmt as $row) {
+        echo '
       <form action="" method="post">
           <tr>
           <td data-th="Product">
@@ -130,11 +131,11 @@ if (isset($_POST['updateQty'])) {
           </td>
         </tr>
           ';
-          $total_product = $row['order_quantity'] * $row['product_price'];
-          $total_price = $total_price + $total_product;
-    }
+        $total_product = $row['order_quantity'] * $row['product_price'];
+        $total_price = $total_price + $total_product;
+      }
 
-    echo '
+      echo '
         </tbody>
         <tfoot>
           <tr class="visible-xs">
@@ -143,22 +144,35 @@ if (isset($_POST['updateQty'])) {
           <tr>
             <td><a href="index.php?pages=user&action=products" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a></td>
             <td colspan="2" class="hidden-xs"></td>
-            <td class="hidden-xs text-center"><strong>Total '.$total_price.'</strong></td>
-            <td><a href="#" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a></td>
+            <td class="hidden-xs text-center"><strong>Total ' . $total_price . '</strong></td>
+            <td>
+            <form action="" method="POST">
+              <input type="text" name="user_id" value="' . $_COOKIE['userID'] . '">
+              <input type="text" name="order_id" value="' . $order->getInfoUserOrder($_COOKIE['userID'], 'order_id') . '">
+              <button name="checkout" type="submit" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></button>
+            </form>   
+            </td>
           </tr>
         </tfoot>
         ';
-  } else {
-    echo '</table>
+      $order->updateCartTotal($row['user_id'], $total_price);
+      if (isset($_POST['checkout'])) {
+        $user_id = $_POST['user_id'];
+        $order_id = $_POST['order_id'];
+        echo "<script>window.location.href = 'index.php?pages=user&action=checkout&user_id=$user_id&order_id=$order_id'</script>";
+      };
+    } else {
+      echo '</table>
     <div class="alert-cart">
   Bạn chưa có sản phẩm trong giỏ hàng ! ! !
 </div>
-<a name="" id="" class=" btn btn-primary" href="index.php?pages=user&action=products" role="button">Trở về trang sản phẩm</a>
-      
+   
 ';
+    }
+  } else {
+    echo '<script>alert("Xin vui lòng đăng nhập để vào giỏ hàng")</script>';
+    echo '<script>window.location.href="index.php?pages=user&action=home"</script>';
   }
-
-
   ?>
 
 </table>
@@ -182,3 +196,4 @@ include('user/component/footer.php');
     margin: 30px auto;
   }
 </style>
+<!-- <button name="checkout" type="submit" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></button> -->

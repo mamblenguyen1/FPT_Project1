@@ -12,6 +12,7 @@ if(isset($_POST['Replycomment'])){
         echo '<script>window.location.href="index.php?pages=admin&action=commentList"</script>';
     }
 }
+
 if (isset($_POST['deletecomment'])) {
     $comment_detail = $_POST['comment_detail_id'];
     $comment->deletedComment($comment_detail);
