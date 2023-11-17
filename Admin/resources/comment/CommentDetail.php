@@ -44,7 +44,7 @@ if(isset($_POST['details'])){
                                                   <form action="index.php?pages=admin&action=commentReply" method="post">
                                                     <input type="hidden" value="' . $row['comment_detail_id'] . '" name="comment_detail_id">
                                                     <button type="submit" name="CommentReply" class="btn  btn-outline-primary">Trả lời</button>
-                                                    <button type="submit" name="deleteproduct" class="btn  btn-outline-danger">Ẩn</button>
+                                                    <button type="submit" name="deletecomment" class="btn  btn-outline-danger">Ẩn</button>
                                                 </form>
                                               </td>
                                               </tr>

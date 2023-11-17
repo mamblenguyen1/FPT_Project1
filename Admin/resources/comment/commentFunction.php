@@ -245,7 +245,7 @@ class comment
         products.product_id = comment.product_id AND
         user.user_id = comment_detail.user_id AND 
         comment_detail.comment_id = $comment_id
-        AND comment_detial.is_deleted= 1";
+        AND comment_detail.is_deleted= 1";
         $result = $db->pdo_query($sql);
         return $result;
     }
@@ -319,6 +319,14 @@ function RestoreComment($commentID)
     {
         $db = new connect();
         $sql = "DELETE FROM comment_detail WHERE comment_detail_id = $comment_detail_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+    //ẩn bình luận
+    function deletedComment($comment_detail_id)
+    {
+        $db = new connect();
+        $sql = "UPDATE`comment_detail` SET is_deleted = 2 WHERE comment_detail_id=$comment_detail_id";
         $result = $db->pdo_execute($sql);
         return $result;
     }
