@@ -1,5 +1,13 @@
 <?php include './Admin/componant/header.php' ?>
 <?php include './admin/componant/sidebar.php' ?>
+<?
+if (isset($_POST['restore_comment'])) {
+    $commentID = $_POST['comment_detail_id'];
+    $comment->RestoreComment($commentID);
+    echo '<script>alert("Đã khôi phục danh mục ! ! !")</script>';
+    echo '<script>window.location.href="index.php?pages=admin&action=commentList"</script>';
+}
+?>
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -41,8 +49,9 @@
                                                 <td>' . $comment->NewestCmt($row['comment_id']) . '</td>
                                                 <td>' . $comment->LastestCmt($row['comment_id']) . '</td>
                                                 <td>
-                                                  <form action="index.php?pages=admin&action=commentDetail" method="post">
-                                                  <button type="submit" name="" class="btn btn-outline-primary">Khôi phục</button>
+                                                  <form action="" method="post">
+                                                  <input type="hidden" name="comment_detail_id" value="' . $row['comment_detail_id'] . '">
+                                                  <button type="submit" name="restore_comment" class="btn btn-outline-primary">Khôi phục</button>
                                                   <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="" class="btn btn-outline-danger">Xóa</button>
                                                 </form>
                                               </td>

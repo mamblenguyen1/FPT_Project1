@@ -6,14 +6,14 @@ class Type
     var $created_at = null;
     var $is_deleted = null;
     var $category_id = null;
-    function create_Type($type_name, $category_id,$user_created)
+    function create_Type($type_name, $category_id, $user_created)
     {
         $db = new connect();
         $select = "INSERT INTO `type`(type_name, category_id,user_created,is_deleted ) VALUES ('$type_name',$category_id ,$user_created, 1 )";
         $result = $db->pdo_execute($select);
         return $result;
     }
-    function update_Type($type_name,$category_id, $user_updated, $type_id)
+    function update_Type($type_name, $category_id, $user_updated, $type_id)
     {
         $db = new connect();
         $select = "UPDATE `type` SET type_name = '$type_name' , category_id = $category_id, user_updated = $user_updated WHERE type_id = $type_id";
@@ -29,7 +29,7 @@ class Type
     function deleteCate($type_id)
     {
         $db = new connect();
-        $sql = "UPDATE `type` SET is_deleted = 0 WHERE type_id = $type_id";
+        $sql = "UPDATE `type` SET is_deleted = 2 WHERE type_id = $type_id";
         $result = $db->pdo_execute($sql);
         return $result;
     }
@@ -74,6 +74,20 @@ class Type
             return $row['COUNT(type.type_id)'];
         }
     }
+//khôi phục
+    function RestoreType($typeID)
+    {
+        $db = new connect();
+        $sql = "UPDATE type SET is_deleted = 1 WHERE type_id = $typeID";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+    //xóa vĩnh viễn tài khoản ẩn
+    function permanently_deleted_type($type_id)
+    {
+        $db = new connect();
+        $sql = "DELETE FROM type WHERE type_id = $type_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
 }
-
-?>

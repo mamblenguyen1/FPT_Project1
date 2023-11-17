@@ -1,5 +1,20 @@
 <?php include './Admin/componant/header.php' ?>
 <?php include './admin/componant/sidebar.php' ?>
+<?
+if (isset($_POST['restore_user'])) {
+    $userID = $_POST['user_id'];
+    $user->RestoreUser($userID);
+    echo '<script>alert("Đã khôi phục tài khoản ! ! !")</script>';
+    echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
+}
+//xóa vĩnh viễn
+if (isset($_POST['permanently_deleted_user'])) {
+    $userpermanently = $_POST['user_id'];
+    $user->permanently_deleted_user($userpermanently);
+    echo '<script>alert("Xóa danh mục thành công ! ! !")</script>';
+    echo '<script>window.location.href="index.php?pages=admin&action=UserHidden"</script>';
+}
+?>
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -44,10 +59,10 @@
                                                 <td><?= $role_id ?></td>
                                                 <td><?= $created_at ?></td>
                                                 <td>
-                                                    <form action="index.php?pages=admin&action=UserEdit" method="post">
+                                                    <form action="" method="post">
                                                         <input type="hidden" value="<?= $user_id ?>" name="user_id">
-                                                        <button type="submit" name="" class="btn btn-outline-primary">Khôi phục</button>
-                                            <button type="submit" onclick="return confirm('Bạn Có đồng ý xóa không ?')" name="" class="btn btn-outline-danger">Xóa</button>
+                                                        <button type="submit" name="restore_user" class="btn btn-outline-primary">Khôi phục</button>
+                                                        <button type="submit" onclick="return confirm('Bạn Có đồng ý xóa không ?')" name="permanently_deleted_user" class="btn btn-outline-danger">Xóa</button>
                                                     </form>
                                                 </td>
                                             </tr>
