@@ -2,32 +2,8 @@
 include('User/component/header.php');
 ?>
 
-<!-- <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="https://c1.wallpaperflare.com/preview/551/930/440/contact-us-contact-call-us-phone-communication.jpg">
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="tg-innerbannercontent">
-					<h1 >Liên hệ với chúng tôi</h1>
-
-					<ol class="tg-breadcrumb">
-						<li><a href="javascript:void(0);">Trang chủ</a></li>
-						<li class="tg-active">Liên hệ</li>
-					</ol>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> -->
-<!--************************************
-				Inner Banner End
-		*************************************-->
-<!--************************************
-				Main Start
-		*************************************-->
 <main id="tg-main" class="tg-main tg-haslayout">
 	<!--************************************
-					Contact Us Start
-			*************************************-->
 	<div class="tg-sectionspace tg-haslayout">
 		<div class="container">
 			<div class="row">
@@ -39,23 +15,17 @@ include('User/component/header.php');
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 						<div class="tg-locationmap tg-map">
-							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36800.40819801512!2d105.72293413981635!3d9.968401673826834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a08906415c355f%3A0x416815a99ebd841e!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1svi!2s!4v1698430652726!5m2!1svi!2s" width="600" height="770" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36800.40819801512!2d105.72293413981635!3d9.968401673826834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a08906415c355f%3A0x416815a99ebd841e!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1svi!2s!4v1698430652726!5m2!1svi!2s" width="600" height="710" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 						<form class="tg-formtheme tg-formcontactus">
 							<fieldset>
 								<div class="form-group">
-									<input type="text" name="first-name" class="form-control" placeholder="Họ">
+									<input type="text" name="name" class="form-control" placeholder="Họ và tên">
 								</div>
 								<div class="form-group">
-									<input type="text" name="last-name" class="form-control" placeholder="Email">
-								</div>
-								<div class="form-group">
-									<input type="email" name="email" class="form-control" placeholder="Tên">
-								</div>
-								<div class="form-group">
-									<input type="text" name="subject" class="form-control" placeholder="Chủ đề">
+									<input type="text" name="email" class="form-control" placeholder="Email">
 								</div>
 								<div class="form-group tg-hastextarea">
 									<textarea placeholder="Nội dung"></textarea>
