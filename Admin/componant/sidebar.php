@@ -207,7 +207,7 @@
                 <p>Tất cả mã giảm giá</p>
               </a>
 
-              <a href="?pages=admin&action=UserHidden" class="nav-link">
+              <a href="?pages=admin&action=CodeNull" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Mã giảm giá đã hết hạn</p>
               </a>
