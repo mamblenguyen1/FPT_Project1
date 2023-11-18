@@ -2,8 +2,35 @@
 include('User/component/header.php');
 ?>
 
+
+
+<?
+// lấy thông tin người dùng
+if (isset($_COOKIE['userID'])) {
+	$name = $user->getInfouser($_COOKIE['userID'], 'user_name');
+	$email = $user->getInfouser($_COOKIE['userID'], 'email');
+} else {
+	$name = '';
+	$email = '';
+}
+?>
+
+<?
+// gửi liên hệ
+if (isset($_POST['contact-btn'])) {
+	$name = $_POST['name'];
+	$email = $_POST['email'];
+	$content = $_POST['content'];
+	if ($name != '' && $email != '' && $content != '') {
+		$contact->send_contact($name, $email, $content);
+		echo '<script>alert("Cảm ơn bạn đã gửi liên hệ cho chúng tôi")</script>';
+		echo '<script>window.location.href="index.php?pages=user&action=contact"</script>';
+	} else {
+		$_SESSION['messages'] = 'Vui lòng nhập đầy đủ thông tin';
+	}
+}
+?>
 <main id="tg-main" class="tg-main tg-haslayout">
-	<!--************************************
 	<div class="tg-sectionspace tg-haslayout">
 		<div class="container">
 			<div class="row">
@@ -19,19 +46,46 @@ include('User/component/header.php');
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-						<form class="tg-formtheme tg-formcontactus">
+						<form class="tg-formtheme tg-formcontactus" method="post" action="">
 							<fieldset>
 								<div class="form-group">
-									<input type="text" name="name" class="form-control" placeholder="Họ và tên">
+									<input value="<?= $name ?>" type="text" name="name" class="form-control" placeholder="Họ và tên">
+									<?
+									if (isset($_POST["name"])) {
+										if (empty($_POST["name"])) {
+											echo '<span style="color:red" class="vaild">Vui lòng nhập họ tên</span>';
+										} else {
+											echo '';
+										}
+									}
+									?>
 								</div>
 								<div class="form-group">
-									<input type="text" name="email" class="form-control" placeholder="Email">
+									<input value="<?= $email ?>" type="text" name="email" class="form-control" placeholder="Email">
+									<?
+									if (isset($_POST["email"])) {
+										if (empty($_POST["email"])) {
+											echo '<span style="color:red" class="vaild">Vui lòng nhập email</span>';
+										} else {
+											echo '';
+										}
+									}
+									?>
 								</div>
 								<div class="form-group tg-hastextarea">
-									<textarea placeholder="Nội dung"></textarea>
+									<textarea name="content" placeholder="Nội dung"></textarea>
+									<?
+									if (isset($_POST["content"])) {
+										if (empty($_POST["content"])) {
+											echo '<span style="color:red" class="alert">Vui lòng nhập nội dung</span>';
+										} else {
+											echo '';
+										}
+									}
+									?>
 								</div>
 								<div class="form-group">
-									<button type="submit" class="tg-btn tg-active">Gửi</button>
+									<button name="contact-btn" type="submit" class="tg-btn tg-active">Gửi</button>
 								</div>
 							</fieldset>
 						</form>
