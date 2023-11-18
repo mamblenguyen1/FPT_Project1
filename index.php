@@ -9,6 +9,8 @@ require_once './Admin/resources/Type/TypeFunction.php';
 require_once './Admin/resources/comment/commentFunction.php';
 require_once './mail/forgot.php';
 require_once './Admin/resources/order/Order_Function.php';
+require_once './Admin/resources/promotioncodes/CodeFunction.php';
+
 
 
 
@@ -20,6 +22,7 @@ $comment = new comment();
 $type = new Type();
 $mail = new Mailer();
 $order = new ORDER();
+$code = new Promotioncode();
 
 //require('./admin/core/function.php');
 //require('./client/core/FunctionClient.php');
@@ -135,6 +138,16 @@ if (isset($_GET['pages'])) {
                             //danh sách đơn hàng đã hủy
                         case 'OrderHidden':
                             include './Admin/resources/category/CategoryHidden.php';
+                            break;
+                            // promotion code
+                        case 'CodeList':
+                            include './Admin/resources/promotioncodes/CodeList.php';
+                            break;
+                        case 'CodeAdd':
+                            include './Admin/resources/promotioncodes/CodeAdd.php';
+                            break;
+                        case 'CodeEdit':
+                            include './Admin/resources/promotioncodes/CodeEdit.php';
                             break;
 
                         default:
