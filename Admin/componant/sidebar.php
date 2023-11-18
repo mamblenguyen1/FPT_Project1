@@ -190,6 +190,30 @@
             </li>
           </ul>
         </li>
+        <!-- Mã giảm giá -->
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa fa-user-o"></i>
+            <p>
+              Mã giảm giá
+              <i class="fas fa-angle-left right"></i>
+              <span class="badge badge-info right"><? echo $user->Countuser1() ?></span>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="?pages=admin&action=CodeList" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Tất cả mã giảm giá</p>
+              </a>
+
+              <a href="?pages=admin&action=UserHidden" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Mã giảm giá đã hết hạn</p>
+              </a>
+            </li>
+          </ul>
+        </li>
         <!-- <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-chart-pie"></i>

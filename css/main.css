@@ -852,14 +852,13 @@ body.tg-comingsoonpage .tg-wrapper{overflow:visible;}
 	z-index: 2;
 	width: 100%;
 	float: left;
-	padding: 30px 0;
 	position: relative;
 }
 .tg-logo {
 	z-index:2;
 	float: left;
-	padding: 10px 0;
 	position:relative;
+	padding: 10px;
 }
 .tg-logo a { display: block;
 
@@ -873,6 +872,7 @@ body.tg-comingsoonpage .tg-wrapper{overflow:visible;}
 	float: right;
 	padding: 23px 0;
 	position: relative;
+	padding-top: 70px;
 }
 .tg-themedropdown {
 	float: left;
@@ -1019,6 +1019,7 @@ body.tg-comingsoonpage .tg-wrapper{overflow:visible;}
 	height: 100%;
 	padding: 0 300px;
 	position: absolute;
+	padding-top: 55px;
 }
 .tg-formsearch fieldset{
 	margin: 0 0 6px;
