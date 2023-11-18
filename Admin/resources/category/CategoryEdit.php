@@ -16,6 +16,7 @@ if (isset($_POST['edit'])) {
     $category_name = $_POST['cateName'] ?? "";
     if (!$category_name == "" || !$category_cnt == "") {
         $category->update_category($category_name, $userId, $cateId);
+
         echo '<script>alert("Cập nhật thành công")</script>';
         echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
     } else {

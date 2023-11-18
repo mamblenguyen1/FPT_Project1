@@ -23,7 +23,20 @@ class Categories
     function deleteCate($cateID)
     {
         $db = new connect();
-        $sql = "UPDATE category SET is_deleted = 0 WHERE category_id = $cateID";
+        $sql = " START TRANSACTION; UPDATE category SET is_deleted = 2 WHERE category_id = $cateID;
+UPDATE type SET type.is_deleted = 2
+        WHERE category_id = (
+                SELECT category_id FROM category 
+                WHERE category.category_id = $cateID
+);
+UPDATE products SET is_deleted = 2
+        WHERE type_id IN 
+(
+SELECT type.type_id FROM `type`, category 
+     WHERE category.category_id = type.category_id
+     AND category.category_id = $cateID);
+     COMMIT;
+        ";
         $result = $db->pdo_execute($sql);
         return $result;
     }
@@ -90,7 +103,7 @@ class Categories
             return $row['COUNT(category.category_id)'];
         }
     }
-//tổng danh mục không có ẩn
+    //tổng danh mục không có ẩn
     function Countcategory1()
     {
         $db = new connect();
@@ -100,12 +113,12 @@ class Categories
             return $row['COUNT(category.category_id)'];
         }
     }
-        //xóa vĩnh viễn danh mục ẩn
-        function permanently_deleted_cate($category_id)
-        {
-            $db = new connect();
-            $sql = "DELETE FROM category WHERE category_id = $category_id";
-            $result = $db->pdo_execute($sql);
-            return $result;
-        }
+    //xóa vĩnh viễn danh mục ẩn
+    function permanently_deleted_cate($category_id)
+    {
+        $db = new connect();
+        $sql = "DELETE FROM category WHERE category_id = $category_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
 }

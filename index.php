@@ -10,6 +10,7 @@ require_once './Admin/resources/comment/commentFunction.php';
 require_once './mail/forgot.php';
 require_once './Admin/resources/order/Order_Function.php';
 require_once './Admin/resources/promotioncodes/CodeFunction.php';
+require_once './Admin/resources/contact/ContactFunction.php';
 
 
 
@@ -23,6 +24,7 @@ $type = new Type();
 $mail = new Mailer();
 $order = new ORDER();
 $code = new Promotioncode();
+$contact = new ContactFunction();
 
 //require('./admin/core/function.php');
 //require('./client/core/FunctionClient.php');
