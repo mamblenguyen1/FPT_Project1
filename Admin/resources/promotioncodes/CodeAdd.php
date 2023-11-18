@@ -7,13 +7,16 @@ if (isset($_POST['addcode'])) {
     $ExpiryDate = $_POST['ExpiryDate'] ?? "";
     $Description = $_POST['Description'] ?? "";
     $IsActive = $_POST['IsActive'] ?? "";
-
-    if (!$Code == "" && !$Percentage == "" && !$ExpiryDate == "" && !$Description == "" && !$IsActive == "") {
-        $code->create_code($Code, $Percentage , $ExpiryDate, $Description ,$IsActive);
+    //xét ngày
+    $ngayGioHienTai = date("Y-m-d");
+    if ($Code == "" && $Percentage == "" && $ExpiryDate == "" &&  $Description == "" && $IsActive == "") {
+        echo '<script>alert("Vui lòng điền đầy đủ thông tin!!")</script>';
+    } else if ($ExpiryDate < $ngayGioHienTai) {
+        echo '<script>alert("Ngày tháng không hợp lệ !!")</script>';
+    } else {
+        $code->create_code($Code, $Percentage, $ExpiryDate, $Description, $IsActive);
         echo '<script>alert("tạo mã giảm giá thành công  !!")</script>';
         echo '<script>window.location.href="index.php?pages=admin&action=CodeList"</script>';
-    } else {
-        $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
     }
 }
 ?>
@@ -108,12 +111,12 @@ if (isset($_POST['addcode'])) {
                             }
                             ?>
                         </div>
-                        </div>
-                  
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            <button type="submit" name="addcode" class="btn btn-primary">Lưu danh mục</button>
-                        </div>
+                    </div>
+
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" name="addcode" class="btn btn-primary">Lưu mã giảm giá</button>
+                    </div>
                 </form>
             </div>
         </div>
