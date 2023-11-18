@@ -8,26 +8,23 @@ if (isset($_POST['restore_user'])) {
     echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
 }
 //xóa vĩnh viễn
-if (isset($_POST['permanently_deleted_user'])) {
-    $userpermanently = $_POST['user_id'];
-    $user->permanently_deleted_user($userpermanently);
-    echo '<script>alert("Xóa danh mục thành công ! ! !")</script>';
-    echo '<script>window.location.href="index.php?pages=admin&action=UserHidden"</script>';
-}
+// if (isset($_POST['permanently_deleted_user'])) {
+//     $userpermanently = $_POST['user_id'];
+//     $user->permanently_deleted_user($userpermanently);
+//     echo '<script>alert("Xóa danh mục thành công ! ! !")</script>';
+//     echo '<script>window.location.href="index.php?pages=admin&action=UserHidden"</script>';
+// }
 ?>
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
-            <h1 style="padding-left: 30px;">Danh sách người dùng</h1>
+            <h1 style="padding-left: 30px;">Danh sách người dùng ẩn</h1>
         </div>
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <a href="?pages=admin&action=UserAdd"><button type="button" class="btn btn-outline-primary">Thêm Tài Khoản</button></a>
-                            </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
@@ -55,14 +52,13 @@ if (isset($_POST['permanently_deleted_user'])) {
                                                 <td><?= $email ?></td>
                                                 <td><?= $user_password ?></td>
                                                 <td><?= $user_phone_number ?></td>
-                                                <td><?= $user_address ?></td>
+                                                <td><?= $user_street ?> - <?= $ketqua['xa']?> - <?= $ketqua['huyen']?> - <?= $ketqua['thanhpho']?> </td>  
                                                 <td><?= $role_id ?></td>
                                                 <td><?= $created_at ?></td>
                                                 <td>
                                                     <form action="" method="post">
                                                         <input type="hidden" value="<?= $user_id ?>" name="user_id">
                                                         <button type="submit" name="restore_user" class="btn btn-outline-primary">Khôi phục</button>
-                                                        <button type="submit" onclick="return confirm('Bạn Có đồng ý xóa không ?')" name="permanently_deleted_user" class="btn btn-outline-danger">Xóa</button>
                                                     </form>
                                                 </td>
                                             </tr>

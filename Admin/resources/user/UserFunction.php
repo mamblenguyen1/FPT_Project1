@@ -144,7 +144,7 @@ class UserFunction
     function user_select_all_hidden()
     {
         $db = new connect();
-        $sql = "SELECT * FROM user WHERE is_deleted = 2";
+        $sql = "SELECT *, province.name as 'thanhpho', district.name as 'huyen', wards.name as 'xa' FROM `user` , province , district , wards WHERE user.province_id = province.province_id AND user.wards_id = wards.wards_id AND user.district_id = district.district_id AND is_deleted = 2";
         return $db->pdo_query($sql);
     }
 

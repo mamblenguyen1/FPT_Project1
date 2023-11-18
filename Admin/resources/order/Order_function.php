@@ -98,7 +98,7 @@ class ORDER
     function updateCartTotal($userId, $total)
     {
         $db = new connect();
-        $select = "UPDATE `order` SET order_total_payment = order_total_payment + $total  WHERE user_id  = $userId";
+        $select = "UPDATE `order` SET order_total_payment =  $total  WHERE user_id  = $userId";
         $result = $db->pdo_execute($select);
         return $result;
     }
@@ -162,6 +162,16 @@ class ORDER
         AND `order`.order_id = order_detail.order_id
         AND
         `order`.`user_id` = $userid";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    function getOrder_total_payment($userid, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `order` 
+        WHERE user_id  = $userid";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];
@@ -369,6 +379,17 @@ class ORDER
         products.product_id = `order_detail`.product_id AND
         user.user_id = `order`.user_id AND 
         order_detail.order_id = $order_id";
+        $result = $db->pdo_query($sql);
+        return $result;
+    }
+    function Show_Order_Detail_user($user_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM order_detail, products, `order`, user
+        WHERE order_detail.order_id = `order`.order_id AND
+        products.product_id = `order_detail`.product_id AND
+        user.user_id = `order`.user_id AND 
+        `order`.user_id = $user_id";
         $result = $db->pdo_query($sql);
         return $result;
     }
