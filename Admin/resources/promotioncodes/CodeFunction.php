@@ -69,4 +69,17 @@ class Promotioncode
             return $row['COUNT(promotioncodes.CodeID)'];
         }
     }
+//check tồn tại code giảm giá
+    public function checkDuplicateCode($Code)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM promotioncodes";
+        $result = $db->pdo_query($select);
+        foreach ($result as $row) {
+            $nw = $row['Code'];
+            if ($Code === $nw) {
+                return true;
+            }
+        }
+    }
 }

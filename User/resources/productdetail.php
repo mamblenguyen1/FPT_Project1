@@ -70,7 +70,9 @@ if ($product->count_view($user_id, $product_id) == 0) {
 									<div class="row">
 										<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 											<div class="tg-postbook">
-												<figure class="tg-featureimg"><img src="../images/iphone.jpg" alt="image description"></figure>
+												<figure class="tg-featureimg">
+													<img src="images/product/<? echo $product->all_product_category($category_id, $product_id, 'product_img') ?>.png" style="height: 250px; width: 250px;">
+												</figure>
 												<div class="tg-postbookcontent">
 													<span class="tg-bookprice">
 														<ins style="color: red;"><? echo number_format($product->all_product_category($category_id, $product_id, 'product_price')) ?><span>đ</span></ins>
@@ -320,27 +322,27 @@ if ($product->count_view($user_id, $product_id) == 0) {
 																	</form>
 															</div>
 															';
-															$stmt1  = $conn->prepare("SELECT * FROM comment_reply
+																		$stmt1  = $conn->prepare("SELECT * FROM comment_reply
 											WHere comment_reply.comment_detail_id = $row[comment_detail_id]");
-															$stmt1->execute();
-															if ($stmt1->rowCount() > 0) {
-																foreach ($stmt1 as $row1) {
-																	echo '
+																		$stmt1->execute();
+																		if ($stmt1->rowCount() > 0) {
+																			foreach ($stmt1 as $row1) {
+																				echo '
 																<div class="reply-comment">
 																<p> <i class="fa fa-reply"></i>
 																<strong>Trả lời từ ADMIN</strong>
 																</p>
 																<span>' . $row1['content'] . '</span>
 																</div>';
-																}
-															}
-															echo '
+																			}
+																		}
+																		echo '
 															</div>
 															</div>
 														</div>
 														<hr>
 															';
-														}
+																	}
 																}
 															} else {
 																$stmt = $conn->prepare("SELECT * FROM comment , comment_detail, user
@@ -634,13 +636,16 @@ if ($product->count_view($user_id, $product_id) == 0) {
 	.comment-method {
 		padding: 10px 0;
 	}
-.reply-comment{
-	padding: 5px 30px;
-}
-.reply-comment span{
-	padding: 5px;
 
-}
+	.reply-comment {
+		padding: 5px 30px;
+	}
+
+	.reply-comment span {
+		padding: 5px;
+
+	}
+
 	.user_cmt {
 		display: flex;
 		justify-content: space-between;
@@ -680,7 +685,7 @@ if ($product->count_view($user_id, $product_id) == 0) {
 		});
 	});
 	// Khởi tạo số lượng trong giỏ hàng
-	let soLuongGioHang = 0;
+	let soLuongGioHang = 1;
 
 	// Hàm tăng số lượng
 	function tangSoLuong() {
