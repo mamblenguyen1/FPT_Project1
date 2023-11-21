@@ -145,6 +145,12 @@ if (isset($_GET['pages'])) {
                         case 'ContactDetail':
                             include './Admin/resources/contact/ContactDetail.php';
                             break;
+                        case 'ContactSpam':
+                            include './Admin/resources/contact/ContactSpam.php';
+                            break;
+                        case 'ContactReply':
+                            include './Admin/resources/contact/ContactReply.php';
+                            break;
                             //danh sách đơn hàng đã hủy
                         case 'OrderHidden':
                             include './Admin/resources/category/CategoryHidden.php';
