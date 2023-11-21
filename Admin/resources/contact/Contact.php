@@ -7,7 +7,7 @@
         <div class="row">
             <h1 style="padding-left: 30px;">Danh sách thư liên hệ</h1>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid" style="padding:30px">
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <h3 class="card-title">Inbox</h3>
@@ -79,16 +79,11 @@
                                     extract($sql);
                                     echo '
                                         <tr>
-                                        <td>
-                                        <div class="icheck-primary">
-                                            <input type="checkbox" value="" id="check1">
-                                            <label for="check1"></label>
-                                        </div>
-                                    </td>
-                                    <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
                                     <td class="mailbox-name">' . $row['name'] . '</td>
                                     <td class="mailbox-subject">' . $row['subject'] . ' </td>
-                                    <td class="mailbox-date">' . $row['date'] . '</td>
+                                    <td class="mailbox-date">' . $timecount->timecount($row['date']) . '</td>
                                     <td>
                                         <form action="index.php?pages=admin&action=ContactDetail" method="post">
                                             <input type="hidden" value="' . $row['contact_id'] . '" name="contact_id">
@@ -105,48 +100,13 @@
                         </table>
                     </div>
                 </div>
-                <!-- /.card-body -->
-                <!-- <div class="card-footer p-0">
-              <div class="mailbox-controls">
-                <button type="button" class="btn btn-default btn-sm checkbox-toggle">
-                  <i class="far fa-square"></i>
-                </button>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="far fa-trash-alt"></i>
-                  </button>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-reply"></i>
-                  </button>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-share"></i>
-                  </button>
-                </div>
-                <button type="button" class="btn btn-default btn-sm">
-                  <i class="fas fa-sync-alt"></i>
-                </button>
-                <div class="float-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="fas fa-chevron-right"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div> -->
             </div>
             <!-- /.card -->
         </div>
         <!-- /.col -->
     </div>
-    <!-- /.row -->
 </div>
-</div>
-</div>
+
 
 
 <?php include './admin/componant/footer.php' ?>

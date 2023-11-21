@@ -11,6 +11,7 @@ require_once './mail/forgot.php';
 require_once './Admin/resources/order/Order_Function.php';
 require_once './Admin/resources/promotioncodes/CodeFunction.php';
 require_once './Admin/resources/contact/ContactFunction.php';
+require_once './componant/TimeFunction.php';
 
 
 
@@ -25,6 +26,7 @@ $mail = new Mailer();
 $order = new ORDER();
 $code = new Promotioncode();
 $contact = new ContactFunction();
+$timecount = new Time();
 
 //require('./admin/core/function.php');
 //require('./client/core/FunctionClient.php');

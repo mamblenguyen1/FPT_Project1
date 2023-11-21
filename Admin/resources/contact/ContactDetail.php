@@ -13,7 +13,7 @@ if (isset($_POST['details'])) {
         <div class="row">
             <h1 style="padding-left: 30px;">Xem chi tiết</h1>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid" style="padding:30px">
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <h3 class="card-title">Read Mail</h3>
@@ -30,8 +30,8 @@ if (isset($_POST['details'])) {
                 <div class="card-body p-0">
                     <div class="mailbox-read-info">
                         <h5><b>Chủ đề </b><?=$subject?></h5>
-                        <h6>From: <?=$name?>
-                            <span class="mailbox-read-time float-right"><?=$date?></span>
+                        <h6>Đến từ: <?=$name?>
+                            <span class="mailbox-read-time float-right"><?=$timecount->timeformatter($date)?></span>
                         </h6>
                     </div>
                     <!-- /.mailbox-read-info -->
@@ -67,11 +67,10 @@ if (isset($_POST['details'])) {
                 <!-- /.card-footer -->
                 <div class="card-footer">
                     <div class="float-right">
-                        <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button>
-                        <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Forward</button>
+                        <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Trả lời</button>
+                        <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Chuyển vào hòm thư ẩn</button>
                     </div>
-                    <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Delete</button>
-                    <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
+                    <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Xoá </button>
                 </div>
                 <!-- /.card-footer -->
             </div>
