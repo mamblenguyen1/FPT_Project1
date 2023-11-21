@@ -137,6 +137,12 @@ if (isset($_GET['pages'])) {
                         case 'UserHidden':
                             include './Admin/resources/user/UserHidden.php';
                             break;
+                        case 'Contact':
+                            include './Admin/resources/contact/Contact.php';
+                            break;
+                        case 'ContactDetail':
+                            include './Admin/resources/contact/ContactDetail.php';
+                            break;
                             //danh sách đơn hàng đã hủy
                         case 'OrderHidden':
                             include './Admin/resources/category/CategoryHidden.php';
