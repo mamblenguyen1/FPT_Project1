@@ -23,6 +23,13 @@ class Promotioncode
         $result = $db->pdo_execute($sql);
         return $result;
     }
-
+    function ExpiryDate($code_id)
+    {
+        $db = new connect();
+        $sql = "UPDATE promotioncodes SET promotioncodes.IsActive = 2 WHERE promotioncodes.CodeID = $code_id
+        ";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
     
 }

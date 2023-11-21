@@ -2,6 +2,7 @@
 
 <?php include './admin/componant/sidebar.php' ?>
 
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -12,7 +13,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header" style="width: 200px;">
-                        <a href="?pages=admin&action=CodeAdd" class="btn btn-block btn-outline-primary">Thêm mã giảm giá</a>
+                            <a href="?pages=admin&action=CodeAdd" class="btn btn-block btn-outline-primary">Thêm mã giảm giá</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -23,38 +24,43 @@
                                         <th>Phần trăm giảm giá</th>
                                         <th>Ngày hết hạn</th>
                                         <th>Mô tả</th>
+                                        <th>Trạng thái</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?
                                     $conn = $db->pdo_get_connection();
-                                    $stmt = $conn->prepare("SELECT * FROM `promotioncodes`
-                                    WHERE IsActive = 1");
+                                    $stmt = $conn->prepare("SELECT * FROM `promotioncodes` , status
+                                    WHERE promotioncodes.IsActive = status.status_id
+                                    AND promotioncodes.IsActive = 1");
                                     $stmt->execute();
                                     if ($stmt->rowCount() > 0) {
+                                        $currentTime = DATE("Y-m-d");
                                         foreach ($stmt as $row) {
+                                            $time = $row['ExpiryDate'];
+                                            if ($time < $currentTime) {
+                                                $code->ExpiryDate($row['CodeID']);
+                                            }
                                             echo ' 
                                         <tr>
                                         <td>' . $row['Code'] . '</td>
                                         <td>' . $row['Percentage'] . '<span>%</span></td>
                                         <td>' . $row['ExpiryDate'] . '</td>
                                         <td>' . $row['Description'] . '</td>
+                                        <td>' . $row['status_name'] . '</td>
                                         <td>
                                         <form action="index.php?pages=admin&action=CodeEdit" method="post">
                                              <input type="hidden" value="' . $row['CodeID'] . '" name="CodeID">
                                              <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="delete_code" class="btn btn-outline-danger">Xóa</button>
                                         </form>
-                                           
                                         </td>
                                     </tr>
-                                   
                                         ';
                                         }
                                     }
                                     ?>
-
-                                </tbody>
+                                </tbody>                                     
 
                             </table>
                         </div>
