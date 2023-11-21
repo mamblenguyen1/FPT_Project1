@@ -20,9 +20,11 @@ if (isset($_COOKIE['userID'])) {
 if (isset($_POST['contact-btn'])) {
 	$name = $_POST['name'];
 	$email = $_POST['email'];
+	$subject = $_POST['subject'];
+	echo $subject;
 	$content = $_POST['content'];
-	if ($name != '' && $email != '' && $content != '') {
-		$contact->send_contact($name, $email, $content);
+	if ($name != '' && $email != '' && $subject != '' && $content != '') {
+		$contact->send_contact($name, $email, $subject, $content);
 		echo '<script>alert("Cảm ơn bạn đã gửi liên hệ cho chúng tôi")</script>';
 		echo '<script>window.location.href="index.php?pages=user&action=contact"</script>';
 	} else {
@@ -66,6 +68,18 @@ if (isset($_POST['contact-btn'])) {
 									if (isset($_POST["email"])) {
 										if (empty($_POST["email"])) {
 											echo '<span style="color:red" class="vaild">Vui lòng nhập email</span>';
+										} else {
+											echo '';
+										}
+									}
+									?>
+								</div>
+								<div class="form-group" style="width:100%" >
+									<input type="text" name="subject" class="form-control" placeholder="Chủ đề">
+									<?
+									if (isset($_POST["subject"])) {
+										if (empty($_POST["subject"])) {
+											echo '<span style="color:red" class="vaild">Vui lòng điền chủ đề</span>';
 										} else {
 											echo '';
 										}

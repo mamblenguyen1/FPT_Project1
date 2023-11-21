@@ -190,6 +190,25 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item">
+          
+          <a href="#" class="nav-link">
+            <i class="fa fa-mail-forward"></i>
+            <p>
+              Thư liên hệ
+              <i class="fas fa-angle-left right"></i>
+              <span class="badge badge-info right"><? echo $user->Countuser1() ?></span>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="?pages=admin&action=Contact" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Tất cả thư liên hệ</p>
+              </a>
+            </li>
+          </ul>
+        </li>
         <!-- Mã giảm giá -->
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -377,15 +396,15 @@
         </li> -->
 
         <li class="nav-item">
-           <a href="logout.php" class="nav-link">
-             <i class="fa fa-sign-out"></i>
-             <p>
-               Đăng Xuất
-             </p>
-           </a>
-         </li>
+          <a href="logout.php" class="nav-link">
+            <i class="fa fa-sign-out"></i>
+            <p>
+              Đăng Xuất
+            </p>
+          </a>
+        </li>
       </ul>
-      
+
     </nav>
     <!-- /.sidebar-menu -->
   </div>
