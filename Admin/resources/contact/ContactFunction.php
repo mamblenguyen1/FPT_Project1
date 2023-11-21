@@ -10,7 +10,7 @@ class ContactFunction{
 
     function show_all_contact(){
         $db = new connect();
-        $select = "SELECT * FROM contact WHERE is_deleted=1";
+        $select = "SELECT * FROM contact WHERE is_deleted=1 Order by date desc";
         $result = $db->pdo_query($select);
         return $result;
     }
