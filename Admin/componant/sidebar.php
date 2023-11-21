@@ -191,7 +191,6 @@
           </ul>
         </li>
         <li class="nav-item">
-          
           <a href="#" class="nav-link">
           <i class='fa fa-envelope'></i>
             <p>
@@ -205,6 +204,12 @@
               <a href="?pages=admin&action=Contact" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Tất cả thư liên hệ</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="?pages=admin&action=ContactSpam" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thư rác</p>
               </a>
             </li>
           </ul>

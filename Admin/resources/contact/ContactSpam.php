@@ -25,7 +25,7 @@
                             <tbody>
 
                                 <?
-                                $sql = $contact->show_all_contact();
+                                $sql = $contact->show_all_spam_contact();
                                 foreach ($sql as $row) {
                                     extract($sql);
                                     echo '
@@ -33,11 +33,11 @@
                                     <td class="mailbox-name">' . $row['name'] . '</td>
                                     <td class="mailbox-subject">' . $row['subject'] . ' </td>
                                     <td class="mailbox-date">' . $timecount->timecount($row['date']) . '</td>
-                                    <td width="330">
+                                    <td width="326.6">
                                         <form action="index.php?pages=admin&action=ContactDetail" method="post">
                                             <input type="hidden" value="' . $row['contact_id'] . '" name="contact_id">
                                             <button type="submit" name="details" class="btn  btn-outline-primary">Xem nội dung</button>
-                                            <button type="submit" name="spam" class="btn btn-danger">Chuyển đến hòm thư Spam</button>
+                                            <button type="submit" name="restore" class="btn btn-success">Chuyển đến hòm thư chính</button>
                                         </form>
                                     </td>
                                     </tr>
