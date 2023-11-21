@@ -3,29 +3,29 @@ include('User/component/header.php');
 ?>
 
 <?
-        if(isset($_GET['user_id']) ){
-            $user_id = $_GET['user_id'];
-            $order_id = $_GET['order_id'];
-        }
+if (isset($_GET['user_id'])) {
+    $user_id = $_GET['user_id'];
+    $order_id = $_GET['order_id'];
+}
 ?>
 <div class="row" style="width: 100%; padding-left:10%; padding-right:10%; padding-top: 25%">
     <div class="col-md-6 order-md-1">
         <h4 class="mb-3"><b>Địa chỉ nhận hàng</b></h4>
         <form class="needs-validation" novalidate>
             <div class="row">
-                    <label for="firstName">Họ và tên</label>
-                    <input type="text" class="form-control rounded-2xl" id="firstName" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_name')?>" required>
+                <label for="firstName">Họ và tên</label>
+                <input type="text" class="form-control rounded-2xl" id="firstName" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_name') ?>" required>
             </div>
 
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control rounded-2xl" id="email" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'email')?>" required>
+                    <input type="text" class="form-control rounded-2xl" id="email" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'email') ?>" required>
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label for="phonenumber">Số điện thoại</label>
-                    <input type="text" class="form-control rounded-2xl" id="phonenumber" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_phone_number')?>" required>
+                    <input type="text" class="form-control rounded-2xl" id="phonenumber" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_phone_number') ?>" required>
                 </div>
             </div>
 
@@ -46,16 +46,16 @@ include('User/component/header.php');
             </div>
 
             <div class="row">
-            <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-3">
                     <label for="wards">Xã , phường</label>
                     <select class="form-select d-block w-100 rounded-2xl" name="wards" id="wards" required>
-                        <option selected value="0">Chọn Quận / huyện</option>
+                        <option selected value="0">Chọn Xã, Phường</option>
                     </select>
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label for="streets">Đường</label>
-                    <input type="text" class="form-control rounded-2xl" id="streets" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_street')?>" required>
+                    <input type="text" class="form-control rounded-2xl" id="streets" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_street') ?>" required>
                 </div>
             </div>
             <hr class="mb-4">
@@ -90,127 +90,137 @@ include('User/component/header.php');
             </div>
     </div>
     <?
-									if(isset($_COOKIE['userID'])){
-                                    $conn = $db->pdo_get_connection();
-                                    $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
+    if (isset($_COOKIE['userID'])) {
+        $conn = $db->pdo_get_connection();
+        $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
 									WHERE order_detail.order_id = `order`.order_id AND
 									products.product_id = `order_detail`.product_id AND
 									user.user_id = `order`.user_id AND 
 									`order`.user_id = $user_id");
-                                    $stmt->execute();
-                                    if ($stmt->rowCount() > 0) {
-                                        echo '
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            echo '
                                         <div class="col-md-6 order-md-2 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted"><b>Thông tin</b></span>
         </h4>
                                         ';
-                                        foreach ($stmt as $row) {
-                                            echo '
+            foreach ($stmt as $row) {
+                echo '
     
         <div class="flex relative py-7">
             <div class="">
-                <img height="50px" src="images/product/'.$row['product_img'].'.png" class="image-checkout h-full w-full object-contain object-center" style="width: 60px;height: 80px;">
+                <img height="50px" src="images/product/' . $row['product_img'] . '.png" class="image-checkout h-full w-full object-contain object-center" style="width: 60px;height: 80px;">
             </div>
             <div class="product ml-3 sm:ml-6 flex flex-1 flex-col" >
                 <div class="flex justify-between">
                     <div class="info">
-                        <p style="font-size: 15px">'.$row['product_name'].'<strong> X '.$row['order_quantity'].'</strong></p>
+                        <p style="font-size: 15px">' . $row['product_name'] . '<strong> X ' . $row['order_quantity'] . '</strong></p>
                         <div class="pricee  ">
-                            <h3  class="price1" style=" font-size: 17px ;color:red ; text-transform : none">'.number_format($row['order_quantity'] * $row['product_price']).' đ</span></h3>
+                            <h3  class="price1" style=" font-size: 17px ;color:red ; text-transform : none">' . number_format($row['order_quantity'] * $row['product_price']) . ' đ</span></h3>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 ';
-                                        }
-                                    }
-                                }
-?>
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <label><b>Thành tiền</b></label>
-        </h4>
-        <form class="card p-2 border-0">
+            }
+        }
+    }
+    ?>
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <form action="">
+            <label for="firstName">Mã giảm giá  (Nếu Có)</label>
+            <input type="text" class="form-control" style="width:200px;" placeholder="Nhập mã giảm giá">
+            <button type="submit" name="" class="tg-btn" style="width:100px; padding:0;">Nhập</button>
         </form>
-        <ul class="list-group mb-3">
-            <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
-                <a class="text-muted"><b>Giá gốc:</b> </a>
-                <a class="text-muted1"><?= number_format($order->getOrder_total_payment($user_id, 'order_total_payment')) ?> đ</a>
-            </li>
-            <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
-                <a class="text-muted"><b>Giảm giá:</b> </a>
-                <a class="text-muted1">5 %</a>
-            </li>
-            <!-- <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
+        
+    </h4>
+
+    <form class="card p-2 border-0">
+    </form>
+    <h3><label><b>Thành tiền</b></label></h3>
+    <ul class="list-group mb-3">
+        <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
+            <a class="text-muted"><b>Giá gốc:</b> </a>
+            <a class="text-muted1"><?= number_format($order->getOrder_total_payment($user_id, 'order_total_payment')) ?> đ</a>
+        </li>
+        <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
+            <a class="text-muted"><b>Giảm giá:</b> </a>
+            <a class="text-muted1">5 %</a>
+        </li>
+        <!-- <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
                 <a class="text-muted"><b>Số lượng:</b> </a>
                 <a class="text-muted1">$5</a>
             </li> -->
-            <li class="list-group-item border-0 d-flex justify-content-between">
-                <h4>Tổng: <a><?= number_format((($order->getOrder_total_payment($user_id, 'order_total_payment')-($order->getOrder_total_payment($user_id, 'order_total_payment'))*0.05))) ?> đ</a></h4>
-            </li>
-            <li class="list-group-item border-0 d-flex justify-content-between">
-                <button class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color:white; font-size:15px">Thanh Toán</button>
-            </li>
-        </ul>
-    </div>
+        <li class="list-group-item border-0 d-flex justify-content-between">
+            <h4>Tổng: <a><?= number_format((($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * 0.05))) ?> đ</a></h4>
+        </li>
+        <li class="list-group-item border-0 d-flex justify-content-between">
+            <button class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color:white; font-size:15px">Thanh Toán</button>
+        </li>
+    </ul>
+</div>
 </div>
 <script>
-$(document).ready(function(){    
-    $.ajax({
-        url: "./admin/resources/address/province.php",       
-        dataType:'json',         
-        success: function(data){     
-            $("#Province").html("");
-            for (i=0; i<data.length; i++){            
-                var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
-                var str = ` 
+    $(document).ready(function() {
+        $.ajax({
+            url: "./admin/resources/address/province.php",
+            dataType: 'json',
+            success: function(data) {
+                $("#Province").html("");
+                for (i = 0; i < data.length; i++) {
+                    var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
+                    var str = ` 
                 <option value="${Province['province_id']}"> ${Province['name']} </option>
                    `;
-                $("#Province").append(str);
+                    $("#Province").append(str);
+                }
+                $("#Province").on("change", function(e) {
+                    layHuyen();
+                });
             }
-            $("#Province").on("change", function(e) { layHuyen();  });
-        }
-    });
-})
-
+        });
+    })
 </script>
 <script>
-function layHuyen(){
-    var province_id = $("#Province").val();
-    $.ajax({
-        url: "./admin/resources/address/district.php?province_id=" + province_id,
-        dataType:'json',         
-        success: function(data){     
-            $("#district").html("");
-            for (i=0; i<data.length; i++){            
-                var district = data[i]; 
-                var str = ` 
+    function layHuyen() {
+        var province_id = $("#Province").val();
+        $.ajax({
+            url: "./admin/resources/address/district.php?province_id=" + province_id,
+            dataType: 'json',
+            success: function(data) {
+                $("#district").html("");
+                for (i = 0; i < data.length; i++) {
+                    var district = data[i];
+                    var str = ` 
                 <option  value="${district['district_id']}">${district['name']} </option>`;
-                $("#district").append(str);
-            }       
-            $("#district").on("change", function(e) { layXa();  });     
-        }
-    });
-}
+                    $("#district").append(str);
+                }
+                $("#district").on("change", function(e) {
+                    layXa();
+                });
+            }
+        });
+    }
 </script>
 <script>
-function layXa(){
-    var district_id = $("#district").val();
-    $.ajax({
-        url: "./admin/resources/address/wards.php?district_id=" + district_id,
-        dataType:'json',         
-        success: function(data){     
-            $("#wards").html("");
-            for (i=0; i<data.length; i++){            
-                var wards = data[i]; 
-                var str = ` 
+    function layXa() {
+        var district_id = $("#district").val();
+        $.ajax({
+            url: "./admin/resources/address/wards.php?district_id=" + district_id,
+            dataType: 'json',
+            success: function(data) {
+                $("#wards").html("");
+                for (i = 0; i < data.length; i++) {
+                    var wards = data[i];
+                    var str = ` 
                 <option  value="${wards['wards_id']}">${wards['name']} </option>`;
-                $("#wards").append(str);
-            }            
-        }
-    });
-}
+                    $("#wards").append(str);
+                }
+            }
+        });
+    }
 </script>
 <style>
     img {

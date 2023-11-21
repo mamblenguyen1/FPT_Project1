@@ -193,7 +193,7 @@
         <li class="nav-item">
           
           <a href="#" class="nav-link">
-            <i class="fa fa-mail-forward"></i>
+          <i class='fa fa-envelope'></i>
             <p>
               Thư liên hệ
               <i class="fas fa-angle-left right"></i>
@@ -236,7 +236,7 @@
 
         <li class="nav-item">
           <a href="logout.php" class="nav-link">
-            <i class="fa fa-sign-out"></i>
+          <i class='fas fa-sign-out-alt'></i>
             <p>
               Đăng Xuất
             </p>
