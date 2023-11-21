@@ -8,13 +8,15 @@ if (isset($_GET['user_id'])) {
     $order_id = $_GET['order_id'];
 }
 ?>
-<div class="row" style="width: 100%; padding-left:10%; padding-right:10%; padding-top: 25%">
-    <div class="col-md-6 order-md-1">
+<div class="row" style="width: 100%; padding-left:20%; padding-right:10%; padding-top: 20%">
+    <div class="col-md-6 order-md-1" style="width:65%">
         <h4 class="mb-3"><b>Địa chỉ nhận hàng</b></h4>
         <form class="needs-validation" novalidate>
             <div class="row">
-                <label for="firstName">Họ và tên</label>
-                <input type="text" class="form-control rounded-2xl" id="firstName" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_name') ?>" required>
+                <div class="col-md-12 mb-3">
+                    <label for="firstName">Họ và tên</label>
+                    <input type="text" class="form-control rounded-2xl" id="firstName" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_name') ?>" required>
+                </div>
             </div>
 
             <div class="row">
@@ -87,26 +89,28 @@ if (isset($_GET['user_id'])) {
                         </div>
                     </li>
                 </ul>
-            </div>
+        </form>
     </div>
-    <?
-    if (isset($_COOKIE['userID'])) {
-        $conn = $db->pdo_get_connection();
-        $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
+
+</div>
+<?
+if (isset($_COOKIE['userID'])) {
+    $conn = $db->pdo_get_connection();
+    $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
 									WHERE order_detail.order_id = `order`.order_id AND
 									products.product_id = `order_detail`.product_id AND
 									user.user_id = `order`.user_id AND 
 									`order`.user_id = $user_id");
-        $stmt->execute();
-        if ($stmt->rowCount() > 0) {
-            echo '
-                                        <div class="col-md-6 order-md-2 mb-4">
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        echo '
+                                        <div class="col-md-6 order-md-2 mb-4" style="width:35%">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted"><b>Thông tin</b></span>
         </h4>
                                         ';
-            foreach ($stmt as $row) {
-                echo '
+        foreach ($stmt as $row) {
+            echo '
     
         <div class="flex relative py-7">
             <div class="">
@@ -124,42 +128,61 @@ if (isset($_GET['user_id'])) {
             </div>
         </div>
 ';
+        }
+    }
+}
+?>
+<h4 class="d-flex justify-content-between align-items-center mb-3">
+    <form method="post">
+        <label for="firstName">Mã giảm giá (Nếu Có)</label>
+        <input value="" name="code" type="text" class="form-control" style="width:200px;" placeholder="Nhập mã giảm giá">
+        <button type="submit" name="code-input" class="tg-btn" style="width:100px; padding:0;">Nhập</button>
+    </form>
+    <?
+    $Percentage = 0;
+    if (isset($_POST['code-input'])) {
+        $result = $code->checkCode($_POST['code']);
+        if ($result == true) {
+            $result = $code->checkExpires($_POST['code']);
+            if ($result == true) {
+                echo '<span style="color:green" class="vaild">Áp dụng mã giảm giá <b>' . $_POST['code'] . '</b> thành công !</span>';
+                $sql = $code->getCode($_POST['code']);
+                extract($sql);
+            } else {
+                echo '<span style="color:red" class="vaild">Mã giảm giá đã hết hạn sử dụng !</span>';
             }
+        } else {
+            echo '<span style="color:red" class="vaild">Mã giảm giá không tồn tại !</span>';
         }
     }
     ?>
-    <h4 class="d-flex justify-content-between align-items-center mb-3">
-        <form action="">
-            <label for="firstName">Mã giảm giá  (Nếu Có)</label>
-            <input type="text" class="form-control" style="width:200px;" placeholder="Nhập mã giảm giá">
-            <button type="submit" name="" class="tg-btn" style="width:100px; padding:0;">Nhập</button>
-        </form>
-        
-    </h4>
 
-    <form class="card p-2 border-0">
-    </form>
-    <h3><label><b>Thành tiền</b></label></h3>
-    <ul class="list-group mb-3">
-        <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
-            <a class="text-muted"><b>Giá gốc:</b> </a>
-            <a class="text-muted1"><?= number_format($order->getOrder_total_payment($user_id, 'order_total_payment')) ?> đ</a>
-        </li>
-        <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
-            <a class="text-muted"><b>Giảm giá:</b> </a>
-            <a class="text-muted1">5 %</a>
-        </li>
-        <!-- <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
+</h4>
+
+<h3><label><b>Thành tiền</b></label></h3>
+<ul class="list-group mb-3"></ul>
+    <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
+        <a class="text-muted"><b>Giá gốc:</b> </a>
+        <a class="text-muted1"><?= number_format($order->getOrder_total_payment($user_id, 'order_total_payment')) ?> đ</a>
+    </li>
+    <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
+        <a class="text-muted"><b>Giảm giá:</b></a>
+        <a class="text-muted1"><?= $Percentage ?> %</a>
+        <?
+        $discount = $Percentage / 100;
+        ?>
+    </li>
+    <!-- <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
                 <a class="text-muted"><b>Số lượng:</b> </a>
                 <a class="text-muted1">$5</a>
             </li> -->
-        <li class="list-group-item border-0 d-flex justify-content-between">
-            <h4>Tổng: <a><?= number_format((($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * 0.05))) ?> đ</a></h4>
-        </li>
-        <li class="list-group-item border-0 d-flex justify-content-between">
-            <button class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color:white; font-size:15px">Thanh Toán</button>
-        </li>
-    </ul>
+    <li class="list-group-item border-0 d-flex justify-content-between">
+        <h3><b>Tổng: <a><?= number_format((($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount))) ?> đ</a></b></h3>
+    </li>
+    <li class="list-group-item border-0 d-flex justify-content-between">
+        <button class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color:white; font-size:15px; width:75%">Thanh Toán</button>
+    </li>
+</ul>
 </div>
 </div>
 <script>

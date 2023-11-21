@@ -404,5 +404,6 @@ class ORDER
             return $row['lasted'];
         }
     }
+
 }
 ?>
