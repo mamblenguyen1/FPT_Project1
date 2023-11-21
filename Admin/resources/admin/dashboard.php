@@ -22,7 +22,7 @@ include './Admin/componant/sidebar.php';
                                 <div class="mr-5"><strong><? echo $user->Countuser() ?></strong> Tài khoản</div>
                             </div>
                             <a class="card-footer text-white clearfix small z-1" href="#">
-                                <a href="index.php?pages=admin&action=UserList"><span class="float-left">Xem Ngay </span><i class="fa fa-angle-right" style="margin-left:65%"></i></a>
+                                <a href="index.php?pages=admin&action=UserList" style="margin: 0 auto"><span class="float-left">Xem Ngay </span></a>
                             </a>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ include './Admin/componant/sidebar.php';
                                 <div class="mr-5"><strong><? echo $category->Countcategory() ?></strong> Danh mục</div>
                             </div>
                             <a class="card-footer text-white clearfix small z-1" href="#">
-                                <a href="index.php?pages=admin&action=UserList"><span class="float-left">Xem Ngay </span><i class="fa fa-angle-right" style="margin-left:65%"></i></a>
+                                <a href="index.php?pages=admin&action=listcate" style="margin: 0 auto"><span class="float-left">Xem Ngay </span></a>
                             </a>
                         </div>
                     </div>
@@ -49,7 +49,7 @@ include './Admin/componant/sidebar.php';
                                 <div class="mr-5"><strong><? echo $product->CountProducts() ?></strong> Sản phẩm</div>
                             </div>
                             <a class="card-footer text-white clearfix small z-1" href="#">
-                                <a href="index.php?pages=admin&action=UserList"><span class="float-left">Xem Ngay </span><i class="fa fa-angle-right" style="margin-left:65%"></i></a>
+                                <a href="index.php?pages=admin&action=productList" style="margin: 0 auto"><span class="float-left">Xem Ngay </span></a>
                             </a>
                         </div>
                     </div>
@@ -62,7 +62,7 @@ include './Admin/componant/sidebar.php';
                                 <div class="mr-5"><strong>50</strong> Sản phẩm mới</div>
                             </div>
                             <a class="card-footer text-white clearfix small z-1" href="#">
-                                <a href="index.php?pages=admin&action=UserList"><span class="float-left">Xem Ngay </span><i class="fa fa-angle-right" style="margin-left:65%"></i></a>
+                                <a href="index.php?pages=admin&action=productList" style="margin: 0 auto"><span class="float-left">Xem Ngay </span></a>
                             </a>
                         </div>
                     </div>

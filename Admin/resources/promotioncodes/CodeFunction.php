@@ -24,5 +24,40 @@ class Promotioncode
         return $result;
     }
 
+    function updateCode($Code, $Percentage, $ExpiryDate, $Description, $IsActive, $CodeID)
+    {
+        $db = new connect();
+        $select = "UPDATE promotioncodes SET Code = '$Code', Percentage = $Percentage, ExpiryDate = '$ExpiryDate', Description = '$Description', IsActive = $IsActive 
+        WHERE CodeID = $CodeID";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
     
+    function getInfoCode($codeID, $column)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM promotioncodes WHERE CodeID = $codeID";
+        $result = $db->pdo_query($select);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
+    function restoreCode($codeID, $ExpiryDate)
+    {
+        $db = new connect();
+        $sql = "UPDATE `promotioncodes` SET ExpiryDate = '$ExpiryDate', IsActive = 1 WHERE CodeID = $codeID";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+
+    function CountCode()
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(promotioncodes.CodeID) FROM promotioncodes WHERE IsActive = 1";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(promotioncodes.CodeID)'];
+        }
+    }
 }

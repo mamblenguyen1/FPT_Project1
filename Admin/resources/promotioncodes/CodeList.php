@@ -43,6 +43,7 @@
                                         <td>
                                         <form action="index.php?pages=admin&action=CodeEdit" method="post">
                                              <input type="hidden" value="' . $row['CodeID'] . '" name="CodeID">
+                                             <button type="submit" name="CodeEdit" class="btn  btn-outline-primary">Chỉnh Sửa</button>
                                              <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="delete_code" class="btn btn-outline-danger">Xóa</button>
                                         </form>
                                            

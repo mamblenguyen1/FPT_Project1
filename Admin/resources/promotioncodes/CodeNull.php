@@ -1,5 +1,4 @@
 <?php include './Admin/componant/header.php' ?>
-
 <?php include './admin/componant/sidebar.php' ?>
 
 <div class="main-panel">
@@ -20,6 +19,7 @@
                                         <th>Phần trăm giảm giá</th>
                                         <th>Ngày hết hạn</th>
                                         <th>Mô tả</th>
+                                        <th>Thao Tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -36,6 +36,12 @@
                                         <td>' . $row['Percentage'] . '</td>
                                         <td>' . $row['ExpiryDate'] . '</td>
                                         <td>' . $row['Description'] . '</td>
+                                        <td>
+                                            <form action="index.php?pages=admin&action=CodeRestore" method="post">
+                                                <input type="hidden" name="CodeID" value="' . $row['CodeID'] . '">
+                                                <button type="submit" name="restore_code" class="btn btn-outline-primary">Khôi phục</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                    
                                         ';

@@ -154,6 +154,10 @@ if (isset($_GET['pages'])) {
                         case 'CodeNull':
                             include './Admin/resources/promotioncodes/CodeNull.php';
                             break;
+                        case 'CodeRestore':
+                            include './Admin/resources/promotioncodes/RestoreCode.php';
+                            break;
+
 
                         default:
                             include './admin/resources/admin/Dashboard.php';

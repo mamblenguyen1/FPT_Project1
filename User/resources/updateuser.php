@@ -10,9 +10,12 @@ if (isset($_POST['luu_user'])) {
     $user_id = $_POST['user_id'];
     $user_name = $_POST['user_name'] ?? "";
     $user_phone_number = $_POST['user_phone_number'] ?? "";
-    $user_address = $_POST['user_address'] ?? "";
-    if (!$user_name == "" && !$user_phone_number == "" && !$user_address == "") {
-        $user->update_user1($user_name, $user_phone_number, $user_address, $user_id);
+    $Province = $_POST['Province'] ?? "";
+    $district = $_POST['district'] ?? "";
+    $wards = $_POST['wards'] ?? "";
+    $Street = $_POST['Street'] ?? "";
+    if (!$user_name == "" && !$user_phone_number == "" && !$Province == ""  && !$district == ""  && !$wards == ""  && !$Street == "") {
+        $user->update_user1($user_name, $user_phone_number, $Province, $district, $wards, $Street , $user_id);
         echo '<script>alert("Cập nhật tài khoản thành công")</script>';
         echo '<script>window.location.href="index.php?pages=user&action=updateuser"</script>';
     } else {
@@ -78,19 +81,71 @@ if (isset($_POST['luu_user'])) {
                                 }
                                 ?>
                             </div>
+
                             <div class="form-group">
-                                <label class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control" name="user_address" value="<? echo $user->getInfo_user($user_id, 'user_address'); ?>">
-                                <?
-                                if (isset($_POST["user_address"])) {
-                                    if (empty($_POST["user_address"])) {
-                                        echo '<span class="vaild">Xin vui lòng nhập tên người dùng</span>';
-                                    } else {
-                                        echo '';
-                                    }
-                                }
-                                ?>
+                                <label>Tỉnh / Thành Phố</label>
+                                <select name="Province" id="Province" class="form-control select2" style="width: 100%;">
+                                    <option selected value="<? echo $user->getInfoProvince($user_id, 'province_id'); ?>"> <? echo $user->getInfoProvince($user_id, 'name'); ?></option>
+                                </select>
                             </div>
+                            <?
+                            if (isset($_POST["province"])) {
+                                if (empty($_POST["province"])) {
+                                    echo '<span class="vaild">Xin vui lòng chọn tỉnh / thành phố</span>';
+                                } else {
+                                    echo '';
+                                }
+                            }
+                            ?>
+
+                            <div class="form-group">
+                                <label>Quận / Huyện</label>
+                                <select name="district" id="district" class="form-control select2" style="width: 100%;">
+                                    <option selected value="<? echo $user->getInfoDistrict($user_id, 'district_id'); ?>"> <? echo $user->getInfoDistrict($user_id, 'name'); ?></option>
+                                </select>
+                            </div>
+                            <?
+                            if (isset($_POST["district"])) {
+                                if (empty($_POST["district"])) {
+                                    echo '<span class="vaild">Xin vui lòng chọn quận / huyện</span>';
+                                } else {
+                                    echo '';
+                                }
+                            }
+                            ?>
+
+                            <div class="form-group">
+                                <label>Phường / Xã</label>
+                                <select name="wards" id="wards" class="form-control select2" style="width: 100%;">
+                                    <option selected value="<? echo $user->getInfoWards($user_id, 'wards_id'); ?>"> <? echo $user->getInfoWards($user_id, 'name'); ?></option>
+
+
+                                </select>
+                            </div>
+                            <?
+                            if (isset($_POST["wards"])) {
+                                if (empty($_POST["wards"])) {
+                                    echo '<span class="vaild">Xin vui lòng chọn phường / xã</span>';
+                                } else {
+                                    echo '';
+                                }
+                            }
+                            ?>
+
+                            <div class="form-group">
+                                <label>Đường</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" name="Street" value="<? echo $user->getInfouser2($user_id, 'user_street'); ?>">
+                            </div>
+                            <?
+                            if (isset($_POST["Street"])) {
+                                if (empty($_POST["Street"])) {
+                                    echo '<span class="vaild">Xin vui lòng nhập đường</span>';
+                                } else {
+                                    echo '';
+                                }
+                            }
+                            ?>
+
                             <div class="text-right mt-3">
                                 <button type="submit" class="tg-btn tg-active" name="luu_user">Lưu</button>&nbsp;
                                 <button type="submit" class="btn btn-default">Hủy</button>
@@ -104,13 +159,71 @@ if (isset($_POST['luu_user'])) {
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function(){    
+    $.ajax({
+        url: "./admin/resources/address/province.php",       
+        dataType:'json',         
+        success: function(data){     
+            $("#Province").html("");
+            for (i=0; i<data.length; i++){            
+                var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
+                var str = ` 
+                <option value="${Province['province_id']}"> ${Province['name']} </option>
+                   `;
+                $("#Province").append(str);
+            }
+            $("#Province").on("change", function(e) { layHuyen();  });
+        }
+    });
+})
+
+</script>
+<script>
+function layHuyen(){
+    var province_id = $("#Province").val();
+    $.ajax({
+        url: "./admin/resources/address/district.php?province_id=" + province_id,
+        dataType:'json',         
+        success: function(data){     
+            $("#district").html("");
+            for (i=0; i<data.length; i++){            
+                var district = data[i]; 
+                var str = ` 
+                <option  value="${district['district_id']}">${district['name']} </option>`;
+                $("#district").append(str);
+            }       
+            $("#district").on("change", function(e) { layXa();  });     
+        }
+    });
+}
+</script>
+<script>
+function layXa(){
+    var district_id = $("#district").val();
+    $.ajax({
+        url: "./admin/resources/address/wards.php?district_id=" + district_id,
+        dataType:'json',         
+        success: function(data){     
+            $("#wards").html("");
+            for (i=0; i<data.length; i++){            
+                var wards = data[i]; 
+                var str = ` 
+                <option  value="${wards['wards_id']}">${wards['name']} </option>`;
+                $("#wards").append(str);
+            }            
+        }
+    });
+}
+</script>
 <?
 include('user/component/footer.php');
 ?>
 <style>
-    .vaild{
+    .vaild {
         color: red;
     }
+
     .ui-w-80 {
         width: 80px !important;
         height: auto;

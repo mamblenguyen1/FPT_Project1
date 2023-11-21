@@ -25,7 +25,6 @@ if (isset($_POST['editProduct'])) {
     $user_updated = $_COOKIE['userID'];
     $ProductId = $_POST['product_id'];
 
-    // exit();
     if (
         !$category_id == "" &&
         !$product_name == "" &&
@@ -41,7 +40,7 @@ if (isset($_POST['editProduct'])) {
     ) {
 
         $product->Edit_Product($product_name, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_short_description, $product_description, $user_updated, $ProductId);
-        echo '<script>alert("tạo thành công !!")</script>';
+        echo '<script>alert(sửa sản phẩm thành công !!")</script>';
         echo '<script>window.location.href="index.php?pages=admin&action=productList"</script>';
         $anhne = $_FILES['product_img']['tmp_name'];
         $error = $_FILES['product_img']['error'];
