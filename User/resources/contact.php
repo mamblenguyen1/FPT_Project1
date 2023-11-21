@@ -21,10 +21,10 @@ if (isset($_POST['contact-btn'])) {
 	$name = $_POST['name'];
 	$email = $_POST['email'];
 	$subject = $_POST['subject'];
-	echo $subject;
 	$content = $_POST['content'];
 	if ($name != '' && $email != '' && $subject != '' && $content != '') {
 		$contact->send_contact($name, $email, $subject, $content);
+		$mail->thanksMail($name , $email);
 		echo '<script>alert("Cảm ơn bạn đã gửi liên hệ cho chúng tôi")</script>';
 		echo '<script>window.location.href="index.php?pages=user&action=contact"</script>';
 	} else {
