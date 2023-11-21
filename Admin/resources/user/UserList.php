@@ -40,7 +40,8 @@
                                                 <td><?= $email ?></td>
                                                 <td><?= $user_password ?></td>
                                                 <td><?= $user_phone_number ?></td>
-                                                <td><?= $user_street ?> - <?= $ketqua['xa']?> - <?= $ketqua['huyen']?> - <?= $ketqua['thanhpho']?> </td>                                                <td><?= $role_id ?></td>
+                                                <td><?= $user_street ?> - <?= $ketqua['xa']?> - <?= $ketqua['huyen']?> - <?= $ketqua['thanhpho']?> </td>                                                
+                                                <td><?= $role_id ?></td>
                                                 <td><?= $created_at ?></td>
                                                 <td>
                                                     <form action="index.php?pages=admin&action=UserEdit" method="post">

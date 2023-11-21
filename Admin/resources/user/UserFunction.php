@@ -34,10 +34,10 @@ class UserFunction
         return $result;
     }
     //cập nhật tài khoản bên user
-    function update_user1($user_name, $user_phone_number, $user_address, $user_id)
+    function update_user1($user_name, $user_phone_number, $province, $district, $wards, $Street , $user_id)
     {
         $db = new connect();
-        $select = "UPDATE `user` SET user_name = '$user_name' , user_phone_number = '$user_phone_number', user_address = '$user_address'  WHERE user_id = $user_id";
+        $select = "UPDATE `user` SET user_name = '$user_name' , user_phone_number = '$user_phone_number', province_id = $province, district_id = $district, wards_id = $wards, user_street = '$Street'  WHERE user_id = $user_id";
         $result = $db->pdo_execute($select);
         return $result;
     }
