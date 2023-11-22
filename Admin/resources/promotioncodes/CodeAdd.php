@@ -9,14 +9,18 @@ if (isset($_POST['addcode'])) {
     $IsActive = $_POST['IsActive'] ?? "";
     //xét ngày
     $ngayGioHienTai = date("Y-m-d");
-    if ($Code == "" && $Percentage == "" && $ExpiryDate == "" &&  $Description == "" && $IsActive == "") {
-        echo '<script>alert("Vui lòng điền đầy đủ thông tin!!")</script>';
-    } else if ($ExpiryDate < $ngayGioHienTai) {
-        echo '<script>alert("Ngày tháng không hợp lệ !!")</script>';
+    if (!$Code == "" && !$Percentage == "" && !$ExpiryDate == "" &&  !$Description == "" && !$IsActive == "") {
+        if ($ExpiryDate < $ngayGioHienTai) {
+            echo '<script>alert("Ngày tháng không hợp lệ !!")</script>';
+        } else if ($code->checkDuplicateCode($Code)) {
+            echo '<script>alert("Mã đã tôn tại!!")</script>';
+        } else {
+            $code->create_code($Code, $Percentage, $ExpiryDate, $Description, $IsActive);
+            echo '<script>alert("tạo mã giảm giá thành công  !!")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=CodeList"</script>';
+        }
     } else {
-        $code->create_code($Code, $Percentage, $ExpiryDate, $Description, $IsActive);
-        echo '<script>alert("tạo mã giảm giá thành công  !!")</script>';
-        echo '<script>window.location.href="index.php?pages=admin&action=CodeList"</script>';
+        echo '<script>alert("Vui lòng điền đầy đủ thông tin!!")</script>';
     }
 }
 ?>
