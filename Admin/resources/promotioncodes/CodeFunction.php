@@ -69,4 +69,33 @@ class Promotioncode
             return $row['COUNT(promotioncodes.CodeID)'];
         }
     }
+
+    function checkCode($code){
+        $db = new connect();
+        $sql = "SELECT * FROM promotioncodes WHERE code LIKE '$code'";
+        $result = $db->pdo_query_one($sql);
+        if ($result != null)
+            return true;
+        else
+            return false;
+    }
+
+    function checkExpires($code){
+        $db = new connect();
+        $sql = "SELECT IsActive FROM promotioncodes WHERE code LIKE '$code'";
+        $result = $db ->pdo_query_one($sql);
+        extract($result);
+        if($IsActive == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function getCode($code){
+        $db = new connect();
+        $sql = "SELECT * FROM promotioncodes WHERE `code` LIKE '$code'";
+        $result = $db ->pdo_query_one($sql);
+        return $result;
+    }
 }
