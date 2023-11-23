@@ -1,10 +1,11 @@
 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 pull-left">
     <aside id="tg-sidebar" class="tg-sidebar">
         <div class="tg-widget tg-widgetsearch">
-            <form class="tg-formtheme tg-formsearch">
+            <form class="tg-formtheme tg-formsearch" method="POST">
                 <div class="form-group">
-                    <button type="submit"><i class="icon-magnifier"></i></button>
-                    <input type="search" name="search" class="form-group" placeholder="Tìm kiếm ...">
+                    <button name="search-btn" type="submit"><i class="icon-magnifier"></i></button>
+                    <input type="hidden" value="0" name="cate">
+                    <input type="search" name="keyword" class="form-group" placeholder="Tìm kiếm ...">
                 </div>
             </form>
         </div>

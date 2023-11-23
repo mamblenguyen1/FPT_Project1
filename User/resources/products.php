@@ -99,10 +99,10 @@ include('user/component/header.php');
                                             $stmt->execute();
                                             if ($stmt->rowCount() > 0) {
                                             ?>
-                                                <span>Đã tìm thấy <? echo $stmt->rowCount()?> sản phẩm </span>
-                                        </div>
-                                        <!-- Render product -->
-                                    <?
+                                                <span>Đã tìm thấy <? echo $stmt->rowCount() ?> sản phẩm </span><br><br>
+
+                                                <!-- Render product -->
+                                            <?
 
                                                 foreach ($stmt as $row) {
 
@@ -161,7 +161,9 @@ include('user/component/header.php');
                                                     echo '<h4>Danh mục chưa có sản phẩm !</h4>';
                                                 }
                                             };
-                                    ?>
+
+                                            ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
