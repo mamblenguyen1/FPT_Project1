@@ -227,6 +227,7 @@ if (isset($_GET['pages'])) {
                     include './User/resources/changepassword.php';
                     break;
                 case "logout":
+                    setcookie("viewCount", '', time() +1 , "/");
                     setcookie("role", '', time() + 1, "/");
                     setcookie("userID", '', time() + 1, "/");
                     header("location: index.php?pages=user&action=home");
@@ -245,5 +246,6 @@ if (isset($_GET['pages'])) {
     }
 } else {
     include './User/resources/home.php';
-}
+};
+
 ?>

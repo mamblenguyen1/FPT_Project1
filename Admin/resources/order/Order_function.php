@@ -144,6 +144,23 @@ class ORDER
         }
     }
 
+    function getOrderStatus($order_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `order_status` , `order` WHERE `order`.order_status_id = order_status.order_status_id AND `order`.order_id = $order_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
+    function editStatusOrder($order_status_id, $order_id)
+    {
+        $db = new connect();
+        $select = "UPDATE `order` SET order_status_id = $order_status_id  WHERE order_id  = $order_id";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
 
 
 
@@ -389,14 +406,29 @@ class ORDER
             return $row['COUNT(*)'];
         }
     }
+
     function Show_Order()
     {
         $db = new connect();
-        $sql = "SELECT * FROM user INNER JOIN `order` WHERE user.user_id=`order`.user_id
-        ";
+        $sql = "SELECT * FROM user INNER JOIN `order` WHERE user.user_id=`order`.user_id";
         $result   = $db->pdo_query($sql);
         return $result;
     }
+    function Show_Order_by_id_user($user_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `order` WHERE user_id = $user_id";
+        $result   = $db->pdo_query($sql);
+        return $result;
+    }
+    function Show_Order_Detail_by_id_order($order_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM order_detail, products WHERE order_detail.product_id = products.product_id AND order_detail.order_id = $order_id";
+        $result = $db->pdo_query($sql);
+        return $result;
+    }
+
     function Show_Order_Detail($order_id)
     {
         $db = new connect();
@@ -408,6 +440,7 @@ class ORDER
         $result = $db->pdo_query($sql);
         return $result;
     }
+//show theo ng dùng   
     function Show_Order_Detail_user($user_id)
     {
         $db = new connect();

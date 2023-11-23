@@ -1,8 +1,9 @@
 <?
+ob_start();
 include('user/component/header.php');
+
 ?>
 <?
-
 if (isset($_GET['product_id'])) {
 	$product_id = $_GET['product_id'];
 }
@@ -28,16 +29,15 @@ if (isset($_POST['editcomment'])) {
 	}
 }
 // đếm view
-$user_id = isset($_COOKIE['userID']) ? $_COOKIE['userID'] : null;
-if ($product->count_view($user_id, $product_id) == 0) {
-	$db = new connect();
-	$sql_insert = "INSERT INTO user_views (user_id, product_id) VALUES ($user_id, $product_id)";
-	$result = $db->pdo_execute($sql_insert);
-	if ($product->count_view($user_id, $product_id) == 1) {
-		$update_view = "UPDATE products SET product_view = product_view + 1 WHERE product_id = $product_id";
-		$result = $db->pdo_execute($update_view);
-	}
+setcookie('viewCount', 'viewed', time() + (10*60), '/');
+if (isset($_COOKIE['viewCount'])) {
+	echo '';
+} else {
+	setcookie('viewCount', 'viewed', time() + (10*60), '/');
+	$update_view = "UPDATE products SET product_view = product_view + 1 WHERE product_id = $product_id";
+	$result = $db->pdo_execute($update_view);
 }
+
 
 
 ?>
@@ -714,4 +714,5 @@ if ($product->count_view($user_id, $product_id) == 0) {
 </script>
 <?
 include('user/component/footer.php');
+ob_end_flush();
 ?>
