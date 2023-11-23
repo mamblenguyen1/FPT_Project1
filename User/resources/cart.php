@@ -147,8 +147,8 @@ if (isset($_POST['updateQty'])) {
             <td class="hidden-xs text-center"><strong>Total ' . $total_price . '</strong></td>
             <td>
             <form action="" method="POST">
-              <input type="text" name="user_id" value="' . $_COOKIE['userID'] . '">
-              <input type="text" name="order_id" value="' . $order->getInfoUserOrder($_COOKIE['userID'], 'order_id') . '">
+              <input type="hidden" name="user_id" value="' . $_COOKIE['userID'] . '">
+              <input type="hidden" name="order_id" value="' . $order->getInfoUserOrder($_COOKIE['userID'], 'order_id') . '">
               <button name="checkout" type="submit" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></button>
             </form>   
             </td>

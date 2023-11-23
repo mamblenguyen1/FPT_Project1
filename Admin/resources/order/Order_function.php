@@ -167,6 +167,44 @@ class ORDER
             return $row[$column];
         }
     }
+    function getInfoOrderId($order_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM user , `order` , order_detail
+        WHERE user.user_id = `order`.user_id
+        AND `order`.order_id = order_detail.order_id
+        AND
+        `order`.`order_id` = $order_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    function OrderInformation($user_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM order_detail, products, `order`, user
+        WHERE order_detail.order_id = `order`.order_id AND
+        products.product_id = `order_detail`.product_id AND
+        user.user_id = `order`.user_id AND 
+        order.user_id = $user_id";
+        $result = $db->pdo_query($sql);
+        return $result;
+    }
+    function getLocationOrderId($order_id, $column)
+    {
+        $db = new connect();
+        $sql = " SELECT *, province.name as 'thanhpho', district.name as 'huyen', wards.name as 'xa' FROM `user` , province , district , wards , `order` WHERE `order`.`user_id` = user.user_id AND  user.province_id = province.province_id AND user.wards_id = wards.wards_id AND user.district_id = district.district_id AND `order`.`user_id` = (
+            SELECT user.user_id FROM `order`, user
+            WHERE `order`.`user_id`= user.user_id
+            AND `order`.`order_id` = $order_id)";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    
+   
     function getOrder_total_payment($userid, $column)
     {
         $db = new connect();
@@ -285,19 +323,7 @@ class ORDER
         }
     }
 
-    function OrderInformation($user_id)
-    {
-        $db = new connect();
-        $sql = "SELECT * FROM order_detail, products, `order`, user
-        WHERE order_detail.order_id = `order`.order_id AND
-        products.product_id = `order_detail`.product_id AND
-        user.user_id = `order`.user_id AND 
-        order.user_id = $user_id";
-        $result = $db->pdo_query($sql);
-        return $result;
-    }
-
-
+  
 
 
    

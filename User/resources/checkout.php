@@ -161,27 +161,30 @@ if (isset($_COOKIE['userID'])) {
 
 <h3><label><b>Thành tiền</b></label></h3>
 <ul class="list-group mb-3"></ul>
-    <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
-        <a class="text-muted"><b>Giá gốc:</b> </a>
-        <a class="text-muted1"><?= number_format($order->getOrder_total_payment($user_id, 'order_total_payment')) ?> đ</a>
-    </li>
-    <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
-        <a class="text-muted"><b>Giảm giá:</b></a>
-        <a class="text-muted1"><?= $Percentage ?> %</a>
-        <?
-        $discount = $Percentage / 100;
-        ?>
-    </li>
-    <!-- <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
+<li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
+    <a class="text-muted"><b>Giá gốc:</b> </a>
+    <a class="text-muted1"><?= number_format($order->getOrder_total_payment($user_id, 'order_total_payment')) ?> đ</a>
+</li>
+<li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
+    <a class="text-muted"><b>Giảm giá:</b></a>
+    <a class="text-muted1"><?= $Percentage ?> %</a>
+    <?
+    $discount = $Percentage / 100;
+    ?>
+</li>
+<!-- <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
                 <a class="text-muted"><b>Số lượng:</b> </a>
                 <a class="text-muted1">$5</a>
             </li> -->
-    <li class="list-group-item border-0 d-flex justify-content-between">
-        <h3><b>Tổng: <a><?= number_format((($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount))) ?> đ</a></b></h3>
-    </li>
-    <li class="list-group-item border-0 d-flex justify-content-between">
-        <button class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color:white; font-size:15px; width:75%">Thanh Toán</button>
-    </li>
+<li class="list-group-item border-0 d-flex justify-content-between">
+    <h3><b>Tổng: <a><?= number_format((($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount))) ?> đ</a></b></h3>
+</li>
+<li class="list-group-item border-0 d-flex justify-content-between">
+    <form action="index.php?pages=user&action=thanks&order_id=<?= $order->getOrder_total_payment($user_id, 'order_id') ?>" method="post">
+        <input type="text" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
+        <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color:white; font-size:15px; width:75%">Thanh Toán</button>
+    </form>
+</li>
 </ul>
 </div>
 </div>

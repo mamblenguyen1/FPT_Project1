@@ -12,15 +12,14 @@ extract($sql);
 ?>
 
 <?
-    if(isset($_POST['send'])){
-        $addressMail = $_POST['mail'];
-        $user_name = $_POST['user_name'];
-        $subject = $_POST['subject'];
-        $question = $_POST['question'];
-        $answer = $_POST['answer'];
-        // echo $mail , $subject , $question , $answer;
-        $mail->ReplyMail($user_name, $addressMail, $subject , $question , $answer);
-    }
+if (isset($_POST['send'])) {
+    $addressMail = $_POST['mail'];
+    $user_name = $_POST['user_name'];
+    $subject = $_POST['subject'];
+    $question = $_POST['question'];
+    $answer = $_POST['answer'];
+    $mail->ReplyMail($user_name, $addressMail, $subject, $question, $answer);
+}
 ?>
 <div class="main-panel">
     <div class="content-wrapper">
@@ -35,11 +34,14 @@ extract($sql);
                 <!-- /.card-header -->
                 <div class="card-body">
                     <form action="" method="post">
-                    <input class="form-control" name="user_name" placeholder="Người nhận:" value="<?= $name ?>">
+                        Tên khách hàng :
+                        <input class="form-control" name="user_name" placeholder="Người nhận:" value="<?= $name ?>">
                         <div class="form-group">
+                            Mail người nhận :
                             <input class="form-control" name="mail" placeholder="Người nhận:" value="<?= $email ?>">
                         </div>
                         <div class="form-group">
+                            Chủ đề câu hỏi :
                             <input class="form-control" name="subject" placeholder="Chủ đề:" value="<?= $subject ?>">
                         </div>
                         <div class="form-group">

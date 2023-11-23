@@ -2,6 +2,14 @@
 include('User/component/header.php');
 ?>
 
+<?
+
+if (isset($_GET['order_id'])) {
+    $order_id = $_GET['order_id'];
+    
+}
+
+?>
 <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
 
     <main id="tg-main" class="tg-main tg-haslayout">
@@ -16,20 +24,24 @@ include('User/component/header.php');
                 <div class="heading">
                     <h3 class="margin-bottom-0">Thanh toán thành công</h3>
                     <p>Cảm ơn quý khách đã mua hàng tại website của chúng tôi !!!</p>
-
                     <div class="hr"></div>
                     <h3>Thông tin khách hàng</h3>
                     <label class="base-label margin-20">Tên</label>
-                    <p class="margin-0">Nguyễn Văn Đặng</p>
+                    <p class="margin-0"><? echo $order->getInfoOrderId($order_id, 'user_name') ?></p>
 
                     <label class="base-label margin-20">Địa chỉ email</label>
-                    <p class="margin-0">nvd@gmail.com</p>
+                    <p class="margin-0"><? echo $order->getInfoOrderId($order_id, 'email') ?></p>
 
                     <label class="base-label margin-20">Địa chỉ giao hàng</label>
-                    <p class="margin-0">Cà Mau</p>
+                    <p class="margin-0">
+                        <? echo $order->getInfoOrderId($order_id, 'user_street') ?> -
+                        <? echo $order->getLocationOrderId($order_id, 'xa') ?> -
+                        <? echo $order->getLocationOrderId($order_id, 'huyen') ?> -
+                        <? echo $order->getLocationOrderId($order_id, 'thanhpho') ?>
+                    </p>
 
                     <label class="base-label margin-20">Số điện thoại</label>
-                    <p class="margin-0">012347159915</p>
+                    <p class="margin-0"><? echo $order->getInfoOrderId($order_id, 'user_phone_number') ?></p>
                     <div class="hr"></div>
 
                     <h3 class="">Thông tin sản phẩm</h3>
@@ -44,24 +56,35 @@ include('User/component/header.php');
                         </thead>
                         <tbody>
                             <!-- Dòng 1: Sản phẩm 1 -->
-                            <tr>
-                                <td>Sản phẩm 1</td>
-                                <td>$50.00</td>
-                                <td>3</td>
-                                <td>$50.00</td>
-                            </tr>
+                            <?
+                                    $conn = $db->pdo_get_connection();
+                                    $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
+                                    WHERE order_detail.order_id = `order`.order_id AND
+                                    products.product_id = `order_detail`.product_id AND
+                                    user.user_id = `order`.user_id AND 
+                                    order_detail.order_id = $order_id");
+                                    $stmt->execute();
+                                    if ($stmt->rowCount() > 0) {
+                                        foreach ($stmt as $row) {
+                                            echo '
+                                            <tr>
+                                 <td>'.$row['product_name'].'</td>
+                                 <td>'.number_format($row['product_price']).' đ</td>
+                                 <td>'.$row['order_quantity'].'</td>
+                                 <td>'.number_format($row['product_price'] * $row['order_quantity']).' đ</td>
+                               </tr>
+                                            ';
+                                        }}
+                                            ?>
+                                 
+                             
+
                             <!-- Dòng 2: Sản phẩm 2 -->
-                            <tr>
-                                <td>Sản phẩm 2</td>
-                                <td>$30.00</td>
-                                <td>5</td>
-                                <td>$30.00</td>
-                            </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="3">Tổng cộng</td>
-                                <td>$80.00</td>
+                                <td><?echo number_format($order->getOrder_total_payment(($order->getInfoOrderId($order_id, 'user_id')), 'order_total_payment'))?> đ</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -145,6 +168,7 @@ include('User/component/header.php');
         font-size: 30px;
         font-weight: bold;
     }
+
     .thanks h3 {
         font-size: 25px;
         font-weight: bold;

@@ -8,7 +8,7 @@ class Categories
     function create_category($category_name)
     {
         $db = new connect();
-        $select = "INSERT INTO category(category_name, is_deleted, category_display, urlAdd ) VALUES ('$category_name', 1, '$category_name', 'AccessoryAdd' )";
+        $select = "INSERT INTO category(category_name, is_deleted) VALUES ('$category_name', 1 )";
         $result = $db->pdo_execute($select);
         return $result;
     }
