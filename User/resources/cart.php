@@ -90,6 +90,7 @@ if (isset($_POST['updateQty'])) {
       `order`.user_id = user.user_id
       AND
       order_detail.product_id = products.product_id
+      AND order_detail.order_status_id  = 4
       AND user.user_id = $_COOKIE[userID];
     ");
     $stmt->execute();

@@ -112,8 +112,8 @@ include('style.php');
 	<div class="tg-middlecontainer">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
-					<strong class="tg-logo"><a href="index.php?pages=user&action=home"><img  style="height: 140px;" src="images/logowhite.png" alt="company name here"></a></strong>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<strong class="tg-logo"><a href="index.php?pages=user&action=home"><img style="height: 140px;" src="images/logowhite.png" alt="company name here"></a></strong>
 					<div class="tg-wishlistandcart">
 						<div class="dropdown tg-themedropdown tg-wishlistdropdown">
 							<a href="" id="tg-wishlisst" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -128,50 +128,51 @@ include('style.php');
 							</div>
 						</div>
 						<?
-									if(isset($_COOKIE['userID'])){
-                                    $conn = $db->pdo_get_connection();
-                                    $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
+						if (isset($_COOKIE['userID'])) {
+							$conn = $db->pdo_get_connection();
+							$stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
 									WHERE order_detail.order_id = `order`.order_id AND
-									products.product_id = `order_detail`.product_id AND
+									products.product_id = `order_detail`.product_id 
+									AND order_detail.order_status_id  = 4
+									 AND
 									user.user_id = `order`.user_id AND 
 									`order`.user_id = $_COOKIE[userID]");
-                                    $stmt->execute();
-                                    if ($stmt->rowCount() > 0) {
-										echo '
+							$stmt->execute();
+							if ($stmt->rowCount() > 0) {
+								echo '
 										<div class="dropdown tg-themedropdown tg-minicartdropdown">
 										<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<span class="tg-themebadge">'. $stmt->rowCount().'</span>
+											<span class="tg-themebadge">' . $stmt->rowCount() . '</span>
 											<i class="icon-cart"></i>
-											<span style="text-transform : none">'.number_format($order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment')).' đ</span>
+											<span style="text-transform : none">' . number_format($order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment')) . ' đ</span>
 										</a>
 										';
-							echo 			
-							'<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">';
-							foreach ($stmt as $row) {
-							echo '
+								echo
+								'<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">';
+								foreach ($stmt as $row) {
+									echo '
 							<div class="tg-minicartbody">
 									<div class="tg-minicarproduct">
 										<figure>
-											<img style="width: 70px; height: 80px;" src="images/product/'.$row['product_img'].'.png" alt="image description">
+											<img style="width: 70px; height: 80px;" src="images/product/' . $row['product_img'] . '.png" alt="image description">
 
 										</figure>
 										<div class="tg-minicarproductdata">
-											<h5><a href="">'.$row['product_name'].' <strong> X '.$row['order_quantity'].'</strong></a> </h5>
-											<h6><a href="" style="text-transform : none">'.number_format($row['order_quantity'] * $row['product_price']).' đ</a></h6>
+											<h5><a href="">' . $row['product_name'] . ' <strong> X ' . $row['order_quantity'] . '</strong></a> </h5>
+											<h6><a href="" style="text-transform : none">' . number_format($row['order_quantity'] * $row['product_price']) . ' đ</a></h6>
 										</div>
 									</div>
 
 								</div>
-							'
-								;
-							}
-							echo '
+							';
+								}
+								echo '
 							<div class="tg-minicartfoot">
 							<a class="tg-btnemptycart" href="">
 								<i class="fa fa-trash-o"></i>
 								<span>Xóa toàn bộ</span>
 							</a>
-							<span class="tg-subtotal">Tổng cộng: <strong>'.number_format($order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment')).' đ</strong></span>
+							<span class="tg-subtotal">Tổng cộng: <strong>' . number_format($order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment')) . ' đ</strong></span>
 							<div class="tg-btns">
 								<a class="tg-btn tg-active" href="index.php?pages=user&action=cart">Xem giỏ hàng</a>
 								<a class="tg-btn" href="">Thanh toán</a>
@@ -179,42 +180,41 @@ include('style.php');
 						</div>
 						<a href="index.php?pages=user&action=order&userID=' . isset($_COOKIE['userID']) . '">Đơn mua</a>
 					</div>
-							'	;
-							
-							
-						}
-					}else{
-						echo '	<div class="dropdown tg-themedropdown tg-minicartdropdown">
+							';
+							}
+						else {
+							echo '	<div class="dropdown tg-themedropdown tg-minicartdropdown">
 						<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" >
 							<span class="tg-themebadge"></span>
 							<i class="icon-cart"></i>
 							<span>Giỏ hàng</span>
 						</a>';
-					}
-								?>
-		
-						</div>
+						}
+					} 
+						?>
+
 					</div>
-					<div class="tg-searchbox">
-						<form class="tg-formtheme tg-formsearch" method="POST" action="./?pages=user&action=products">
-							<fieldset>
-								<select id="category-select" name="cate">
-									<option value="0">Tất cả</option>
-									<?
-									$product = new ProductFunction();
-									$row = $product->category_select_all();
-									foreach ($row as $ketqua) {
-										extract($ketqua);
-									?>
-										<option value="<?= $category_id ?>"><?= $category_name ?></option>
-									<?
-									}
-									?>
-								</select>
-								<input id="search-input" type="text" name="keyword" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
-								<button name="search-btn" type="submit"><i class="icon-magnifier"></i></button>
-							</fieldset>
-							<?
+				</div>
+				<div class="tg-searchbox">
+					<form class="tg-formtheme tg-formsearch" method="POST" action="./?pages=user&action=products">
+						<fieldset>
+							<select id="category-select" name="cate">
+								<option value="0">Tất cả</option>
+								<?
+								$product = new ProductFunction();
+								$row = $product->category_select_all();
+								foreach ($row as $ketqua) {
+									extract($ketqua);
+								?>
+									<option value="<?= $category_id ?>"><?= $category_name ?></option>
+								<?
+								}
+								?>
+							</select>
+							<input id="search-input" type="text" name="keyword" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
+							<button name="search-btn" type="submit"><i class="icon-magnifier"></i></button>
+						</fieldset>
+						<?
 						if (isset($_POST['search-btn'])) {
 							$id = $_POST['cate'];
 							$search = $_POST['keyword'];
@@ -222,29 +222,29 @@ include('style.php');
 						};
 						?>
 
-						</form>
-						<style>
-							#category-select {
-								width: 20%;
-								flex: 1;
-								border: 1px solid #ccc;
-								border-radius: 4px 0 0 4px;
-								padding: 8px;
-								height: 44px;
-							}
+					</form>
+					<style>
+						#category-select {
+							width: 20%;
+							flex: 1;
+							border: 1px solid #ccc;
+							border-radius: 4px 0 0 4px;
+							padding: 8px;
+							height: 44px;
+						}
 
-							#search-input {
-								width: 72%;
-								flex: 1;
-								border: 1px solid #ccc;
-								border-radius: 0 0 0 0;
-								margin-left: -4;
-							}
-						</style>
-					</div>
+						#search-input {
+							width: 72%;
+							flex: 1;
+							border: 1px solid #ccc;
+							border-radius: 0 0 0 0;
+							margin-left: -4;
+						}
+					</style>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	<div class="tg-navigationarea">
 		<div class="container">
@@ -345,9 +345,10 @@ include('style.php');
 		align-items: center;
 	}
 
-.category{
-	font-weight: bold;
-}
+	.category {
+		font-weight: bold;
+	}
+
 	.render-type ul li a:hover {
 		text-decoration: underline;
 		background-color: #77B748 !important;

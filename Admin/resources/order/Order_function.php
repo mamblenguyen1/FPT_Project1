@@ -14,11 +14,11 @@ class ORDER
     function addCart($userid, $sachma, $qty)
     {
         $db = new connect();
-        $select = " INSERT INTO `order` (user_id , order_total_payment) 
+        $select = " INSERT INTO `order` (user_id , order_total_payment  ) 
         VALUES ($userid,0);
         SET @product_id = LAST_INSERT_ID();
-        INSERT INTO order_detail (order_id , product_id, order_quantity) 
-        VALUES (@product_id, $sachma, $qty)
+        INSERT INTO order_detail (order_id , product_id, order_quantity, order_status_id ) 
+        VALUES (@product_id, $sachma, $qty , 4)
         ";
         $result = $db->pdo_execute($select);
         return $result;
@@ -30,8 +30,8 @@ class ORDER
         $db = new connect();
         $idn = $this->DuplicateColumnCart($userid);
         $newidn = intval($idn);
-        $select = "INSERT INTO `order_detail` (`order_id` ,  `product_id` ,  `order_quantity`) 
-        VALUES ('$newidn' ,'$sachma', '$soluong')
+        $select = "INSERT INTO `order_detail` (`order_id` ,  `product_id` ,  `order_quantity`,  order_status_id) 
+        VALUES ('$newidn' ,'$sachma', '$soluong', 4)
         ";
         $result = $db->pdo_execute($select);
         return $result;
@@ -153,15 +153,76 @@ class ORDER
             return $row[$column];
         }
     }
+    function getOrderStatusDetail($order_detail_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `order_status` , `order_detail` WHERE `order_detail`.order_status_id = order_status.order_status_id AND `order_detail`.order_detail_id = $order_detail_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
 
     function editStatusOrder($order_status_id, $order_id)
     {
         $db = new connect();
-        $select = "UPDATE `order` SET order_status_id = $order_status_id  WHERE order_id  = $order_id";
+        $select = "UPDATE `order_detail` 
+        SET order_status_id = $order_status_id  
+        WHERE order_detail_id IN
+        (
+          SELECT od_temp.order_detail_id 
+          FROM (
+            SELECT od.order_detail_id 
+            FROM `order` o
+            INNER JOIN order_detail od ON o.order_id = od.order_id
+            WHERE o.order_id = $order_id
+            AND od.order_status_id = 4
+
+          ) AS od_temp
+        );";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
+    function editStatusOrderAd1($order_status_id, $order_id)
+    {
+        $db = new connect();
+        $select = "UPDATE `order_detail` 
+        SET order_status_id = $order_status_id  
+        WHERE order_detail_id IN
+        (
+          SELECT od_temp.order_detail_id 
+          FROM (
+            SELECT od.order_detail_id 
+            FROM `order` o
+            INNER JOIN order_detail od ON o.order_id = od.order_id
+            WHERE o.order_id = $order_id
+            AND od.order_status_id = 1
+          ) AS od_temp
+        );";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
+    function editStatusOrderAd2($order_status_id, $order_id)
+    {
+        $db = new connect();
+        $select = "UPDATE `order_detail` 
+        SET order_status_id = $order_status_id  
+        WHERE order_detail_id IN
+        (
+          SELECT od_temp.order_detail_id 
+          FROM (
+            SELECT od.order_detail_id 
+            FROM `order` o
+            INNER JOIN order_detail od ON o.order_id = od.order_id
+            WHERE o.order_id = $order_id
+            AND od.order_status_id = 2
+          ) AS od_temp
+        );";
         $result = $db->pdo_execute($select);
         return $result;
     }
 
+  
 
 
     function deleteCart($userid)
@@ -424,19 +485,58 @@ class ORDER
     function Show_Order_Detail_by_id_order($order_id)
     {
         $db = new connect();
-        $sql = "SELECT * FROM order_detail, products WHERE order_detail.product_id = products.product_id AND order_detail.order_id = $order_id";
+        $sql = "SELECT * FROM order_detail, products WHERE order_detail.product_id = products.product_id AND order_detail.order_id = $order_id 
+        AND order_detail.order_status_id IN (1 ,2)
+        ";
         $result = $db->pdo_query($sql);
         return $result;
     }
 
-    function Show_Order_Detail($order_id)
+    function Show_Order_Detail_Wait($order_id)
     {
         $db = new connect();
         $sql = "SELECT * FROM order_detail, products, `order`, user
         WHERE order_detail.order_id = `order`.order_id AND
         products.product_id = `order_detail`.product_id AND
-        user.user_id = `order`.user_id AND 
-        order_detail.order_id = $order_id";
+        user.user_id = `order`.user_id  
+        AND order_detail.order_status_id = 1
+        AND order_detail.order_id = $order_id";
+        $result = $db->pdo_query($sql);
+        return $result;
+    }
+    function Show_Order_Detail_Tracking($order_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM order_detail, products, `order`, user
+        WHERE order_detail.order_id = `order`.order_id AND
+        products.product_id = `order_detail`.product_id AND
+        user.user_id = `order`.user_id  
+        AND order_detail.order_status_id = 2
+        AND order_detail.order_id = $order_id";
+        $result = $db->pdo_query($sql);
+        return $result;
+    }
+    function Show_Order_Detail_Delivered($order_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM order_detail, products, `order`, user
+        WHERE order_detail.order_id = `order`.order_id AND
+        products.product_id = `order_detail`.product_id AND
+        user.user_id = `order`.user_id  
+        AND order_detail.order_status_id = 3
+        AND order_detail.order_id = $order_id";
+        $result = $db->pdo_query($sql);
+        return $result;
+    }
+    function Show_Order_Detail_Cart($order_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM order_detail, products, `order`, user
+        WHERE order_detail.order_id = `order`.order_id AND
+        products.product_id = `order_detail`.product_id AND
+        user.user_id = `order`.user_id  
+        AND order_detail.order_status_id = 4
+        AND order_detail.order_id = $order_id";
         $result = $db->pdo_query($sql);
         return $result;
     }

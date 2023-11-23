@@ -20,23 +20,31 @@ include('User/component/header.php');
                     </div>
                     <?
                     $row1 = $order->Show_Order_Detail_by_id_order($order_id);
+                    $tong = 0;
+                    $finalPrice = 0;
                     foreach ($row1 as $ketqua1) {
                         extract($ketqua1);
                     ?>
-                    
+
                         <div class="detail">
-                            <img src="images/product/<?=$product_img?>.png" class="img-responsive" style="width: 100px;height: 100px;"/>
+                            <img src="images/product/<?= $product_img ?>.png" class="img-responsive" style="width: 100px;height: 100px;" />
                             <div class="info">
-                                <h5 class="nomargin"><?=$product_name?></h5>
-                                <p>Số lượng: <?=$order_quantity?></p>
+                                <h5 class="nomargin"><?= $product_name ?></h5>
+                                <p>Số lượng: <?= $order_quantity ?></p>
                             </div>
                             <div class="price">
-                                <span>Giá: <?=number_format($product_price)?> đ</span>
+                                <span>Giá: <?= number_format($product_price * $order_quantity) ?> đ</span>
                             </div>
+
                         </div>
-                        <?
-        }
-                        ?>
+                        <div style="margin: 10px 0; padding: 5px 20px;">
+                            <span>Trạng thái: <? echo $order->getOrderStatusDetail($order_detail_id, 'order_status') ?></span>
+                        </div>
+                    <?
+                        $tong = $product_price * $order_quantity;
+                        $finalPrice = $finalPrice + $tong;
+                    }
+                    ?>
                     <div class="total">
                         <div class="action">
                             <button type="button" class="btn btn-danger">Huỷ đơn hàng</button>
@@ -45,7 +53,7 @@ include('User/component/header.php');
                             <span>
                                 Thành tiền:
                                 <h7>
-                                    <?=number_format($order_total_payment)?> đ 
+                                    <?= number_format($finalPrice) ?> đ
                                 </h7>
                             </span>
                         </div>

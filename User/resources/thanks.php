@@ -6,7 +6,6 @@ include('User/component/header.php');
 
 if (isset($_GET['order_id'])) {
     $order_id = $_GET['order_id'];
-    
 }
 
 ?>
@@ -61,7 +60,9 @@ if (isset($_GET['order_id'])) {
                                     $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
                                     WHERE order_detail.order_id = `order`.order_id AND
                                     products.product_id = `order_detail`.product_id AND
-                                    user.user_id = `order`.user_id AND 
+                                    user.user_id = `order`.user_id 
+                                    AND order_detail.order_status_id  = 4
+                                    AND 
                                     order_detail.order_id = $order_id");
                                     $stmt->execute();
                                     if ($stmt->rowCount() > 0) {
@@ -116,6 +117,11 @@ if (isset($_GET['order_id'])) {
 
     </main>
 </div>
+<?
+  if(isset($_POST['payment'])){
+    $order->editStatusOrder(1, $order_id);
+}
+?>
 <style>
     .thanks .logo {
         margin-top: 0px;

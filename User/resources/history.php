@@ -28,35 +28,40 @@ include('User/component/header.php');
                                     <div class="card-body">
                                         <table id="example2" class="table table-bordered table-hover">
                                             <thead>
-                                                <tr>
-                                                    <th>Tên sản phẩm</th>
-                                                    <th>Tên danh mục</th>
-                                                    <th>Hãng</th>
+                                                <tr style="text-align: center;">
+                                                    <th style="width: 300px;">Tên đơn hàng</th>
                                                     <th>Đơn giá</th>
-                                                    <th>Chi tiết sản phẩm</th>
+                                                    <th>Số lượng</th>
+                                                    <th>Tổng tiền</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Iphone 15 Promax</td>
-                                                    <td>3</td>
-                                                    <td>30/10/2023</td>
-                                                    <td>31/10/2023</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-outline-primary">Chi tiết bình luận</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Laptop ROG Strix G15</td>
-                                                    <td>3</td>
-                                                    <td>30/10/2023</td>
-                                                    <td>31/10/2023</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-outline-primary">Chi tiết bình luận</button>
-                                                    </td>
-                                                </tr>
+                                            <tbody style="text-align: center;">
+                                                <?
+                                                $tong = 0;
+                                                $totalPrice = 0;
+                                                $sql = $order->Show_Order_Detail_Delivered($order->getInfoUserOrder($_COOKIE['userID'], 'order_id'));
+                                                foreach ($sql as $row) {
+                                                    extract($sql);
+                                                    echo ' 
+                          <tr>
+                          <td>' . $row['product_name'] . '</td>
+                          <td>' . number_format($row['product_price']) . ' đ</td>
+                          <td>' . $row['order_quantity'] . '</td>
+                          <td>' . number_format($row['product_price'] * $row['order_quantity']) . ' đ</td>
+                          </tr>
+                          ';
+                          $tong = $row['product_price'] * $row['order_quantity'];
+                          $totalPrice = $totalPrice + $tong ;
+                                                }
+                                                ?>
 
                                             </tbody>
+                                            <tfoot>
+                            <tr>
+                                <td colspan="3">Tổng cộng</td>
+                                <td><?echo number_format($totalPrice)?> đ</td>
+                            </tr>
+                        </tfoot>
                                         </table>
                                     </div>
                                 </div>

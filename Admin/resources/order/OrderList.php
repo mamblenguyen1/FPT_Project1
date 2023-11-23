@@ -24,7 +24,6 @@
                                             <th>Tổng tiền</th>
                                             <th>Số điện thoại</th>
                                             <th>Địa chỉ</th>
-                                            <th>Tình trạng</th>
                                             <th>Thanh Toán</th>
                                             <th>Thao Tác</th>
                                         </tr>
@@ -42,7 +41,6 @@
                                                 <td>' . number_format($row['order_total_payment']) . ' đ</td>
                                                 <td>' . $row['user_phone_number'] . '</td>
                                                 <td>' . $user->getInfo_address($row['user_id'], 'user_street') . ' -  ' . $user->getInfo_address($row['user_id'], 'xa') . ' - ' . $user->getInfo_address($row['user_id'], 'huyen') . ' - ' . $user->getInfo_address($row['user_id'], 'thanhpho') . '</td>       
-                                                <td>' . $order->getOrderStatus($row['order_id'], 'order_status') . '</td>
                                                 <td>Tiền mặt</td>
                                                 <td>
                                                     <form action="index.php?pages=admin&action=OrderDetail" method="post">

@@ -6,6 +6,7 @@ include('User/component/header.php');
 if (isset($_GET['user_id'])) {
     $user_id = $_GET['user_id'];
     $order_id = $_GET['order_id'];
+   
 }
 ?>
 <div class="row" style="width: 100%; padding-left:20%; padding-right:10%; padding-top: 20%">
@@ -99,7 +100,9 @@ if (isset($_COOKIE['userID'])) {
     $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
 									WHERE order_detail.order_id = `order`.order_id AND
 									products.product_id = `order_detail`.product_id AND
-									user.user_id = `order`.user_id AND 
+									user.user_id = `order`.user_id 
+                                    AND order_detail.order_status_id  = 4
+                                    AND 
 									`order`.user_id = $user_id");
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
