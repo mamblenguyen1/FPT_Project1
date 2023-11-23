@@ -1,8 +1,19 @@
 <?php include './Admin/componant/header.php' ?>
 <?php include './admin/componant/sidebar.php' ?>
 <?
+if (isset($_POST['editStatus'])) {
+  $order_status_id = $_POST['order_status_id'];
+  $order_id = $_POST['order_id'];
+  if (!$order_status_id == "") {
+    $order->editStatusOrder($order_status_id, $order_id);
+    echo '<script>window.location.href="index.php?pages=admin&action=OrderList"</script>';
+  }
+}
+?>
+
+<?
 if (isset($_POST['detail_order'])) {
-  $product_idd = $_POST['order_id'];
+  $order_ID = $_POST['order_id'];
 };
 ?>
 <div class="main-panel">
@@ -18,25 +29,49 @@ if (isset($_POST['detail_order'])) {
               <div class="card-header">
                 <h1 style="padding-left: 30px;">Chi tiết đơn hàng</h1>
               </div>
+              <button class="btn btn-primary accordion" style="width:15%; margin: 10px 0px 0px 20px">Thay đổi trạng thái đơn hàng</button>
+              <div class="panel">
+                <form action="" method="post">
+                  <p>
+                    <input type="hidden" name="order_id" value="<? echo $order_ID;?>">
+                    <?
+                    echo '
+                       <select name="order_status_id" class="form-control select2" style="width: 9%; margin-left:5px; display: inline-block;">
+                         ';
+                    $conn = $db->pdo_get_connection();
+                    $stmt = $conn->prepare("SELECT * FROM `order_status` WHERE order_show = 1");
+                    $stmt->execute();
+                    if ($stmt->rowCount() > 0) {
+                      foreach ($stmt as $row) {
+                        echo '<option value="' . $row['order_status_id'] . '">' . $row['order_status'] . '</option>;';
+                      }
+                    }
+                    echo '
+                        </select>';
+
+                    ?>
+                    <button type="submit" class="btn btn-primary" name="editStatus">xác nhận</button>
+                  </p>
+                </form>
+              </div>
+
+              <hr>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
-                    <tr>
-                      <th>Tên đơn hàng</th>
+                    <tr style="text-align: center;">
+                      <th >Tên đơn hàng</th>
                       <th>Đơn giá</th>
                       <th>Số lượng</th>
                       <th>Tổng tiền</th>
-                      <th>Thanh Toán</th>
                       <th>Thời gian đặt hàng</th>
-                      <th>Tình trạng</th>
-                      <th>Thao Tác</th>
                     </tr>
                   </thead>
                   <tbody style="text-align: center;">
                     <?
                     $tong = 0;
-                    $sql = $order->Show_Order_Detail($product_idd);
+                    $sql = $order->Show_Order_Detail($order_ID);
                     foreach ($sql as $row) {
                       extract($sql);
                       echo ' 
@@ -45,24 +80,12 @@ if (isset($_POST['detail_order'])) {
                           <td>' . $row['product_price'] . '</td>
                           <td>' . $row['order_quantity'] . '</td>
                           <td>' . $row['product_price'] * $row['order_quantity'] . '</td>
-                          <td></td>
                           <td>' . $row['order_date'] . '</td>
-                          <td>
-                            <select name="role_id" id="" class="form-control select2" style="width: 100%;">
-                            <option selected value="2">Đã giao</option>
-                            <option selected value="1">Đang giao</option>
-                            <option selected value="0">Chưa giao</option>
-                            </select>
-                          </td>
-                          <td>
-                                <form action="index.php?pages=admin&action=OrderDetail" method="post">
-                                  <button type="submit" class="btn btn-danger" name="detail_order"> <i class="fa fa-trash"></i></button>
-                                </form>
-                          </td>
                           </tr>
                           ';
                     }
                     ?>
+
                   </tbody>
                 </table>
               </div>
@@ -74,3 +97,31 @@ if (isset($_POST['detail_order'])) {
   </div>
 </div>
 <?php include './admin/componant/footer.php' ?>
+
+<style>
+  div.panel {
+    margin-bottom: 3px;
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+</style>
+
+<script>
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    };
+  }
+</script>

@@ -43,7 +43,6 @@ if (isset($_POST['restore_cate'])) {
                                         <form action="" method="post"> 
                                         <input type="hidden" name="category_id" value="' . $row['category_id'] . '">
                                         <button type="submit" name="restore_cate" class="btn btn-outline-primary">Khôi phục</button>
-                                        <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="" class="btn btn-outline-danger">Xóa</button>
                                         </form> 
                                         </td>
                                     </tr>

@@ -52,7 +52,6 @@ if (isset($_POST['restore_product'])) {
                                                   <form action="" method="post">
                                                     <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
                                                     <button type="submit" name="restore_product" class="btn btn-outline-primary">Khôi phục</button>
-                                                    <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="" class="btn btn-outline-danger">Xóa</button>
                                                 </form>
                                               </td>
                                               </tr>

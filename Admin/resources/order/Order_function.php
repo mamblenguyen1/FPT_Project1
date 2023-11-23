@@ -144,6 +144,23 @@ class ORDER
         }
     }
 
+    function getOrderStatus($order_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `order_status` , `order` WHERE `order`.order_status_id = order_status.order_status_id AND `order`.order_id = $order_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
+    function editStatusOrder($order_status_id, $order_id)
+    {
+        $db = new connect();
+        $select = "UPDATE `order` SET order_status_id = $order_status_id  WHERE order_id  = $order_id";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
 
 
 

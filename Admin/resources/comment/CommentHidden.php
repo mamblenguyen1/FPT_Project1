@@ -52,7 +52,6 @@ if (isset($_POST['restore_comment'])) {
                                                   <form action="" method="post">
                                                   <input type="hidden" name="comment_detail_id" value="' . $row['comment_detail_id'] . '">
                                                   <button type="submit" name="restore_comment" class="btn btn-outline-primary">Khôi phục</button>
-                                                  <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="" class="btn btn-outline-danger">Xóa</button>
                                                 </form>
                                               </td>
                                               </tr>
