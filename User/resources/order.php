@@ -1,18 +1,15 @@
 <?
 include('User/component/header.php');
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Danh sách đơn hàng</title>
-</head>
-
-<body>
-    <div class="tg-sectionspace tg-haslayout">
-        <div class="container">
-            <h3>Danh sách đơn hàng</h3>
-
+<div class="tg-sectionspace tg-haslayout">
+    <div class="container">
+        <h3>Danh sách đơn hàng</h3>
+        <?
+        $order = new ORDER();
+        $row = $order->Show_Order_by_id_user($_COOKIE['userID']);
+        foreach ($row as $ketqua) {
+            extract($ketqua);
+        ?>
             <div class="order-list">
                 <div class="order">
                     <div class="head">
@@ -21,26 +18,25 @@ include('User/component/header.php');
                             <h4>Trạng thái: Đang giao</h4>
                         </div>
                     </div>
-                    <div class="detail">
-                        <img src="http://placehold.it/100x100" alt="..." class="img-responsive" />
-                        <div class="info">
-                            <h5 class="nomargin">Điện thoại Iphone 15</h5>
-                            <p>Số lượng: 1</p>
+                    <?
+                    $row1 = $order->Show_Order_Detail_by_id_order($order_id);
+                    foreach ($row1 as $ketqua1) {
+                        extract($ketqua1);
+                    ?>
+                    
+                        <div class="detail">
+                            <img src="images/product/<?=$product_img?>.png" class="img-responsive" style="width: 100px;height: 100px;"/>
+                            <div class="info">
+                                <h5 class="nomargin"><?=$product_name?></h5>
+                                <p>Số lượng: <?=$order_quantity?></p>
+                            </div>
+                            <div class="price">
+                                <span>Giá: <?=number_format($product_price)?> đ</span>
+                            </div>
                         </div>
-                        <div class="price">
-                            <span>200.000 đ</span>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <img src="http://placehold.it/100x100" alt="..." class="img-responsive" />
-                        <div class="info">
-                            <h5 class="nomargin">Điện thoại Iphone 15</h5>
-                            <p>Số lượng: 1</p>
-                        </div>
-                        <div class="price">
-                            <span>200.000 đ</span>
-                        </div>
-                    </div>
+                        <?
+        }
+                        ?>
                     <div class="total">
                         <div class="action">
                             <button type="button" class="btn btn-danger">Huỷ đơn hàng</button>
@@ -49,14 +45,13 @@ include('User/component/header.php');
                             <span>
                                 Thành tiền:
                                 <h7>
-                                    400.000 đ
+                                    <?=number_format($order_total_payment)?> đ 
                                 </h7>
                             </span>
                         </div>
                     </div>
                 </div>
-
-                <div class="order">
+                <!-- <div class="order">
                     <div class="head">
                         <h4 class="name">Đơn hàng #1</h4>
                         <div class="status">
@@ -96,17 +91,15 @@ include('User/component/header.php');
                             </span>
                         </div>
                     </div>
-                </div>
-
-                
+                </div> -->
             </div>
-            <!-- Thêm đơn hàng khác tùy theo nhu cầu -->
-        </div>
+        <?
+        }
+        ?>
+        <!-- Thêm đơn hàng khác tùy theo nhu cầu -->
     </div>
-    </div>
-</body>
-
-</html>
+</div>
+</div>
 <style>
     h7 {
         color: red;
