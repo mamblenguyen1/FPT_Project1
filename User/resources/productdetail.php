@@ -4,6 +4,14 @@ include('user/component/header.php');
 
 ?>
 <?
+if (isset($_POST['deletecomment'])) {
+	$product_id = $_GET['product_id'];
+    $comment_detail = $_POST['detailCommentId'];
+    $comment->deletedComment($comment_detail);
+    echo '<script>alert("Đã ẩn bình luận ! ! !")</script>';
+  };
+
+
 if (isset($_GET['product_id'])) {
 	$product_id = $_GET['product_id'];
 }
@@ -94,32 +102,32 @@ if (isset($_COOKIE['viewCount'])) {
 														</form>
 													</div>
 													<script>
-															let soLuongGioHang = 1;
+														let soLuongGioHang = 1;
 
-// Hàm tăng số lượng
-function tangSoLuong() {
-	soLuongGioHang++;
-	capNhatGioHang();
-}
+														// Hàm tăng số lượng
+														function tangSoLuong() {
+															soLuongGioHang++;
+															capNhatGioHang();
+														}
 
-// Hàm giảm số lượng
-function giamSoLuong() {
-	if (soLuongGioHang > 0) {
-		soLuongGioHang--;
-		capNhatGioHang();
-	}
-}
+														// Hàm giảm số lượng
+														function giamSoLuong() {
+															if (soLuongGioHang > 0) {
+																soLuongGioHang--;
+																capNhatGioHang();
+															}
+														}
 
-// Hàm cập nhật giỏ hàng trên giao diện
-function capNhatGioHang() {
-	let hienThiGioHang = document.getElementById('hien-thi-gio-hang');
-	hienThiGioHang.value = soLuongGioHang;
-}
+														// Hàm cập nhật giỏ hàng trên giao diện
+														function capNhatGioHang() {
+															let hienThiGioHang = document.getElementById('hien-thi-gio-hang');
+															hienThiGioHang.value = soLuongGioHang;
+														}
 
-// Gọi hàm cập nhật giỏ hàng khi tải trang
-document.addEventListener('DOMContentLoaded', function() {
-	capNhatGioHang();
-});
+														// Gọi hàm cập nhật giỏ hàng khi tải trang
+														document.addEventListener('DOMContentLoaded', function() {
+															capNhatGioHang();
+														});
 													</script>
 													<button class="tg-btnaddtowishlist" href="">
 														<span>Yêu thích</span>
@@ -196,10 +204,6 @@ document.addEventListener('DOMContentLoaded', function() {
 															// 		$user_id = $_COOKIE['userID'];
 															// 		$content = $_COOKIE['content'];
 
-
-
-
-
 															if (isset($_POST['AddComment'])) {
 																if (isset($_COOKIE['userID'])) {
 																	$product_id = $_POST['product_id'];
@@ -271,8 +275,12 @@ document.addEventListener('DOMContentLoaded', function() {
 													<br>
 													<div class="comment-method">
 														<div class="item1">
+														<form action="" method="post">
+															<input type="hidden" name="pid" value="' . $row['product_id'] . '" id="">
+															<input type="hidden" name="detailCommentId" value="' . $row['comment_detail_id'] . '" id="">
 															<div class="item-header btn btn-primary" class="editcmt"><i class="fa fa-edit"></i></div>
-															<button class="btn btn-danger"> <i class="fa fa-trash"></i></button>
+															<button class="btn btn-danger" name="deletecomment" type="submit"> <i class="fa fa-trash"></i></button>
+															</form>
 															<div class="item-content">
 																<form action="" method="post">
 																	<input type="hidden" name="pid" value="' . $row['product_id'] . '" id="">
@@ -340,8 +348,8 @@ document.addEventListener('DOMContentLoaded', function() {
 													<div class="comment-method">
 														<div class="item1">
 														';
-														if (($_COOKIE['userID']) == $row['user_id']) {
-														echo'
+																		if (($_COOKIE['userID']) == $row['user_id']) {
+																			echo '
 															<div class="item-header btn btn-primary" class="editcmt"><i class="fa fa-edit"></i></div>
 															<button class="btn btn-danger"> <i class="fa fa-trash"></i></button>
 															<div class="item-content">
@@ -352,7 +360,8 @@ document.addEventListener('DOMContentLoaded', function() {
 																	<button type="submit" class="btn btn-primary" name="editcomment"><i class="fa fa-send-o"></i></button>
 																	</form>
 															</div>
-															';}
+															';
+																		}
 																		$stmt1  = $conn->prepare("SELECT * FROM comment_reply
 											WHere comment_reply.comment_detail_id = $row[comment_detail_id]");
 																		$stmt1->execute();
@@ -458,9 +467,9 @@ document.addEventListener('DOMContentLoaded', function() {
 												<img src="images/product/<? echo $product->all_product_category($_GET['category_id'], $_GET['product_id'], 'product_img') ?>.png" style="width:150px; height:200px">
 											</a>
 											<h4 class="text-center"><? echo $product->all_product_category($_GET['category_id'], $_GET['product_id'], 'product_name') ?></h4>
-											<h5 class="text-center"><ins style="text-decoration:none"> <?echo $product->all_product_category($_GET['category_id'], $_GET['product_id'], 'product_sale')?></ins>
+											<h5 class="text-center"><ins style="text-decoration:none"> <? echo $product->all_product_category($_GET['category_id'], $_GET['product_id'], 'product_sale') ?></ins>
 												<br>
-												<del><?echo $product->all_product_category($_GET['category_id'], $_GET['product_id'], 'product_price')?></del>
+												<del><? echo $product->all_product_category($_GET['category_id'], $_GET['product_id'], 'product_price') ?></del>
 											</h5>
 										</div>
 									</div>
@@ -482,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
 										echo '
 											<div class="item">
 										<div class="col-xs-12 col-sm-6 col-md-2">
-											<a href="./?pages=user&action=productdetail&category_id='.$row['category_id'].'&product_id='.$row['product_id'].'">
+											<a href="./?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . '">
 												<img src="images/product/' . $row['product_img'] . '.png" style="width:150px; height:200px">
 											</a>
 											<h4 class="text-center">' . $product_name_text . '</h4>
@@ -580,7 +589,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	});
 	// Khởi tạo số lượng trong giỏ hàng
-
 </script>
 <?
 include('user/component/footer.php');
