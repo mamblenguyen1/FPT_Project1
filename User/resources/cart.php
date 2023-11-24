@@ -72,14 +72,7 @@ if (isset($_POST['updateQty'])) {
   // exit();
   $order->updateCartQty($cartdeId, $cartdeQty);
 }
-
-
-
-
-
-
 ?>
-
 <link rel="stylesheet" href="../../css/cart.css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <table id="cart" class="table table-hover table-condensed" style="width: 80%; margin: 0 auto;">

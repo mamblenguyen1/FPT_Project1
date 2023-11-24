@@ -2,47 +2,50 @@
 include('User/component/header.php');
 ?>
 <div class="tg-sectionspace tg-haslayout">
-    <div class="container">
-        <h3>Danh sách đơn hàng</h3>
-        <?
-        $order = new ORDER();
-        $row = $order->Show_Order_by_id_user($_COOKIE['userID']);
-        foreach ($row as $ketqua) {
-            extract($ketqua);
-        ?>
+    <?
+    if ($order->CountOrderWait(1, $_COOKIE['userID']) > 0) {
+    ?>
+        <div class="container">
+            <h3>Danh sách đơn hàng chưa giao</h3>
             <div class="order-list">
                 <div class="order">
                     <div class="head">
                         <h4 class="name">Đơn hàng #1</h4>
                         <div class="status">
-                            <h4>Trạng thái: Đang giao</h4>
+                            <h4>Trạng thái: Chưa giao</h4>
                         </div>
                     </div>
                     <?
-                    $row1 = $order->Show_Order_Detail_by_id_order($order_id);
-                    $tong = 0;
                     $finalPrice = 0;
-                    foreach ($row1 as $ketqua1) {
-                        extract($ketqua1);
-                    ?>
-
+                    $conn = $db->pdo_get_connection();
+                    $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
+                     WHERE order_detail.order_id = `order`.order_id AND
+                     products.product_id = `order_detail`.product_id AND
+                     user.user_id = `order`.user_id  
+                     AND order_detail.order_status_id = 1
+                     AND order.user_id = $_COOKIE[userID]");
+                    $stmt->execute();
+                    if ($stmt->rowCount() > 0) {
+                        foreach ($stmt as $row) {
+                            echo ' 
                         <div class="detail">
-                            <img src="images/product/<?= $product_img ?>.png" class="img-responsive" style="width: 100px;height: 100px;" />
+                            <img src="images/product/' . $row['product_img'] . '.png" class="img-responsive" style="width: 100px;height: 100px;" />
                             <div class="info">
-                                <h5 class="nomargin"><?= $product_name ?></h5>
-                                <p>Số lượng: <?= $order_quantity ?></p>
+                                <h5 class="nomargin">' . $row['product_name'] . '</h5>
+                                <p>Số lượng: ' . $row['order_quantity'] . '</p>
                             </div>
                             <div class="price">
-                                <span>Giá: <?= number_format($product_price * $order_quantity) ?> đ</span>
+                                <span>Giá: ' . number_format($row['order_quantity'] * $row['product_price']) . 'sđ</span>
                             </div>
 
                         </div>
                         <div style="margin: 10px 0; padding: 5px 20px;">
-                            <span>Trạng thái: <? echo $order->getOrderStatusDetail($order_detail_id, 'order_status') ?></span>
+                            <span>Trạng thái: ' . $order->getOrderStatusDetail($row['order_detail_id'], 'order_status') . '</span>
                         </div>
-                    <?
-                        $tong = $product_price * $order_quantity;
-                        $finalPrice = $finalPrice + $tong;
+                        ';
+                            $tong = $row['order_quantity'] * $row['product_price'];
+                            $finalPrice = $finalPrice + $tong;
+                        }
                     }
                     ?>
                     <div class="total">
@@ -59,53 +62,81 @@ include('User/component/header.php');
                         </div>
                     </div>
                 </div>
-                <!-- <div class="order">
-                    <div class="head">
-                        <h4 class="name">Đơn hàng #1</h4>
-                        <div class="status">
-                            <h4>Trạng thái: Đang giao</h4>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <img src="http://placehold.it/100x100" alt="..." class="img-responsive" />
-                        <div class="info">
-                            <h5 class="nomargin">Điện thoại Iphone 15</h5>
-                            <p>Số lượng: 1</p>
-                        </div>
-                        <div class="price">
-                            <span>200.000 đ</span>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <img src="http://placehold.it/100x100" alt="..." class="img-responsive" />
-                        <div class="info">
-                            <h5 class="nomargin">Điện thoại Iphone 15</h5>
-                            <p>Số lượng: 1</p>
-                        </div>
-                        <div class="price">
-                            <span>200.000 đ</span>
-                        </div>
-                    </div>
-                    <div class="total">
-                        <div class="action">
-                            <button type="button" class="btn btn-danger">Huỷ đơn hàng</button>
-                        </div>
-                        <div class="prices">
-                            <span>
-                                Thành tiền:
-                                <h7>
-                                    400.000 đ
-                                </h7>
-                            </span>
-                        </div>
-                    </div>
-                </div> -->
             </div>
-        <?
-        }
-        ?>
-        <!-- Thêm đơn hàng khác tùy theo nhu cầu -->
+
+        </div>
+    <?
+
+
+
+    }else{
+        echo '';
+    }
+    ?>
+  <?
+    if ($order->CountOrderWait(2, $_COOKIE['userID']) > 0) {
+    ?>
+    <div class="container">
+        <h3>Danh sách đơn hàng đang giao</h3>
+        <div class="order-list">
+            <div class="order">
+                <div class="head">
+                    <h4 class="name">Đơn hàng #1</h4>
+                    <div class="status">
+                        <h4>Trạng thái: đang giao</h4>
+                    </div>
+                </div>
+                <?
+                $finalPrice = 0;
+                $conn = $db->pdo_get_connection();
+                $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
+                     WHERE order_detail.order_id = `order`.order_id AND
+                     products.product_id = `order_detail`.product_id AND
+                     user.user_id = `order`.user_id  
+                     AND order_detail.order_status_id = 2
+                     AND order.user_id = $_COOKIE[userID]");
+                $stmt->execute();
+                if ($stmt->rowCount() > 0) {
+                    foreach ($stmt as $row) {
+                        echo ' 
+                        <div class="detail">
+                            <img src="images/product/' . $row['product_img'] . '.png" class="img-responsive" style="width: 100px;height: 100px;" />
+                            <div class="info">
+                                <h5 class="nomargin">' . $row['product_name'] . '</h5>
+                                <p>Số lượng: ' . $row['order_quantity'] . '</p>
+                            </div>
+                            <div class="price">
+                                <span>Giá: ' . number_format($row['order_quantity'] * $row['product_price']) . 'sđ</span>
+                            </div>
+
+                        </div>
+                        <div style="margin: 10px 0; padding: 5px 20px;">
+                            <span>Trạng thái: ' . $order->getOrderStatusDetail($row['order_detail_id'], 'order_status') . '</span>
+                        </div>
+                        ';
+                        $tong = $row['order_quantity'] * $row['product_price'];
+                        $finalPrice = $finalPrice + $tong;
+                    }
+                }
+                ?>
+                <div class="total">
+                    <div class="action">
+                        <button type="button" class="btn btn-danger">Huỷ đơn hàng</button>
+                    </div>
+                    <div class="prices">
+                        <span>
+                            Thành tiền:
+                            <h7>
+                                <?= number_format($finalPrice) ?> đ
+                            </h7>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+    <? }?>
 </div>
 </div>
 <style>

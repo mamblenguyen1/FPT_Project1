@@ -382,7 +382,23 @@ class ORDER
             return $row['COUNT(cartdetail.cartId)'];
         }
     }
+    function CountOrderWait($order_status_id,$user_id)
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(order_detail.order_detail_id)
+        FROM order_detail
+        WHERE order_detail.order_status_id = $order_status_id
+        AND order_detail.order_id IN (
+            SELECT order.order_id FROM `order`
+            WHERE order.user_id = $user_id
+        )";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(order_detail.order_detail_id)'];
+        }
+    }
 
+  
     function LastesCart($CartId)
     {
         $db = new connect();
