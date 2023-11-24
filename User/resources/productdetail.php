@@ -311,6 +311,9 @@ if (isset($_COOKIE['viewCount'])) {
 													<br>
 													<div class="comment-method">
 														<div class="item1">
+														';
+														if (($_COOKIE['userID']) == $row['user_id']) {
+														echo'
 															<div class="item-header btn btn-primary" class="editcmt"><i class="fa fa-edit"></i></div>
 															<button class="btn btn-danger"> <i class="fa fa-trash"></i></button>
 															<div class="item-content">
@@ -321,7 +324,7 @@ if (isset($_COOKIE['viewCount'])) {
 																	<button type="submit" class="btn btn-primary" name="editcomment"><i class="fa fa-send-o"></i></button>
 																	</form>
 															</div>
-															';
+															';}
 																		$stmt1  = $conn->prepare("SELECT * FROM comment_reply
 											WHere comment_reply.comment_detail_id = $row[comment_detail_id]");
 																		$stmt1->execute();
