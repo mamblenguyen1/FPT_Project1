@@ -29,11 +29,11 @@ if (isset($_POST['editcomment'])) {
 	}
 }
 // đếm view
-setcookie('viewCount', 'viewed', time() + (10*60), '/');
+setcookie('viewCount', 'viewed', time() + (10 * 60), '/');
 if (isset($_COOKIE['viewCount'])) {
 	echo '';
 } else {
-	setcookie('viewCount', 'viewed', time() + (10*60), '/');
+	setcookie('viewCount', 'viewed', time() + (10 * 60), '/');
 	$update_view = "UPDATE products SET product_view = product_view + 1 WHERE product_id = $product_id";
 	$result = $db->pdo_execute($update_view);
 }
@@ -43,7 +43,7 @@ if (isset($_COOKIE['viewCount'])) {
 ?>
 <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
 
-	<div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="../images/background-login1.jpg">
+	<!-- <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="../images/background-login1.jpg">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -58,7 +58,7 @@ if (isset($_COOKIE['viewCount'])) {
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<main id="tg-main" class="tg-main tg-haslayout">
 		<div class="tg-sectionspace tg-haslayout">
 			<div class="container">
@@ -394,222 +394,6 @@ if (isset($_COOKIE['viewCount'])) {
 												</div>
 											</div>
 										</div>
-										<div class="tg-relatedproducts">
-											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-												<div class="tg-sectionhead">
-													<h2><span>Gợi ý sản phẩm</span>Có thể bạn sẽ biết</h2>
-													<a class="tg-btn" href="">Xem tất cả</a>
-												</div>
-											</div>
-											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-												<div id="tg-relatedproductslider" class="tg-relatedproductslider tg-relatedbooks owl-carousel">
-													<div class="item">
-														<div class="tg-postbook">
-															<figure class="tg-featureimg">
-																<div class="tg-bookimg">
-																	<div class="tg-frontcover"><img src="../images/iphone.jpg" alt="image description"></div>
-																	<div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div>
-																</div>
-																<a class="tg-btnaddtowishlist" href="">
-																	<i class="icon-heart"></i>
-																	<span>Yêu thích</span>
-																</a>
-															</figure>
-															<div class="tg-postbookcontent">
-																<ul class="tg-bookscategories">
-																	<li><a href="">Điện thoại</a></li>
-																	<li><a href="">APPLE</a></li>
-																</ul>
-																<div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
-																<div class="tg-booktitle">
-																	<h3><a href="">Iphone 15 Promax</a></h3>
-																</div>
-																<span class="tg-bookwriter">By: <a href="">Angela Gunning</a></span>
-																<span class="tg-stars"><span></span></span>
-																<span class="tg-bookprice">
-																	<ins>$25.18</ins>
-																	<del>$27.20</del>
-																</span>
-																<a class="tg-btn tg-btnstyletwo" href="">
-																	<i class="fa fa-shopping-basket"></i>
-																	<em>Thêm giỏ hàng</em>
-																</a>
-															</div>
-														</div>
-													</div>
-													<div class="item">
-														<div class="tg-postbook">
-															<figure class="tg-featureimg">
-																<div class="tg-bookimg">
-																	<div class="tg-frontcover"><img src="../images/iphone.jpg" alt="image description"></div>
-																	<div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div>
-																</div>
-																<a class="tg-btnaddtowishlist" href="">
-																	<i class="icon-heart"></i>
-																	<span>Yêu thích</span>
-																</a>
-															</figure>
-															<div class="tg-postbookcontent">
-																<ul class="tg-bookscategories">
-																	<li><a href="">Điện thoại</a></li>
-																	<li><a href="">APPLE</a></li>
-																</ul>
-																<div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
-																<div class="tg-booktitle">
-																	<h3><a href="">Iphone 15 Promax</a></h3>
-																</div>
-																<span class="tg-bookwriter">By: <a href="">Angela Gunning</a></span>
-																<span class="tg-stars"><span></span></span>
-																<span class="tg-bookprice">
-																	<ins>$25.18</ins>
-																	<del>$27.20</del>
-																</span>
-																<a class="tg-btn tg-btnstyletwo" href="">
-																	<i class="fa fa-shopping-basket"></i>
-																	<em>Thêm giỏ hàng</em>
-																</a>
-															</div>
-														</div>
-													</div>
-													<div class="item">
-														<div class="tg-postbook">
-															<figure class="tg-featureimg">
-																<div class="tg-bookimg">
-																	<div class="tg-frontcover"><img src="../images/iphone.jpg" alt="image description"></div>
-																	<div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div>
-																</div>
-																<a class="tg-btnaddtowishlist" href="">
-																	<i class="icon-heart"></i>
-																	<span>Yêu thích</span>
-																</a>
-															</figure>
-															<div class="tg-postbookcontent">
-																<ul class="tg-bookscategories">
-																	<li><a href="">Điện thoại</a></li>
-																	<li><a href="">APPLE</a></li>
-																</ul>
-																<div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
-																<div class="tg-booktitle">
-																	<h3><a href="">Iphone 15 Promax</a></h3>
-																</div>
-																<span class="tg-bookwriter">By: <a href="">Angela Gunning</a></span>
-																<span class="tg-stars"><span></span></span>
-																<span class="tg-bookprice">
-																	<ins>$25.18</ins>
-																	<del>$27.20</del>
-																</span>
-																<a class="tg-btn tg-btnstyletwo" href="">
-																	<i class="fa fa-shopping-basket"></i>
-																	<em>Thêm giỏ hàng</em>
-																</a>
-															</div>
-														</div>
-													</div>
-													<div class="item">
-														<div class="tg-postbook">
-															<figure class="tg-featureimg">
-																<div class="tg-bookimg">
-																	<div class="tg-frontcover"><img src="../images/iphone.jpg" alt="image description"></div>
-																	<div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div>
-																</div>
-																<a class="tg-btnaddtowishlist" href="">
-																	<i class="icon-heart"></i>
-																	<span>Yêu thích</span>
-																</a>
-															</figure>
-															<div class="tg-postbookcontent">
-																<ul class="tg-bookscategories">
-																	<li><a href="">Điện thoại</a></li>
-																	<li><a href="">APPLE</a></li>
-																</ul>
-																<div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
-																<div class="tg-booktitle">
-																	<h3><a href="">Iphone 15 Promax</a></h3>
-																</div>
-																<span class="tg-bookwriter">By: <a href="">Angela Gunning</a></span>
-																<span class="tg-stars"><span></span></span>
-																<span class="tg-bookprice">
-																	<ins>$25.18</ins>
-																	<del>$27.20</del>
-																</span>
-																<a class="tg-btn tg-btnstyletwo" href="">
-																	<i class="fa fa-shopping-basket"></i>
-																	<em>Thêm giỏ hàng</em>
-																</a>
-															</div>
-														</div>
-													</div>
-													<div class="item">
-														<div class="tg-postbook">
-															<figure class="tg-featureimg">
-																<div class="tg-bookimg">
-																	<div class="tg-frontcover"><img src="../images/iphone.jpg" alt="image description"></div>
-																	<div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div>
-																</div>
-																<a class="tg-btnaddtowishlist" href="">
-																	<i class="icon-heart"></i>
-																	<span>Yêu thích</span>
-																</a>
-															</figure>
-															<div class="tg-postbookcontent">
-																<ul class="tg-bookscategories">
-																	<li><a href="">Điện thoại</a></li>
-																	<li><a href="">APPLE</a></li>
-																</ul>
-																<div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
-																<div class="tg-booktitle">
-																	<h3><a href="">Iphone 15 Promax</a></h3>
-																</div>
-																<span class="tg-bookwriter">By: <a href="">Angela Gunning</a></span>
-																<span class="tg-stars"><span></span></span>
-																<span class="tg-bookprice">
-																	<ins>$25.18</ins>
-																	<del>$27.20</del>
-																</span>
-																<a class="tg-btn tg-btnstyletwo" href="">
-																	<i class="fa fa-shopping-basket"></i>
-																	<em>Thêm giỏ hàng</em>
-																</a>
-															</div>
-														</div>
-													</div>
-													<div class="item">
-														<div class="tg-postbook">
-															<figure class="tg-featureimg">
-																<div class="tg-bookimg">
-																	<div class="tg-frontcover"><img src="../images/iphone.jpg" alt="image description"></div>
-																	<div class="tg-backcover"><img src="images/books/img-01.jpg" alt="image description"></div>
-																</div>
-																<a class="tg-btnaddtowishlist" href="">
-																	<i class="icon-heart"></i>
-																	<span>Yêu thích</span>
-																</a>
-															</figure>
-															<div class="tg-postbookcontent">
-																<ul class="tg-bookscategories">
-																	<li><a href="">Điện thoại</a></li>
-																	<li><a href="">APPLE</a></li>
-																</ul>
-																<div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
-																<div class="tg-booktitle">
-																	<h3><a href="">Iphone 15 Promax</a></h3>
-																</div>
-																<span class="tg-bookwriter">By: <a href="">Angela Gunning</a></span>
-																<span class="tg-stars"><span></span></span>
-																<span class="tg-bookprice">
-																	<ins>$25.18</ins>
-																	<del>$27.20</del>
-																</span>
-																<a class="tg-btn tg-btnstyletwo" href="">
-																	<i class="fa fa-shopping-basket"></i>
-																	<em>Thêm giỏ hàng</em>
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -620,18 +404,98 @@ if (isset($_COOKIE['viewCount'])) {
 						?>
 					</div>
 				</div>
+
+				<div class="container">
+					<div class="row" id="slider-text">
+						<div class="col-md-6">
+							<h2>Các sản phẩm tương tự</h2>
+						</div>
+					</div>
+				</div>
+
+				<!-- Item slider-->
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12">
+							<div class="carousel carousel-showmanymoveone slide" id="itemslider">
+								<div class="carousel-inner">
+
+									<div class="item active">
+										<div class="col-xs-12 col-sm-6 col-md-2">
+											<a href="#">
+												<img src="images/product/<? echo $product->all_product_category($_GET['category_id'], $_GET['product_id'], 'product_img') ?>.png" style="width:150px; height:200px">
+											</a>
+											<h4 class="text-center"><? echo $product->all_product_category($_GET['category_id'], $_GET['product_id'], 'product_name') ?></h4>
+											<h5 class="text-center"><ins style="text-decoration:none"> <?echo $product->all_product_category($_GET['category_id'], $_GET['product_id'], 'product_sale')?></ins>
+												<br>
+												<del><?echo $product->all_product_category($_GET['category_id'], $_GET['product_id'], 'product_price')?></del>
+											</h5>
+										</div>
+									</div>
+									<?
+									$cate_similar = $_GET['category_id'];
+									$pro_similar = $_GET['product_id'];
+									$conn = $db->pdo_get_connection();
+									$stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+									type.type_id = products.type_id
+									AND 
+									category.category_id = products.category_id
+									AND
+									products.is_deleted = 1
+									AND category.category_id = $cate_similar
+									AND products.product_id <> $pro_similar ");
+									$stmt->execute();
+									foreach ($stmt as $row) {
+										$product_name_text = $product->substringtext($row['product_name'], 22);
+										echo '
+											<div class="item">
+										<div class="col-xs-12 col-sm-6 col-md-2">
+											<a href="./?pages=user&action=productdetail&category_id='.$row['category_id'].'&product_id='.$row['product_id'].'">
+												<img src="images/product/' . $row['product_img'] . '.png" style="width:150px; height:200px">
+											</a>
+											<h4 class="text-center">' . $product_name_text . '</h4>
+											<h5 class="text-center"><ins style="text-decoration:none"> ' . $row['product_sale'] . '</ins>
+												<br>
+												<del>' . $row['product_price'] . '</del>
+											</h5>
+										</div>
+									</div>
+											';
+									}
+
+									?>
+								</div>
+
+								<div id="slider-control">
+									<a class="left carousel-control" href="#itemslider" data-slide="prev"><img src="https://cdn0.iconfinder.com/data/icons/website-kit-2/512/icon_402-512.png" alt="Left" class="img-responsive"></a>
+									<a class="right carousel-control" href="#itemslider" data-slide="next"><img src="http://pixsector.com/cache/81183b13/avcc910c4ee5888b858fe.png" alt="Right" class="img-responsive"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<?
+				include('User/component/recommend_product_slider.php');
+				?>
+
+
 			</div>
 		</div>
 		<!--************************************
 					News Grid End
 			*************************************-->
+
+
+
+
 	</main>
 	<!--************************************
 				Main End
 		*************************************-->
 
 </div>
-
 <style>
 	.comment-method {
 		padding: 10px 0;
