@@ -40,7 +40,13 @@ if (isset($_POST['buy'])) {
     $userid = $_COOKIE['userID'];
     $qty = intval($qty);
     if ($order->DuplicateCartPro($product_id, $userid)) {
-      $order->updateCartQtyDup($product_id, $qty);
+      if ($order->DuplicateCartProStorge($product_id, $userid)) {
+        if ($order->DuplicateCartProStorgeAD($product_id, $userid)) {
+          $order->updateCartQtyDup($product_id, $qty);
+        } else {
+          $order->addCartDetails($userid, $product_id, $qty);
+        }
+      }
     } else {
       if ($order->DuplicateCart($userid)) {
         $order->addCartDetails($userid, $product_id, $qty);

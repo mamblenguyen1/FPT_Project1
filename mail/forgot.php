@@ -101,8 +101,7 @@ class Mailer
         }
     }
 
-
-    public function ReplyMail($user_name, $addressMail, $subject , $question , $answer)
+    public function ReplyMail($user_name, $addressMail, $subject, $question, $answer)
     {
         $mail = new PHPMailer\PHPMailer\PHPMailer(true); //true:enables exceptions
         try {
@@ -233,7 +232,7 @@ class Mailer
                                                 <div style="font-family:Arial, sans-serif;font-size:17px;letter-spacing:normal;line-height:1;text-align:left;color:#000000;">
                                                     <h1 class="text-build-content" style="line-height:32px;text-align:center;; margin-top: 10px; margin-bottom: 10px; font-weight: normal;">
                                                                 <span style="color:#55575d;font-family:Open Sans;font-size:17px;">
-                                                                    <p>Xin chào <strong>'.$user_name.'</strong>,</p>
+                                                                    <p>Xin chào <strong>' . $user_name . '</strong>,</p>
                                                                     <b>Căm ơn bạn đã gửi thư phàn hồi đến chúng tôi !</b>
                                                                 </span>
                                                     </h1>
@@ -259,7 +258,7 @@ class Mailer
                                             <td align="left" style="font-size:0;padding:0 35px 0 35px;word-break:break-word;">
                                                 <div style="font-family:Arial, sans-serif;font-size:14px;letter-spacing:normal;line-height:1;text-align:left;color:#000000;">
                                                     <p class="text-build-content" style="margin: 10px 0;">
-                                                        <span style="font-family:Open Sans;font-size:13px;">Chủ đề : <strong>'.$subject.'</strong></span>
+                                                        <span style="font-family:Open Sans;font-size:13px;">Chủ đề : <strong>' . $subject . '</strong></span>
                                                     </p>
                                                 </div>
                                             </td>
@@ -269,7 +268,7 @@ class Mailer
                                                 <div style="font-family:Arial, sans-serif;font-size:14px;letter-spacing:normal;line-height:1;text-align:left;color:#000000;">
                                                     <p class="text-build-content" style="margin: 10px 0;">
                                                         <span style="font-family:Open Sans;font-size:13px;">Nội dung câu hỏi của bạn :</span>
-                                                        <p><strong>" '.$question.' "</strong></p>
+                                                        <p><strong>" ' . $question . ' "</strong></p>
                                                     </p>
                                                 </div>
                                             </td>
@@ -281,7 +280,7 @@ class Mailer
                                                         <span style="font-family:Open Sans;font-size:14px;">Thay bộ phận chăm sóc khách hàng, chúng tôi xin phép trả lời câu hỏi của bạn như sau  :</span>
                                                     </p>
                                                     <p class="text-build-content" style="line-height: 16px; margin: 10px 0;">
-                                                        <span style="font-family:Open Sans;font-size:14px;"><strong>" '.$answer.' "</strong></span>
+                                                        <span style="font-family:Open Sans;font-size:14px;"><strong>" ' . $answer . ' "</strong></span>
                                                     </p>
                                                     <!-- <p class="text-build-content" style="line-height: 12px; margin: 10px 0;">
                                                         <span style="font-family:Open Sans;font-size:14px;">- vendre vos mobiles*</span>
@@ -364,6 +363,352 @@ class Mailer
             </div>
             </body>
             
+        ';
+            $mail->Body = $noidungthu;
+            $mail->smtpConnect(
+                array(
+                    "ssl" => array(
+                        "verify_peer" => false,
+                        "verify_peer_name" => false,
+                        "allow_self_signed" => true
+                    )
+                )
+            );
+            $mail->send();
+            // echo 'Đã gửi mail xong';
+        } catch (Exception $e) {
+            echo 'Error: ', $mail->ErrorInfo;
+        }
+    }
+    public function MailOrder($user_name, $addressMail)
+    {
+        $mail = new PHPMailer\PHPMailer\PHPMailer(true); //true:enables exceptions
+        try {
+            $mail->SMTPDebug = 0; //0,1,2: chế độ debug
+            $mail->isSMTP();
+            $mail->CharSet = "utf-8";
+            $mail->Host = 'smtp.gmail.com'; //SMTP servers
+            $mail->SMTPAuth = true; // Enable authentication
+            $mail->Username = 'nmquang1997@gmail.com'; // SMTP username
+            $mail->Password = 'znxczngepylfhjqh'; // SMTP password
+            $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL 
+            $mail->Port = 465; // port to connect to                
+            $mail->setFrom('nmquang1997@gmail.com', 'Liberty Technology');
+            $mail->addAddress($addressMail);
+            $mail->isHTML(true);
+            $mail->Subject = 'Thông tin đơn hàng';
+            $noidungthu = ' <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+            <tr>
+              <td height="20"></td>
+            </tr>
+            <tr>
+              <td>
+                <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff" style="border-radius: 10px 10px 0 0;">
+                  <tr class="visibleMobile">
+                    <td height="30"></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                        <tbody>
+                          <tr>
+                              <td align="center"> 
+                                <img src="https://www.zupimages.net/up/23/47/7ko6.png" width="100" height="100" alt="logo"/>
+                              </td>
+                          </tr>
+                          <tr class="visibleMobile">
+                              <td height="20"></td>
+                          </tr>
+                          <tr>
+                              <td style="font-size: 21px; color: #ff0000; letter-spacing: -1px; font-family:  sans-serif; text-align: center;">
+                                Hóa Đơn
+                              </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                                <tbody>
+                                  <tr class="hiddenMobile">
+                                    <td height="40"></td>
+                                  </tr>
+                                  <tr>
+                                    <td style="font-size: 12px; color: #5b5b5b; font-family:  sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
+                                      Xin Chào, TÚ.
+                                      <br> Cảm ơn bạn đã mua sắm từ cửa hàng của chúng tôi và đặt hàng.
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
+                                <tbody>
+                                  <tr class="hiddenMobile">
+                                    <td height="50"></td>
+                                  </tr>
+                                  <tr>
+                                    <td style="font-size: 12px; color: #5b5b5b; font-family:  sans-serif; line-height: 22px; vertical-align: top; text-align: right;">
+                                      <small>Đơn hàng</small> #123<br />
+                                      <small>Ngày 11 tháng 24 năm 2023</small>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <!-- /Header -->
+          <!-- Order Details -->
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+            <tbody>
+              <tr>
+                <td>
+                  <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+                    <tbody>
+                      <tr>
+                      <tr class="hiddenMobile">
+                        <td height="60"></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                            <tbody>
+                              <tr>
+                                <th style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="52%" align="left">
+                                  Tên Sản Phẩm
+                                </th>
+                                <th style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="left">
+                                  <small></small>
+                                </th>
+                                <th style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="center">
+                                  Số Lượng
+                                </th>
+                                <th style="font-size: 12px; font-family:  sans-serif; color: #1e2b33; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="right">
+                                  Tổng
+                                </th>
+                              </tr>
+                              <tr>
+                                <td height="1" style="background: #bebebe;" colspan="4"></td>
+                              </tr>
+                              <tr>
+                                <td height="10" colspan="4"></td>
+                              </tr>
+                              <tr>
+                                <td style="font-size: 12px; font-family:  sans-serif; color: #ff0000;  line-height: 18px;  vertical-align: top; padding:10px 0;" class="article">
+                                  Iphone 15 Pro
+                                </td>
+                                <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;"><small></small></td>
+                                <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="center">1</td>
+                                <td style="font-size: 12px; font-family:  sans-serif; color: #1e2b33;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="right">$299.95</td>
+                              </tr>
+                              <tr>
+                                <td height="1" colspan="4" style="border-bottom:1px solid #e4e4e4"></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="20"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /Order Details -->
+          <!-- Total -->
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+            <tbody>
+              <tr>
+                <td>
+                  <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <!-- Table Total -->
+                          <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                            <tbody>
+                              <tr>
+                                <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ">
+                                  Subtotal
+                                </td>
+                                <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; white-space:nowrap;" width="80">
+                                  $329.90
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="font-size: 12px; font-family:  sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
+                                  <strong>Thành Tiền</strong>
+                                </td>
+                                <td style="font-size: 12px; font-family:  sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
+                                  <strong>$344.90</strong>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <!-- /Table Total -->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /Total -->
+          <!-- Information -->
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+            <tbody>
+              <tr>
+                <td>
+                  <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+                    <tbody>
+                      <tr>
+                      <tr class="visibleMobile">
+                        <td height="40"></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                                    <tbody>
+                                      <tr>
+                                        <td style="font-size: 11px; font-family:  sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                          <strong>Địa Chỉ: </strong>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td width="100%" height="10"></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                          226, Xã chữ A<br> Huyện chữ B<br> Tp. chữ C<br> Hotline: 09090909
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
+                                    <tbody>
+                                      <tr>
+                                        <td style="font-size: 11px; font-family:  sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                          <strong>Phương Thức Thanh Toán</strong>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td width="100%" height="10"></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                          Thanh toán khi nhận hàng.
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                                    <tbody>
+                                      <tr class="hiddenMobile">
+                                        <td height="35"></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="font-size: 11px; font-family:  sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                          <strong>Thông Tin Vận Chuyển</strong>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td width="100%" height="10"></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                          Đơn hàng của bạn được giao trong vòng 1h đến 2h.
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
+                                    <tbody>
+                                      <tr class="hiddenMobile">
+                                        <td height="35"></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="font-size: 11px; font-family:  sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                          <strong>Hình Thức Vận Chuyển</strong>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td width="100%" height="10"></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                          Giao hàng hỏa tốc
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr class="visibleMobile">
+                        <td height="30"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /Information -->
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+            <tr>
+              <td>
+                <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff" style="border-radius: 0 0 10px 10px;">
+                  <tr>
+                    <td>
+                      <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                        <tbody>
+                          <tr>
+                            <td style="font-size: 12px; color: #5b5b5b; font-family:  sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
+                              Chúc bạn một ngày tốt lành !!
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr class="spacer">
+                    <td height="50"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td height="20"></td>
+            </tr>
+          </table>
         ';
             $mail->Body = $noidungthu;
             $mail->smtpConnect(

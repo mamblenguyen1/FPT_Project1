@@ -60,6 +60,40 @@ class ORDER
             }
         }
     }
+    public function DuplicateCartProStorge($productId, $userid)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM order_detail ,`order` , order_status
+        WHERE `order`.order_id = order_detail.order_id 
+        AND order_detail.order_status_id = order_status.order_status_id
+        AND order_detail.order_status_id IN (1,2,3)
+        AND `order`.user_id = $userid
+        ";
+        $result = $db->pdo_query($select);
+        foreach ($result as $row) {
+            $nw = $row['product_id'];
+            if ($productId == $nw) {
+                return true;
+            }
+        }
+    }
+    public function DuplicateCartProStorgeAD($productId, $userid)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM order_detail ,`order` , order_status
+        WHERE `order`.order_id = order_detail.order_id 
+        AND order_detail.order_status_id = order_status.order_status_id
+        AND order_detail.order_status_id IN (4)
+        AND `order`.user_id = $userid
+        ";
+        $result = $db->pdo_query($select);
+        foreach ($result as $row) {
+            $nw = $row['product_id'];
+            if ($productId == $nw) {
+                return true;
+            }
+        }
+    }
     public function DuplicateCart($user_id)
     {
         $db = new connect();

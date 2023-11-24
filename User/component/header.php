@@ -190,7 +190,14 @@ include('style.php');
 							<span>Giỏ hàng</span>
 						</a>';
 						}
-					} 
+					} 	else {
+						echo '	<div class="dropdown tg-themedropdown tg-minicartdropdown">
+					<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" >
+						<span class="tg-themebadge"></span>
+						<i class="icon-cart"></i>
+						<span>Giỏ hàng</span>
+					</a>';
+					}
 						?>
 
 					</div>
