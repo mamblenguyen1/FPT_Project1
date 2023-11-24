@@ -93,6 +93,34 @@ if (isset($_COOKIE['viewCount'])) {
 															<button type="submit" class="tg-btn tg-active tg-btn-lg" name="buy">Mua ngay </button>
 														</form>
 													</div>
+													<script>
+															let soLuongGioHang = 1;
+
+// Hàm tăng số lượng
+function tangSoLuong() {
+	soLuongGioHang++;
+	capNhatGioHang();
+}
+
+// Hàm giảm số lượng
+function giamSoLuong() {
+	if (soLuongGioHang > 0) {
+		soLuongGioHang--;
+		capNhatGioHang();
+	}
+}
+
+// Hàm cập nhật giỏ hàng trên giao diện
+function capNhatGioHang() {
+	let hienThiGioHang = document.getElementById('hien-thi-gio-hang');
+	hienThiGioHang.value = soLuongGioHang;
+}
+
+// Gọi hàm cập nhật giỏ hàng khi tải trang
+document.addEventListener('DOMContentLoaded', function() {
+	capNhatGioHang();
+});
+													</script>
 													<button class="tg-btnaddtowishlist" href="">
 														<span>Yêu thích</span>
 													</button>
@@ -552,32 +580,7 @@ if (isset($_COOKIE['viewCount'])) {
 		});
 	});
 	// Khởi tạo số lượng trong giỏ hàng
-	let soLuongGioHang = 1;
 
-	// Hàm tăng số lượng
-	function tangSoLuong() {
-		soLuongGioHang++;
-		capNhatGioHang();
-	}
-
-	// Hàm giảm số lượng
-	function giamSoLuong() {
-		if (soLuongGioHang > 0) {
-			soLuongGioHang--;
-			capNhatGioHang();
-		}
-	}
-
-	// Hàm cập nhật giỏ hàng trên giao diện
-	function capNhatGioHang() {
-		let hienThiGioHang = document.getElementById('hien-thi-gio-hang');
-		hienThiGioHang.value = soLuongGioHang;
-	}
-
-	// Gọi hàm cập nhật giỏ hàng khi tải trang
-	document.addEventListener('DOMContentLoaded', function() {
-		capNhatGioHang();
-	});
 </script>
 <?
 include('user/component/footer.php');
