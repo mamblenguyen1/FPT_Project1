@@ -6,13 +6,12 @@ include('User/component/header.php');
 if (isset($_GET['user_id'])) {
     $user_id = $_GET['user_id'];
     $order_id = $_GET['order_id'];
-   
 }
 ?>
 <div class="row" style="width: 100%; padding-left:20%; padding-right:10%; padding-top: 20%">
     <div class="col-md-6 order-md-1" style="width:65%">
         <h4 class="mb-3"><b>Địa chỉ nhận hàng</b></h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" novalidate action="index.php?pages=user&action=thanks&order_id=<?= $order->getOrder_total_payment($user_id, 'order_id') ?>" method="post">
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <label for="firstName">Họ và tên</label>
@@ -58,7 +57,7 @@ if (isset($_GET['user_id'])) {
 
                 <div class="col-md-6 mb-3">
                     <label for="streets">Đường</label>
-                    <input type="text" class="form-control rounded-2xl" id="streets" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_street') ?>" required>
+                    <input type="text" class="form-control rounded-2xl" name="user_street" id="user_street" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_street') ?>" required>
                 </div>
             </div>
             <hr class="mb-4">
@@ -90,7 +89,11 @@ if (isset($_GET['user_id'])) {
                         </div>
                     </li>
                 </ul>
-        </form>
+                <li class="list-group-item border-0 d-flex justify-content-between">
+        <input type="text" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
+        <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color:white; font-size:15px; width:75%">Thanh Toán</button>
+    </form>
+</li>
     </div>
 
 </div>
@@ -135,13 +138,7 @@ if (isset($_COOKIE['userID'])) {
     }
 }
 ?>
-<h4 class="d-flex justify-content-between align-items-center mb-3">
-    <form method="post">
-        <label for="firstName">Mã giảm giá (Nếu Có)</label>
-        <input value="" name="code" type="text" class="form-control" style="width:200px;" placeholder="Nhập mã giảm giá">
-        <button type="submit" name="code-input" class="tg-btn" style="width:100px; padding:0;">Nhập</button>
-    </form>
-    <?
+ <?
     $Percentage = 0;
     if (isset($_POST['code-input'])) {
         $result = $code->checkCode($_POST['code']);
@@ -151,6 +148,9 @@ if (isset($_COOKIE['userID'])) {
                 echo '<span style="color:green" class="vaild">Áp dụng mã giảm giá <b>' . $_POST['code'] . '</b> thành công !</span>';
                 $sql = $code->getCode($_POST['code']);
                 extract($sql);
+                $discount = $Percentage / 100;
+             $finalprice = (($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount));
+             $order->updateCartTotal($_COOKIE['userID'], $finalprice);
             } else {
                 echo '<span style="color:red" class="vaild">Mã giảm giá đã hết hạn sử dụng !</span>';
             }
@@ -159,35 +159,39 @@ if (isset($_COOKIE['userID'])) {
         }
     }
     ?>
-
-</h4>
-
-<h3><label><b>Thành tiền</b></label></h3>
-<ul class="list-group mb-3"></ul>
-<li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
-    <a class="text-muted"><b>Giá gốc:</b> </a>
-    <a class="text-muted1"><?= number_format($order->getOrder_total_payment($user_id, 'order_total_payment')) ?> đ</a>
-</li>
-<li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
-    <a class="text-muted"><b>Giảm giá:</b></a>
-    <a class="text-muted1"><?= $Percentage ?> %</a>
-    <?
-    $discount = $Percentage / 100;
-    ?>
-</li>
-<!-- <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
+<h4 class="d-flex justify-content-between align-items-center mb-3">
+    <form method="post">
+        <label for="firstName">Mã giảm giá (Nếu Có)</label>
+        <input value="" name="code" type="text" class="form-control" style="width:200px;" placeholder="Nhập mã giảm giá">
+        <button type="submit" name="code-input" class="tg-btn" style="width:100px; padding:0;">Nhập</button>
+        <h3><label><b>Thành tiền</b></label></h3>
+        <ul class="list-group mb-3"></ul>
+        <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
+            <a class="text-muted"><b>Giá gốc:</b> </a>
+            <a class="text-muted1"><?= number_format($order->getOrder_total_payment($user_id, 'order_total_payment')) ?> đ</a>
+        </li>
+        <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
+            <a class="text-muted"><b>Giảm giá:</b></a>
+            <a class="text-muted1"><?= $Percentage ?> %</a>
+            <?
+                $discount = $Percentage / 100;
+            ?>
+        </li>
+        <!-- <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
                 <a class="text-muted"><b>Số lượng:</b> </a>
                 <a class="text-muted1">$5</a>
             </li> -->
-<li class="list-group-item border-0 d-flex justify-content-between">
-    <h3><b>Tổng: <a><?= number_format((($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount))) ?> đ</a></b></h3>
-</li>
-<li class="list-group-item border-0 d-flex justify-content-between">
-    <form action="index.php?pages=user&action=thanks&order_id=<?= $order->getOrder_total_payment($user_id, 'order_id') ?>" method="post">
-        <input type="hidden" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
-        <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color:white; font-size:15px; width:75%">Thanh Toán</button>
+        <li class="list-group-item border-0 d-flex justify-content-between">
+            <h3><b>Tổng: <a><?= round($order->getOrder_total_payment($user_id, 'order_total_payment'))?> đ</a></b></h3>
+            <!-- <input type="hidden" name="priceFinal" value="<?= round((($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount)))?>" id=""> -->
+        </li>
     </form>
-</li>
+   
+
+</h4>
+
+
+
 </ul>
 </div>
 </div>
