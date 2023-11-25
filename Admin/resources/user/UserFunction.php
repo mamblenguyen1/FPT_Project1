@@ -151,7 +151,7 @@ class UserFunction
     public function checkUser($Email, $password)
     {
         $db = new connect();
-        $select = "SELECT * FROM user WHERE email = '$Email' AND user_password = '$password'";
+        $select = "SELECT * FROM user WHERE email = '$Email' AND user_password = '$password' AND is_deleted = 1";
         $result = $db->pdo_query_one($select);
         if ($result != null)
             return true;

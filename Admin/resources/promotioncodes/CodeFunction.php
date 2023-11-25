@@ -102,13 +102,8 @@ class Promotioncode
     public function checkDuplicateCode($Code)
     {
         $db = new connect();
-        $select = "SELECT * FROM promotioncodes";
+        $select = "SELECT * FROM promotioncodes WHERE LOWER(Code) = '$Code'";
         $result = $db->pdo_query($select);
-        foreach ($result as $row) {
-            $nw = $row['Code'];
-            if ($Code === $nw) {
-                return true;
-            }
-        }
+        return $result;
     }
 }

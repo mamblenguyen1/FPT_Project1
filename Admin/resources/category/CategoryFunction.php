@@ -121,4 +121,13 @@ SELECT type.type_id FROM `type`, category
         $result = $db->pdo_execute($sql);
         return $result;
     }
+    // check tồn tại tên danh mục
+    public function checkDuplicateCate($Cate)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM category WHERE LOWER(category_name) = '$Cate'";
+        $result = $db->pdo_query($select);
+        return $result;
+    }
+
 }

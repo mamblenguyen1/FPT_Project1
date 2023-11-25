@@ -3,29 +3,29 @@
 if (isset($_POST["submit"])) {
   $email = $_POST["email"];
   $pass = $_POST["pass"];
-  $kh = new UserFunction();
   if (empty($email) || empty($pass)) {
-    echo '<div class="danger" role="alert"> Điền đầy đủ email và mật khẩu! </div>';
+    echo '<div class="danger" role="alert"> Sai tên tài khoản hoặc mật khẩu! </div>';
   } else {
-    if ($kh->checkUser($email, $pass)) {
-      foreach (($kh->checkRole($email, $pass)) as $row) {
+    if ($user->checkUser($email, $pass)) {
+      foreach (($user->checkRole($email, $pass)) as $row) {
         if ($row == "1") {
           $_SESSION['user'] = $email;
           setcookie("role", '1', time() + 3600, "/");
-          $userid = $kh->getInfoUserEmail($email, 'user_id');
+          $userid = $user->getInfoUserEmail($email, 'user_id');
           setcookie("userID", $userid, time() + 3600, "/");
           header('location: ./?pages=user&action=home');
         } else {
-          $result = $kh->userid($email, $pass);
+          $result = $user->userid($email, $pass);
           $_SESSION['user'] = $email;
           setcookie("role", '2', time() + 3600, "/");
-          $userid = $kh->getInfoUserEmail($email, 'user_id');
+          $userid = $user->getInfoUserEmail($email, 'user_id');
           setcookie("userID", $userid, time() + 3600, "/");
           header('location: ./?pages=user&action=home');
         }
       }
-    }else{
-    echo '<div class="danger" role="alert"> Sai tên tài khoản hoặc mật khẩu! </div>';
+    }
+    else {
+      echo '<script>alert("Tài khoản đã bị vô hiệu hóa!!")</script>';
     }
   }
 }
@@ -39,12 +39,11 @@ if (isset($_POST["submitreg"])) {
   $pass2 = $_POST["pass2"];
   $username = $_POST["username"];
   $phone = $_POST["phone"];
-  $kh = new UserFunction();
   if (!empty($regEmail) && !empty($pass1) && !empty($pass2) && !empty($username) && !empty($phone) && $pass1 == $pass2) {
-    if ($kh->checkDuplicateEmail($regEmail)) {
+    if ($user->checkDuplicateEmail($regEmail)) {
       echo '<div class="danger" role="alert"> Email đã tồn tại! </div>';
     } else {
-      $kh->user_create($username, $regEmail, $phone, $pass1);
+      $user->user_create($username, $regEmail, $phone, $pass1);
       echo '<div class="success" role="alert"> Chúc mừng bạn đã đăng ký thành công! </div>';
     }
   } else {
@@ -182,6 +181,7 @@ if (isset($_POST["submitreg"])) {
     display: block;
     margin-top: 15px;
   }
+
   .foot-lnk a:hover {
     color: #00ffdc;
   }

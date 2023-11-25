@@ -2,16 +2,20 @@
 <?php include './admin/componant/sidebar.php' ?>
 <?
 if (isset($_POST['addType'])) {
-    $user_created = 1 ;
+    $user_created = 1;
     $typeName = $_POST['typeName'] ?? "";
     $typeCate = $_POST['typeCate'] ?? "";
-    if (!$typeName == "" && !$typeCate == "" ) {
-        $type->create_Type($typeName, $typeCate,$user_created);
-        echo '<script>alert("tạo thành công !!")</script>';
-        // exit();
-        echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+    if (!$typeName == "" && !$typeCate == "") {
+        if ($type->checkDuplicateType(trim($typeName))) {
+            echo '<script>alert("Tên danh mục con đã tồn tại !!")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=TypeAdd"</script>';
+        } else {
+            $type->create_Type($typeName, $typeCate, $user_created);
+            echo '<script>alert("tạo thành công !!")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+        }
     } else {
-        $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
+        echo '<script>alert("Vui lòng nhập đầy đủ thông tin !!")</script>';
     }
 }
 ?>

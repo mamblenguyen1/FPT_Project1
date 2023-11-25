@@ -90,4 +90,12 @@ class Type
         $result = $db->pdo_execute($sql);
         return $result;
     }
+    // check tên tồn tại
+    public function checkDuplicateType($Type)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM type WHERE LOWER(type_name) = '$Type'";
+        $result = $db->pdo_query($select);
+        return $result;
+    }
 }

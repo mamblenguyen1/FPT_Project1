@@ -21,13 +21,18 @@ if (isset($_POST['editType'])) {
     $type_name = $_POST['typeName'] ?? "";
     $category_id = $_POST['typeCate'] ?? "";
     $is_show = $_POST['typeShow'] ?? "";
-    if (!$type_name == "" && !$category_id == "" ) {
-        $type->update_Type($type_name, $category_id, $user_updated, $typeid);
-        echo '<script>alert("Cập nhập thành công !!")</script>';
-        // exit();
-        echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+    if (!$type_name == "" && !$category_id == "") {
+        if ($type->checkDuplicateType(trim($type_name))) {
+            echo '<script>alert("Tên danh mục con đã tồn tại !!")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+        } else {
+            $type->update_Type($type_name, $category_id, $user_updated, $typeid);
+            echo '<script>alert("Cập nhập thành công !!")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+        }
     } else {
-        $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
+        echo '<script>alert("Vui lòng nhập đầy đủ thông tin !!")</script>';
+        echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
     }
 }
 ?>
@@ -88,7 +93,7 @@ if (isset($_POST['editType'])) {
                             }
                             ?>
                         </div>
-              
+
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" name="editType" class="btn btn-primary">Lưu danh mục</button>

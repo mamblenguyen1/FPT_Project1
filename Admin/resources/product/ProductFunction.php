@@ -90,8 +90,6 @@ class ProductFunction
         return $db->pdo_execute($select);
     }
 
-
-
     function deleteProduct($product_id)
     {
         $db = new connect();
@@ -99,6 +97,15 @@ class ProductFunction
         $result = $db->pdo_execute($sql);
         return $result;
     }
+
+    public function checkDuplicateProduct($Product)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM products WHERE LOWER(product_name) = '$Product'";
+        $result = $db->pdo_query($select);
+        return $result;
+    }
+
 
 
 
@@ -129,8 +136,6 @@ class ProductFunction
             return $row[$column];
         }
     }
-
-
 
     function getCateName($product_id, $column)
     {

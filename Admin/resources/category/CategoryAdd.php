@@ -3,10 +3,15 @@
 <?
 if (isset($_POST['addCate'])) {
     $category_name = $_POST['cateName'] ?? "";
-    if (!$category_name == "" ) {
-        $category->create_category($category_name);
-        echo '<script>alert("tạo thành công !!")</script>';
-        echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
+    if (!$category_name == "") {
+        if ($category->checkDuplicateCate(trim($category_name))) {
+            echo '<script>alert("Tên danh mục đã tồn tại !!")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=addcate"</script>';
+        } else {
+            $category->create_category($category_name);
+            echo '<script>alert("tạo thành công !!")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
+        }
     } else {
         $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
     }
@@ -39,7 +44,7 @@ if (isset($_POST['addCate'])) {
                             }
                             ?>
                         </div>
-         
+
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" name="addCate" class="btn btn-primary">Lưu danh mục</button>
