@@ -36,16 +36,16 @@ if (isset($_POST["submit"])) {
 
 <?
 // Đăng Ký
-
 ?>
+<body style="margin: 0; padding:0; max-width: 100%;">
 <!-- Form Đăng Nhập -->
 <div class="container-login">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js" style="background-color: #00ffdc;"></script>
   <div class="login-wrap" style="box-shadow: none;">
-    <div class="login-html" style="margin-top: 80px;">
+    <div class="login-html" style="margin-top: 10px; position: relative; margin-left: 150%; margin-top: 9%; border-radius: 10px" >
       <input id="tab-1" type="radio" name="tab" class="sign-in dongmo" checked="checked"><label for="tab-1" class="tab">Đăng nhập</label>
       <input id="tab-2" type="radio" name="tab" class="sign-up dongmo1"><label for="tab-2" class="tab">Đăng kí</label>
       <div class="login-form">
-
         <div class="sign-in-htm">
           <form action="" method="post">
             <div class="group">
@@ -90,17 +90,12 @@ if (isset($_POST["submit"])) {
               <button type="submit" name="submit" class="button"> Đăng nhập</button>
             </div>
           </form>
-
           <div class="hr"></div>
-
           <!-- Quên Mật Khẩu -->
           <div class="foot-lnk">
             <a href="index.php?pages=user&action=forget">Quên mật khẩu?</a>
           </div>
-
         </div>
-
-
         <!-- Form Đăng Ký -->
         <div class="sign-up-htm">
           <form action="" method="post">
@@ -184,13 +179,11 @@ if (isset($_POST["submit"])) {
             </div>
           </form>
         </div>
-
       </div>
     </div>
   </div>
 </div>
 <?
-
 if (isset($_POST["submitreg"])) {
   $regEmail = $_POST["regEmail"];
   $pass1 = $_POST["pass1"];
@@ -213,7 +206,6 @@ if (isset($_POST["submitreg"])) {
     ';
   } else {
     if (!empty($regEmail) && !empty($pass1) && !empty($pass2) && !empty($username) && !empty($phone) && $pass1 == $pass2) {
-
       if ($user->checkDuplicateEmail(trim($regEmail))) {
         echo '<div class="danger" role="alert"> Email đã tồn tại! </div>';
       } else {
@@ -239,7 +231,6 @@ if (isset($_POST["submitreg"])) {
 }
 ?>
 <link rel="stylesheet" href="css/login.css">
-
 <style>
   .danger {
     color: #fff;
@@ -273,3 +264,75 @@ if (isset($_POST["submitreg"])) {
     color: #00ffdc;
   }
 </style>
+<script>
+var Chars = ["*","X","+","-","1","0","1","@","vn"];
+var Cells = [];	
+var tileSize = 16;
+var dropspeed = 8;
+var tiles = 160;
+var x = 0;
+function setup() {
+  noStroke();
+  colorMode(HSB, 360, 100, 1, .1);
+  createCanvas(window.innerWidth, window.innerHeight);
+  for (var i = 0; i < tiles; i++) {
+  console.log(width / tileSize);
+    x += tileSize;
+    var y = round(random(height / dropspeed) * tileSize) - window.innerHeight;	
+    var r = tileSize;
+    var h = random(100, 150);
+	var t = random(.8, 8);
+	var u = random(.3, .8);
+    Cells[i] = new Matrix(x, y, r, h, t, u);
+  }
+}
+function draw() {
+   background(255, .009);
+  for (var i =0; i < tiles; i++) {
+    Cells[i].spread();
+    Cells[i].update();
+  }
+}
+function Matrix(isX, isY, myD, myHue, newX, newY) {
+  this.x = isX;
+  this.y = isY;
+  this.tS = newX;
+  this.tU = newY;
+  this.diameter = myD;
+  this.h = myHue;
+  this.spread = function() {
+    var tx = 0;
+    var ty = round(random(0, 2));
+    this.x += (tx * tileSize);
+    if ((this.x > width+(tileSize * 8)) || (this.x < -tileSize * 8)) {this.x = random(width / tileSize) * tileSize;}
+    this.y += (ty * dropspeed);
+    if ((this.y > height+(tileSize * 8)) || (this.y < -tileSize * 8)) {this.y = random(-height / tileSize) * tileSize; this.x = random(width / tileSize) * tileSize;}
+	if ((this.y < ((window.innerHeight)))) this.y+= this.tU;
+}
+  this.update = function() {
+  var thecol = round(random(0, 10));
+    var thebri = 0;
+    if (thecol == 10) {thecol = 0; thebri = 100;}
+    else {myHue = 120; thecol = 100; thebri = 50;}
+    fill(myHue, thecol, thebri, .7);
+    textSize(14);
+    textFont('Verdana');
+    var thechar = round(random(0, 8));
+    text((Chars[(thechar)]), this.x, this.y);
+  }
+}
+function mousePressed() {
+  tileSize = random(0.3, 2);
+  tiles = random(1, 239);
+  for (var i = 0; i < tiles; i++) {
+    var x = random(width / tileSize) * tileSize;
+    var y = random((height / tileSize) * tileSize) - height;
+    var r = tileSize;
+    var h = random(10, 300);
+	var t = random(.5, 2);
+	var u = random(.3, 3.8);
+    Cells[i] = new Matrix(x, y, r, h, t, u);
+  }
+}
+</script>
+</body>

@@ -1,35 +1,36 @@
-/* body{
-  margin:0;
-  color:#6a6f8c;
-  background:#c8c8c8;
-  font:600 16px/18px 'Open Sans',sans-serif;
-} */
-*,:after,:before{box-sizing:border-box}
-.clearfix:after,.clearfix:before{content:'';display:table}
-.clearfix:after{clear:both;display:block}
-a{color:inherit;text-decoration:none}
+
 .container-login{
-  height: 100%;
-  width: 100%;
-  
-  background:url(../images/background-login.jpg) no-repeat center;
-  background-position: center;
-  background-size: cover;
+  position: absolute;
+  height: 90%;
+}
+*,:after,:before{
+  box-sizing:border-box
+}
+.clearfix:after,.clearfix:before{
+  content:'';display:table
+}
+.clearfix:after{
+  clear:both;display:block
+}
+a{
+  color:inherit;
+  text-decoration:none
+}
+.container-login{
+
 }
 .login-wrap{
   margin:auto;
   max-width:525px;
   min-height:670px;
-  background:url(../images/background-login.jpg) no-repeat center;
-  position:relative;
+
 }
 .login-html{
   width:100%;
   height:100%;
   position:absolute;
   padding:90px 70px 50px 70px;
-  background:rgba(40,57,101,.9);
-  margin-top: 80px;
+  background:rgba(40, 57, 101, 0.9);
 }
 .login-html .sign-in-htm,
 .login-html .sign-up-htm{
