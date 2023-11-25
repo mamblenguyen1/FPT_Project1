@@ -10,17 +10,21 @@ if (isset($_POST['delete_cate'])) {
     echo '<script>alert("Đã xóa danh mục ! ! !")</script>';
     echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
 }
+
 if (isset($_POST['edit'])) {
-    $userId = 1;   //Nhớ sửa cái này lại khi hoàn thành xong chức năng user nhé hihi
+    $userId = $_COOKIE['userID'];
     $cateId = $_POST['cateId'];
     $category_name = $_POST['cateName'] ?? "";
-    if (!$category_name == "" || !$category_cnt == "") {
-        $category->update_category($category_name, $userId, $cateId);
-
-        echo '<script>alert("Cập nhật thành công")</script>';
-        echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
+    if (!$category_name == "") {
+        if ($category->checkDuplicateCate(trim($category_name))) {
+            echo '<script>alert("Tên danh mục đã tồn tại !!")</script>';
+        } else {
+            $category->update_category($category_name, $userId, $cateId);
+            echo '<script>alert("Cập nhật thành công")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
+        }
     } else {
-        $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
+        echo '<script>alert("Vui lòng nhập dầy đủ thông tin")</script>';
     }
 }
 
@@ -44,7 +48,6 @@ if (isset($_POST['edit'])) {
                     <div class="card-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên danh mục</label>
-
                             <input name="cateName" type="text" class="form-control" value="<? echo $category->getInfoCate($cateId, 'category_name') ?>" id="exampleInputEmail1" placeholder="Nhập tên. . .">
                         </div>
                         <!-- /.card-body -->

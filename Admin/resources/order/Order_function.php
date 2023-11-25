@@ -106,14 +106,14 @@ class ORDER
             }
         }
     }
-    function updateCartQty($order_detail_id , $cartQty)
+    function updateCartQty($order_detail_id, $cartQty)
     {
         $db = new connect();
         $select = "UPDATE `order_detail` SET order_quantity = $cartQty  WHERE order_detail_id = $order_detail_id ";
         $result = $db->pdo_execute($select);
         return $result;
     }
-    
+
     function updateCartQtyDup($product_id, $cartQty)
     {
         $db = new connect();
@@ -136,19 +136,25 @@ class ORDER
         $result = $db->pdo_execute($select);
         return $result;
     }
-    function AddPayment2($userId)
+    function addCartAndCartDetail($userid, $address, $totalprice, $order_id)
     {
         $db = new connect();
-        $select = "INSERT INTO payment (cartdetailId , cartId , sachma ,soluong, created_at, userId)
-        SELECT cartdetailId , cartdetail.cartId , sachma ,soluong, created_at, userId
-        FROM cartdetail,cart
-        WHERE cartdetail.cartId = cart.cartId
-        AND cartdetail.cartId IN (
-        SELECT cartId FROM cart WHERE userId = $userId
-        )";
+        $select = " START TRANSACTION;
+        INSERT INTO `cart` (user_id , address, total_price) 
+        VALUES ($userid , '$address', $totalprice);
+        SET @product_id = LAST_INSERT_ID();
+        INSERT INTO cart_detail (cart_id , product_id, quantity ) 
+        SELECT @product_id, product_id, order_quantity
+		FROM order_detail
+		WHERE order_detail.order_id = $order_id
+        AND order_detail.order_status_id = 1;
+        COMMIT;
+        ";
         $result = $db->pdo_execute($select);
         return $result;
     }
+
+
 
     function getInfoPayment($userid, $column)
     {
@@ -256,7 +262,7 @@ class ORDER
         return $result;
     }
 
-  
+
 
 
     function deleteCart($userid)
@@ -315,12 +321,22 @@ class ORDER
             return $row[$column];
         }
     }
-    
-   
+
+
     function getOrder_total_payment($userid, $column)
     {
         $db = new connect();
         $sql = "SELECT * FROM `order` 
+        WHERE user_id  = $userid";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    function getCart_total_payment($userid, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `cart` 
         WHERE user_id  = $userid";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
@@ -354,20 +370,20 @@ class ORDER
     //     return $result;
     // }
 
- //   function updateCartQty($detailorderId, $cartQty)
-   // {
-  //      $db = new connect();
-  //      $select = "UPDATE cartdetail SET soluong = $cartQty  WHERE cartDetailId   = $detailorderId";
-   //     $result = $db->pdo_execute($select);
-  //      return $result;
-  //  }
-   // function updateCartTotal($userId, $total)
-   // {
+    //   function updateCartQty($detailorderId, $cartQty)
+    // {
+    //      $db = new connect();
+    //      $select = "UPDATE cartdetail SET soluong = $cartQty  WHERE cartDetailId   = $detailorderId";
+    //     $result = $db->pdo_execute($select);
+    //      return $result;
+    //  }
+    // function updateCartTotal($userId, $total)
+    // {
     //    $db = new connect();
-  //      $select = "UPDATE cart SET total = total + $total  WHERE userId  = $userId";
-   //     $result = $db->pdo_execute($select);
-   //     return $result;
-  //  }
+    //      $select = "UPDATE cart SET total = total + $total  WHERE userId  = $userId";
+    //     $result = $db->pdo_execute($select);
+    //     return $result;
+    //  }
 
 
 
@@ -382,7 +398,7 @@ class ORDER
             return $row['COUNT(cartdetail.cartId)'];
         }
     }
-    function CountOrderWait($order_status_id,$user_id)
+    function CountOrderWait($order_status_id, $user_id)
     {
         $db = new connect();
         $sql = "SELECT COUNT(order_detail.order_detail_id)
@@ -398,7 +414,7 @@ class ORDER
         }
     }
 
-  
+
     function LastesCart($CartId)
     {
         $db = new connect();
@@ -451,10 +467,10 @@ class ORDER
         }
     }
 
-  
 
 
-   
+
+
 
 
     function getInfoUserCmtAll($productId, $column)
@@ -590,7 +606,7 @@ class ORDER
         $result = $db->pdo_query($sql);
         return $result;
     }
-//show theo ng dùng   
+    //show theo ng dùng   
     function Show_Order_Detail_user($user_id)
     {
         $db = new connect();
@@ -613,6 +629,4 @@ class ORDER
             return $row['lasted'];
         }
     }
-
 }
-?>

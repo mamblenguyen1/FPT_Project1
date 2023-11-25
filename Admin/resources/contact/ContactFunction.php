@@ -49,6 +49,16 @@ class ContactFunction{
         $result = $db->pdo_execute($select);
         return $result;
     }
+
+    function CountContact()
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(contact.contact_id) FROM contact WHERE is_deleted = 1";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(contact.contact_id)'];
+        }
+    }
 }
 
 ?>

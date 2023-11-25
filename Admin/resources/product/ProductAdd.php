@@ -33,20 +33,25 @@ if (isset($_POST['addProductbtn'])) {
         !$product_short_description == ""
 
     ) {
-
-        $product->add_product($product_name, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_short_description, $product_description, $user_created);
-        echo '<script>alert("tạo thành công !!")</script>';
-        echo '<script>window.location.href="index.php?pages=admin&action=productList"</script>';
-        $anhne = $_FILES['product_img']['tmp_name'];
-        $error = $_FILES['product_img']['error'];
-        $path = 'images/product/' . $product_img . '.png';
-        if (
-            $error === 0
-        ) {
-            move_uploaded_file($anhne, $path);
+        if ($product->checkDuplicateProduct(trim($product_name))) {
+            echo '<script>alert("Tên sản phẩm đã tồn tại !!")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=ProductAdd"</script>';
+        } else { 
+                $product->add_product($product_name, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_short_description, $product_description, $user_created);
+                echo '<script>alert("tạo thành công !!")</script>';
+                echo '<script>window.location.href="index.php?pages=admin&action=productList"</script>';
+                $anhne = $_FILES['product_img']['tmp_name'];
+                $error = $_FILES['product_img']['error'];
+                $path = 'images/product/' . $product_img . '.png';
+                if (
+                    $error === 0
+                ) {
+                    move_uploaded_file($anhne, $path);
+                }
+            }
         }
-    } else {
-        $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
+    else {
+        echo '<script>alert("Xin vui lòng nhập đầy đủ thông tin !!")</script>';
     }
 }
 ?>
@@ -65,7 +70,7 @@ if (isset($_POST['addProductbtn'])) {
                     <div class="card-body">
                         <!-- Tên Laptop -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Tên Sản phẩm </label><input name="product_name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <label for="exampleInputEmail1">Tên Sản phẩm </label><input name="product_name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên sản phẩm . . .">
                             <?
                             if (isset($_POST["product_name"])) {
                                 if (empty($_POST["product_name"])) {
@@ -81,7 +86,7 @@ if (isset($_POST['addProductbtn'])) {
                         <!-- giá Laptop -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sản phẩm </label>
-                            <input name="product_price" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_price" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá sản phẩm . . .">
                             <?
                             if (isset($_POST["product_price"])) {
                                 if (empty($_POST["product_price"])) {
@@ -96,7 +101,7 @@ if (isset($_POST['addProductbtn'])) {
                         <!-- giá giảm Laptop -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sau khi giảm </label>
-                            <input name="product_sale" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_sale" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá sản phẩm sau khi giảm. . .">
                             <?
                             if (isset($_POST["product_sale"])) {
                                 if (empty($_POST["product_sale"])) {
@@ -108,7 +113,7 @@ if (isset($_POST['addProductbtn'])) {
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Mô tả ngắn sản phẩm </label>
-                            <input name="product_short_description" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_short_description" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập mô tả ngắn. . .">
                             <?
                             if (isset($_POST["product_short_description"])) {
                                 if (empty($_POST["product_short_description"])) {
@@ -121,7 +126,7 @@ if (isset($_POST['addProductbtn'])) {
                         <!-- số lượng Laptop nhập-->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Số lượng </label>
-                            <input name="product_quantily" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . .">
+                            <input name="product_quantily" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập số lượng. . .">
                             <?
                             if (isset($_POST["product_quantily"])) {
                                 if (empty($_POST["product_quantily"])) {
@@ -132,23 +137,13 @@ if (isset($_POST['addProductbtn'])) {
                             }
                             ?>
                         </div>
-
-
-
-                        <!-- Ram Laptop -->
-
-                        <!-- <textarea>Next, use our Get Started docs to setup Tiny!</textarea> -->
-
-                        <!-- <input name="laptop_ram" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên. . ."> -->
-
-
-
                         <!-- hình ảnh sản phẩm -->
 
                         <input type="file" name="product_img" id="">
                         <?
                         if (isset($_FILES['product_img']['name'])) {
                             if (empty($_FILES['product_img']['name'])) {
+                                echo '<br/>';
                                 echo '<span class="vaild">Xin vui lòng chọn ảnh </span>';
                             } else {
                                 echo '';
@@ -159,8 +154,8 @@ if (isset($_POST['addProductbtn'])) {
                         <!-- hãng sản phẩm -->
                         <div class="form-group">
                             <label>Danh mục sản phẩm : </label>
-                            <select  name="category_id" id="category" class="form-control select2" style="width: 100%;">
-                                <option selected  value="0">Chọn Danh mục</option>
+                            <select name="category_id" id="category" class="form-control select2" style="width: 100%;">
+                                <option selected value="0">Chọn Danh mục</option>
                             </select>
                             <?
                             if (isset($_POST["category_id"])) {
@@ -175,7 +170,7 @@ if (isset($_POST['addProductbtn'])) {
                         <div class="form-group">
                             <label>Hãng sản phẩm</label>
                             <select name="type_id" id="type" class="form-control select2" style="width: 100%;">
-                                <option selected  value="0">Chọn hãng</option>
+                                <option selected value="0">Chọn hãng</option>
                             </select>
                             <?
                             if (isset($_POST["type_id"])) {
@@ -232,40 +227,41 @@ if (isset($_POST['addProductbtn'])) {
 
 <?php include './admin/componant/footer.php' ?>
 <script>
-$(document).ready(function(){    
-    $.ajax({
-        url: "./admin/resources/product/category.php",       
-        dataType:'json',         
-        success: function(data){     
-            $("#category").html("");
-            for (i=0; i<data.length; i++){            
-                var category = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
-                var str = ` 
+    $(document).ready(function() {
+        $.ajax({
+            url: "./admin/resources/product/category.php",
+            dataType: 'json',
+            success: function(data) {
+                $("#category").html("");
+                for (i = 0; i < data.length; i++) {
+                    var category = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
+                    var str = ` 
                 <option value="${category['category_id']}"> ${category['category_name']} </option>
                    `;
-                $("#category").append(str);
+                    $("#category").append(str);
+                }
+                $("#category").on("change", function(e) {
+                    layHuyen();
+                });
             }
-            $("#category").on("change", function(e) { layHuyen();  });
-        }
-    });
-})
-
+        });
+    })
 </script>
 <script>
-function layHuyen(){
-    var category_id = $("#category").val();
-    $.ajax({
-        url: "./admin/resources/type/type.php?category_id=" + category_id,
-        dataType:'json',         
-        success: function(data){     
-            $("#type").html("");
-            for (i=0; i<data.length; i++){            
-                var type = data[i]; 
-                var str = ` 
+    function layHuyen() {
+        var category_id = $("#category").val();
+        $.ajax({
+            url: "./admin/resources/type/type.php?category_id=" + category_id,
+            dataType: 'json',
+            success: function(data) {
+                $("#type").html("");
+                for (i = 0; i < data.length; i++) {
+                    var type = data[i];
+                    var str = ` 
                 <option  value="${type['type_id']}">${type['type_name']} </option>`;
-                $("#type").append(str);
-            }            
-        }
-    });
-}
+                    $("#type").append(str);
+                }
+            }
+        });
+    }
 </script>

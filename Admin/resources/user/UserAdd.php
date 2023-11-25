@@ -13,19 +13,22 @@ if (isset($_POST['them_user'])) {
   $role_id = $_POST['role_id'];
   $Street = $_POST['Street'];
 
-  // echo $user_name;
-  // echo $email;
-  // echo $user_password;
-  // echo $user_phone_number;
-  // echo  $Province;
-  // echo  $district;
-  // echo $wards;
-  // echo $role_id;
-  // exit();
   if (($user_name != '') && ($email != '') && ($user_password != '') && ($Street != '') && ($user_phone_number != '') && ($Province != '') && ($district != '') && ($wards != '') && ($user_password != '') && ($role_id != '')) {
-    $user->user_insert($user_name, $email, $user_phone_number, $Province, $district, $wards, $Street ,$user_password, $role_id);
-    echo '<script>alert("Thêm tài khoản thành công !!!")</script>';
-    echo '<script>window.location.href="index.php?pages=admin&action=UserList</script>';
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      echo '<script>alert("Vui lòng thêm @ vào phần email !!!")</script>';
+    } else {
+      if ($user->checkDuplicateEmail(trim($email))) {
+        echo '<script>alert("Email đã tồn tại !!!")</script>';
+        echo '<script>window.location.href="index.php?pages=admin&action=UserAdd</script>';
+      } else {
+        $user->user_insert($user_name, $email, $user_phone_number, $Province, $district, $wards, $Street, $user_password, $role_id);
+        echo '<script>alert("Thêm tài khoản thành công !!!")</script>';
+        echo '<script>window.location.href="index.php?pages=admin&action=UserList</script>';
+      }
+    }
+  } else {
+    echo '<script>alert("Vui lòng nhập đầy đủ thông tin !!!")</script>';
+    echo '<script>window.location.href="index.php?pages=admin&action=UserAdd</script>';
   }
 }
 ?>
@@ -33,7 +36,7 @@ if (isset($_POST['them_user'])) {
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="row">
-      <h1>Thêm Tài Khoản</h1>
+      <h1 style="padding-left:20px;">Thêm Tài Khoản</h1>
     </div>
     <div class="add-cate-form">
       <div class="card card-primary">
@@ -44,7 +47,7 @@ if (isset($_POST['them_user'])) {
           <div class="card-body">
             <div class="form-group">
               <label>Tên người dùng</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" name="user_name">
+              <input type="text" class="form-control" id="exampleInputEmail1" name="user_name" placeholder="Nhập tên người dùng....">
             </div>
             <?
             if (isset($_POST["user_name"])) {
@@ -58,21 +61,23 @@ if (isset($_POST['them_user'])) {
 
             <div class="form-group">
               <label>Email</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" name="email">
+              <input type="text" class="form-control" id="exampleInputEmail1" name="email" placeholder="Nhập email....">
             </div>
             <?
             if (isset($_POST["email"])) {
               if (empty($_POST["email"])) {
                 echo '<span class="vaild">Xin vui lòng nhập email </span>';
               } else {
-                echo '';
+                if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+                  echo '<span class="vaild">Xin vui lòng nhập @ </span>';
+                }
               }
             }
             ?>
 
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" name="user_password">
+              <input type="password" class="form-control" id="exampleInputPassword1" name="user_password" placeholder="Nhập mật khẩu....">
             </div>
             <?
             if (isset($_POST["user_password"])) {
@@ -86,7 +91,7 @@ if (isset($_POST['them_user'])) {
 
             <div class="form-group">
               <label>Số điện thoại</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" name="user_phone_number">
+              <input type="text" class="form-control" id="exampleInputEmail1" name="user_phone_number" placeholder=" Nhập số điện thoại....">
             </div>
             <?
             if (isset($_POST["user_phone_number"])) {
@@ -145,7 +150,7 @@ if (isset($_POST['them_user'])) {
               <label>Quận / Huyện</label>
               <select name="district" id="district" class="form-control select2" style="width: 100%;">
                 <option selected value="0">Chọn quận / huyện</option>
-              
+
               </select>
             </div>
             <?
@@ -176,7 +181,7 @@ if (isset($_POST['them_user'])) {
 
             <div class="form-group">
               <label>Đường</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" name="Street">
+              <input type="text" class="form-control" id="exampleInputEmail1" name="Street" placeholder="Nhập đường....">
             </div>
             <?
             if (isset($_POST["Street"])) {
@@ -203,59 +208,62 @@ if (isset($_POST['them_user'])) {
 
   <?php include './admin/componant/footer.php' ?>
   <script>
-$(document).ready(function(){    
-    $.ajax({
-        url: "./admin/resources/address/province.php",       
-        dataType:'json',         
-        success: function(data){     
-            $("#Province").html("");
-            for (i=0; i<data.length; i++){            
-                var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
-                var str = ` 
+    $(document).ready(function() {
+      $.ajax({
+        url: "./admin/resources/address/province.php",
+        dataType: 'json',
+        success: function(data) {
+          $("#Province").html("");
+          for (i = 0; i < data.length; i++) {
+            var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
+            var str = ` 
                 <option value="${Province['province_id']}"> ${Province['name']} </option>
                    `;
-                $("#Province").append(str);
-            }
-            $("#Province").on("change", function(e) { layHuyen();  });
+            $("#Province").append(str);
+          }
+          $("#Province").on("change", function(e) {
+            layHuyen();
+          });
         }
-    });
-})
-
-</script>
-<script>
-function layHuyen(){
-    var province_id = $("#Province").val();
-    $.ajax({
+      });
+    })
+  </script>
+  <script>
+    function layHuyen() {
+      var province_id = $("#Province").val();
+      $.ajax({
         url: "./admin/resources/address/district.php?province_id=" + province_id,
-        dataType:'json',         
-        success: function(data){     
-            $("#district").html("");
-            for (i=0; i<data.length; i++){            
-                var district = data[i]; 
-                var str = ` 
+        dataType: 'json',
+        success: function(data) {
+          $("#district").html("");
+          for (i = 0; i < data.length; i++) {
+            var district = data[i];
+            var str = ` 
                 <option  value="${district['district_id']}">${district['name']} </option>`;
-                $("#district").append(str);
-            }       
-            $("#district").on("change", function(e) { layXa();  });     
+            $("#district").append(str);
+          }
+          $("#district").on("change", function(e) {
+            layXa();
+          });
         }
-    });
-}
-</script>
-<script>
-function layXa(){
-    var district_id = $("#district").val();
-    $.ajax({
+      });
+    }
+  </script>
+  <script>
+    function layXa() {
+      var district_id = $("#district").val();
+      $.ajax({
         url: "./admin/resources/address/wards.php?district_id=" + district_id,
-        dataType:'json',         
-        success: function(data){     
-            $("#wards").html("");
-            for (i=0; i<data.length; i++){            
-                var wards = data[i]; 
-                var str = ` 
+        dataType: 'json',
+        success: function(data) {
+          $("#wards").html("");
+          for (i = 0; i < data.length; i++) {
+            var wards = data[i];
+            var str = ` 
                 <option  value="${wards['wards_id']}">${wards['name']} </option>`;
-                $("#wards").append(str);
-            }            
+            $("#wards").append(str);
+          }
         }
-    });
-}
-</script>
+      });
+    }
+  </script>

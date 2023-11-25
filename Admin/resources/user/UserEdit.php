@@ -23,13 +23,13 @@ if (isset($_POST['sua_user'])) {
   $wards = $_POST['wards'] ?? "";
   $Street = $_POST['Street'] ?? "";
   $role_id = $_POST['role_id'] ?? "";
-    if (!$user_name == "" && !$user_password == "" && !$user_phone_number == "" && !$Province == ""  && !$district == ""  && !$wards == ""  && !$Street == "" && !$role_id == "") {
-
-    $user->update_user($user_name, $user_password, $user_phone_number, $Province, $district, $wards, $Street, $role_id, $user_id);
-    echo '<script>alert("Cập nhật tài khoản thành công")</script>';
-    echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
-  } else {
-    $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
+  if (!$user_name == "" && !$user_password == "" && !$user_phone_number == "" && !$Province == ""  && !$district == ""  && !$wards == ""  && !$Street == "" && !$role_id == "") {
+      $user->update_user($user_name, $user_password, $user_phone_number, $Province, $district, $wards, $Street, $role_id, $user_id);
+      echo '<script>alert("Cập nhật tài khoản thành công !!!")</script>';
+      echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
+    }
+   else {
+    echo '<script>alert("Vui lòng nhập đầy đủ thông tin !!!")</script>';
   }
 }
 
@@ -66,7 +66,7 @@ if (isset($_POST['sua_user'])) {
             <div class="form-group">
 
               <label for="exampleInputPassword1">Password</label>
-              <input type="text" class="form-control" id="exampleInputPassword1" name="user_password" value="<? echo $user->getInfouser($user_id, 'user_password'); ?>">
+              <input type="password" class="form-control" id="exampleInputPassword1" name="user_password" value="<? echo $user->getInfouser($user_id, 'user_password'); ?>">
             </div>
             <?
             if (isset($_POST["user_password"])) {
@@ -111,7 +111,7 @@ if (isset($_POST['sua_user'])) {
               <select name="Province" id="Province" class="form-control select2" style="width: 100%;">
                 <option selected value="<? echo $user->getInfoProvince($user_id, 'province_id'); ?>"> <? echo $user->getInfoProvince($user_id, 'name'); ?></option>
 
-         
+
 
               </select>
             </div>
@@ -128,8 +128,8 @@ if (isset($_POST['sua_user'])) {
             <div class="form-group">
               <label>Quận / Huyện</label>
               <select name="district" id="district" class="form-control select2" style="width: 100%;">
-              <option selected value="<? echo $user->getInfoDistrict($user_id, 'district_id'); ?>"> <? echo $user->getInfoDistrict($user_id, 'name'); ?></option>
-          
+                <option selected value="<? echo $user->getInfoDistrict($user_id, 'district_id'); ?>"> <? echo $user->getInfoDistrict($user_id, 'name'); ?></option>
+
               </select>
             </div>
             <?
@@ -145,9 +145,9 @@ if (isset($_POST['sua_user'])) {
             <div class="form-group">
               <label>Phường / Xã</label>
               <select name="wards" id="wards" class="form-control select2" style="width: 100%;">
-              <option selected value="<? echo $user->getInfoWards($user_id, 'wards_id'); ?>"> <? echo $user->getInfoWards($user_id, 'name'); ?></option>
-                
-              
+                <option selected value="<? echo $user->getInfoWards($user_id, 'wards_id'); ?>"> <? echo $user->getInfoWards($user_id, 'name'); ?></option>
+
+
               </select>
             </div>
             <?
@@ -188,60 +188,63 @@ if (isset($_POST['sua_user'])) {
 </div>
 
 <script>
-$(document).ready(function(){    
+  $(document).ready(function() {
     $.ajax({
-        url: "./admin/resources/address/province.php",       
-        dataType:'json',         
-        success: function(data){     
-            $("#Province").html("");
-            for (i=0; i<data.length; i++){            
-                var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
-                var str = ` 
+      url: "./admin/resources/address/province.php",
+      dataType: 'json',
+      success: function(data) {
+        $("#Province").html("");
+        for (i = 0; i < data.length; i++) {
+          var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
+          var str = ` 
                 <option value="${Province['province_id']}"> ${Province['name']} </option>
                    `;
-                $("#Province").append(str);
-            }
-            $("#Province").on("change", function(e) { layHuyen();  });
+          $("#Province").append(str);
         }
+        $("#Province").on("change", function(e) {
+          layHuyen();
+        });
+      }
     });
-})
-
+  })
 </script>
 <script>
-function layHuyen(){
+  function layHuyen() {
     var province_id = $("#Province").val();
     $.ajax({
-        url: "./admin/resources/address/district.php?province_id=" + province_id,
-        dataType:'json',         
-        success: function(data){     
-            $("#district").html("");
-            for (i=0; i<data.length; i++){            
-                var district = data[i]; 
-                var str = ` 
+      url: "./admin/resources/address/district.php?province_id=" + province_id,
+      dataType: 'json',
+      success: function(data) {
+        $("#district").html("");
+        for (i = 0; i < data.length; i++) {
+          var district = data[i];
+          var str = ` 
                 <option  value="${district['district_id']}">${district['name']} </option>`;
-                $("#district").append(str);
-            }       
-            $("#district").on("change", function(e) { layXa();  });     
+          $("#district").append(str);
         }
+        $("#district").on("change", function(e) {
+          layXa();
+        });
+      }
     });
-}
+  }
 </script>
 <script>
-function layXa(){
+  function layXa() {
     var district_id = $("#district").val();
     $.ajax({
-        url: "./admin/resources/address/wards.php?district_id=" + district_id,
-        dataType:'json',         
-        success: function(data){     
-            $("#wards").html("");
-            for (i=0; i<data.length; i++){            
-                var wards = data[i]; 
-                var str = ` 
+      url: "./admin/resources/address/wards.php?district_id=" + district_id,
+      dataType: 'json',
+      success: function(data) {
+        $("#wards").html("");
+        for (i = 0; i < data.length; i++) {
+          var wards = data[i];
+          var str = ` 
                 <option  value="${wards['wards_id']}">${wards['name']} </option>`;
-                $("#wards").append(str);
-            }            
+          $("#wards").append(str);
         }
+      }
     });
-}
+  }
 </script>
 <?php include './admin/componant/footer.php' ?>

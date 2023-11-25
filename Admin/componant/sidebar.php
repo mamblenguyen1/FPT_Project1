@@ -196,7 +196,7 @@
             <p>
               Thư liên hệ
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right"><? echo $user->Countuser1() ?></span>
+              <span class="badge badge-info right"><? echo $contact->CountContact() ?></span>
             </p>
           </a>
           <ul class="nav nav-treeview">

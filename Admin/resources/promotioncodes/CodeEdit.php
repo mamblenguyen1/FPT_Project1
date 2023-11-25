@@ -25,7 +25,7 @@ if (isset($_POST['EditCode'])) {
     if (!$Code == "" && !$Percentage == "" && !$ExpiryDate == "" &&  !$Description == "" && !$IsActive == "") {
         if ($ExpiryDate < $ngayGioHienTai) {
             echo '<script>alert("Ngày tháng không hợp lệ !!")</script>';
-        } else if ($code->checkDuplicateCode($Code)) {
+        } else if ($code->checkDuplicateCode(trim($Code))) {
             echo '<script>alert("Mã đã tôn tại!!")</script>';
         } else {
             $code->updateCode($Code, $Percentage, $ExpiryDate, $Description, $IsActive, $CodeID);
