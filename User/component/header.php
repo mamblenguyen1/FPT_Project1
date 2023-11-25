@@ -1,121 +1,15 @@
 <?
 include('style.php');
 ?>
-
-<!--************************************
-				Header Start
-		*************************************-->
 <header id="tg-header" class="tg-header tg-haslayout">
-	<div class="tg-topbar" style="background-color:#504c4c; color:white">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<ul class="tg-addnav">
-						<li>
-							<a href="" style="color:white">
-								<i class="icon-envelope"></i>
-								<em>Liên hệ</em>
-							</a>
-						</li>
-						<li>
-							<a href="" style="color:white">
-								<i class="icon-question-circle"></i>
-								<em>Trợ giúp</em>
-							</a>
-						</li>
-					</ul>
-					<!-- <div class="dropdown tg-themedropdown tg-currencydropdown">
-								<a href="" id="tg-currenty" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="icon-earth"></i>
-									<span>Đơn vị </span>
-								</a>
-								<ul class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-currenty">
-									<li>
-										<a href="">
-											<i>£</i>
-											<span>British Pound</span>
-										</a>
-									</li>
-									<li>
-										<a href="">
-											<i>$</i>
-											<span>Us Dollar</span>
-										</a>
-									</li>
-									<li>
-										<a href="">
-											<i>€</i>
-											<span>Euro</span>
-										</a>
-									</li>
-								</ul>
-							</div> -->
-					<div class="tg-userlogin">
-
-						<?
-						if (isset($_COOKIE['userID'])) {
-							if ($_COOKIE['role'] == 2) {
-								echo '
-								<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
-								<div class="user">
-								<div class="user-name">
-									<span>Chào ! Minh Quang</span>
-									<ul class="menu">
-										<ul>
-											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
-										</ul>
-									</ul>
-									
-								</div>
-								<div class="logout">
-								<a class="logout-btn" href="./index.php?pages=user&action=logout">Đăng Xuất</a>
-	
-								</div>
-							</div>
-								';
-							} else {
-								echo '
-								<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
-								<div class="user">
-								<div class="user-name">
-									<span>Chào ! Minh Quang</span>
-									<ul class="menu">
-										<ul>
-											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
-											<li><a href="index.php?pages=admin&action=dashboard">Vào trang quản trị</a></li>
-	
-										</ul>
-									</ul>
-								</div>
-								<div class="logout">
-									<a class="logout-btn" href="./index.php?pages=user&action=logout">Đăng Xuất</a>
-	
-								</div>
-							</div>
-								';
-							}
-						} else {
-							echo '
-							<a class="login-btn" href="index.php?pages=user&action=login">Đăng nhập</a>
-							';
-						}
-						?>
-
-
-
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tg-middlecontainer">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<strong class="tg-logo"><a href="index.php?pages=user&action=home"><img style="height: 140px;" src="images/logowhite.png" alt="company name here"></a></strong>
-					<div class="tg-wishlistandcart">
-						<div class="dropdown tg-themedropdown tg-wishlistdropdown">
+	<div class="tg-topbar" style="background-color:white; color:white">
+		<div class="tg-middlecontainer">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<strong class="tg-logo"><a href="index.php?pages=user&action=home"><img style="height: 140px;" src="images/logowhite.png" alt="company name here"></a></strong>
+						<div class="tg-wishlistandcart" style="z-index: 2;float: right;position: absolute; padding-top: 70px;margin-left: 84%;">
+							<!-- <div class="dropdown tg-themedropdown tg-wishlistdropdown">
 							<a href="" id="tg-wishlisst" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="tg-themebadge">3</span>
 								<i class="icon-heart"></i>
@@ -126,31 +20,31 @@ include('style.php');
 									<p>Chưa có sản phẩm yêu thích!</p>
 								</div>
 							</div>
-						</div>
-						<?
-						if (isset($_COOKIE['userID'])) {
-							$conn = $db->pdo_get_connection();
-							$stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
+						</div> -->
+							<?
+							if (isset($_COOKIE['userID'])) {
+								$conn = $db->pdo_get_connection();
+								$stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
 									WHERE order_detail.order_id = `order`.order_id AND
 									products.product_id = `order_detail`.product_id 
 									AND order_detail.order_status_id  = 4
 									 AND
 									user.user_id = `order`.user_id AND 
 									`order`.user_id = $_COOKIE[userID]");
-							$stmt->execute();
-							if ($stmt->rowCount() > 0) {
-								echo '
+								$stmt->execute();
+								if ($stmt->rowCount() > 0) {
+									echo '
 										<div class="dropdown tg-themedropdown tg-minicartdropdown">
-										<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: -45%;">
 											<span class="tg-themebadge">' . $stmt->rowCount() . '</span>
 											<i class="icon-cart"></i>
 											<span style="text-transform : none">' . number_format($order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment')) . ' đ</span>
 										</a>
 										';
-								echo
-								'<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">';
-								foreach ($stmt as $row) {
-									echo '
+									echo
+									'<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart" style="margin-top: 12%; margin-right: 30%;">';
+									foreach ($stmt as $row) {
+										echo '
 							<div class="tg-minicartbody">
 									<div class="tg-minicarproduct">
 										<figure>
@@ -165,8 +59,8 @@ include('style.php');
 
 								</div>
 							';
-								}
-								echo '
+									}
+									echo '
 							<div class="tg-minicartfoot">
 							<a class="tg-btnemptycart" href="">
 								<i class="fa fa-trash-o"></i>
@@ -178,80 +72,100 @@ include('style.php');
 								<a class="tg-btn" href="">Thanh toán</a>
 							</div>
 						</div>
-						<a href="index.php?pages=user&action=order&userID=' . isset($_COOKIE['userID']) . '">Đơn mua</a>
+						<a href="index.php?pages=user&action=order&userID=' . isset($_COOKIE['userID']) . '" style="color: black">Đơn mua</a>
 					</div>
 							';
-							}
-						else {
-							echo '	<div class="dropdown tg-themedropdown tg-minicartdropdown">
-						<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" >
+								} else {
+									echo '	<div class="dropdown tg-themedropdown tg-minicartdropdown">
+						<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown">
 							<span class="tg-themebadge"></span>
 							<i class="icon-cart"></i>
 							<span>Giỏ hàng</span>
 						</a>';
-						}
-					} 	else {
-						echo '	<div class="dropdown tg-themedropdown tg-minicartdropdown">
-					<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" >
+								}
+							} else {
+								echo '	<div class="dropdown tg-themedropdown tg-minicartdropdown">
+					<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" style="margin-left: -40%; color: white">
 						<span class="tg-themebadge"></span>
 						<i class="icon-cart"></i>
 						<span>Giỏ hàng</span>
 					</a>';
-					}
-						?>
-
-					</div>
-				</div>
-				<div class="tg-searchbox">
-					<form class="tg-formtheme tg-formsearch" method="POST" action="./?pages=user&action=products">
-						<fieldset>
-							<select id="category-select" name="cate">
-								<option value="0">Tất cả</option>
+							}
+							?>
+							<div class="tg-userlogin" style="margin-top: -12.2%; width: 300px; background-color: white; color: black;">
 								<?
-								$product = new ProductFunction();
-								$row = $product->category_select_all();
-								foreach ($row as $ketqua) {
-									extract($ketqua);
-								?>
-									<option value="<?= $category_id ?>"><?= $category_name ?></option>
-								<?
+								if (isset($_COOKIE['userID'])) {
+									if ($_COOKIE['role'] == 2) {
+										echo '
+								<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
+								<div class="user">
+								<div class="user-name">
+									<span>Chào ! Minh Quang</span>
+									<ul class="menu">
+										<ul>
+											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
+										</ul>
+									</ul>
+								</div>
+							</div>
+								';
+									} else {
+										echo '
+								<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
+								<div class="user">
+								<div class="user-name">
+									<span>Chào ! Minh Quang</span>
+									<ul class="menu" style="position: relative; display: block; padding: 10px 30px; margin-top: 10%; margin-left: -20%;">
+										<ul>
+											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
+											<li><a href="index.php?pages=admin&action=dashboard">Vào trang quản trị</a></li>
+											<li><a class="logout-btn" href="./index.php?pages=user&action=logout">Đăng Xuất</a></li>
+										</ul>
+									</ul>
+								</div>
+							</div>
+								';
+									}
+								} else {
+									echo '
+							<a class="login-btn" href="index.php?pages=user&action=login">Đăng nhập</a>
+							';
 								}
 								?>
-							</select>
-							<input id="search-input" type="text" name="keyword" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
-							<button name="search-btn" type="submit"><i class="icon-magnifier"></i></button>
-						</fieldset>
-						<?
-						if (isset($_POST['search-btn'])) {
-							$id = $_POST['cate'];
-							$search = $_POST['keyword'];
-							echo "<script>window.location.href = './?pages=user&action=products&id=$id&search=$search'</script>";
-						};
-						?>
-
-					</form>
-					<style>
-						#category-select {
-							width: 20%;
-							flex: 1;
-							border: 1px solid #ccc;
-							border-radius: 4px 0 0 4px;
-							padding: 8px;
-							height: 44px;
-						}
-
-						#search-input {
-							width: 72%;
-							flex: 1;
-							border: 1px solid #ccc;
-							border-radius: 0 0 0 0;
-							margin-left: -4;
-						}
-					</style>
+							</div>
+						</div>
+					</div>
+					<div class="tg-searchbox">
+						<form class="tg-formtheme tg-formsearch" method="POST" action="./?pages=user&action=products">
+							<fieldset>
+								<select id="category-select" name="cate">
+									<option value="0">Tất cả</option>
+									<?
+									$product = new ProductFunction();
+									$row = $product->category_select_all();
+									foreach ($row as $ketqua) {
+										extract($ketqua);
+									?>
+										<option value="<?= $category_id ?>"><?= $category_name ?></option>
+									<?
+									}
+									?>
+								</select>
+								<input id="search-input" type="text" name="keyword" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
+								<button name="search-btn" type="submit"><i class="icon-magnifier"></i></button>
+							</fieldset>
+							<?
+							if (isset($_POST['search-btn'])) {
+								$id = $_POST['cate'];
+								$search = $_POST['keyword'];
+								echo "<script>window.location.href = './?pages=user&action=products&id=$id&search=$search'</script>";
+							};
+							?>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 	<div class="tg-navigationarea">
 		<div class="container">
@@ -309,14 +223,19 @@ include('style.php');
 								</li>
 
 								<li>
-									<a href="#">Tin Tức Công Nghệ</a>
+									<a href="index.php?pages=user&action=introduce">Giới thiệu</a>
+								</li>
+
+								<li>
+									<a href="index.php?pages=user&action=policy">Chính Sách</a>
+								</li>
+
+								<li>
+									<a href="#">Tin Tức</a>
 								</li>
 
 								<li>
 									<a href="index.php?pages=user&action=contact">Liên Hệ</a>
-								</li>
-								<li>
-									<a href="index.php?pages=user&action=introduce">Giới thiệu</a>
 								</li>
 							</ul>
 						</div>
@@ -330,6 +249,23 @@ include('style.php');
 				Header End
 		*************************************-->
 <style>
+	#category-select {
+		width: 20%;
+		flex: 1;
+		border: 1px solid #ccc;
+		border-radius: 4px 0 0 4px;
+		padding: 8px;
+		height: 44px;
+	}
+
+	#search-input {
+		width: 72%;
+		flex: 1;
+		border: 1px solid #ccc;
+		border-radius: 0 0 0 0;
+		margin-left: -4;
+	}
+
 	.tg-userlogin {
 		padding: 30px 0;
 	}

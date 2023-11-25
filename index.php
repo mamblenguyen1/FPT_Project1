@@ -196,6 +196,10 @@ if (isset($_GET['pages'])) {
                 case 'contact':
                     include './User/resources/contact.php';
                     break;
+                    //policy
+                case 'policy':
+                    include './User/resources/policy.php';
+                    break;
                 case 'introduce':
                     include './User/resources/introduce.php';
                     break;
@@ -227,7 +231,7 @@ if (isset($_GET['pages'])) {
                     include './User/resources/changepassword.php';
                     break;
                 case "logout":
-                    setcookie("viewCount", '', time() +1 , "/");
+                    setcookie("viewCount", '', time() + 1, "/");
                     setcookie("role", '', time() + 1, "/");
                     setcookie("userID", '', time() + 1, "/");
                     header("location: index.php?pages=user&action=home");
