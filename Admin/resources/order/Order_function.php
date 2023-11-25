@@ -18,7 +18,7 @@ class ORDER
         VALUES ($userid,0);
         SET @product_id = LAST_INSERT_ID();
         INSERT INTO order_detail (order_id , product_id, order_quantity, order_status_id ) 
-        VALUES (@product_id, $sachma, $qty , 4)
+        VALUES (@product_id, $sachma, $qty , 1)
         ";
         $result = $db->pdo_execute($select);
         return $result;
@@ -31,7 +31,7 @@ class ORDER
         $idn = $this->DuplicateColumnCart($userid);
         $newidn = intval($idn);
         $select = "INSERT INTO `order_detail` (`order_id` ,  `product_id` ,  `order_quantity`,  order_status_id) 
-        VALUES ('$newidn' ,'$sachma', '$soluong', 4)
+        VALUES ('$newidn' ,'$sachma', '$soluong', 1)
         ";
         $result = $db->pdo_execute($select);
         return $result;
@@ -60,6 +60,15 @@ class ORDER
             }
         }
     }
+    function updateCartQty($order_detail_id, $cartQty)
+    {
+        $db = new connect();
+        $select = "UPDATE `order_detail` SET order_quantity = $cartQty  WHERE order_detail_id = $order_detail_id ";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
+
+    
     public function DuplicateCartProStorge($productId, $userid)
     {
         $db = new connect();
@@ -106,7 +115,7 @@ class ORDER
             }
         }
     }
-    function updateCartQty($order_detail_id, $cartQty)
+    function hiddenOrderDetails($order_detail_id, $cartQty)
     {
         $db = new connect();
         $select = "UPDATE `order_detail` SET order_quantity = $cartQty  WHERE order_detail_id = $order_detail_id ";
