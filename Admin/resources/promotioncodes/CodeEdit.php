@@ -10,7 +10,7 @@ if (isset($_POST['delete_code'])) {
 ?>
 
 <?
-if (isset($_POST['CodeEdit'])){
+if (isset($_POST['CodeEdit'])) {
     $CodeID = $_POST['CodeID'] ?? "";
 }
 if (isset($_POST['EditCode'])) {
@@ -22,9 +22,19 @@ if (isset($_POST['EditCode'])) {
     $ngayGioHienTai = date("Y-m-d");
     $CodeID = $_POST['CodeID'] ?? "";
 
-    $code->updateCode($Code, $Percentage, $ExpiryDate, $Description, $IsActive, $CodeID);
-    echo '<script>alert("sửa mã giảm giá thành công  !!")</script>';
-    echo '<script>window.location.href="index.php?pages=admin&action=CodeList"</script>';
+    if (!$Code == "" && !$Percentage == "" && !$ExpiryDate == "" &&  !$Description == "" && !$IsActive == "") {
+        if ($ExpiryDate < $ngayGioHienTai) {
+            echo '<script>alert("Ngày tháng không hợp lệ !!")</script>';
+        } else if ($code->checkDuplicateCode($Code)) {
+            echo '<script>alert("Mã đã tôn tại!!")</script>';
+        } else {
+            $code->updateCode($Code, $Percentage, $ExpiryDate, $Description, $IsActive, $CodeID);
+            echo '<script>alert("sửa mã giảm giá thành công  !!")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=CodeList"</script>';
+        }
+    } else {
+        echo '<script>alert("Vui lòng điền đầy đủ thông tin!!")</script>';
+    }
 }
 ?>
 
@@ -41,7 +51,7 @@ if (isset($_POST['EditCode'])) {
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form action="" method="post">
-                <input name="CodeID" type="hidden" class="form-control" value="<? echo $code->getInfoCode($CodeID, 'CodeID') ?>">
+                    <input name="CodeID" type="hidden" class="form-control" value="<? echo $code->getInfoCode($CodeID, 'CodeID') ?>">
 
                     <div class="card-body">
                         <div class="form-group">

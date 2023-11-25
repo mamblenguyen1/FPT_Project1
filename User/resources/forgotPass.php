@@ -6,7 +6,7 @@ if (isset($_POST['forgot'])) {
         $mail->sendEmail('Mật khẩu mới của bạn là :  ' . $newRandomPass, $email);
         $user->update_NewPass($newRandomPass, $email);
         echo '<script>alert("Xin vui lòng kiểm tra lại Email   !!")</script>';
-        echo '<script>window.location.href="../../index.php?act=login"</script>';
+        echo '<script>window.location.href="index.php?pages=user&action=login"</script>';
     } else {
         echo '<script>alert("Email nhập vào sai  !!")</script>';
     }

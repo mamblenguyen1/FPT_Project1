@@ -33,7 +33,7 @@
                                             echo ' 
                                         <tr>
                                         <td>' . $row['Code'] . '</td>
-                                        <td>' . $row['Percentage'] . '</td>
+                                        <td>' . $row['Percentage'] . '<span>%</span></td>
                                         <td>' . $row['ExpiryDate'] . '</td>
                                         <td>' . $row['Description'] . '</td>
                                         <td>
