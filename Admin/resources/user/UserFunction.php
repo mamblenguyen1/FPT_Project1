@@ -151,7 +151,7 @@ class UserFunction
     public function checkUser($Email, $password)
     {
         $db = new connect();
-        $select = "SELECT * FROM user WHERE email = '$Email' AND user_password = '$password' AND is_deleted = 1";
+        $select = "SELECT * FROM user WHERE email = '$Email' AND user_password = '$password'";
         $result = $db->pdo_query_one($select);
         if ($result != null)
             return true;
@@ -167,6 +167,17 @@ class UserFunction
         return $result;
     }
 
+    public function checkAccount($Email, $password)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM user WHERE email = '$Email' AND user_password = '$password' AND is_deleted = 2";
+        $result = $db->pdo_query_one($select);
+        if ($result != null)
+            return true;
+        else
+            return false;
+    }
+
     function getInfoUserEmail($Email, $column)
     {
         $db = new connect();
@@ -177,18 +188,33 @@ class UserFunction
         }
     }
 
+    // public function checkDuplicateEmail($userEmail)
+    // {
+    //     $db = new connect();
+    //     $select = "SELECT * FROM user";
+    //     $result = $db->pdo_query($select);
+    //     foreach ($result as $row) {
+    //         $nw = $row['email'];
+    //         if ($userEmail == $nw) {
+    //             return true;
+    //         }
+    //     }
+    // }
+
+
     public function checkDuplicateEmail($userEmail)
     {
         $db = new connect();
-        $select = "SELECT * FROM user";
+        $select = "SELECT * FROM user WHERE LOWER(email) = '$userEmail'";
         $result = $db->pdo_query($select);
-        foreach ($result as $row) {
-            $nw = $row['email'];
-            if ($userEmail == $nw) {
-                return true;
-            }
-        }
+        return $result;
     }
+
+
+
+
+
+
 
 
 
@@ -222,8 +248,6 @@ class UserFunction
         $result = $db->pdo_query_one($select);
         return $result;
     }
-
-
     //tk trung
     public function checkDuplicateUser($userAccount)
     {
@@ -237,7 +261,6 @@ class UserFunction
             }
         }
     }
-
     //dk
     function create_User($userAccount, $userPass, $userEmail)
     {
@@ -247,7 +270,6 @@ class UserFunction
         return $result;
     }
     //doimk = sét email
-
     //suapass
     function update_Pass($userPass, $userID)
     {
@@ -255,7 +277,6 @@ class UserFunction
         $select = "UPDATE khachhang SET mat_khau = '$userPass' WHERE user_id = $userID";
         return $db->pdo_execute($select);
     }
-
     function getInfoEmail($column)
     {
         $db = new connect();
@@ -284,7 +305,6 @@ class UserFunction
             return $row['COUNT(user.user_id)'];
         }
     }
-
     // tổng tk không có ẩn
     function Countuser1()
     {
