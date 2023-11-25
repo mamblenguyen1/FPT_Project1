@@ -184,7 +184,7 @@ if (isset($_COOKIE['userID'])) {
 </li>
 <li class="list-group-item border-0 d-flex justify-content-between">
     <form action="index.php?pages=user&action=thanks&order_id=<?= $order->getOrder_total_payment($user_id, 'order_id') ?>" method="post">
-        <input type="text" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
+        <input type="hidden" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
         <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color:white; font-size:15px; width:75%">Thanh Toán</button>
     </form>
 </li>

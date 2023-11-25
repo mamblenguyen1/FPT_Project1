@@ -41,7 +41,7 @@
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 					<div class="tg-footercol">
 						<div class="logo" style="margin: 0 auto;">
-							<strong class="tg-logo"><a href=""><img style="width:200px;    padding: 0 auto;display: block; margin-left: 50%;" src="images/logowhite.png" alt="image description"></a></strong>
+							<strong class="tg-logo"><a href=""><img style="width:200px; height: auto; padding: 0 auto;display: block; margin-left: 50%;" src="images/logowhite.png" alt="image description"></a></strong>
 						</div>
 						<ul class="tg-contactinfo">
 							<li>
