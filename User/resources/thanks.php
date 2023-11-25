@@ -6,6 +6,26 @@ include('User/component/header.php');
 
 if (isset($_GET['order_id'])) {
     $order_id = $_GET['order_id'];
+if (isset($_POST['payment'])) {
+    $province_id = $_POST['Province'];
+    $district_id  = $_POST['district'];
+    $wards_id  = $_POST['wards'];
+    $user_street = $_POST['user_street'];
+    $province_name = $user->getAddress('province', $province_id, 'name');
+    $district_name = $user->getAddress('district', $district_id, 'name');
+    $wards_name = $user->getAddress('wards', $wards_id, 'name');
+    $address = "$user_street  - $wards_name - $district_name - $province_name";
+    $totalprice = $order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment');
+
+    // echo $address .'<br/>';
+    // echo $order_id .'<br/>';
+    // echo $_COOKIE['userID'] .'<br/>';
+    // echo $totalprice .'<br/>';
+    // exit();
+
+
+    $order->addCartAndCartDetail($_COOKIE['userID'], $address, $totalprice, $order_id);
+}
 }
 
 ?>
@@ -33,10 +53,7 @@ if (isset($_GET['order_id'])) {
 
                     <label class="base-label margin-20">Địa chỉ giao hàng</label>
                     <p class="margin-0">
-                        <? echo $order->getInfoOrderId($order_id, 'user_street') ?> -
-                        <? echo $order->getLocationOrderId($order_id, 'xa') ?> -
-                        <? echo $order->getLocationOrderId($order_id, 'huyen') ?> -
-                        <? echo $order->getLocationOrderId($order_id, 'thanhpho') ?>
+                        <? echo $address?>
                     </p>
 
                     <label class="base-label margin-20">Số điện thoại</label>
@@ -56,36 +73,37 @@ if (isset($_GET['order_id'])) {
                         <tbody>
                             <!-- Dòng 1: Sản phẩm 1 -->
                             <?
-                                    $conn = $db->pdo_get_connection();
-                                    $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
+                            $conn = $db->pdo_get_connection();
+                            $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
                                     WHERE order_detail.order_id = `order`.order_id AND
                                     products.product_id = `order_detail`.product_id AND
                                     user.user_id = `order`.user_id 
                                     AND order_detail.order_status_id  = 4
                                     AND 
                                     order_detail.order_id = $order_id");
-                                    $stmt->execute();
-                                    if ($stmt->rowCount() > 0) {
-                                        foreach ($stmt as $row) {
-                                            echo '
+                            $stmt->execute();
+                            if ($stmt->rowCount() > 0) {
+                                foreach ($stmt as $row) {
+                                    echo '
                                             <tr>
-                                 <td>'.$row['product_name'].'</td>
-                                 <td>'.number_format($row['product_price']).' đ</td>
-                                 <td>'.$row['order_quantity'].'</td>
-                                 <td>'.number_format($row['product_price'] * $row['order_quantity']).' đ</td>
+                                 <td>' . $row['product_name'] . '</td>
+                                 <td>' . number_format($row['product_price']) . ' đ</td>
+                                 <td>' . $row['order_quantity'] . '</td>
+                                 <td>' . number_format($row['product_price'] * $row['order_quantity']) . ' đ</td>
                                </tr>
                                             ';
-                                        }}
-                                            ?>
-                                 
-                             
+                                }
+                            }
+                            ?>
+
+
 
                             <!-- Dòng 2: Sản phẩm 2 -->
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="3">Tổng cộng</td>
-                                <td><?echo number_format($order->getOrder_total_payment(($order->getInfoOrderId($order_id, 'user_id')), 'order_total_payment'))?> đ</td>
+                                <td><? echo number_format($order->getOrder_total_payment(($order->getInfoOrderId($order_id, 'user_id')), 'order_total_payment')) ?> đ</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -118,9 +136,10 @@ if (isset($_GET['order_id'])) {
     </main>
 </div>
 <?
-  if(isset($_POST['payment'])){
-    $order->editStatusOrder(1, $order_id);
-}
+// if (isset($_POST['payment'])) {
+//     $price = $_POST['finalprice'];
+//     echo $price;
+// }
 ?>
 <style>
     .thanks .logo {

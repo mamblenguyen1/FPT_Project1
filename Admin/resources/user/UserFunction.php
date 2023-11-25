@@ -61,6 +61,16 @@ class UserFunction
             return $row[$column];
         }
     }
+    function getAddress($loct= '', $id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM $loct  WHERE  $loct"."_id = $id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+   
     function getInfoDistrict($userID, $column)
     {
         $db = new connect();
