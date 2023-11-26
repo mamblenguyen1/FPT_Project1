@@ -101,6 +101,12 @@ if (isset($_GET['pages'])) {
                         case 'OrderDetail':
                             include './Admin/resources/order/OrderDetail.php';
                             break;
+                        case 'OrderDetailList':
+                            include './Admin/resources/order/OrderDetailList.php';
+                            break;
+                            case 'OrderHidden':
+                                include './Admin/resources/order/OrderHidden.php';
+                                break;
                             // type
                         case 'TypeList':
                             include './Admin/resources/Type/TypeList.php';

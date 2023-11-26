@@ -12,12 +12,12 @@ if (isset($_POST['addoneproduct'])) {
     $qty = intval($qty);
     if ($order->DuplicateCartPro($product_id, $userid)) {
       if ($order->DuplicateCartProStorge($product_id, $userid)) {
+        $order->updateCartQtyDup($product_id, $qty);
+       } else {
         if ($order->DuplicateCartProStorgeAD($product_id, $userid)) {
-          $order->updateCartQtyDup($product_id, $qty);
-        } else {
           $order->addCartDetails($userid, $product_id, $qty);
+          }
         }
-      }
     } else {
       if ($order->DuplicateCart($userid)) {
         $order->addCartDetails($userid, $product_id, $qty);
@@ -44,26 +44,28 @@ if (isset($_POST['buy'])) {
     $qty = intval($qty);
     if ($order->DuplicateCartPro($product_id, $userid)) {
       if ($order->DuplicateCartProStorge($product_id, $userid)) {
+        $order->updateCartQtyDup($product_id, $qty);
+       } else {
         if ($order->DuplicateCartProStorgeAD($product_id, $userid)) {
-          $order->updateCartQtyDup($product_id, $qty);
-        } else {
           $order->addCartDetails($userid, $product_id, $qty);
+          }
         }
-      }
     } else {
       if ($order->DuplicateCart($userid)) {
         $order->addCartDetails($userid, $product_id, $qty);
         // echo '<script>alert("Thêm vào chi tiết giỏ hàng thành công ! !")</script>';
       } else {
         $order->addCart($userid, $product_id, $qty);
-        // echo '<script>alert("Thêm giỏ hành thành công ! !")</script>';
+        echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng ! !")</script>';
+        echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
       }
     }
   } else {
-    echo '<script>alert("Xin vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng ! !")</script>';
-    echo '<script>window.location.href="index.php?act=products"</script>';
+    echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng ! !")</script>';
+    echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
   }
 }
+
 if (isset($_POST['deleteCart'])) {
   $cartdeId = $_POST['cartDetailId'];
   $order->deleteCartDetailAd($cartdeId);

@@ -75,7 +75,7 @@ class ORDER
         $select = "SELECT * FROM order_detail ,`order` , order_status
         WHERE `order`.order_id = order_detail.order_id 
         AND order_detail.order_status_id = order_status.order_status_id
-        AND order_detail.order_status_id IN (1,2,3)
+        AND order_detail.order_status_id IN (1)
         AND `order`.user_id = $userid
         ";
         $result = $db->pdo_query($select);
@@ -92,7 +92,7 @@ class ORDER
         $select = "SELECT * FROM order_detail ,`order` , order_status
         WHERE `order`.order_id = order_detail.order_id 
         AND order_detail.order_status_id = order_status.order_status_id
-        AND order_detail.order_status_id IN (4)
+        AND order_detail.order_status_id IN (2)
         AND `order`.user_id = $userid
         ";
         $result = $db->pdo_query($select);
@@ -145,6 +145,13 @@ class ORDER
         $result = $db->pdo_execute($select);
         return $result;
     }
+    function updateOrderDetail($order_id)
+    {
+        $db = new connect();
+        $select = "UPDATE order_detail SET order_detail.order_status_id = 2  WHERE order_detail.order_id = $order_id";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
     function addCartAndCartDetail($userid, $address, $totalprice, $order_id)
     {
         $db = new connect();
@@ -163,7 +170,38 @@ class ORDER
         return $result;
     }
 
-
+    function insertAndSelectCartDetail($address, $totalPrice, $orderId, $pdo) {
+        try {
+            // Bắt đầu giao dịch
+            $pdo->beginTransaction();
+    
+            // Chèn dữ liệu vào bảng `cart`
+            $stmt = $pdo->prepare("INSERT INTO `cart` (user_id, address, total_price) VALUES (?, ?, ?)");
+            $stmt->execute([15, $address, $totalPrice]);
+            $cartId = $pdo->lastInsertId(); // Lấy cart_id mới chèn vào
+    
+            // Chèn dữ liệu vào bảng `cart_detail` từ `order_detail`
+            $stmt = $pdo->prepare("INSERT INTO `cart_detail` (cart_id, product_id, quantity) 
+                                  SELECT ?, product_id, order_quantity 
+                                  FROM `order_detail` 
+                                  WHERE `order_id` = ? AND `order_status_id` = 1");
+            $stmt->execute([$cartId, $orderId]);
+    
+            // Truy vấn SELECT ngay lập tức sau khi chèn dữ liệu
+            $stmt = $pdo->prepare("SELECT * FROM `cart_detail` WHERE `cart_id` = ?");
+            $stmt->execute([$cartId]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            // Kết thúc giao dịch
+            $pdo->commit();
+    
+            return $result;
+        } catch (PDOException $e) {
+            // Xử lý lỗi và hủy bỏ giao dịch nếu có lỗi
+            $pdo->rollBack();
+            throw $e;
+        }
+    }
 
     function getInfoPayment($userid, $column)
     {
@@ -202,15 +240,7 @@ class ORDER
             return $row[$column];
         }
     }
-    function getOrderStatusDetail($order_detail_id, $column)
-    {
-        $db = new connect();
-        $sql = "SELECT * FROM `order_status` , `order_detail` WHERE `order_detail`.order_status_id = order_status.order_status_id AND `order_detail`.order_detail_id = $order_detail_id";
-        $result = $db->pdo_query($sql);
-        foreach ($result as $row) {
-            return $row[$column];
-        }
-    }
+   
 
     function editStatusOrder($order_status_id, $order_id)
     {
@@ -232,44 +262,90 @@ class ORDER
         $result = $db->pdo_execute($select);
         return $result;
     }
-    function editStatusOrderAd1($order_status_id, $order_id)
-    {
-        $db = new connect();
-        $select = "UPDATE `order_detail` 
-        SET order_status_id = $order_status_id  
-        WHERE order_detail_id IN
-        (
-          SELECT od_temp.order_detail_id 
-          FROM (
-            SELECT od.order_detail_id 
-            FROM `order` o
-            INNER JOIN order_detail od ON o.order_id = od.order_id
-            WHERE o.order_id = $order_id
-            AND od.order_status_id = 1
-          ) AS od_temp
-        );";
-        $result = $db->pdo_execute($select);
-        return $result;
+
+
+
+// ---------------------------------------------------------------------------------------------|
+//|                            Chổ này viết hàm giỏ hàng nè nha                                 |
+//|                                                                                             |
+//----------------------------------------------------------------------------------------------|
+
+function Show_Cart($user_id)
+{
+    $db = new connect();
+    $sql = "SELECT * FROM cart , order_status
+    WHERE cart.status = order_status.order_status_id
+    AND cart.user_id = $user_id
+    AND cart.status <> 4";
+    $result = $db->pdo_query($sql);
+    return $result;
+}
+function Hidden_Cart()
+{
+    $db = new connect();
+    $sql = "SELECT * FROM cart , order_status
+    WHERE cart.status = order_status.order_status_id
+    AND cart.status = 4";
+    $result = $db->pdo_query($sql);
+    return $result;
+}
+function Show_Cart_detail($cart_id)
+{
+    $db = new connect();
+    $sql = "SELECT * FROM cart , order_status, cart_detail, products
+    WHERE cart.status = order_status.order_status_id
+    AND cart.cart_id= cart_detail.cart_id
+    AND cart_detail.product_id = products.product_id
+    AND cart.cart_id = $cart_id";
+    $result = $db->pdo_query($sql);
+    return $result;
+}
+function getCartStatusDetail($cart_id, $column)
+{
+    $db = new connect();
+    $sql = "SELECT * FROM `order_status` ,  cart
+    WHERE cart.status = order_status.order_status_id 
+    AND cart.cart_id= $cart_id";
+    $result = $db->pdo_query($sql);
+    foreach ($result as $row) {
+        return $row[$column];
     }
-    function editStatusOrderAd2($order_status_id, $order_id)
-    {
-        $db = new connect();
-        $select = "UPDATE `order_detail` 
-        SET order_status_id = $order_status_id  
-        WHERE order_detail_id IN
-        (
-          SELECT od_temp.order_detail_id 
-          FROM (
-            SELECT od.order_detail_id 
-            FROM `order` o
-            INNER JOIN order_detail od ON o.order_id = od.order_id
-            WHERE o.order_id = $order_id
-            AND od.order_status_id = 2
-          ) AS od_temp
-        );";
-        $result = $db->pdo_execute($select);
-        return $result;
+}
+
+function CountCart($user_id, $column)
+{
+    $db = new connect();
+    $sql = "SELECT COUNT(cart.cart_id) FROM cart 
+    WHERE cart.user_id = $user_id
+    AND cart.status <> 4
+    ";
+    $result = $db->pdo_query($sql);
+    foreach ($result as $row) {
+        return $row[$column];
     }
+}
+
+  
+function editStatusCartAd($order_status_id, $cart_id)
+{
+    $db = new connect();
+    $select = "UPDATE cart SET status = $order_status_id
+    WHERE cart.cart_id =$cart_id";
+    $result = $db->pdo_execute($select);
+    return $result;
+}
+// function cancelCart( $cart_id)
+// {
+//     $db = new connect();
+//     $select = "UPDATE cart SET status = 4
+//     WHERE cart.cart_id =$cart_id";
+//     $result = $db->pdo_execute($select);
+//     return $result;
+// }
+
+
+
+
 
 
 
@@ -371,42 +447,8 @@ class ORDER
         $result = $db->pdo_execute($sql);
         return $result;
     }
-    // function deleteCartDetailUser($productID)
-    // {
-    //     $db = new connect();
-    //     $sql = "DELETE FROM cartdetail WHERE cartdetail.userId  = $productID";
-    //     $result = $db->pdo_execute($sql);
-    //     return $result;
-    // }
-
-    //   function updateCartQty($detailorderId, $cartQty)
-    // {
-    //      $db = new connect();
-    //      $select = "UPDATE cartdetail SET soluong = $cartQty  WHERE cartDetailId   = $detailorderId";
-    //     $result = $db->pdo_execute($select);
-    //      return $result;
-    //  }
-    // function updateCartTotal($userId, $total)
-    // {
-    //    $db = new connect();
-    //      $select = "UPDATE cart SET total = total + $total  WHERE userId  = $userId";
-    //     $result = $db->pdo_execute($select);
-    //     return $result;
-    //  }
 
 
-
-    function CountCart($userID)
-    {
-        $db = new connect();
-        $sql = "SELECT COUNT(cartdetail.cartId) FROM cart, cartdetail
-        WHERE cart.cartId = cartdetail.cartId
-        AND cart.userId =  $userID";
-        $result = $db->pdo_query($sql);
-        foreach ($result as $row) {
-            return $row['COUNT(cartdetail.cartId)'];
-        }
-    }
     function CountOrderWait($order_status_id, $user_id)
     {
         $db = new connect();
@@ -575,42 +617,6 @@ class ORDER
         products.product_id = `order_detail`.product_id AND
         user.user_id = `order`.user_id  
         AND order_detail.order_status_id = 1
-        AND order_detail.order_id = $order_id";
-        $result = $db->pdo_query($sql);
-        return $result;
-    }
-    function Show_Order_Detail_Tracking($order_id)
-    {
-        $db = new connect();
-        $sql = "SELECT * FROM order_detail, products, `order`, user
-        WHERE order_detail.order_id = `order`.order_id AND
-        products.product_id = `order_detail`.product_id AND
-        user.user_id = `order`.user_id  
-        AND order_detail.order_status_id = 2
-        AND order_detail.order_id = $order_id";
-        $result = $db->pdo_query($sql);
-        return $result;
-    }
-    function Show_Order_Detail_Delivered($order_id)
-    {
-        $db = new connect();
-        $sql = "SELECT * FROM order_detail, products, `order`, user
-        WHERE order_detail.order_id = `order`.order_id AND
-        products.product_id = `order_detail`.product_id AND
-        user.user_id = `order`.user_id  
-        AND order_detail.order_status_id = 3
-        AND order_detail.order_id = $order_id";
-        $result = $db->pdo_query($sql);
-        return $result;
-    }
-    function Show_Order_Detail_Cart($order_id)
-    {
-        $db = new connect();
-        $sql = "SELECT * FROM order_detail, products, `order`, user
-        WHERE order_detail.order_id = `order`.order_id AND
-        products.product_id = `order_detail`.product_id AND
-        user.user_id = `order`.user_id  
-        AND order_detail.order_status_id = 4
         AND order_detail.order_id = $order_id";
         $result = $db->pdo_query($sql);
         return $result;
