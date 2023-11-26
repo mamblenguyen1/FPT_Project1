@@ -25,59 +25,151 @@ include('User/component/header.php');
                                     <div class="card-header">
                                     </div>
                                     <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="example2" class="table table-bordered table-hover">
-                                            <thead>
-                                                <tr style="text-align: center;">
-                                                    <th style="width: 300px;">Tên đơn hàng</th>
-                                                    <th>Đơn giá</th>
-                                                    <th>Số lượng</th>
-                                                    <th>Tổng tiền</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody style="text-align: center;">
+                                    <?
+                                    $conn = $db->pdo_get_connection();
+                                    $stmt = $conn->prepare("SELECT * FROM cart, order_status WHERE order_status.order_status_id= cart.status AND cart.status = 3 AND cart.user_id = $_COOKIE[userID]");
+                                    $stmt->execute();
+                                    if ($stmt->rowCount() > 0) {
+                                        foreach ($stmt as $row) {
+
+                                    ?>
+
+                                            
+                                            <div class="history">
+                                                <h3 class="title"> 
+                                                Mã đơn hàng #<?= $row['cart_id'] ?>
+                                                </h3>
+
                                                 <?
-                                                $tong = 0;
-                                                $totalPrice = 0;
-                                                $sql = $order->Show_Order_Detail_Delivered($order->getInfoUserOrder($_COOKIE['userID'], 'order_id'));
-                                                foreach ($sql as $row) {
-                                                    extract($sql);
-                                                    echo ' 
-                          <tr>
-                          <td>' . $row['product_name'] . '</td>
-                          <td>' . number_format($row['product_price']) . ' đ</td>
-                          <td>' . $row['order_quantity'] . '</td>
-                          <td>' . number_format($row['product_price'] * $row['order_quantity']) . ' đ</td>
-                          </tr>
-                          ';
-                          $tong = $row['product_price'] * $row['order_quantity'];
-                          $totalPrice = $totalPrice + $tong ;
+                                                $finalPrice = 0;
+                                                $conn = $db->pdo_get_connection();
+                                                $stmt = $conn->prepare("SELECT * FROM cart_detail, products ,cart
+                                     WHERE cart_detail.product_id = products.product_id
+                                     AND cart.cart_id = cart_detail.cart_id
+                                     AND cart_detail.cart_id = $row[cart_id]");
+                                                $stmt->execute();
+                                                if ($stmt->rowCount() > 0) {
+                                                    foreach ($stmt as $row) {
+                                                ?>
+                                                        <div class="product-ordered">
+                                                            <div class="productimg">
+                                                                <div class="imgp">
+                                                                <img src="images/product/<?= $row['product_img']?>.png">
+                                                                </div>
+                                                                <div class="name"><span><?= $row['product_name']?></span></div>
+                                                            </div>
+                                                            <div class="productinfo">
+                                                                <div class="quantity">Số lượng : <?= $row['quantity']?></div>
+                                                                <div class="price"> Giá : <?= number_format($row['quantity'] * $row['product_price'])?></div>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <?
+                                                         $tong = $row['quantity'] * $row['product_price'];
+                                                         $finalPrice = $finalPrice + $tong;
+                                                        ?>
+                                                    <? }
+                                                    ?>
+                                                    <div class="cost">
+                                                        <p class="costprice">Tổng cộng : <?= number_format($finalPrice)?> đ</p>
+                                                        <p class="per">Giảm giá : <? echo(100 - intval($row['total_price'] *100 / $finalPrice));?> %</p>
+                                                        <p class="finalprice"> Thành tiền : <?= number_format($row['total_price']) ?></p>
+                                                    </div>
+                                                <?
                                                 }
                                                 ?>
-
-                                            </tbody>
-                                            <tfoot>
-                            <tr>
-                                <td colspan="3">Tổng cộng</td>
-                                <td><?echo number_format($totalPrice)?> đ</td>
-                            </tr>
-                        </tfoot>
-                                        </table>
-                                    </div>
+                                            </div>
+                                            <br><br>
+                                    <? }
+                                    } ?>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 </div>
 <?
 include('user/component/footer.php');
 ?>
 <style>
+    .history {
+        border: 2px solid gray;
+        box-shadow: 0 3px 5px gray;
+        padding: 5px;
+    }
+
+    .product-ordered {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 5px 0;
+    }
+
+    .productimg {
+        display: flex;
+    }
+
+    .history img {
+        width: 100px;
+        height: 120px;
+    }
+
+    .productimg .imgp {
+        margin-right: 30px;
+    }
+
+    .productimg .name {
+        margin-left: 30px;
+
+    }
+
+    .productimg .name span {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .productinfo {
+        margin: 0 20px;
+    }
+
+    .productinfo .quantity {
+        margin: 20px 0;
+        font-size: 16px;
+    }
+
+    .productinfo .price {
+        margin: 20px 0;
+        font-size: 16px;
+        color: red;
+    }
+
+
+
+    .cost .costprice {
+        color: gray;
+        font-size: 17px;
+        font-weight: bolder;
+    }
+
+    .cost .per {
+        color: green;
+        font-size: 16px;
+        font-weight: bolder;
+    }
+
+    .cost .finalprice {
+        color: red;
+        font-size: 17px;
+        font-weight: bolder;
+    }
+
+   
+
     .ui-w-80 {
         width: 80px !important;
         height: auto;

@@ -11,9 +11,9 @@ if (isset($_GET['user_id'])) {
 <div class="row" style="width: 100%; padding-left:20%; padding-right:10%; padding-top: 20%">
     <div class="col-md-6 order-md-1" style="width:65%">
         <h4 class="mb-3"><b>Địa chỉ nhận hàng</b></h4>
-        <form class="needs-validation" novalidate action="index.php?pages=user&action=thanks&order_id=<?= $order->getOrder_total_payment($user_id, 'order_id') ?>" method="post">
+        <form class="needs-validation"  action="index.php?pages=user&action=thanks&order_id=<?= $order->getOrder_total_payment($user_id, 'order_id') ?>" method="post">
             <div class="row">
-                <div class="col-md-12 mb-3">
+                <div class="col-md-12 mb-3" >
                     <label for="firstName">Họ và tên</label>
                     <input type="text" class="form-control rounded-2xl" id="firstName" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_name') ?>" required>
                 </div>
@@ -104,7 +104,7 @@ if (isset($_COOKIE['userID'])) {
 									WHERE order_detail.order_id = `order`.order_id AND
 									products.product_id = `order_detail`.product_id AND
 									user.user_id = `order`.user_id 
-                                    AND order_detail.order_status_id  = 4
+                                    AND order_detail.order_status_id  = 1
                                     AND 
 									`order`.user_id = $user_id");
     $stmt->execute();
@@ -115,6 +115,8 @@ if (isset($_COOKIE['userID'])) {
             <span class="text-muted"><b>Thông tin</b></span>
         </h4>
                                         ';
+                                        $cost = 0;
+                                        $firstPrice = 0;
         foreach ($stmt as $row) {
             echo '
     
@@ -133,7 +135,9 @@ if (isset($_COOKIE['userID'])) {
                 </div>
             </div>
         </div>
-';
+';              
+                $firstPrice = $row['order_quantity'] * $row['product_price'];
+                $cost = $cost + $firstPrice;
         }
     }
 }
@@ -168,7 +172,7 @@ if (isset($_COOKIE['userID'])) {
         <ul class="list-group mb-3"></ul>
         <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
             <a class="text-muted"><b>Giá gốc:</b> </a>
-            <a class="text-muted1"><?= number_format($order->getOrder_total_payment($user_id, 'order_total_payment')) ?> đ</a>
+            <a class="text-muted1"><?= number_format($cost) ?> đ</a>
         </li>
         <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
             <a class="text-muted"><b>Giảm giá:</b></a>

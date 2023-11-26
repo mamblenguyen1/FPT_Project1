@@ -16,14 +16,6 @@ if (isset($_POST['payment'])) {
     $wards_name = $user->getAddress('wards', $wards_id, 'name');
     $address = "$user_street  - $wards_name - $district_name - $province_name";
     $totalprice = $order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment');
-
-    // echo $address .'<br/>';
-    // echo $order_id .'<br/>';
-    // echo $_COOKIE['userID'] .'<br/>';
-    // echo $totalprice .'<br/>';
-    // exit();
-
-
     $order->addCartAndCartDetail($_COOKIE['userID'], $address, $totalprice, $order_id);
 }
 }
@@ -73,12 +65,18 @@ if (isset($_POST['payment'])) {
                         <tbody>
                             <!-- Dòng 1: Sản phẩm 1 -->
                             <?
+                              $sql = $order->Show_Order();
+                              foreach ($sql as $row) {
+                                  extract($sql);
+                              }
+                            ?>
+                            <?
                             $conn = $db->pdo_get_connection();
                             $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
                                     WHERE order_detail.order_id = `order`.order_id AND
                                     products.product_id = `order_detail`.product_id AND
                                     user.user_id = `order`.user_id 
-                                    AND order_detail.order_status_id  = 4
+                                    AND order_detail.order_status_id  = 1
                                     AND 
                                     order_detail.order_id = $order_id");
                             $stmt->execute();
@@ -108,7 +106,10 @@ if (isset($_POST['payment'])) {
                         </tfoot>
                     </table>
 
+<?
+   $order->updateOrderDetail($order_id);
 
+?>
 
                     <div class="hr"></div>
 

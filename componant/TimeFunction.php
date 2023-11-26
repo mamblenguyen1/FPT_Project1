@@ -30,4 +30,10 @@ class Time
         $currentDateTimeFormatted = $currentTime->format('H:i:s d-m-Y');
         return $currentDateTimeFormatted;
     }
+    function timeformatterDMY($date)
+    {
+        $currentTime = new datetime($date);
+        $currentDateTimeFormatted = $currentTime->format('d-m-Y');
+        return $currentDateTimeFormatted;
+    }
 }

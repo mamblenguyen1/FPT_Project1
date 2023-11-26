@@ -5,6 +5,12 @@ if (isset($_POST['detail_order'])) {
   $order_ID = $_POST['order_id'];
   $user_id = $_POST['user_id'];
 };
+if(isset($_POST['cancel'])){
+    $cart_id = $_POST['cart_id'];
+    $order->editStatusCartAd(1, $cart_id);
+    echo '<script>window.location.href="index.php?pages=admin&action=OrderList"</script>';
+
+}
 ?>
 <div class="main-panel">
   <div class="content-wrapper">
@@ -46,21 +52,21 @@ if (isset($_POST['detail_order'])) {
                   </thead>
                   <tbody style="text-align: center;">
                     <?
-                    $sql = $order->Show_Cart($user_id);
+                    $sql = $order->Hidden_Cart();
                     foreach ($sql as $row) {
                       extract($sql);
                       echo ' 
                           <tr>
                           <th>'.$row['cart_id'].'</th>
-                          <th>'. $timecount->timeformatterDMY($row['date']).'</th>
+                          <th>'.$row['date'].'</th>
                           <th>'.$row['address'].'</th>
                           <th>'.$row['payment'].'</th>
-                          <th>'.number_format($row['total_price']).' đ</th>
+                          <th>'.$row['total_price'].'</th>
                           <th>'.$row['order_status'].'</th>
                           <td>
-                          <form action="index.php?pages=admin&action=OrderDetailList" method="post">
+                          <form action="" method="post">
                               <input type="hidden" value="' . $row['cart_id'] . '" name="cart_id">
-                              <button type="submit" name="detail_order" class="btn  btn-outline-primary">Chi tiết</button>
+                              <button type="submit" name="cancel" class="btn  btn-outline-success">Khôi phục</button>
                           </form>
                       </td>
                           </tr>
@@ -93,20 +99,3 @@ if (isset($_POST['detail_order'])) {
     transition: max-height 0.2s ease-out;
   }
 </style>
-
-<script>
-  var acc = document.getElementsByClassName("accordion");
-  var i;
-
-  for (i = 0; i < acc.length; i++) {
-    acc[i].onclick = function() {
-      this.classList.toggle("active");
-      var panel = this.nextElementSibling;
-      if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-      }
-    };
-  }
-</script>
