@@ -77,7 +77,7 @@ include('style.php');
 							';
 								} else {
 									echo '	<div class="dropdown tg-themedropdown tg-minicartdropdown">
-						<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown">
+						<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown"style="margin-left: -45%;">
 							<span class="tg-themebadge"></span>
 							<i class="icon-cart"></i>
 							<span>Giỏ hàng</span>
@@ -101,9 +101,10 @@ include('style.php');
 								<div class="user">
 								<div class="user-name">
 									<span>Chào ! Minh Quang</span>
-									<ul class="menu">
+									<ul class="menu" style="position: relative; display: block; padding: 10px 30px; margin-top: 10%; margin-left: -20%;">
 										<ul>
 											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
+											<li><a class="logout-btn" href="./index.php?pages=user&action=logout">Đăng Xuất</a></li>
 										</ul>
 									</ul>
 								</div>
@@ -152,7 +153,7 @@ include('style.php');
 									?>
 								</select>
 								<input id="search-input" type="text" name="keyword" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
-								<button name="search-btn" type="submit"><i class="icon-magnifier"></i></button>
+								<button name="search-btn" type="submit"><i class="bi bi-search"></i></button>
 							</fieldset>
 							<?
 							if (isset($_POST['search-btn'])) {
