@@ -28,7 +28,7 @@
                                             <th>Ngày tạo</th>
                                             <th>Thao Tác</th>
                                         </tr>
-            </thead>
+                                    </thead>
                                     <tbody>
                                         <?
                                         $row = $user->user_select_all();

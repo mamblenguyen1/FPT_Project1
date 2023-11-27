@@ -7,20 +7,8 @@ include('style.php');
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<strong class="tg-logo"><a href="index.php?pages=user&action=home"><img style="height: 140px;" src="images/logowhite.png" alt="company name here"></a></strong>
+						<strong class="tg-logo"><a href="index.php?pages=user&action=home"><img style="height: 140px;" src="images/loweb.png" alt="company name here"></a></strong>
 						<div class="tg-wishlistandcart" style="z-index: 2;float: right;position: absolute; padding-top: 70px;margin-left: 84%;">
-							<!-- <div class="dropdown tg-themedropdown tg-wishlistdropdown">
-							<a href="" id="tg-wishlisst" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="tg-themebadge">3</span>
-								<i class="icon-heart"></i>
-								<span>Yêu thích</span>
-							</a>
-							<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
-								<div class="tg-description">
-									<p>Chưa có sản phẩm yêu thích!</p>
-								</div>
-							</div>
-						</div> -->
 							<?
 							if (isset($_COOKIE['userID'])) {
 								$conn = $db->pdo_get_connection();
@@ -79,20 +67,20 @@ include('style.php');
 									echo '	<div class="dropdown tg-themedropdown tg-minicartdropdown">
 						<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown"style="margin-left: -45%;">
 							<span class="tg-themebadge"></span>
-							<i class="icon-cart"></i>
-							<span>Giỏ hàng</span>
+							<i class="icon-cart" style="color: var(--secondary-color);"></i>
+							<span style="color: var(--secondary-color);">Giỏ hàng</span>
 						</a>';
 								}
 							} else {
 								echo '	<div class="dropdown tg-themedropdown tg-minicartdropdown">
 					<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" style="margin-left: -40%; color: white">
 						<span class="tg-themebadge"></span>
-						<i class="icon-cart"></i>
-						<span>Giỏ hàng</span>
+						<i class="icon-cart" style="color: var(--secondary-color);"></i>
+						<span style="color: var(--secondary-color);">Giỏ hàng</span>
 					</a>';
 							}
 							?>
-							<div class="tg-userlogin" style="margin-top: -12.2%; width: 300px; background-color: white; color: black;">
+							<div class="tg-userlogin" style="margin-top: -12.2%; width: 300px; background: var(--primary-color); color: var(--secondary-color);">
 								<?
 								if (isset($_COOKIE['userID'])) {
 									if ($_COOKIE['role'] == 2) {
@@ -108,6 +96,7 @@ include('style.php');
 										</ul>
 									</ul>
 								</div>
+								<img src="/images/dark_theme_icon/moon.png" id="icon" style="width: 25px; height: 25px; cursor: pointer;margin-left: 55%;position: absolute;margin-bottom: 3%;">
 							</div>
 								';
 									} else {
@@ -124,12 +113,14 @@ include('style.php');
 										</ul>
 									</ul>
 								</div>
+								<img src="/images/dark_theme_icon/moon.png" id="icon" style="width: 25px; height: 25px; cursor: pointer;margin-left: 55%;position: absolute;margin-bottom: 3%;">
 							</div>
 								';
 									}
 								} else {
 									echo '
 							<a class="login-btn" href="index.php?pages=user&action=login">Đăng nhập</a>
+							<img src="/images/dark_theme_icon/moon.png" id="icon" style="width: 25px; height: 25px; cursor: pointer;margin-left: 5%;position: absolute;">
 							';
 								}
 								?>
@@ -246,10 +237,26 @@ include('style.php');
 		</div>
 	</div>
 </header>
-<!--************************************
-				Header End
-		*************************************-->
+<script>
+	var icon =document.getElementById("icon");
+	icon.onclick =function(){
+		document.body.classList.toggle("dark-theme");
+		if(document.body.classList.contains("dark-theme")){
+			icon.src = "/images/dark_theme_icon/sun.png";
+		}else{
+			icon.src = "/images/dark_theme_icon/moon.png";
+		}
+	}
+</script>
 <style>
+	#icon{
+	width: 25px;
+    height: 25px;
+    cursor: pointer;
+    margin-left: 55%;
+    position: absolute;
+    margin-bottom: 3%;
+	}
 	#category-select {
 		width: 20%;
 		flex: 1;
@@ -258,7 +265,6 @@ include('style.php');
 		padding: 8px;
 		height: 44px;
 	}
-
 	#search-input {
 		width: 72%;
 		flex: 1;
@@ -266,43 +272,35 @@ include('style.php');
 		border-radius: 0 0 0 0;
 		margin-left: -4;
 	}
-
 	.tg-userlogin {
 		padding: 30px 0;
 	}
-
 	.menu {
 		position: relative;
 		display: block;
 		padding: 20px 30px;
 	}
-
 	.login-btn {
 		display: inline-block;
 		padding: 5px 15px;
 	}
-
 	.user {
 		width: 250px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
-
 	.category {
 		font-weight: bold;
 	}
-
 	.render-type ul li a:hover {
 		text-decoration: underline;
 		background-color: #77B748 !important;
 		color: white;
 	}
-
 	.logout {
 		padding-bottom: 8.5px;
 	}
-
 	.menu ul {
 		background-color: #504C4C;
 		position: absolute;
@@ -311,28 +309,22 @@ include('style.php');
 		opacity: .9;
 		top: 10px;
 	}
-
 	.menu ul li {
 		margin: 10px 0;
 		list-style: none;
 	}
-
 	.menu ul li a {
 		display: inline-block;
 		z-index: 1000000;
 		padding: 0px 40px;
 		margin: 0px 20px;
 		color: white;
-
 	}
-
 	.menu ul li a:hover {
 		background-color: #504C4C;
 		color: black;
 		font-weight: bold;
 	}
-
-
 	.menu:hover>ul {
 		display: block;
 	}

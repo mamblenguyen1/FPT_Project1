@@ -52,7 +52,7 @@ if (isset($_POST['addType'])) {
                                 <option selected="selected" value="">Chọn danh mục</option>
                                 <?
                                 $conn = $db->pdo_get_connection();
-                                $stmt = $conn->prepare("SELECT * FROM category");
+                                $stmt = $conn->prepare("SELECT * FROM category WHERE is_deleted = 1");
                                 $stmt->execute();
                                 if ($stmt->rowCount() > 0) {
                                     foreach ($stmt as $row) {

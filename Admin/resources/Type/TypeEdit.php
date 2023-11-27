@@ -16,7 +16,7 @@ if (isset($_POST['delete_type'])) {
 ?>
 <?
 if (isset($_POST['editType'])) {
-    $user_updated = 1;
+    $user_updated = $_COOKIE['userID'];
     $typeid = $_POST['typeid'] ?? "";
     $type_name = $_POST['typeName'] ?? "";
     $category_id = $_POST['typeCate'] ?? "";
@@ -74,7 +74,7 @@ if (isset($_POST['editType'])) {
                                                             ?></option>
                                 <?
                                 $conn = $db->pdo_get_connection();
-                                $stmt = $conn->prepare("SELECT * FROM category WHERE category_id <> $showidCate");
+                                $stmt = $conn->prepare("SELECT * FROM category WHERE category_id <> $showidCate AND is_deleted=1");
                                 $stmt->execute();
                                 if ($stmt->rowCount() > 0) {
                                     foreach ($stmt as $row) {

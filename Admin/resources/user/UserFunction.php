@@ -22,7 +22,7 @@ class UserFunction
     function user_create($user_name, $email, $user_phone_number, $user_password)
     {
         $db = new connect();
-        $sql = "INSERT INTO user(user_name, email, user_phone_number, user_password, role_id, is_deleted) VALUES ('$user_name','$email' , '$user_phone_number', '$user_password', 2, 1)";
+        $sql = "INSERT INTO user(user_name, email, user_phone_number, user_password, role_id, is_deleted, wards_id , province_id, district_id ) VALUES ('$user_name','$email' , '$user_phone_number', '$user_password', 2, 1, 1, 1, 1)";
         $result = $db->pdo_execute($sql);
         return $result;
     }
@@ -147,7 +147,9 @@ class UserFunction
     function user_select_all()
     {
         $db = new connect();
-        $sql = "SELECT *, province.name as 'thanhpho', district.name as 'huyen', wards.name as 'xa' FROM `user` , province , district , wards WHERE user.province_id = province.province_id AND user.wards_id = wards.wards_id AND user.district_id = district.district_id AND is_deleted = 1";
+        $sql = "SELECT *, province.name as 'thanhpho', district.name as 'huyen', wards.name as 'xa' FROM `user` , province , district , wards 
+        WHERE user.province_id = province.province_id AND user.wards_id = wards.wards_id AND user.district_id = district.district_id 
+        AND user.is_deleted = 1";
         return $db->pdo_query($sql);
     }
 //hiển thị bình luận ẩn

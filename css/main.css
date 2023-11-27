@@ -4,6 +4,17 @@
 	margin: 0px;
 	padding: 0px;
 }
+:root{
+	--primary-color: #ffff;
+	--secondary-color: #212121;
+
+	/* --primary-color: #000;
+	--secondary-color: #fff; */
+}
+.dark-theme{
+	--primary-color: #000;
+	--secondary-color: #fff;
+}
 body,
 html{
 	height:100%;
@@ -11,7 +22,7 @@ html{
 }
 body {
 	color: #666;
-	background: #fff;
+	background: var(--primary-color);
 	font:400 14px/23px 'Open Sans', Arial, Helvetica, sans-serif;
 }
 body h1,
@@ -67,10 +78,6 @@ iframe {
 	float: left;
 	border: none;
 }
-/* .wp-caption,
-.wp-caption-text,
-.gallery-caption,
-.bypostauthor {} */
 .wp-caption.alignleft,
 .wp-caption.alignnone { width: 100%; }
 button { border: none; }
@@ -429,7 +436,10 @@ li.tg-rss a { background:#ff6600; }
 	width: 100%;
 	float: left;
 }
-.tg-bglight { background:#f7f7f7; }
+.tg-description p{
+color: var(--secondary-color);
+}
+.tg-bglight { background:var(--primary-color); }
 .tg-bgdark { background:#373542; }
 .tg-stars span,
 .tg-stars {
@@ -624,12 +634,14 @@ li.tg-rss a { background:#ff6600; }
 	float: left;
 	font-size: 30px;
 	line-height: 20px;
+	color: var(--secondary-color);
 }
 .tg-sectionhead h2 span {
 	display: block;
 	font-size: 16px;
 	line-height: 16px;
 	padding: 0 0 10px;
+	color: var(--secondary-color);
 }
 .tg-sectionhead .tg-btn,
 .tg-btnstyletwo {
@@ -853,6 +865,7 @@ body.tg-comingsoonpage .tg-wrapper{overflow:visible;}
 	width: 100%;
 	float: left;
 	position: relative;
+	background: var(--primary-color);
 }
 .tg-logo {
 	z-index:2;
@@ -1352,7 +1365,7 @@ li.menu-item-has-mega-menu { position: static; }
 	width:2px;
 	height:2px;
 	margin:-1px 0 0;
-	background:#fff;
+	background: var(--primary-color);
 	position:absolute;
 }
 .tg-headervtwo .tg-navigation ul li:first-child a:after,
@@ -1789,6 +1802,18 @@ li.menu-item-has-mega-menu { position: static; }
 	float: left;
 	padding: 15px 0 0;
 }
+.tg-postbookcontent ul li a{
+color: var(--secondary-color);
+}
+.tg-postbookcontent .tg-booktitle h3 a{
+	color: var(--secondary-color);
+}
+.tg-postbookcontent .tg-bookwriter{
+	color: var(--secondary-color);
+}
+.tg-postbookcontent span a{
+	color: var(--secondary-color);
+}
 .tg-bookscategories {
 	width: 100%;
 	float: left;
@@ -1980,6 +2005,13 @@ li.menu-item-has-mega-menu { position: static; }
 	float: none;
 	display: block;
 	overflow: hidden;
+	color: var(--secondary-color);
+}
+.tg-priceandbtn .tg-bookprice ins{
+	color: var(--secondary-color);
+}
+.tg-priceandbtn .tg-bookprice del{
+	color: var(--secondary-color);
 }
 /* =============================================
 			New Release Style					
@@ -2474,7 +2506,7 @@ li.menu-item-has-mega-menu { position: static; }
 			Footer Style						
 ============================================= */
 .tg-footer{
-	background: #f7f7f7;
+	background: var(--primary-color);
 	border-top: 2px solid;
 }
 .tg-footerarea{
@@ -2484,7 +2516,7 @@ li.menu-item-has-mega-menu { position: static; }
 .tg-clientservices{
 	width: 100%;
 	float: left;
-	color: #666;
+	color: var(--secondary-color);
 	padding: 60px 0;
 	list-style: none;
 	font-size: 16px;
@@ -2521,6 +2553,7 @@ li.menu-item-has-mega-menu { position: static; }
 	font-size: 22px;
 	font-weight: 500;
 	line-height: 22px;
+	color: var(--secondary-color)
 }
 .tg-titlesubtitle p{
 	margin: 0;
@@ -2535,6 +2568,7 @@ li.menu-item-has-mega-menu { position: static; }
 	width: 100%;
 	float: left;
 	min-height: 350px;
+	color: var(--secondary-color);
 }
 .tg-footercol .tg-logo{padding: 0 0 30px;}
 .tg-contactinfo{
@@ -2617,7 +2651,7 @@ li.menu-item-has-mega-menu { position: static; }
 }
 .tg-widget ul li + li{border-top:1px solid #e6e6e6;}
 .tg-widget ul li a{
-	color: #666;
+	color: var(--secondary-color);
 	display:block;
 }
 .tg-widget ul li a em{
@@ -2660,7 +2694,7 @@ li.menu-item-has-mega-menu { position: static; }
 	margin:0 0 15px;
 }
 .tg-footercol .tg-widgettitle h3{
-	color:#404040;
+	color:var(--secondary-color);
 	font-size:16px;
 	padding:0 0 20px;
 	line-height:normal;
@@ -3639,6 +3673,15 @@ blockquote .tg-bookwriter{
 	font-size:30px;
 	line-height:25px;
 }
+.tg-booktitle h3 a{
+	color: var(--secondary-color);
+}
+.tg-featureditmcontent .tg-bookwriter {
+	color: var(--secondary-color);
+}
+.tg-featureditmcontent .tg-bookwriter a{
+	color: var(--secondary-color);
+}
 .tg-productcontent .tg-bookwriter{
 	font-size:16px;
 	line-height:16px;
@@ -4160,4 +4203,7 @@ body.tg-comingsoonpage:before{
 body.tg-comingsoonpage .tg-footer{border:0;}
 body.tg-comingsoonpage .tg-footerbar{position:static;}
 .tg-userlogin  figure a img {width: 50px; height: 50px;}
+.comment .comment-info .user_cmt{
+	color: var(--secondary-color);
 
+}
