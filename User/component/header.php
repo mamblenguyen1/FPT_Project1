@@ -88,7 +88,7 @@ include('style.php');
 								<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
 								<div class="user">
 								<div class="user-name">
-									<span>Chào ! Minh Quang</span>
+									<span>Chào ! '.$user->getInfouser2($_COOKIE['userID'], 'user_name').'</span>
 									<ul class="menu" style="position: relative; display: block; padding: 10px 30px; margin-top: 10%; margin-left: -20%;">
 										<ul>
 											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
@@ -104,7 +104,7 @@ include('style.php');
 								<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
 								<div class="user">
 								<div class="user-name">
-									<span>Chào ! Minh Quang</span>
+									<span>Chào ! '.$user->getInfouser2($_COOKIE['userID'], 'user_name').'</span>
 									<ul class="menu" style="position: relative; display: block; padding: 10px 30px; margin-top: 10%; margin-left: -20%;">
 										<ul>
 											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
@@ -144,7 +144,7 @@ include('style.php');
 									?>
 								</select>
 								<input id="search-input" type="text" name="keyword" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
-								<button name="search-btn" type="submit"><i class="bi bi-search"></i></button>
+								<button name="search-btn" type="submit">Tìm Kiếm</button>
 							</fieldset>
 							<?
 							if (isset($_POST['search-btn'])) {
@@ -237,6 +237,7 @@ include('style.php');
 		</div>
 	</div>
 </header>
+
 <script>
 	var icon =document.getElementById("icon");
 	icon.onclick =function(){
@@ -266,7 +267,7 @@ include('style.php');
 		height: 44px;
 	}
 	#search-input {
-		width: 72%;
+		width: 71.3%;
 		flex: 1;
 		border: 1px solid #ccc;
 		border-radius: 0 0 0 0;

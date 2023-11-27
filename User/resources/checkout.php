@@ -90,10 +90,10 @@ if (isset($_GET['user_id'])) {
                     </li>
                 </ul>
                 <li class="list-group-item border-0 d-flex justify-content-between">
-                    <input type="text" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
-                    <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color:white; font-size:15px; width:75%">Thanh Toán</button>
-        </form>
-        </li>
+        <input type="text" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
+        <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color: var(--primary-color); font-size:15px; width:75%; background-color: var(--secondary-color);">Thanh Toán</button>
+    </form>
+</li>
     </div>
 
 </div>
@@ -168,7 +168,7 @@ if (isset($_POST['code-input'])) {
 }
 ?>
 <h4 class="d-flex justify-content-between align-items-center mb-3">
-    <form method="post">
+    <form method="post" class="color-white">
         <label for="firstName">Mã giảm giá (Nếu Có)</label>
         <input value="" name="code" type="text" class="form-control" style="width:200px;" placeholder="Nhập mã giảm giá">
         <button type="submit" name="code-input" class="tg-btn" style="width:100px; padding:0;">Nhập</button>
@@ -264,6 +264,27 @@ if (isset($_POST['code-input'])) {
     }
 </script>
 <style>
+    .color-white li{
+        background: var(--primary-color);
+    }
+    .color-white li a{
+        color: var(--secondary-color-color);
+    }
+    .color-white li .text-muted1{
+        color: var(--secondary-color);
+    }
+    .info p{
+        color: var(--secondary-color);
+    }
+    .my-3 li{
+        background: var(--primary-color);
+    }
+    h4 b{
+        color: var(--secondary-color);
+    }
+    label{
+        color: var(--secondary-color);
+    }
     img {
         width: 100px;
         height: 50px;
@@ -321,7 +342,7 @@ if (isset($_POST['code-input'])) {
 
     .confirm-oder {
         color: white;
-        background-color: #121A2D !important;
+        background: var(--secondary-color);;
         font-size: 1rem;
         line-height: 1.5rem;
         width: 100%;
