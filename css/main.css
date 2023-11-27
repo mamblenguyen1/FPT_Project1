@@ -72,7 +72,7 @@ img {
 	height: auto;
 	max-width: 100%;
 }
-strong { color: #414141; }
+strong { color: var(--secondary-color); }
 iframe {
 	width: 100%;
 	float: left;
@@ -139,7 +139,7 @@ input:focus,
 	margin:0 0 20px;
 }
 label {
-	color: #666;
+	color: var(--secondary-color);
 	display: block;
 	font-weight: 400;
 	margin-bottom: 10px;
@@ -187,7 +187,8 @@ table > thead > tr > td,
 table > tbody > tr > td,
 table > tfoot > tr > td {
 	border-top: 1px solid #dbdbdb;
-	border: 1px solid #dbdbdb;
+	border: 1px solid var(--secondary-color);
+	color: var(--secondary-color);
 	line-height: 2.5;
 	padding-left: 3px;
 	text-align: center;
@@ -477,7 +478,7 @@ color: var(--secondary-color);
 .row.no-gutters > [class^="col-"],
 .row.no-gutters > [class*="col-"] {
 	padding-right: 0;
-	padding-left: 0;
+	padding-left: -2px;
 }
 .tg-formtheme{
 	width: 100%;
@@ -1051,11 +1052,12 @@ body.tg-comingsoonpage .tg-wrapper{overflow:visible;}
 	top: 0;
 	right: 0;
 	z-index: 2;
-	width: 44px;
+	width: 50px;
 	height: 44px;
-	font-size: 20px;
+	font-size: 10px;
 	line-height: 44px;
-	background: none;
+	color: black;
+	background: white;
 	position: absolute;
 }
 .tg-formsearch a{
@@ -1882,6 +1884,7 @@ color: var(--secondary-color);
 	font-size: 16px;
 	font-weight: 500;
 	line-height: 19px;
+	color: var(--secondary-color);
 }
 .tg-bookwriter {
 	width: 100%;
@@ -1889,6 +1892,10 @@ color: var(--secondary-color);
 	font-size: 13px;
 	line-height: 13px;
 	padding: 0 0 6px;
+	color: var(--secondary-color);
+}
+.tg-bookwriter a{
+	color: var(--secondary-color);
 }
 .tg-bookwriter a {color: #666;}
 .tg-bestsellingbooks .tg-postbookcontent .tg-stars {
@@ -2588,6 +2595,7 @@ color: var(--secondary-color);
 	height: 40px;
 	font-size: 24px;
 	line-height: 40px;
+	color: var(--secondary-color);
 }
 .tg-contactinfo li > i,
 .tg-contactinfo li address,
@@ -2599,10 +2607,15 @@ color: var(--secondary-color);
 }
 .tg-contactinfo li address{
 	width: 80%;
+	color: var(--secondary-color);
+}
+.tg-contactinfo li span{
+	color: var(--secondary-color);
 }
 .tg-contactinfo li span em{
 	display: block;
 	font-style: normal;
+	color: var(--secondary-color);
 }
 .tg-footercol .tg-socialicons{
 	width: 100%;
@@ -3603,6 +3616,7 @@ blockquote .tg-bookwriter{
 	width:40px;
 	font-size:24px;
 	line-height:24px;
+	color: var(--secondary-color);
 }
 .tg-delevrystock li i,
 .tg-delevrystock li span{
@@ -3612,6 +3626,7 @@ blockquote .tg-bookwriter{
 .tg-delevrystock li span{
 	width:78%;
 	overflow:hidden;
+	color: var(--secondary-color);
 }
 .tg-delevrystock li span em{font-style:normal;}
 .tg-quantityholder{
@@ -3837,7 +3852,7 @@ blockquote .tg-bookwriter{
 }
 .tg-themetabs li + li{margin:0 0 0 5px;}
 .tg-themetabs li a{
-	color:#666;
+	color: var(--secondary-color);
 	display:block;
 	padding:0 20px;
 	position:relative;
@@ -3846,7 +3861,7 @@ blockquote .tg-bookwriter{
 }
 .tg-themetabs li a:hover,
 .tg-themetabs li.active a{
-	color:#484848;
+	color: var(--secondary-color);
 	border-bottom-color:#fff;
 }
 .tg-themetabs li a:before{
@@ -3865,7 +3880,7 @@ blockquote .tg-bookwriter{
 	float:left;
 	padding:30px;
 	margin:-1px 0 0;
-	background:#fff;
+	background: var(--primary-color);
 	border:1px solid #dbdbdb;
 }
 .tg-tab-pane{
@@ -4205,5 +4220,13 @@ body.tg-comingsoonpage .tg-footerbar{position:static;}
 .tg-userlogin  figure a img {width: 50px; height: 50px;}
 .comment .comment-info .user_cmt{
 	color: var(--secondary-color);
-
+}
+.comment .comment-info .user_cmt p{
+	color: var(--secondary-color);
+}
+.comment .comment-info .user_cmt p>strong{
+	color: var(--secondary-color);
+}
+.comment .comment-info p{
+	color: var(--secondary-color);
 }

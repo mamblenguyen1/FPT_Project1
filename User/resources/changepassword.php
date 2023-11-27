@@ -35,22 +35,22 @@ if (isset($_POST['submituser'])) {
 
 ?>
 <div class="container light-style flex-grow-1 container-p-y">
-    <h4 class="font-weight-bold py-3 mb-4" style="color: white;">
+    <h4 class="font-weight-bold py-3 mb-4" style="color: var(--primary-color);">
         .
     </h4>
     <div class="card overflow-hidden">
         <div class="row no-gutters row-bordered row-border-light">
             <div class="col-md-3 pt-0">
                 <div class="list-group list-group-flush account-settings-links">
-                    <a class="list-group-item list-group-item-action active " href="index.php?pages=user&action=informationuser">Thông tin tài khoản</a>
-                    <a class="list-group-item list-group-item-action " href="index.php?pages=user&action=updateuser">Cập nhật tài khoản</a>
-                    <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=changepassword">Đổi mật khẩu</a>
-                    <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=history">Lịch sử đơn hàng</a>
+                    <a class="list-group-item list-group-item-action active " href="index.php?pages=user&action=informationuser" style="color: var(--secondary-color);">Thông tin tài khoản</a>
+                    <a class="list-group-item list-group-item-action " href="index.php?pages=user&action=updateuser" style="color: var(--secondary-color);">Cập nhật tài khoản</a>
+                    <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=changepassword" style="color: var(--secondary-color);">Đổi mật khẩu</a>
+                    <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=history" style="color: var(--secondary-color);">Lịch sử đơn hàng</a>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="tab-content">
-                    <h3>Đổi mật khẩu</h3>
+                    <h3 style="color: var(--secondary-color);">Đổi mật khẩu</h3>
                     <div id="General">
                         <br>
                         <form class="card-body" method="post">
@@ -113,6 +113,14 @@ if (isset($_POST['submituser'])) {
 include('user/component/footer.php');
 ?>
 <style>
+        .pt-0{
+        border: 1px solid white;
+    }
+
+    .account-settings-links a{
+        background: var(--primary-color);
+        border: 1px solid white;
+    }
     .ui-w-80 {
         width: 80px !important;
         height: auto;
@@ -189,7 +197,7 @@ include('user/component/footer.php');
     }
 
     .light-style .account-settings-links .list-group-item.active {
-        color: #4e5155 !important;
+        color: var(--secondary-color);
     }
 
     .material-style .account-settings-links .list-group-item {
@@ -198,7 +206,7 @@ include('user/component/footer.php');
     }
 
     .material-style .account-settings-links .list-group-item.active {
-        color: #4e5155 !important;
+        color: var(--secondary-color);
     }
 
     .dark-style .account-settings-links .list-group-item {
@@ -207,11 +215,11 @@ include('user/component/footer.php');
     }
 
     .dark-style .account-settings-links .list-group-item.active {
-        color: #fff !important;
+        color: var(--secondary-color);
     }
 
     .light-style .account-settings-links .list-group-item.active {
-        color: #4E5155 !important;
+        color: var(--secondary-color);
     }
 
     .light-style .account-settings-links .list-group-item {

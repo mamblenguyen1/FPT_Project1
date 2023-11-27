@@ -2,22 +2,22 @@
 include('User/component/header.php');
 ?>
 <div class="container light-style flex-grow-1 container-p-y">
-    <h4 class="font-weight-bold py-3 mb-4" style="color: white;">
+    <h4 class="font-weight-bold py-3 mb-4" style="color: var(--primary-color);">
         .
     </h4>
     <div class="card overflow-hidden">
         <div class="row no-gutters row-bordered row-border-light">
             <div class="col-md-3 pt-0">
                 <div class="list-group list-group-flush account-settings-links">
-                    <a class="list-group-item list-group-item-action active " href="index.php?pages=user&action=informationuser">Thông tin tài khoản</a>
-                    <a class="list-group-item list-group-item-action " href="index.php?pages=user&action=updateuser">Cập nhật tài khoản</a>
-                    <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=changepassword">Đổi mật khẩu</a>
-                    <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=history">Lịch sử đơn hàng</a>
+                    <a class="list-group-item list-group-item-action active " href="index.php?pages=user&action=informationuser" style="color: var(--secondary-color);">Thông tin tài khoản</a>
+                    <a class="list-group-item list-group-item-action " href="index.php?pages=user&action=updateuser" style="color: var(--secondary-color);">Cập nhật tài khoản</a>
+                    <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=changepassword" style="color: var(--secondary-color);">Đổi mật khẩu</a>
+                    <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=history" style="color: var(--secondary-color);">Lịch sử đơn hàng</a>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="tab-content">
-                    <h3>Lịch sử đơn hàng</h3>
+                    <h3 style="color: var(--secondary-color);">Lịch sử đơn hàng</h3>
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
@@ -34,10 +34,10 @@ include('User/component/header.php');
 
                                     ?>
 
-                                            
+
                                             <div class="history">
-                                                <h3 class="title"> 
-                                                Mã đơn hàng #<?= $row['cart_id'] ?>
+                                                <h3 class="title">
+                                                    Mã đơn hàng #<?= $row['cart_id'] ?>
                                                 </h3>
 
                                                 <?
@@ -54,25 +54,25 @@ include('User/component/header.php');
                                                         <div class="product-ordered">
                                                             <div class="productimg">
                                                                 <div class="imgp">
-                                                                <img src="images/product/<?= $row['product_img']?>.png">
+                                                                    <img src="images/product/<?= $row['product_img'] ?>.png">
                                                                 </div>
-                                                                <div class="name"><span><?= $row['product_name']?></span></div>
+                                                                <div class="name"><span><?= $row['product_name'] ?></span></div>
                                                             </div>
                                                             <div class="productinfo">
-                                                                <div class="quantity">Số lượng : <?= $row['quantity']?></div>
-                                                                <div class="price"> Giá : <?= number_format($row['quantity'] * $row['product_price'])?></div>
+                                                                <div class="quantity">Số lượng : <?= $row['quantity'] ?></div>
+                                                                <div class="price"> Giá : <?= number_format($row['quantity'] * $row['product_price']) ?></div>
                                                             </div>
                                                         </div>
                                                         <hr>
                                                         <?
-                                                         $tong = $row['quantity'] * $row['product_price'];
-                                                         $finalPrice = $finalPrice + $tong;
+                                                        $tong = $row['quantity'] * $row['product_price'];
+                                                        $finalPrice = $finalPrice + $tong;
                                                         ?>
                                                     <? }
                                                     ?>
                                                     <div class="cost">
-                                                        <p class="costprice">Tổng cộng : <?= number_format($finalPrice)?> đ</p>
-                                                        <p class="per">Giảm giá : <? echo(100 - intval($row['total_price'] *100 / $finalPrice));?> %</p>
+                                                        <p class="costprice">Tổng cộng : <?= number_format($finalPrice) ?> đ</p>
+                                                        <p class="per">Giảm giá : <? echo (100 - intval($row['total_price'] * 100 / $finalPrice)); ?> %</p>
                                                         <p class="finalprice"> Thành tiền : <?= number_format($row['total_price']) ?></p>
                                                     </div>
                                                 <?
@@ -97,10 +97,24 @@ include('User/component/header.php');
 include('user/component/footer.php');
 ?>
 <style>
+    .pt-0 {
+        border: 1px solid white;
+    }
+
+    .account-settings-links a {
+        background: var(--primary-color);
+        border: 1px solid white;
+    }
+
     .history {
         border: 2px solid gray;
         box-shadow: 0 3px 5px gray;
         padding: 5px;
+        color: var(--secondary-color);
+    }
+
+    .history h3 {
+        color: var(--secondary-color);
     }
 
     .product-ordered {
@@ -147,13 +161,12 @@ include('user/component/footer.php');
         font-size: 16px;
         color: red;
     }
-
-
-
+    
     .cost .costprice {
         color: gray;
         font-size: 17px;
         font-weight: bolder;
+        color: var(--secondary-color);
     }
 
     .cost .per {
@@ -168,7 +181,7 @@ include('user/component/footer.php');
         font-weight: bolder;
     }
 
-   
+
 
     .ui-w-80 {
         width: 80px !important;
@@ -246,7 +259,7 @@ include('user/component/footer.php');
     }
 
     .light-style .account-settings-links .list-group-item.active {
-        color: #4e5155 !important;
+        color: var(--secondary-color);
     }
 
     .material-style .account-settings-links .list-group-item {
@@ -255,7 +268,7 @@ include('user/component/footer.php');
     }
 
     .material-style .account-settings-links .list-group-item.active {
-        color: #4e5155 !important;
+        color: var(--secondary-color);
     }
 
     .dark-style .account-settings-links .list-group-item {
@@ -264,11 +277,11 @@ include('user/component/footer.php');
     }
 
     .dark-style .account-settings-links .list-group-item.active {
-        color: #fff !important;
+        color: var(--secondary-color);
     }
 
     .light-style .account-settings-links .list-group-item.active {
-        color: #4E5155 !important;
+        color: var(--secondary-color);
     }
 
     .light-style .account-settings-links .list-group-item {

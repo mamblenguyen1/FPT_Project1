@@ -42,27 +42,27 @@ include('user/component/header.php');
                     </div>
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                         <h6 class="section-title bg-white text-start text-primary pe-3">Giới thiệu</h6>
-                        <h1 class="mb-4">Welcome</h1>
-                        <p class="mb-4">Chào mừng bạn đến với trang web công nghệ của chúng tôi! Đây là nơi bạn có thể khám phá những xu hướng công nghệ mới nhất, cùng những sản phẩm và dịch vụ tiên tiến nhất trong thế giới kỹ thuật số. </p>
-                        <p class="mb-4">Chúng tôi tự hào đem đến cho bạn những thông tin, hướng dẫn và sự hiểu biết cần thiết để bạn có thể tận dụng tối đa tiềm năng của công nghệ trong cuộc sống hàng ngày. Hãy cùng chúng tôi khám phá và trải nghiệm cuộc hành trình đầy kỳ thú trong thế giới công nghệ!</p>
+                        <h1 class="mb-4" style="color: var(--secondary-color)">Welcome</h1>
+                        <p class="mb-4" style="color: var(--secondary-color)">Chào mừng bạn đến với trang web công nghệ của chúng tôi! Đây là nơi bạn có thể khám phá những xu hướng công nghệ mới nhất, cùng những sản phẩm và dịch vụ tiên tiến nhất trong thế giới kỹ thuật số. </p>
+                        <p class="mb-4" style="color: var(--secondary-color)">Chúng tôi tự hào đem đến cho bạn những thông tin, hướng dẫn và sự hiểu biết cần thiết để bạn có thể tận dụng tối đa tiềm năng của công nghệ trong cuộc sống hàng ngày. Hãy cùng chúng tôi khám phá và trải nghiệm cuộc hành trình đầy kỳ thú trong thế giới công nghệ!</p>
                         <div class="row gy-2 gx-4 mb-4">
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i> Chất lượng sản phẩm</p>
+                                <p class="mb-0" style="color: var(--secondary-color)"><i class="fa fa-arrow-right text-primary me-2"></i> Chất lượng sản phẩm</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i> Hỗ trợ tận tình</p>
+                                <p class="mb-0" style="color: var(--secondary-color)"><i class="fa fa-arrow-right text-primary me-2"></i> Hỗ trợ tận tình</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i> Đổi trả trong ngày</p>
+                                <p class="mb-0" style="color: var(--secondary-color)"><i class="fa fa-arrow-right text-primary me-2"></i> Đổi trả trong ngày</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i> Giao hàng nhanh chóng</p>
+                                <p class="mb-0" style="color: var(--secondary-color)"><i class="fa fa-arrow-right text-primary me-2"></i> Giao hàng nhanh chóng</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i> Chất lượng dịch vụ hàng đầu</p>
+                                <p class="mb-0" style="color: var(--secondary-color)"><i class="fa fa-arrow-right text-primary me-2"></i> Chất lượng dịch vụ hàng đầu</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i> Đội ngũ nhân viên trình độ cao</p>
+                                <p class="mb-0" style="color: var(--secondary-color)"><i class="fa fa-arrow-right text-primary me-2"></i> Đội ngũ nhân viên trình độ cao</p>
                             </div>
                         </div>
                         <!-- <a class="btn btn-primary py-3 px-5 mt-2" href="">Xem Ngay</a> -->
@@ -76,7 +76,7 @@ include('user/component/header.php');
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h1 class="mb-5">TEAM</h1>
+                    <h1 class="mb-5" style="color: var(--secondary-color)">TEAM</h1>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -92,8 +92,8 @@ include('user/component/header.php');
                                 </div>
                             </div>
                             <div class="text-center p-4">
-                                <h5 class="mb-0">Nguyễn Minh Quang</h5>
-                                <small>Nhóm trưởng</small>
+                                <h5 class="mb-0" style="color: var(--secondary-color)">Nguyễn Minh Quang</h5>
+                                <small style="color: var(--secondary-color)">Nhóm trưởng</small>
                             </div>
                         </div>
                     </div>
@@ -110,8 +110,8 @@ include('user/component/header.php');
                                 </div>
                             </div>
                             <div class="text-center p-4">
-                                <h5 class="mb-0">Quách Thanh Tú</h5>
-                                <small>Thành viên</small>
+                                <h5 class="mb-0" style="color: var(--secondary-color)">Quách Thanh Tú</h5>
+                                <small style="color: var(--secondary-color)">Thành viên</small>
                             </div>
                         </div>
                     </div>
@@ -128,8 +128,8 @@ include('user/component/header.php');
                                 </div>
                             </div>
                             <div class="text-center p-4">
-                                <h5 class="mb-0">Võ Phan Hoàng Sang</h5>
-                                <small>Thành viên</small>
+                                <h5 class="mb-0" style="color: var(--secondary-color)">Võ Phan Hoàng Sang</h5>
+                                <small style="color: var(--secondary-color)">Thành viên</small>
                             </div>
                         </div>
                     </div>
@@ -146,8 +146,8 @@ include('user/component/header.php');
                                 </div>
                             </div>
                             <div class="text-center p-4">
-                                <h5 class="mb-0">Nguyễn Văn Đặng</h5>
-                                <small>Thành viên</small>
+                                <h5 class="mb-0" style="color: var(--secondary-color)">Nguyễn Văn Đặng</h5>
+                                <small style="color: var(--secondary-color)">Thành viên</small>
                             </div>
                         </div>
                     </div>

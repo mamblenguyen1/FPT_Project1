@@ -144,7 +144,7 @@ if (isset($_COOKIE['viewCount'])) {
 												<div class="tg-booktitle">
 													<h3><? echo $product->all_product_category($category_id, $product_id, 'product_name') ?></h3>
 												</div>
-												<span class="tg-bookwriter">Hãng: <a href=""><? echo $product->all_product_category($category_id, $product_id, 'type_name') ?></a></span>
+												<span class="tg-bookwriter">Hãng: <a href="" style="color: var(--secondary-color);"><? echo $product->all_product_category($category_id, $product_id, 'type_name') ?></a></span>
 												<span class="tg-stars"><span></span></span>
 												<span class="tg-addreviews"><a href="">Đánh giá</a></span>
 												<div class="tg-share">
@@ -537,12 +537,19 @@ if (isset($_COOKIE['viewCount'])) {
 
 </div>
 <style>
+	.text-center{
+		color: var(--secondary-color);
+	}
+	.col-md-6 h2{
+		color: var(--secondary-color);
+	}
 	.comment-method {
 		padding: 10px 0;
 	}
 
 	.reply-comment {
 		padding: 5px 30px;
+		color: var(--secondary-color);
 	}
 
 	.reply-comment span {
