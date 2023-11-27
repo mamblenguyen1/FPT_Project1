@@ -6,20 +6,22 @@ include('User/component/header.php');
 
 if (isset($_GET['order_id'])) {
     $order_id = $_GET['order_id'];
-if (isset($_POST['payment'])) {
-    $province_id = $_POST['Province'];
-    $district_id  = $_POST['district'];
-    $wards_id  = $_POST['wards'];
-    $user_street = $_POST['user_street'];
-    $province_name = $user->getAddress('province', $province_id, 'name');
-    $district_name = $user->getAddress('district', $district_id, 'name');
-    $wards_name = $user->getAddress('wards', $wards_id, 'name');
-    $address = "$user_street  - $wards_name - $district_name - $province_name";
-    $totalprice = $order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment');
-    $order->addCartAndCartDetail($_COOKIE['userID'], $address, $totalprice, $order_id);
-    $cart_now = $order->Show_Cart_detail_Collumn1($_COOKIE['userID'], 'cart_id');
-    $mail->MailOrder($cart_now, 'nmquang1997@gmail.com');
-}
+    if (isset($_POST['payment'])) {
+        $province_id = $_POST['Province'];
+        $district_id  = $_POST['district'];
+        $wards_id  = $_POST['wards'];
+        $user_street = $_POST['user_street'];
+        $discount = isset($_SESSION['discount']) ? $_SESSION['discount'] : 0;
+        $phone_number = $_POST['phonenumber'];
+        $province_name = $user->getAddress('province', $province_id, 'name');
+        $district_name = $user->getAddress('district', $district_id, 'name');
+        $wards_name = $user->getAddress('wards', $wards_id, 'name');
+        $address = "$user_street  - $wards_name - $district_name - $province_name";
+        $totalprice = $order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment');
+        $order->addCartAndCartDetail($_COOKIE['userID'], $address, $totalprice, $order_id);
+        $cart_now = $order->Show_Cart_detail_Collumn1($_COOKIE['userID'], 'cart_id');
+        // $mail->MailOrder($cart_now, 'nmquang1997@gmail.com');
+    }
 }
 
 ?>
@@ -47,11 +49,11 @@ if (isset($_POST['payment'])) {
 
                     <label class="base-label margin-20">Địa chỉ giao hàng</label>
                     <p class="margin-0">
-                        <? echo $address?>
+                        <? echo $address ?>
                     </p>
 
                     <label class="base-label margin-20">Số điện thoại</label>
-                    <p class="margin-0"><? echo $order->getInfoOrderId($order_id, 'user_phone_number') ?></p>
+                    <p class="margin-0"><? echo $phone_number ?></p>
                     <div class="hr"></div>
 
                     <h3 class="">Thông tin sản phẩm</h3>
@@ -59,20 +61,23 @@ if (isset($_POST['payment'])) {
                         <thead>
                             <tr>
                                 <th>Sản phẩm</th>
-                                <th>Giá</th>
+                                <th>Giá Gốc</th>
                                 <th>Số lượng</th>
                                 <th>Tổng cộng</th>
                             </tr>
+
+
                         </thead>
                         <tbody>
                             <!-- Dòng 1: Sản phẩm 1 -->
                             <?
-                              $sql = $order->Show_Order();
-                              foreach ($sql as $row) {
-                                  extract($sql);
-                              }
+                            $sql = $order->Show_Order();
+                            foreach ($sql as $row) {
+                                extract($sql);
+                            }
                             ?>
                             <?
+                            $tong = 0;
                             $conn = $db->pdo_get_connection();
                             $stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
                                     WHERE order_detail.order_id = `order`.order_id AND
@@ -85,13 +90,14 @@ if (isset($_POST['payment'])) {
                             if ($stmt->rowCount() > 0) {
                                 foreach ($stmt as $row) {
                                     echo '
-                                            <tr>
-                                 <td>' . $row['product_name'] . '</td>
-                                 <td>' . number_format($row['product_price']) . ' đ</td>
-                                 <td>' . $row['order_quantity'] . '</td>
-                                 <td>' . number_format($row['product_price'] * $row['order_quantity']) . ' đ</td>
-                               </tr>
+                                        <tr>
+                                            <td>' . $row['product_name'] . '</td>
+                                            <td>' . number_format($row['product_price']) . ' đ</td>
+                                            <td>' . $row['order_quantity'] . '</td>
+                                            <td>' . number_format($row['product_price'] * $row['order_quantity']) . ' đ</td>
+                                        </tr>
                                             ';
+                                            $tong = $tong + ($row['product_price'] * $row['order_quantity']);
                                 }
                             }
                             ?>
@@ -102,16 +108,26 @@ if (isset($_POST['payment'])) {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="3">Tổng cộng</td>
+                                <td colspan="3">Giá tổng</td>
+                                <td><? echo number_format($tong)?> đ</td>
+                            </tr>
+
+                            
+                            <tr>
+                                <td colspan="3">Phần trăm đã giảm</td>
+                                <td><? echo (100 - intval(($order->getOrder_total_payment(($order->getInfoOrderId($order_id, 'user_id')), 'order_total_payment')) *100 / $tong)) ?> %</td>  
+                            </tr>
+                            <tr>
+                                <th colspan="3">Tổng cộng</th>
                                 <td><? echo number_format($order->getOrder_total_payment(($order->getInfoOrderId($order_id, 'user_id')), 'order_total_payment')) ?> đ</td>
                             </tr>
                         </tfoot>
                     </table>
 
-<?
-   $order->updateOrderDetail($order_id);
+                    <?
+                    $order->updateOrderDetail($order_id);
 
-?>
+                    ?>
 
                     <div class="hr"></div>
 

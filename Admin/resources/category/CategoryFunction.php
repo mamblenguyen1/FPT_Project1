@@ -23,19 +23,20 @@ class Categories
     function deleteCate($cateID)
     {
         $db = new connect();
-        $sql = " START TRANSACTION; UPDATE category SET is_deleted = 2 WHERE category_id = $cateID;
-UPDATE type SET type.is_deleted = 2
-        WHERE category_id = (
+        $sql = " START TRANSACTION; 
+                UPDATE category SET is_deleted = 2 WHERE category_id = $cateID;
+                UPDATE type SET type.is_deleted = 2
+                WHERE category_id = (
                 SELECT category_id FROM category 
                 WHERE category.category_id = $cateID
-);
-UPDATE products SET is_deleted = 2
-        WHERE type_id IN 
-(
-SELECT type.type_id FROM `type`, category 
-     WHERE category.category_id = type.category_id
-     AND category.category_id = $cateID);
-     COMMIT;
+                );
+                UPDATE products SET is_deleted = 2
+                        WHERE type_id IN 
+                (
+                SELECT type.type_id FROM `type`, category 
+                    WHERE category.category_id = type.category_id
+                    AND category.category_id = $cateID);
+                    COMMIT;
         ";
         $result = $db->pdo_execute($sql);
         return $result;

@@ -120,12 +120,23 @@ class UserFunction
     function getInfouser($user_id, $column)
     {
         $db = new connect();
-        $sql = "SELECT * FROM user, status WHERE status.status_id= user.is_deleted AND user_id = $user_id";
+        $sql = "SELECT * FROM user, `status` WHERE status.status_id= user.is_deleted AND user_id = $user_id";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];
         }
     }
+
+    function getInfoUserRole($user_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM user, `role` WHERE role.role_id = user.role_id AND user_id = $user_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+
     function update_NewPass($userPass , $userEmail)
     {
         $db = new connect();
@@ -147,8 +158,8 @@ class UserFunction
     function user_select_all()
     {
         $db = new connect();
-        $sql = "SELECT *, province.name as 'thanhpho', district.name as 'huyen', wards.name as 'xa' FROM `user` , province , district , wards 
-        WHERE user.province_id = province.province_id AND user.wards_id = wards.wards_id AND user.district_id = district.district_id 
+        $sql = "SELECT *, province.name as 'thanhpho', district.name as 'huyen', wards.name as 'xa' FROM `user` , province , district , wards , `role`
+        WHERE user.province_id = province.province_id AND user.wards_id = wards.wards_id AND user.district_id = district.district_id AND user.role_id = role.role_id
         AND user.is_deleted = 1";
         return $db->pdo_query($sql);
     }

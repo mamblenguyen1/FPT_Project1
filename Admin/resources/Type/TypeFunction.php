@@ -26,10 +26,16 @@ class Type
         $sql = "SELECT * FROM category, `type` WHERE category.category_id=type.category_id AND category.category_id NOT IN (1,2)";
         return $db->pdo_query($sql);
     }
+
     function deleteCate($type_id)
     {
         $db = new connect();
-        $sql = "UPDATE `type` SET is_deleted = 2 WHERE type_id = $type_id";
+        $sql = " START TRANSACTION; 
+                UPDATE type SET is_deleted = 2 WHERE type_id = $type_id;
+                UPDATE products SET products.is_deleted = 2
+                WHERE type_id = $type_id;
+                COMMIT;
+        ";
         $result = $db->pdo_execute($sql);
         return $result;
     }
@@ -75,10 +81,14 @@ class Type
         }
     }
 //khôi phục
-    function RestoreType($typeID)
+    function RestoreType($type_id)
     {
         $db = new connect();
-        $sql = "UPDATE type SET is_deleted = 1 WHERE type_id = $typeID";
+        $sql = "START TRANSACTION; 
+        UPDATE type SET is_deleted = 1 WHERE type_id = $type_id;
+        UPDATE products SET products.is_deleted = 1
+        WHERE type_id = $type_id;
+        COMMIT;";
         $result = $db->pdo_execute($sql);
         return $result;
     }
@@ -98,4 +108,6 @@ class Type
         $result = $db->pdo_query($select);
         return $result;
     }
+
+    
 }

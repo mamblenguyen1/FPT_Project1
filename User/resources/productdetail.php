@@ -413,6 +413,20 @@ if (isset($_COOKIE['viewCount'])) {
 												</div>
 												<hr>
 														';
+														$stmt1  = $conn->prepare("SELECT * FROM comment_reply
+														WHere comment_reply.comment_detail_id = $row[comment_detail_id]");
+																					$stmt1->execute();
+																					if ($stmt1->rowCount() > 0) {
+																						foreach ($stmt1 as $row1) {
+																							echo '
+																			<div class="reply-comment">
+																			<p> <i class="fa fa-reply"></i>
+																			<strong>Trả lời từ ADMIN</strong>
+																			</p>
+																			<span>' . $row1['content'] . '</span>
+																			</div>';
+																						}
+																					}
 																	}
 																}
 															}

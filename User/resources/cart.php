@@ -73,8 +73,6 @@ if (isset($_POST['deleteCart'])) {
 if (isset($_POST['updateQty'])) {
   $cartdeId = $_POST['cartDetailId'];
   $cartdeQty = $_POST['cartqty'];
-  echo $cartdeId, $cartdeQty;
-  // exit();
   $order->updateCartQty($cartdeId, $cartdeQty);
 }
 ?>
@@ -119,15 +117,14 @@ if (isset($_POST['updateQty'])) {
               <div class="col-sm-2 hidden-xs"><img src="/images/product/' . $row['product_img'] . '.png" alt="..." class="img-responsive" /></div>
               <div class="col-sm-10">
                 <h4 class="nomargin">' . $row['product_name'] . '</h4>
-                <p>' . $row['product_short_description'] . '.</p>
               </div>
             </div>
           </td>
-          <td data-th="Price">' . $row['product_price'] . '</td>
+          <td data-th="Price">' . number_format($row['product_price']) . ' đ</td>
           <td data-th="Quantity">
             <input type="number" value="' . $row['order_quantity'] . '" class="form-control text-center" name="cartqty">
           </td>
-          <td data-th="Subtotal" class="text-center">' . $row['order_quantity'] * $row['product_price'] . '</td>
+          <td data-th="Subtotal" class="text-center">' . number_format($row['order_quantity'] * $row['product_price']) . ' đ</td>
           <td class="actions" data-th="">
           <input type="hidden" name="cartDetailId" value="' . $row['order_detail_id'] . '" id="">
           <button name="updateQty" type="submit" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
@@ -149,7 +146,7 @@ if (isset($_POST['updateQty'])) {
           <tr>
             <td><a href="index.php?pages=user&action=products" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a></td>
             <td colspan="2" class="hidden-xs"></td>
-            <td class="hidden-xs text-center"><strong>Total ' . $total_price . '</strong></td>
+            <td class="hidden-xs text-center"><strong>Total ' . number_format($total_price) . ' đ </strong></td>
             <td>
             <form action="" method="POST">
               <input type="hidden" name="user_id" value="' . $_COOKIE['userID'] . '">

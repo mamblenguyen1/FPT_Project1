@@ -27,7 +27,7 @@ if (isset($_GET['user_id'])) {
 
                 <div class="col-md-6 mb-3">
                     <label for="phonenumber">Số điện thoại</label>
-                    <input type="text" class="form-control rounded-2xl" id="phonenumber" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_phone_number') ?>" required>
+                    <input type="text" class="form-control rounded-2xl" id="phonenumber" name="phonenumber" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_phone_number') ?>" required>
                 </div>
             </div>
 
@@ -180,7 +180,7 @@ if (isset($_POST['code-input'])) {
         </li>
         <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
             <a class="text-muted"><b>Giảm giá:</b></a>
-            <a class="text-muted1"><?= $Percentage ?> %</a>
+            <a class="text-muted1"></a><?= $Percentage ?> %</a>
             <?
             $discount = $Percentage / 100;
             ?>

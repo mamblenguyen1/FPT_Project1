@@ -94,7 +94,20 @@ if (isset($_POST['sua_user'])) {
 
             <div class="form-group">
               <label for="exampleInputPassword1">Vai trò</label>
-              <input type="text" class="form-control" id="exampleInputPassword1" name="role_id" value="<? echo $user->getInfouser($user_id, 'role_id'); ?>">
+              <select name="role_id" id="role"class="form-control select2" style="width: 100%;">
+              <option selected="selected" value="<?= $user->getInfoUserRole($user_id, 'role_id')?>"><?= $user->getInfoUserRole($user_id, 'role_name')?></option>
+                                <?
+                                $roleid = $user->getInfoUserRole($user_id, 'role_id');
+                                $conn = $db->pdo_get_connection();
+                                $stmt = $conn->prepare("SELECT * FROM `role` WHERE role_id <> $roleid");
+                                $stmt->execute();
+                                if ($stmt->rowCount() > 0) {
+                                    foreach ($stmt as $row) {
+                                        echo ' <option value="' . $row['role_id'] . '" >' . $row['role_name'] . '</option>';
+                                    }
+                                }
+                                ?>
+              </select>
             </div>
             <?
             if (isset($_POST["role_id"])) {
@@ -110,9 +123,6 @@ if (isset($_POST['sua_user'])) {
               <label>Tỉnh / Thành Phố</label>
               <select name="Province" id="Province" class="form-control select2" style="width: 100%;">
                 <option selected value="<? echo $user->getInfoProvince($user_id, 'province_id'); ?>"> <? echo $user->getInfoProvince($user_id, 'name'); ?></option>
-
-
-
               </select>
             </div>
             <?
@@ -146,8 +156,6 @@ if (isset($_POST['sua_user'])) {
               <label>Phường / Xã</label>
               <select name="wards" id="wards" class="form-control select2" style="width: 100%;">
                 <option selected value="<? echo $user->getInfoWards($user_id, 'wards_id'); ?>"> <? echo $user->getInfoWards($user_id, 'name'); ?></option>
-
-
               </select>
             </div>
             <?
@@ -240,7 +248,7 @@ if (isset($_POST['sua_user'])) {
         for (i = 0; i < data.length; i++) {
           var wards = data[i];
           var str = ` 
-                <option  value="${wards['wards_id']}">${wards['name']} </option>`;
+                <option value="${wards['wards_id']}">${wards['name']} </option>`;
           $("#wards").append(str);
         }
       }
