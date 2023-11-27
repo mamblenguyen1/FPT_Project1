@@ -8,62 +8,65 @@ require 'PHPMailer/src/Exception.php';
 
 
 
+
+
+
 class Mailer
 {
 
-    public function sendEmail($content, $addressMail)
-    {
-        $mail = new PHPMailer\PHPMailer\PHPMailer(true); //true:enables exceptions
-        try {
-            $mail->SMTPDebug = 0; //0,1,2: chế độ debug
-            $mail->isSMTP();
-            $mail->CharSet = "utf-8";
-            $mail->Host = 'smtp.gmail.com'; //SMTP servers
-            $mail->SMTPAuth = true; // Enable authentication
-            $mail->Username = 'nmquang1997@gmail.com'; // SMTP username
-            $mail->Password = 'znxczngepylfhjqh'; // SMTP password
-            $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL 
-            $mail->Port = 465; // port to connect to                
-            $mail->setFrom('nmquang1997@gmail.com', 'Minh Quang Electronics');
-            $mail->addAddress($addressMail);
-            $mail->isHTML(true);
-            $mail->Subject = 'Quên Mật Khẩu';
-            $noidungthu = 'Mật Khẩu Của Bạn Là:' . $content;
-            $mail->Body = $noidungthu;
-            $mail->smtpConnect(
-                array(
-                    "ssl" => array(
-                        "verify_peer" => false,
-                        "verify_peer_name" => false,
-                        "allow_self_signed" => true
-                    )
-                )
-            );
-            $mail->send();
-            // echo 'Đã gửi mail xong';
-        } catch (Exception $e) {
-            echo 'Error: ', $mail->ErrorInfo;
-        }
+  public function sendEmail($content, $addressMail)
+  {
+    $mail = new PHPMailer\PHPMailer\PHPMailer(true); //true:enables exceptions
+    try {
+      $mail->SMTPDebug = 0; //0,1,2: chế độ debug
+      $mail->isSMTP();
+      $mail->CharSet = "utf-8";
+      $mail->Host = 'smtp.gmail.com'; //SMTP servers
+      $mail->SMTPAuth = true; // Enable authentication
+      $mail->Username = 'nmquang1997@gmail.com'; // SMTP username
+      $mail->Password = 'znxczngepylfhjqh'; // SMTP password
+      $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL 
+      $mail->Port = 465; // port to connect to                
+      $mail->setFrom('nmquang1997@gmail.com', 'Minh Quang Electronics');
+      $mail->addAddress($addressMail);
+      $mail->isHTML(true);
+      $mail->Subject = 'Quên Mật Khẩu';
+      $noidungthu = 'Mật Khẩu Của Bạn Là:' . $content;
+      $mail->Body = $noidungthu;
+      $mail->smtpConnect(
+        array(
+          "ssl" => array(
+            "verify_peer" => false,
+            "verify_peer_name" => false,
+            "allow_self_signed" => true
+          )
+        )
+      );
+      $mail->send();
+      // echo 'Đã gửi mail xong';
+    } catch (Exception $e) {
+      echo 'Error: ', $mail->ErrorInfo;
     }
+  }
 
-    public function thanksMail($user_name, $addressMail)
-    {
-        $mail = new PHPMailer\PHPMailer\PHPMailer(true); //true:enables exceptions
-        try {
-            $mail->SMTPDebug = 0; //0,1,2: chế độ debug
-            $mail->isSMTP();
-            $mail->CharSet = "utf-8";
-            $mail->Host = 'smtp.gmail.com'; //SMTP servers
-            $mail->SMTPAuth = true; // Enable authentication
-            $mail->Username = 'nmquang1997@gmail.com'; // SMTP username
-            $mail->Password = 'znxczngepylfhjqh'; // SMTP password
-            $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL 
-            $mail->Port = 465; // port to connect to                
-            $mail->setFrom('nmquang1997@gmail.com', 'Liberty Technology');
-            $mail->addAddress($addressMail);
-            $mail->isHTML(true);
-            $mail->Subject = 'Thư cảm ơn';
-            $noidungthu = ' <div  style=" max-width: 600px;
+  public function thanksMail($user_name, $addressMail)
+  {
+    $mail = new PHPMailer\PHPMailer\PHPMailer(true); //true:enables exceptions
+    try {
+      $mail->SMTPDebug = 0; //0,1,2: chế độ debug
+      $mail->isSMTP();
+      $mail->CharSet = "utf-8";
+      $mail->Host = 'smtp.gmail.com'; //SMTP servers
+      $mail->SMTPAuth = true; // Enable authentication
+      $mail->Username = 'nmquang1997@gmail.com'; // SMTP username
+      $mail->Password = 'znxczngepylfhjqh'; // SMTP password
+      $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL 
+      $mail->Port = 465; // port to connect to                
+      $mail->setFrom('nmquang1997@gmail.com', 'Liberty Technology');
+      $mail->addAddress($addressMail);
+      $mail->isHTML(true);
+      $mail->Subject = 'Thư cảm ơn';
+      $noidungthu = ' <div  style=" max-width: 600px;
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
@@ -84,41 +87,41 @@ class Mailer
                 <p>Trân trọng,<br>Liberty Technology</p>
             </div>
         ';
-            $mail->Body = $noidungthu;
-            $mail->smtpConnect(
-                array(
-                    "ssl" => array(
-                        "verify_peer" => false,
-                        "verify_peer_name" => false,
-                        "allow_self_signed" => true
-                    )
-                )
-            );
-            $mail->send();
-            // echo 'Đã gửi mail xong';
-        } catch (Exception $e) {
-            echo 'Error: ', $mail->ErrorInfo;
-        }
+      $mail->Body = $noidungthu;
+      $mail->smtpConnect(
+        array(
+          "ssl" => array(
+            "verify_peer" => false,
+            "verify_peer_name" => false,
+            "allow_self_signed" => true
+          )
+        )
+      );
+      $mail->send();
+      // echo 'Đã gửi mail xong';
+    } catch (Exception $e) {
+      echo 'Error: ', $mail->ErrorInfo;
     }
+  }
 
-    public function ReplyMail($user_name, $addressMail, $subject, $question, $answer)
-    {
-        $mail = new PHPMailer\PHPMailer\PHPMailer(true); //true:enables exceptions
-        try {
-            $mail->SMTPDebug = 0; //0,1,2: chế độ debug
-            $mail->isSMTP();
-            $mail->CharSet = "utf-8";
-            $mail->Host = 'smtp.gmail.com'; //SMTP servers
-            $mail->SMTPAuth = true; // Enable authentication
-            $mail->Username = 'nmquang1997@gmail.com'; // SMTP username
-            $mail->Password = 'znxczngepylfhjqh'; // SMTP password
-            $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL 
-            $mail->Port = 465; // port to connect to                
-            $mail->setFrom('nmquang1997@gmail.com', 'Liberty Technology');
-            $mail->addAddress($addressMail);
-            $mail->isHTML(true);
-            $mail->Subject = 'Thư phản hồi khách hàng';
-            $noidungthu = ' 
+  public function ReplyMail($user_name, $addressMail, $subject, $question, $answer)
+  {
+    $mail = new PHPMailer\PHPMailer\PHPMailer(true); //true:enables exceptions
+    try {
+      $mail->SMTPDebug = 0; //0,1,2: chế độ debug
+      $mail->isSMTP();
+      $mail->CharSet = "utf-8";
+      $mail->Host = 'smtp.gmail.com'; //SMTP servers
+      $mail->SMTPAuth = true; // Enable authentication
+      $mail->Username = 'nmquang1997@gmail.com'; // SMTP username
+      $mail->Password = 'znxczngepylfhjqh'; // SMTP password
+      $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL 
+      $mail->Port = 465; // port to connect to                
+      $mail->setFrom('nmquang1997@gmail.com', 'Liberty Technology');
+      $mail->addAddress($addressMail);
+      $mail->isHTML(true);
+      $mail->Subject = 'Thư phản hồi khách hàng';
+      $noidungthu = ' 
 
             <body style="background-color:#ffffff;">
             <div style="background-color:#ffffff;">
@@ -364,40 +367,47 @@ class Mailer
             </body>
             
         ';
-            $mail->Body = $noidungthu;
-            $mail->smtpConnect(
-                array(
-                    "ssl" => array(
-                        "verify_peer" => false,
-                        "verify_peer_name" => false,
-                        "allow_self_signed" => true
-                    )
-                )
-            );
-            $mail->send();
-            // echo 'Đã gửi mail xong';
-        } catch (Exception $e) {
-            echo 'Error: ', $mail->ErrorInfo;
-        }
+      $mail->Body = $noidungthu;
+      $mail->smtpConnect(
+        array(
+          "ssl" => array(
+            "verify_peer" => false,
+            "verify_peer_name" => false,
+            "allow_self_signed" => true
+          )
+        )
+      );
+      $mail->send();
+      // echo 'Đã gửi mail xong';
+    } catch (Exception $e) {
+      echo 'Error: ', $mail->ErrorInfo;
     }
-    public function MailOrder($user_name, $addressMail)
-    {
-        $mail = new PHPMailer\PHPMailer\PHPMailer(true); //true:enables exceptions
-        try {
-            $mail->SMTPDebug = 0; //0,1,2: chế độ debug
-            $mail->isSMTP();
-            $mail->CharSet = "utf-8";
-            $mail->Host = 'smtp.gmail.com'; //SMTP servers
-            $mail->SMTPAuth = true; // Enable authentication
-            $mail->Username = 'nmquang1997@gmail.com'; // SMTP username
-            $mail->Password = 'znxczngepylfhjqh'; // SMTP password
-            $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL 
-            $mail->Port = 465; // port to connect to                
-            $mail->setFrom('nmquang1997@gmail.com', 'Liberty Technology');
-            $mail->addAddress($addressMail);
-            $mail->isHTML(true);
-            $mail->Subject = 'Thông tin đơn hàng';
-            $noidungthu = ' <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+  }
+  public function MailOrder($cart_id, $addressMail)
+  {
+    $db = new connect();
+    $order = new ORDER();
+    $mail = new PHPMailer\PHPMailer\PHPMailer(true); //true:enables exceptions
+    try {
+      $mail->SMTPDebug = 0; //0,1,2: chế độ debug
+      $mail->isSMTP();
+      $mail->CharSet = "utf-8";
+      $mail->Host = 'smtp.gmail.com'; //SMTP servers
+      $mail->SMTPAuth = true; // Enable authentication
+      $mail->Username = 'nmquang1997@gmail.com'; // SMTP username
+      $mail->Password = 'znxczngepylfhjqh'; // SMTP password
+      $mail->SMTPSecure = 'ssl'; // encryption TLS/SSL 
+      $mail->Port = 465; // port to connect to                
+      $mail->setFrom('nmquang1997@gmail.com', 'Liberty Technology');
+      $mail->addAddress($addressMail);
+      $mail->isHTML(true);
+      $mail->Subject = 'Thông tin đơn hàng';  
+      $total = 0;
+      $sql = $order->Show_Cart_detail($cart_id);
+     
+      
+   
+      $noidungthu = ' <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
             <tr>
               <td height="20"></td>
             </tr>
@@ -426,15 +436,15 @@ class Mailer
                           </tr>
                           <tr>
                             <td>
-                              <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                              <table width="220" border="0"  cellpadding="0" cellspacing="0" align="left" class="col">
                                 <tbody>
                                   <tr class="hiddenMobile">
                                     <td height="40"></td>
                                   </tr>
                                   <tr>
                                     <td style="font-size: 12px; color: #5b5b5b; font-family:  sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
-                                      Xin Chào, TÚ.
-                                      <br> Cảm ơn bạn đã mua sắm từ cửa hàng của chúng tôi và đặt hàng.
+                                      Xin Chào, ' . $order->Show_Cart_detail_Collumn($cart_id, 'user_name') . '.
+                                      <br> Cảm ơn bạn đã đặt hàng từ cửa hàng của chúng tôi.
                                     </td>
                                   </tr>
                                 </tbody>
@@ -446,8 +456,8 @@ class Mailer
                                   </tr>
                                   <tr>
                                     <td style="font-size: 12px; color: #5b5b5b; font-family:  sans-serif; line-height: 22px; vertical-align: top; text-align: right;">
-                                      <small>Đơn hàng</small> #123<br />
-                                      <small>Ngày 11 tháng 24 năm 2023</small>
+                                      <small>Đơn hàng</small> #' . $cart_id . '<br />
+                                      <small>' . $order->Show_Cart_detail_Collumn($cart_id, 'date') . '</small>
                                     </td>
                                   </tr>
                                 </tbody>
@@ -476,254 +486,281 @@ class Mailer
                       </tr>
                       <tr>
                         <td>
-                          <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
-                            <tbody>
-                              <tr>
-                                <th style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="52%" align="left">
-                                  Tên Sản Phẩm
-                                </th>
-                                <th style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="left">
-                                  <small></small>
-                                </th>
-                                <th style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="center">
-                                  Số Lượng
-                                </th>
-                                <th style="font-size: 12px; font-family:  sans-serif; color: #1e2b33; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="right">
-                                  Tổng
-                                </th>
-                              </tr>
-                              <tr>
-                                <td height="1" style="background: #bebebe;" colspan="4"></td>
-                              </tr>
-                              <tr>
-                                <td height="10" colspan="4"></td>
-                              </tr>
-                              <tr>
-                                <td style="font-size: 12px; font-family:  sans-serif; color: #ff0000;  line-height: 18px;  vertical-align: top; padding:10px 0;" class="article">
-                                  Iphone 15 Pro
-                                </td>
-                                <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;"><small></small></td>
-                                <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="center">1</td>
-                                <td style="font-size: 12px; font-family:  sans-serif; color: #1e2b33;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="right">$299.95</td>
-                              </tr>
-                              <tr>
-                                <td height="1" colspan="4" style="border-bottom:1px solid #e4e4e4"></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td height="20"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- /Order Details -->
-          <!-- Total -->
-          <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
-            <tbody>
-              <tr>
-                <td>
-                  <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <!-- Table Total -->
-                          <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
-                            <tbody>
-                              <tr>
-                                <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ">
-                                  Subtotal
-                                </td>
-                                <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; white-space:nowrap;" width="80">
-                                  $329.90
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="font-size: 12px; font-family:  sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
-                                  <strong>Thành Tiền</strong>
-                                </td>
-                                <td style="font-size: 12px; font-family:  sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
-                                  <strong>$344.90</strong>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <!-- /Table Total -->
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- /Total -->
-          <!-- Information -->
-          <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
-            <tbody>
-              <tr>
-                <td>
-                  <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
-                    <tbody>
-                      <tr>
-                      <tr class="visibleMobile">
-                        <td height="40"></td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
-                                    <tbody>
-                                      <tr>
-                                        <td style="font-size: 11px; font-family:  sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
-                                          <strong>Địa Chỉ: </strong>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td width="100%" height="10"></td>
-                                      </tr>
-                                      <tr>
-                                        <td style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
-                                          226, Xã chữ A<br> Huyện chữ B<br> Tp. chữ C<br> Hotline: 09090909
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                  <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
-                                    <tbody>
-                                      <tr>
-                                        <td style="font-size: 11px; font-family:  sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
-                                          <strong>Phương Thức Thanh Toán</strong>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td width="100%" height="10"></td>
-                                      </tr>
-                                      <tr>
-                                        <td style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
-                                          Thanh toán khi nhận hàng.
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
-                                    <tbody>
-                                      <tr class="hiddenMobile">
-                                        <td height="35"></td>
-                                      </tr>
-                                      <tr>
-                                        <td style="font-size: 11px; font-family:  sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
-                                          <strong>Thông Tin Vận Chuyển</strong>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td width="100%" height="10"></td>
-                                      </tr>
-                                      <tr>
-                                        <td style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
-                                          Đơn hàng của bạn được giao trong vòng 1h đến 2h.
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                  <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
-                                    <tbody>
-                                      <tr class="hiddenMobile">
-                                        <td height="35"></td>
-                                      </tr>
-                                      <tr>
-                                        <td style="font-size: 11px; font-family:  sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
-                                          <strong>Hình Thức Vận Chuyển</strong>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td width="100%" height="10"></td>
-                                      </tr>
-                                      <tr>
-                                        <td style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
-                                          Giao hàng hỏa tốc
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                      <tr class="visibleMobile">
-                        <td height="30"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- /Information -->
-          <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+
+      <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+        <tbody>
+
+          <tr>
+            <th style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;" width="52%" align="left">
+              Tên Sản Phẩm
+            </th>
+            <th style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="left">
+              <small></small>
+            </th>
+            <th style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="center">
+              Số Lượng
+            </th>
+            <th style="font-size: 12px; font-family:  sans-serif; color: #1e2b33; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;" align="right">
+              Tổng
+            </th>
+          </tr>
+
+          <tr>
+            <td height="1" style="background: #bebebe;" colspan="4"></td>
+          </tr>
+
+
+          ';
+          foreach ($sql as $row) {
+            extract($row);
+            $noidungthu .= '
             <tr>
-              <td>
-                <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff" style="border-radius: 0 0 10px 10px;">
+              <td height="10" colspan="4"></td>
+            </tr>
+            
+                <tr>
+                  <td style="font-size: 12px; font-family:  sans-serif; color: #ff0000;  line-height: 18px;  vertical-align: top; padding:10px 0;" class="article">
+                    '.$product_name.'
+                  </td>
+                  <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;"><small></small></td>
+                  <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="center">'.$quantity.' </td>
+                  <td style="font-size: 12px; font-family:  sans-serif; color: #1e2b33;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="right">'.$quantity * $product_price.'</td>
+                </tr>
+            <tr>
+              <td height="1" colspan="4" style="border-bottom:1px solid #e4e4e4"></td>
+              ';
+              $total = $total + ($quantity * $product_price);
+          }
+          
+
+         
+            $noidungthu .='
+          </tr>
+        </tbody>
+      </table>
+      </td>
+      </tr>
+      <tr>
+        <td height="20"></td>
+      </tr>
+      </tbody>
+      </table>
+      </td>
+      </tr>
+      </tbody>
+      </table>
+      <!-- /Order Details -->
+      <!-- Total -->
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+        <tbody>
+          <tr>
+            <td>
+              <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+                <tbody>
+                  <tr>
+                    <td>
+                      <!-- Table Total -->
+                      <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                        <tbody>
+                          <tr>
+                            <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ">
+                              Tổng cộng
+                            </td>
+                            <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; white-space:nowrap;" width="80">
+                              ' .$total .'
+                            </td>
+                          </tr>
+                          <tr>
+                          <td style="font-size: 12px; font-family:  sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
+                            <strong>Giảm giá : </strong>
+                          </td>
+                          <td style="font-size: 12px; font-family:  sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
+                            <strong>' .$total .'</strong>
+                          </td>
+                        </tr>
+                          <tr>
+                            <td style="font-size: 12px; font-family:  sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
+                              <strong>Thành Tiền</strong>
+                            </td>
+                            <td style="font-size: 12px; font-family:  sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
+                              <strong>' .$total .'</strong>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- /Table Total -->
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- /Total -->
+      <!-- Information -->
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+        <tbody>
+          <tr>
+            <td>
+              <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+                <tbody>
+                  <tr>
+                  <tr class="visibleMobile">
+                    <td height="40"></td>
+                  </tr>
                   <tr>
                     <td>
                       <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
                         <tbody>
                           <tr>
-                            <td style="font-size: 12px; color: #5b5b5b; font-family:  sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
-                              Chúc bạn một ngày tốt lành !!
+                            <td>
+                              <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                                <tbody>
+                                  <tr>
+                                    <td style="font-size: 11px; font-family:  sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                      <strong>Địa Chỉ: </strong>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td width="100%" height="10"></td>
+                                  </tr>
+                                  <tr>
+                                    <td style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                    ' . $order->Show_Cart_detail_Collumn($cart_id, 'address') . '<br> Hotline: 09090909
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
+                                <tbody>
+                                  <tr>
+                                    <td style="font-size: 11px; font-family:  sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                      <strong>Phương Thức Thanh Toán</strong>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td width="100%" height="10"></td>
+                                  </tr>
+                                  <tr>
+                                    <td style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                      Thanh toán khi nhận hàng.
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
                             </td>
                           </tr>
                         </tbody>
                       </table>
                     </td>
                   </tr>
-                  <tr class="spacer">
-                    <td height="50"></td>
+                  <tr>
+                    <td>
+                      <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                                <tbody>
+                                  <tr class="hiddenMobile">
+                                    <td height="35"></td>
+                                  </tr>
+                                  <tr>
+                                    <td style="font-size: 11px; font-family:  sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                      <strong>Thông Tin Vận Chuyển</strong>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td width="100%" height="10"></td>
+                                  </tr>
+                                  <tr>
+                                    <td style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                      Đơn hàng của bạn được giao trong vòng 1h đến 2h.
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
+                                <tbody>
+                                  <tr class="hiddenMobile">
+                                    <td height="35"></td>
+                                  </tr>
+                                  <tr>
+                                    <td style="font-size: 11px; font-family:  sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+                                      <strong>Hình Thức Vận Chuyển</strong>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td width="100%" height="10"></td>
+                                  </tr>
+                                  <tr>
+                                    <td style="font-size: 12px; font-family:  sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                      Giao hàng hỏa tốc
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
                   </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td height="20"></td>
-            </tr>
-          </table>
-        ';
-            $mail->Body = $noidungthu;
-            $mail->smtpConnect(
-                array(
-                    "ssl" => array(
-                        "verify_peer" => false,
-                        "verify_peer_name" => false,
-                        "allow_self_signed" => true
-                    )
-                )
-            );
-            $mail->send();
-            // echo 'Đã gửi mail xong';
-        } catch (Exception $e) {
-            echo 'Error: ', $mail->ErrorInfo;
-        }
+                  <tr class="visibleMobile">
+                    <td height="30"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- /Information -->
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+        <tr>
+          <td>
+            <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff" style="border-radius: 0 0 10px 10px;">
+              <tr>
+                <td>
+                  <table width="480" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                    <tbody>
+                      <tr>
+                        <td style="font-size: 12px; color: #5b5b5b; font-family:  sans-serif; line-height: 18px; vertical-align: top; text-align: left;">
+                          Chúc bạn một ngày tốt lành !!
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr class="spacer">
+                <td height="50"></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td height="20"></td>
+        </tr>
+      </table>
+';
+
+      $mail->Body = $noidungthu;
+      $mail->smtpConnect(
+        array(
+          "ssl" => array(
+            "verify_peer" => false,
+            "verify_peer_name" => false,
+            "allow_self_signed" => true
+          )
+        )
+      );
+      $mail->send();
+      // echo 'Đã gửi mail xong';
+    } catch (Exception $e) {
+      echo 'Error: ', $mail->ErrorInfo;
     }
+  }
 }
+?>

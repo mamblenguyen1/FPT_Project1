@@ -11,9 +11,9 @@ if (isset($_GET['user_id'])) {
 <div class="row" style="width: 100%; padding-left:20%; padding-right:10%; padding-top: 20%">
     <div class="col-md-6 order-md-1" style="width:65%">
         <h4 class="mb-3"><b>Địa chỉ nhận hàng</b></h4>
-        <form class="needs-validation"  action="index.php?pages=user&action=thanks&order_id=<?= $order->getOrder_total_payment($user_id, 'order_id') ?>" method="post">
+        <form class="needs-validation" action="index.php?pages=user&action=thanks&order_id=<?= $order->getOrder_total_payment($user_id, 'order_id') ?>" method="post">
             <div class="row">
-                <div class="col-md-12 mb-3" >
+                <div class="col-md-12 mb-3">
                     <label for="firstName">Họ và tên</label>
                     <input type="text" class="form-control rounded-2xl" id="firstName" placeholder="" value="<?= $order->getInfoUserOrder($user_id, 'user_name') ?>" required>
                 </div>
@@ -90,10 +90,10 @@ if (isset($_GET['user_id'])) {
                     </li>
                 </ul>
                 <li class="list-group-item border-0 d-flex justify-content-between">
-        <input type="text" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
-        <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color:white; font-size:15px; width:75%">Thanh Toán</button>
-    </form>
-</li>
+                    <input type="text" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
+                    <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color:white; font-size:15px; width:75%">Thanh Toán</button>
+        </form>
+        </li>
     </div>
 
 </div>
@@ -115,8 +115,8 @@ if (isset($_COOKIE['userID'])) {
             <span class="text-muted"><b>Thông tin</b></span>
         </h4>
                                         ';
-                                        $cost = 0;
-                                        $firstPrice = 0;
+        $cost = 0;
+        $firstPrice = 0;
         foreach ($stmt as $row) {
             echo '
     
@@ -135,34 +135,38 @@ if (isset($_COOKIE['userID'])) {
                 </div>
             </div>
         </div>
-';              
-                $firstPrice = $row['order_quantity'] * $row['product_price'];
-                $cost = $cost + $firstPrice;
+';
+            $firstPrice = $row['order_quantity'] * $row['product_price'];
+            $cost = $cost + $firstPrice;
         }
     }
 }
 ?>
- <?
-    $Percentage = 0;
-    if (isset($_POST['code-input'])) {
-        $result = $code->checkCode($_POST['code']);
+<?
+$Percentage = 0;
+if (isset($_POST['code-input'])) {
+    $result = $code->checkCode($_POST['code']);
+    if ($result == true) {
+        $result = $code->checkExpires($_POST['code']);
         if ($result == true) {
-            $result = $code->checkExpires($_POST['code']);
-            if ($result == true) {
+            if (($order->getOrder_total_payment($user_id, 'order_total_payment')) < intval($code->getInfoCode($_POST['code'], 'code_condition'))) {
+                echo '<span style="color:red" class="vaild">Bạn không đủ điều kiện sử dụng mã giảm giá, tổng giá trị đơn hàng phải > '.number_format(intval($code->getInfoCode($_POST['code'], 'code_condition'))).' đ để sử dụng mã này</span>';
+            } else {
                 echo '<span style="color:green" class="vaild">Áp dụng mã giảm giá <b>' . $_POST['code'] . '</b> thành công !</span>';
                 $sql = $code->getCode($_POST['code']);
                 extract($sql);
                 $discount = $Percentage / 100;
-             $finalprice = (($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount));
-             $order->updateCartTotal($_COOKIE['userID'], $finalprice);
-            } else {
-                echo '<span style="color:red" class="vaild">Mã giảm giá đã hết hạn sử dụng !</span>';
+                $finalprice = (($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount));
+                $order->updateCartTotal($_COOKIE['userID'], $finalprice);
             }
         } else {
-            echo '<span style="color:red" class="vaild">Mã giảm giá không tồn tại !</span>';
+            echo '<span style="color:red" class="vaild">Mã giảm giá đã hết hạn sử dụng !</span>';
         }
+    } else {
+        echo '<span style="color:red" class="vaild">Mã giảm giá không tồn tại !</span>';
     }
-    ?>
+}
+?>
 <h4 class="d-flex justify-content-between align-items-center mb-3">
     <form method="post">
         <label for="firstName">Mã giảm giá (Nếu Có)</label>
@@ -178,7 +182,7 @@ if (isset($_COOKIE['userID'])) {
             <a class="text-muted"><b>Giảm giá:</b></a>
             <a class="text-muted1"><?= $Percentage ?> %</a>
             <?
-                $discount = $Percentage / 100;
+            $discount = $Percentage / 100;
             ?>
         </li>
         <!-- <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
@@ -186,11 +190,11 @@ if (isset($_COOKIE['userID'])) {
                 <a class="text-muted1">$5</a>
             </li> -->
         <li class="list-group-item border-0 d-flex justify-content-between">
-            <h3><b>Tổng: <a><?= round($order->getOrder_total_payment($user_id, 'order_total_payment'))?> đ</a></b></h3>
-            <!-- <input type="hidden" name="priceFinal" value="<?= round((($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount)))?>" id=""> -->
+            <h3><b>Tổng: <a><?= round($order->getOrder_total_payment($user_id, 'order_total_payment')) ?> đ</a></b></h3>
+            <!-- <input type="hidden" name="priceFinal" value="<?= round((($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount))) ?>" id=""> -->
         </li>
     </form>
-   
+
 
 </h4>
 

@@ -17,6 +17,8 @@ if (isset($_POST['payment'])) {
     $address = "$user_street  - $wards_name - $district_name - $province_name";
     $totalprice = $order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment');
     $order->addCartAndCartDetail($_COOKIE['userID'], $address, $totalprice, $order_id);
+    $cart_now = $order->Show_Cart_detail_Collumn1($_COOKIE['userID'], 'cart_id');
+    $mail->MailOrder($cart_now, 'nmquang1997@gmail.com');
 }
 }
 

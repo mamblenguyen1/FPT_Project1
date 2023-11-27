@@ -6,16 +6,17 @@ if (isset($_POST['addcode'])) {
     $Percentage = $_POST['Percentage'] ?? "";
     $ExpiryDate = $_POST['ExpiryDate'] ?? "";
     $Description = $_POST['Description'] ?? "";
+    $code_condition = $_POST['code_condition'] ?? "";
     $IsActive = $_POST['IsActive'] ?? "";
     //xét ngày
     $ngayGioHienTai = date("Y-m-d");
-    if (!$Code == "" && !$Percentage == "" && !$ExpiryDate == "" &&  !$Description == "" && !$IsActive == "") {
+    if (!$Code == "" && !$Percentage == "" && !$ExpiryDate == "" &&  !$Description == "" && !$IsActive == "" && !$code_condition == "") {
         if ($ExpiryDate < $ngayGioHienTai) {
             echo '<script>alert("Ngày tháng không hợp lệ !!")</script>';
         } else if ($code->checkDuplicateCode(trim($Code))) {
             echo '<script>alert("Mã đã tôn tại!!")</script>';
         } else {
-            $code->create_code($Code, $Percentage, $ExpiryDate, $Description, $IsActive);
+            $code->create_code($Code, $Percentage, $ExpiryDate, $Description, $IsActive, $code_condition);
             echo '<script>alert("tạo mã giảm giá thành công  !!")</script>';
             echo '<script>window.location.href="index.php?pages=admin&action=CodeList"</script>';
         }
@@ -58,6 +59,19 @@ if (isset($_POST['addcode'])) {
                             if (isset($_POST["Percentage"])) {
                                 if (empty($_POST["Percentage"])) {
                                     echo '<span class="vaild">Xin vui lòng nhập phần trăm giảm </span>';
+                                } else {
+                                    echo '';
+                                }
+                            }
+                            ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Điều kiện giảm giá () :</label>
+                            <input name="code_condition" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá điều kiện. . .">
+                            <?
+                            if (isset($_POST["code_condition"])) {
+                                if (empty($_POST["code_condition"])) {
+                                    echo '<span class="vaild">Xin vui lòng nhập giá điều kiện </span>';
                                 } else {
                                     echo '';
                                 }

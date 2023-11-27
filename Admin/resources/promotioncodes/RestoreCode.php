@@ -31,7 +31,7 @@ if (isset($_POST['reCode'])) {
                     <h3 class="card-title">Sửa mã giảm giá từ hệ thống !!!</h3>
                 </div>
                 <form action="" method="post">
-                    <input name="CodeID" type="hidden" class="form-control" value="<? echo $code->getInfoCode($CodeID, 'CodeID') ?>">
+                    <input name="CodeID" type="hidden" class="form-control" value="<? echo $code->getInfoCodeAD($CodeID, 'CodeID') ?>">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Ngày hết hạn :</label>
                         <input name="ExpiryDate" type="date" class="form-control" id="exampleInputEmail1" placeholder="Nhập ngày hết hạn. . ." value="<? echo $code->getInfoCode($CodeID, 'ExpiryDate') ?>">

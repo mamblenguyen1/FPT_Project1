@@ -300,6 +300,37 @@ function Show_Cart_detail($cart_id)
     $result = $db->pdo_query($sql);
     return $result;
 }
+function Show_Cart_detail_Collumn($cart_id, $column)
+{
+    $db = new connect();
+    $sql = "SELECT * FROM cart , order_status, cart_detail, products, user
+    WHERE cart.status = order_status.order_status_id
+    AND cart.cart_id= cart_detail.cart_id
+    AND cart_detail.product_id = products.product_id
+    AND cart.user_id = user.user_id
+    AND cart.cart_id = $cart_id";
+    $result = $db->pdo_query($sql);
+    foreach ($result as $row) {
+        return $row[$column];
+    }
+}
+function Show_Cart_detail_Collumn1($user_id, $column)
+{
+    $db = new connect();
+    $sql = "SELECT * FROM cart , order_status, cart_detail, products, user
+    WHERE cart.status = order_status.order_status_id
+    AND cart.cart_id= cart_detail.cart_id
+    AND cart_detail.product_id = products.product_id
+    AND cart.user_id = user.user_id
+    AND cart.user_id = $user_id
+    AND cart.status = 1
+    order BY cart.date
+    DESC LIMIT 1";
+    $result = $db->pdo_query($sql);
+    foreach ($result as $row) {
+        return $row[$column];
+    }  
+}
 function getCartStatusDetail($cart_id, $column)
 {
     $db = new connect();

@@ -8,11 +8,11 @@ class Promotioncode
     var $Description = null;
     var $IsActive  = null;
 
-    function create_code($Code, $Percentage , $ExpiryDate, $Description ,$IsActive)
+    function create_code($Code, $Percentage , $ExpiryDate, $Description ,$IsActive, $code_condition)
     {
         $db = new connect();
-        $select = "INSERT INTO `promotioncodes` (`CodeID`, `Code`, `Percentage`, `ExpiryDate`, `Description`, `IsActive`, `created_at`, `updated_at`) 
-        VALUES (NULL, '$Code', $Percentage, '$ExpiryDate', '$Description', $IsActive, NULL, NULL);";
+        $select = "INSERT INTO `promotioncodes` (`CodeID`, `Code`, `Percentage`, `ExpiryDate`, `Description`, `IsActive`, `created_at`, `updated_at`, code_condition) 
+        VALUES (NULL, '$Code', $Percentage, '$ExpiryDate', '$Description', $IsActive, NULL, NULL, $code_condition);";
         $result = $db->pdo_execute($select);
         return $result;
     }
@@ -33,10 +33,10 @@ class Promotioncode
     }
     
 
-    function updateCode($Code, $Percentage, $ExpiryDate, $Description, $IsActive, $CodeID)
+    function updateCode($Code, $Percentage, $ExpiryDate, $Description, $IsActive, $CodeID, $code_condition)
     {
         $db = new connect();
-        $select = "UPDATE promotioncodes SET Code = '$Code', Percentage = $Percentage, ExpiryDate = '$ExpiryDate', Description = '$Description', IsActive = $IsActive 
+        $select = "UPDATE promotioncodes SET Code = '$Code', Percentage = $Percentage, ExpiryDate = '$ExpiryDate', Description = '$Description', IsActive = $IsActive , code_condition = $code_condition
         WHERE CodeID = $CodeID";
         $result = $db->pdo_execute($select);
         return $result;
@@ -45,7 +45,16 @@ class Promotioncode
     function getInfoCode($codeID, $column)
     {
         $db = new connect();
-        $select = "SELECT * FROM promotioncodes WHERE CodeID = $codeID";
+        $select = "SELECT * FROM promotioncodes WHERE code LIKE '$codeID'";
+        $result = $db->pdo_query($select);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    function getInfoCodeAD($codeID, $column)
+    {
+        $db = new connect();
+        $select = "SELECT * FROM promotioncodes WHERE codeID = $codeID";
         $result = $db->pdo_query($select);
         foreach ($result as $row) {
             return $row[$column];

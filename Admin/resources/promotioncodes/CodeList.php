@@ -22,6 +22,7 @@
                                     <tr>
                                         <th>Mã giảm giá</th>
                                         <th>Phần trăm giảm giá</th>
+                                        <th>Điều kiện giảm</th>
                                         <th>Ngày hết hạn</th>
                                         <th>Mô tả</th>
                                         <th>Trạng thái</th>
@@ -46,6 +47,7 @@
                                         <tr>
                                         <td>' . $row['Code'] . '</td>
                                         <td>' . $row['Percentage'] . '<span>%</span></td>
+                                        <th> > ' . $row['code_condition'] . ' đ</th>
                                         <td>' . $row['ExpiryDate'] . '</td>
                                         <td>' . $row['Description'] . '</td>
                                         <td>' . $row['status_name'] . '</td>
