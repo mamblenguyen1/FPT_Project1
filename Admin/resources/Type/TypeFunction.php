@@ -108,4 +108,6 @@ class Type
         $result = $db->pdo_query($select);
         return $result;
     }
+
+    
 }
