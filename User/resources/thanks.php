@@ -20,7 +20,7 @@ if (isset($_GET['order_id'])) {
         $totalprice = $order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment');
         $order->addCartAndCartDetail($_COOKIE['userID'], $address, $totalprice, $order_id);
         $cart_now = $order->Show_Cart_detail_Collumn1($_COOKIE['userID'], 'cart_id');
-        // $mail->MailOrder($cart_now, 'nmquang1997@gmail.com');
+        // $mail->MailOrder($cart_now,$order_id, 'admin@gmail.com');
     }
 }
 
@@ -92,12 +92,12 @@ if (isset($_GET['order_id'])) {
                                     echo '
                                         <tr>
                                             <td>' . $row['product_name'] . '</td>
-                                            <td>' . number_format($row['product_price']) . ' đ</td>
+                                            <td>' . number_format($product->sale($row['product_price'],$row['product_sale'])) . ' đ</td>
                                             <td>' . $row['order_quantity'] . '</td>
-                                            <td>' . number_format($row['product_price'] * $row['order_quantity']) . ' đ</td>
+                                            <td>' . number_format($product->sale($row['product_price'],$row['product_sale']) * $row['order_quantity']) . ' đ</td>
                                         </tr>
                                             ';
-                                            $tong = $tong + ($row['product_price'] * $row['order_quantity']);
+                                            $tong = $tong + ($product->sale($row['product_price'],$row['product_sale']) * $row['order_quantity']);
                                 }
                             }
                             ?>
@@ -147,7 +147,7 @@ if (isset($_GET['order_id'])) {
                         </div>
                     </div>
 
-                    <a class="btn btn-primary" style="display: block ; margin: 20px auto; width: 200px; padding: 15px 25px;" href="index.php?pages=user&action=home">Về Trang Lịch Sử</a>
+                    <a class="btn btn-primary" style="display: block ; margin: 20px auto; width: 200px; padding: 15px 25px;" href="index.php?pages=user&action=history">Về Trang Lịch Sử</a>
                 </div>
             </div>
         </div>

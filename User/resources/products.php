@@ -103,23 +103,21 @@ include('user/component/header.php');
                                             <?
 
                                                 foreach ($stmt as $row) {
-
+                                                    $sale = $row['product_sale'] >0;
                                                     $product_name_text = $product->substringtext($row['product_name'], 22);
                                                     echo '<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+                                            
                                                 <div class="tg-postbook">
+                                                    '.($sale ? "<span class='saleprice'>-$row[product_sale]%</span>":"").'
                                                     <figure class="tg-featureimg">
                                                         <div class="tg-bookimg">
                                                             <div class="tg-frontcover"><img  style="width: 300px; height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
                                                             <div class="tg-backcover"><img  style="width: 300px; height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
                                                             </div>
-                                                        <a class="tg-btnaddtowishlist" href="">
-                                                            <i class="icon-heart"></i>
-                                                            <span>Yêu thích</span>
-                                                        </a>
                                                     </figure>
                                                     <div class="tg-postbookcontent">
                                                         <ul class="tg-bookscategories">
-                                                            <li><a href="">' .  $row['category_name'] . '   </a>
+                                                            <li><a href="">' .  $row['category_name'] . '   </a> 
                                                             </li>
                                                         </ul>
                                                         <div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
@@ -132,10 +130,10 @@ include('user/component/header.php');
                                                         <span class="tg-bookwriter">Hãng: <a href="">' . $row['type_name'] . '</a></span>
                                                         <span class="tg-stars"><span></span></span>
                                                         <span class="tg-bookprice">
-                                                            <ins>' . number_format($row['product_price'])
-                                                        . ' đ</ins>
+                                                         
+                                                            <ins>' . number_format($product->sale($row['product_price'],$row['product_sale'])) . ' đ</ins>
                                                             <br>
-                                                            <del>' . number_format($row['product_sale']) . ' đ</del>
+                                                            <del>' .($sale ? "$row[product_price] đ":"<div><br></div>") . '</del>
                                                         </span>
                                                         <form action="index.php?pages=user&action=cart" method="post">
                                                         <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
@@ -165,6 +163,7 @@ include('user/component/header.php');
                                 </div>
                             </div>
                         </div>
+                        <a href=""style="z-index: 10; top:0; right:0;position:absolute;back"></a>
                         <?
                         include('user/component/sidebar.php');
                         ?>

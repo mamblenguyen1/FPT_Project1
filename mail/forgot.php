@@ -383,7 +383,7 @@ class Mailer
       echo 'Error: ', $mail->ErrorInfo;
     }
   }
-  public function MailOrder($cart_id, $addressMail)
+  public function MailOrder($cart_id,$order_id, $addressMail)
   {
     $db = new connect();
     $order = new ORDER();
@@ -524,12 +524,12 @@ class Mailer
                   </td>
                   <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;"><small></small></td>
                   <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="center">'.$quantity.' </td>
-                  <td style="font-size: 12px; font-family:  sans-serif; color: #1e2b33;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="right">'.$quantity * $product_price.'</td>
+                  <td style="font-size: 12px; font-family:  sans-serif; color: #1e2b33;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="right">'.$quantity * $order->sale($product_price,$product_sale).'</td>
                 </tr>
             <tr>
               <td height="1" colspan="4" style="border-bottom:1px solid #e4e4e4"></td>
               ';
-              $total = $total + ($quantity * $product_price);
+              $total = $total + ($quantity * $order->sale($product_price,$product_sale));
           }
           
 
@@ -575,7 +575,7 @@ class Mailer
                             <strong>Giảm giá : </strong>
                           </td>
                           <td style="font-size: 12px; font-family:  sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
-                            <strong>' .$total .'</strong>
+                            <strong>' . (100 - intval(($order->getOrder_total_payment(($order->getInfoOrderId($order_id, 'user_id')), 'order_total_payment')) *100 / $total)) .'%</strong>
                           </td>
                         </tr>
                           <tr>
@@ -583,7 +583,7 @@ class Mailer
                               <strong>Thành Tiền</strong>
                             </td>
                             <td style="font-size: 12px; font-family:  sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
-                              <strong>' .$total .'</strong>
+                              <strong>' .intval(($order->getOrder_total_payment(($order->getInfoOrderId($order_id, 'user_id')), 'order_total_payment'))) .'</strong>
                             </td>
                           </tr>
                         </tbody>

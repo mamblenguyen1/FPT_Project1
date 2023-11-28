@@ -66,20 +66,18 @@ include('user/component/header.php');
                             $stmt->execute();
                             if ($stmt->rowCount() > 0) {
                                 foreach ($stmt as $row) {
-
+                                    $sale = $row['product_sale'] > 0;
                                     $product_name_text = $product->substringtext($row['product_name'], 22);
                                     echo '
                                     <div class="item">
                                 <div class="tg-postbook">
+                                ' . ($sale ? "<span class='saleprice'>-$row[product_sale]%</span>" : "") . '
                                     <figure class="tg-featureimg">
                                         <div class="tg-bookimg">
-                                        <div class="tg-frontcover"><img style="height: 150px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
-                                        <div class="tg-backcover"><img style="height: 150px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                        <div class="tg-frontcover"><img style="width:175.55;height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                        <div class="tg-backcover"><img style="width:175.55;height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
                                         </div>
-                                        <a class="tg-btnaddtowishlist" href="javascript:void(0);" style="width: 105%;">
-                                            <i class="icon-heart"></i>
-                                            <span>Thêm giỏ hàng</span>
-                                        </a>
+                                        
                                     </figure>
                                     <div class="tg-postbookcontent">
                                         <ul class="tg-bookscategories">
@@ -93,9 +91,9 @@ include('user/component/header.php');
                                         <span class="tg-bookwriter">By: <a href="javascript:void(0);">' .  $row['type_name'] . '</a></span>
                                         <span class="tg-stars"><span></span></span>
                                         <span class="tg-bookprice">
-                                            <ins>' . number_format($row['product_sale']) . ' đ</ins>
-                                            <br>
-                                            <del>' . number_format($row['product_price']) . ' đ</del>
+                                        <ins>' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</ins>
+                                        <br>
+                                        <del>' . ($sale ? "$row[product_price] đ" : "<div><br></div>") . '</del>
                                         </span>
                                         <form action="index.php?pages=user&action=cart" method="post">
                                         <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
@@ -142,38 +140,64 @@ include('user/component/header.php');
                                     và chúng tôi rất tự hào về điều đó.</p>
                             </div>
                             <div class="tg-btns">
-                                <a class="tg-btn tg-active" href="index.php?pages=user&action=products">Xem Tất Cả</a>
-                                <a class="tg-btn" href="vindex.php?pages=user&action=cart">Giỏ hàng</a>
+                                <a class="tg-btn tg-active" href="./index.php?pages=user&action=products">Xem Tất Cả</a>
+                                <a class="tg-btn" href="javascript:void(0);">Thêm</a>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="row">
                                 <div class="tg-newreleasebooks">
-                                <?
-                        $conn = $db->pdo_get_connection();
-                        $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
-                        type.type_id = products.type_id
-                        AND 
-                        category.category_id = products.category_id
-                        AND 
-                        products.product_id IN (
-                        SELECT product_id
-                        FROM products
-                        GROUP BY product_id
-                        ORDER BY MIN(products.created_at) 
-                        )
-                            LIMIT 3
-                        ;");
-                        $stmt->execute();
-                        if ($stmt->rowCount() > 0) {
-                            foreach ($stmt as $row) {
-                                echo '
+
+                                    <?
+                                    $conn = $db->pdo_get_connection();
+                                    $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                                                    type.type_id = products.type_id
+                                                    AND 
+                                                    category.category_id = products.category_id
+                                                    AND
+                                                    products.is_deleted = 1
+                                                    ORDER BY products.product_id DESC LIMIT 3");
+                                    $stmt->execute();
+                                    if ($stmt->rowCount() > 0) {
+                                        foreach ($stmt as $row) {
+                                           
+                                            $product_name_text = $product->substringtext($row['product_name'], 22);
+                                            echo '
                                     <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
                                         <div class="tg-postbook">
                                             <figure class="tg-featureimg">
                                                 <div class="tg-bookimg">
-                                                    <div class="tg-frontcover"><img style="height: 150px" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
-                                                    <div class="tg-backcover"><img style="height: 150px" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+
+                                                    <div class="tg-frontcover"><img style="width:175.55;height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                                    <div class="tg-backcover"><img style="width:175.55;height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                                </div>
+
+                                            </figure>
+                                            <div class="tg-postbookcontent">
+                                                <ul class="tg-bookscategories">
+                                                    <li><a href="javascript:void(0);">' . $row['category_name'] . '</a></li>
+                                                    <li><a href="javascript:void(0);">' . $row['type_name'] . '</a></li>
+                                                </ul>
+                                                <div class="tg-booktitle">
+
+                                                    <h3><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a></h3>
+                                                </div>
+                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">' .  $row['type_name'] . '</a></span>
+                                                <span class="tg-stars"><span></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ';
+                                        }
+                                    };
+
+                                    ?>
+                                    <!-- <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
+                                        <div class="tg-postbook">
+                                            <figure class="tg-featureimg">
+                                                <div class="tg-bookimg">
+                                                    <div class="tg-frontcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
+                                                    <div class="tg-backcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
                                                 </div>
                                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                     <i class="icon-heart"></i>
@@ -182,20 +206,42 @@ include('user/component/header.php');
                                             </figure>
                                             <div class="tg-postbookcontent">
                                                 <ul class="tg-bookscategories">
-                                                    <li><a href="javascript:void(0);">' . $row['category_name'] . '</a></li>
-                                                    <li><a href="javascript:void(0);">' . $row['type_name'] . '</a></li>
+                                                    <li><a href="javascript:void(0);">Laptop</a></li>
+                                                    <li><a href="javascript:void(0);">Hãng</a></li>
                                                 </ul>
                                                 <div class="tg-booktitle">
-                                                    <h3><a href="javascript:void(0);">' . $product->substringtext($row['product_name'], 22) . '</a></h3>
+                                                    <h3><a href="javascript:void(0);">Name</a></h3>
                                                 </div>
-                                                <span class="tg-bookwriter">Số lượng đã bán: <a href="javascript:void(0);">' . $product->count_order_by_id($row['product_id'], 'COUNT(order_detail.product_id)') . '</a></span>
+                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Hàng VN chất lượng cao</a></span>
                                                 <span class="tg-stars"><span></span></span>
                                             </div>
                                         </div>
                                     </div>
-                                    ';
-                            }}?>
-                            
+                                    <div class="col-xs-4 col-sm-4 col-md-3 col-lg-4 hidden-md">
+                                        <div class="tg-postbook">
+                                            <figure class="tg-featureimg">
+                                                <div class="tg-bookimg">
+                                                    <div class="tg-frontcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
+                                                    <div class="tg-backcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
+                                                </div>
+                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+                                                    <i class="icon-heart"></i>
+                                                    <span>Thêm giỏ hàng</span>
+                                                </a>
+                                            </figure>
+                                            <div class="tg-postbookcontent">
+                                                <ul class="tg-bookscategories">
+                                                    <li><a href="javascript:void(0);">Laptop</a></li>
+                                                    <li><a href="javascript:void(0);">Fun</a></li>
+                                                </ul>
+                                                <div class="tg-booktitle">
+                                                    <h3><a href="javascript:void(0);">Name</a></h3>
+                                                </div>
+                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Hàng VN chất lượng cao</a></span>
+                                                <span class="tg-stars"><span></span></span>
+                                            </div>
+                                        </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -209,7 +255,7 @@ include('user/component/header.php');
         <!--************************************
                 Collection Count Start
         *************************************-->
-        <section class="tg-parallax tg-bgcollectioncount tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="https://www.anphatpc.com.vn/media/news/1308_Laptop-Gaming-tot-nhat-2022.jpg">
+        <section class="tg-parallax tg-bgcollectioncount tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/image.png">
             <div class="tg-sectionspace tg-collectioncount tg-haslayout">
                 <div class="container">
                     <div class="row">

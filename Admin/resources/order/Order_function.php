@@ -685,5 +685,10 @@ function editStatusCartAd($order_status_id, $cart_id)
         AND cart.status=1";
         $result   = $db->pdo_query($sql);
         return $result;
+
+    }
+    function sale($product_price,$product_sale){
+        $result = $product_price - ($product_price * ($product_sale/100));
+        return $result;
     }
 }
