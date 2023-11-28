@@ -142,19 +142,38 @@ include('user/component/header.php');
                                     và chúng tôi rất tự hào về điều đó.</p>
                             </div>
                             <div class="tg-btns">
-                                <a class="tg-btn tg-active" href="javascript:void(0);">Xem Tất Cả</a>
-                                <a class="tg-btn" href="javascript:void(0);">Thêm</a>
+                                <a class="tg-btn tg-active" href="index.php?pages=user&action=products">Xem Tất Cả</a>
+                                <a class="tg-btn" href="vindex.php?pages=user&action=cart">Giỏ hàng</a>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="row">
                                 <div class="tg-newreleasebooks">
+                                <?
+                        $conn = $db->pdo_get_connection();
+                        $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                        type.type_id = products.type_id
+                        AND 
+                        category.category_id = products.category_id
+                        AND 
+                        products.product_id IN (
+                        SELECT product_id
+                        FROM products
+                        GROUP BY product_id
+                        ORDER BY MIN(products.created_at) 
+                        )
+                            LIMIT 3
+                        ;");
+                        $stmt->execute();
+                        if ($stmt->rowCount() > 0) {
+                            foreach ($stmt as $row) {
+                                echo '
                                     <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
                                         <div class="tg-postbook">
                                             <figure class="tg-featureimg">
                                                 <div class="tg-bookimg">
-                                                    <div class="tg-frontcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
-                                                    <div class="tg-backcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
+                                                    <div class="tg-frontcover"><img style="height: 150px" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                                    <div class="tg-backcover"><img style="height: 150px" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
                                                 </div>
                                                 <a class="tg-btnaddtowishlist" href="javascript:void(0);">
                                                     <i class="icon-heart"></i>
@@ -163,67 +182,20 @@ include('user/component/header.php');
                                             </figure>
                                             <div class="tg-postbookcontent">
                                                 <ul class="tg-bookscategories">
-                                                    <li><a href="javascript:void(0);">Laptop</a></li>
-                                                    <li><a href="javascript:void(0);">Hãng</a></li>
+                                                    <li><a href="javascript:void(0);">' . $row['category_name'] . '</a></li>
+                                                    <li><a href="javascript:void(0);">' . $row['type_name'] . '</a></li>
                                                 </ul>
                                                 <div class="tg-booktitle">
-                                                    <h3><a href="javascript:void(0);">Name</a></h3>
+                                                    <h3><a href="javascript:void(0);">' . $product->substringtext($row['product_name'], 22) . '</a></h3>
                                                 </div>
-                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Hàng VN chất lượng cao</a></span>
+                                                <span class="tg-bookwriter">Số lượng đã bán: <a href="javascript:void(0);">' . $product->count_order_by_id($row['product_id'], 'COUNT(order_detail.product_id)') . '</a></span>
                                                 <span class="tg-stars"><span></span></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
-                                        <div class="tg-postbook">
-                                            <figure class="tg-featureimg">
-                                                <div class="tg-bookimg">
-                                                    <div class="tg-frontcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
-                                                    <div class="tg-backcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
-                                                </div>
-                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                                    <i class="icon-heart"></i>
-                                                    <span>Thêm giỏ hàng</span>
-                                                </a>
-                                            </figure>
-                                            <div class="tg-postbookcontent">
-                                                <ul class="tg-bookscategories">
-                                                    <li><a href="javascript:void(0);">Laptop</a></li>
-                                                    <li><a href="javascript:void(0);">Hãng</a></li>
-                                                </ul>
-                                                <div class="tg-booktitle">
-                                                    <h3><a href="javascript:void(0);">Name</a></h3>
-                                                </div>
-                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Hàng VN chất lượng cao</a></span>
-                                                <span class="tg-stars"><span></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 col-sm-4 col-md-3 col-lg-4 hidden-md">
-                                        <div class="tg-postbook">
-                                            <figure class="tg-featureimg">
-                                                <div class="tg-bookimg">
-                                                    <div class="tg-frontcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
-                                                    <div class="tg-backcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
-                                                </div>
-                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                                    <i class="icon-heart"></i>
-                                                    <span>Thêm giỏ hàng</span>
-                                                </a>
-                                            </figure>
-                                            <div class="tg-postbookcontent">
-                                                <ul class="tg-bookscategories">
-                                                    <li><a href="javascript:void(0);">Laptop</a></li>
-                                                    <li><a href="javascript:void(0);">Fun</a></li>
-                                                </ul>
-                                                <div class="tg-booktitle">
-                                                    <h3><a href="javascript:void(0);">Name</a></h3>
-                                                </div>
-                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Hàng VN chất lượng cao</a></span>
-                                                <span class="tg-stars"><span></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    ';
+                            }}?>
+                            
                                 </div>
                             </div>
                         </div>
@@ -294,151 +266,67 @@ include('user/component/header.php');
                 <div class="row">
                     <div class="col-xs-16 col-sm-16 col-md-16 col-lg-16">
                         <div class="tg-sectionhead">
-                            <h2><span>Some Great Books</span>Picked By Authors</h2>
-                            <a class="tg-btn" href="javascript:void(0);" style="margin-right: 2%;">Xem Tất Cả</a>
+                            <h2><span>Some Great Books</span>Sản phẩm bán chạy</h2>
+                            <a class="tg-btn" href="index.php?pages=user&action=products" style="margin-right: 2%;">Xem Tất Cả</a>
                         </div>
                     </div>
                     <div id="tg-pickedbyauthorslider" class="tg-pickedbyauthor tg-pickedbyauthorslider owl-carousel">
-                        <div class="item">
+                        <?
+                        $conn = $db->pdo_get_connection();
+                        $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                        type.type_id = products.type_id
+                        AND 
+                        category.category_id = products.category_id
+                        AND 
+                        products.product_id IN (
+                        SELECT product_id
+                        FROM order_detail
+                        WHERE order_detail.order_status_id = 2
+                        GROUP BY product_id
+                        ORDER BY COUNT(product_id) DESC
+                        )
+                            LIMIT 4
+                        
+                        ;");
+                        $stmt->execute();
+                        if ($stmt->rowCount() > 0) {
+                            foreach ($stmt as $row) {
+                                echo '
+                        <div class="item" >
                             <div class="tg-postbook">
                                 <figure class="tg-featureimg">
                                     <div class="tg-bookimg" style="background: white;">
-                                        <div class="tg-frontcover"><img src="images/iphone.jpg" alt="image description"></div>
+                                        <div class="tg-frontcover"><img style="height: 150px" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
                                     </div>
                                     <div class="tg-hovercontent">
                                         <div class="tg-description">
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna aliqua enim adia minim veniam, quis nostrud.</p>
+                                            <p>' . $row['product_short_description'] . '</p>
                                         </div>
-                                        <strong class="tg-bookpage">Book Pages: 206</strong>
-                                        <strong class="tg-bookcategory">Category: Laptop, Fun</strong>
-                                        <strong class="tg-bookprice">Price: $23.18</strong>
+                                        <strong class="tg-bookpage">Danh mục : ' . $row['category_name'] . '</strong>
+                                        <strong class="tg-bookcategory">Hãng :' . $row['type_name'] . ' </strong>
+                                        <strong class="tg-bookprice">Giá : ' . $row['product_price'] . '</strong>
                                         <div class="tg-ratingbox"><span class="tg-stars"><span></span></span></div>
                                     </div>
                                 </figure>
                                 <div class="tg-postbookcontent">
                                     <div class="tg-booktitle">
-                                        <h3><a href="javascript:void(0);">Seven Minutes In Heaven</a></h3>
+                                        <h3><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . '">' . $row['product_name'] . '</a></h3>
                                     </div>
-                                    <span class="tg-bookwriter">By: <a href="javascript:void(0);">Sunshine Orlando</a></span>
-                                    <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                                        <i class="fa fa-shopping-basket"></i>
-                                        <em>Thêm Giỏ Hàng</em>
-                                    </a>
+                                    <span class="tg-bookwriter">Số lượng đã bán: <a href="javascript:void(0);">' . $product->count_order_by_id($row['product_id'], 'COUNT(order_detail.product_id)') . '</a></span>
+                                    <form action="index.php?pages=user&action=cart" method="post">
+                                    <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
+                                    <input type="hidden" name="qty" value="1">
+                                    <button type="submit" class="tg-btn tg-btnstyletwo" name="addoneproduct" ><i class="fa fa-shopping-basket"></i>
+                                        Thêm giỏ hàng</button>
+                                </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="item">
-                            <div class="tg-postbook">
-                                <figure class="tg-featureimg">
-                                    <div class="tg-bookimg">
-                                        <div class="tg-frontcover"><img src="images/iphone.jpg" alt="image description"></div>
-                                    </div>
-                                    <div class="tg-hovercontent">
-                                        <div class="tg-description">
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna aliqua enim adia minim veniam, quis nostrud.</p>
-                                        </div>
-                                        <strong class="tg-bookpage">Book Pages: 206</strong>
-                                        <strong class="tg-bookcategory">Category: Laptop, Fun</strong>
-                                        <strong class="tg-bookprice">Price: $23.18</strong>
-                                        <div class="tg-ratingbox"><span class="tg-stars"><span></span></span></div>
-                                    </div>
-                                </figure>
-                                <div class="tg-postbookcontent">
-                                    <div class="tg-booktitle">
-                                        <h3><a href="javascript:void(0);">Slow And Steady Wins The Race</a></h3>
-                                    </div>
-                                    <span class="tg-bookwriter">By: <a href="javascript:void(0);">Drusilla Glandon</a></span>
-                                    <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                                        <i class="fa fa-shopping-basket"></i>
-                                        <em>Thêm Giỏ Hàng</em>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="tg-postbook">
-                                <figure class="tg-featureimg">
-                                    <div class="tg-bookimg">
-                                        <div class="tg-frontcover"><img src="images/iphone.jpg" alt="image description"></div>
-                                    </div>
-                                    <div class="tg-hovercontent">
-                                        <div class="tg-description">
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna aliqua enim adia minim veniam, quis nostrud.</p>
-                                        </div>
-                                        <strong class="tg-bookpage">Book Pages: 206</strong>
-                                        <strong class="tg-bookcategory">Category: Laptop, Fun</strong>
-                                        <strong class="tg-bookprice">Price: $23.18</strong>
-                                        <div class="tg-ratingbox"><span class="tg-stars"><span></span></span></div>
-                                    </div>
-                                </figure>
-                                <div class="tg-postbookcontent">
-                                    <div class="tg-booktitle">
-                                        <h3><a href="javascript:void(0);">There’s No Time Like The Present</a></h3>
-                                    </div>
-                                    <span class="tg-bookwriter">By: <a href="javascript:void(0);">Patrick Seller</a></span>
-                                    <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                                        <i class="fa fa-shopping-basket"></i>
-                                        <em>Thêm Giỏ Hàng</em>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="tg-postbook">
-                                <figure class="tg-featureimg">
-                                    <div class="tg-bookimg">
-                                        <div class="tg-frontcover"><img src="images/iphone.jpg" alt="image description"></div>
-                                    </div>
-                                    <div class="tg-hovercontent">
-                                        <div class="tg-description">
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna aliqua enim adia minim veniam, quis nostrud.</p>
-                                        </div>
-                                        <strong class="tg-bookpage">Book Pages: 206</strong>
-                                        <strong class="tg-bookcategory">Category: Laptop, Fun</strong>
-                                        <strong class="tg-bookprice">Price: $23.18</strong>
-                                        <div class="tg-ratingbox"><span class="tg-stars"><span></span></span></div>
-                                    </div>
-                                </figure>
-                                <div class="tg-postbookcontent">
-                                    <div class="tg-booktitle">
-                                        <h3><a href="javascript:void(0);">Seven Minutes In Heaven</a></h3>
-                                    </div>
-                                    <span class="tg-bookwriter">By: <a href="javascript:void(0);">Sunshine Orlando</a></span>
-                                    <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                                        <i class="fa fa-shopping-basket"></i>
-                                        <em>Thêm Giỏ Hàng</em>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="tg-postbook">
-                                <figure class="tg-featureimg">
-                                    <div class="tg-bookimg">
-                                        <div class="tg-frontcover"><img src="images/iphone.jpg" alt="image description"></div>
-                                    </div>
-                                    <div class="tg-hovercontent">
-                                        <div class="tg-description">
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna aliqua enim adia minim veniam, quis nostrud.</p>
-                                        </div>
-                                        <strong class="tg-bookpage">Book Pages: 206</strong>
-                                        <strong class="tg-bookcategory">Category: Laptop, Fun</strong>
-                                        <strong class="tg-bookprice">Price: $23.18</strong>
-                                        <div class="tg-ratingbox"><span class="tg-stars"><span></span></span></div>
-                                    </div>
-                                </figure>
-                                <div class="tg-postbookcontent">
-                                    <div class="tg-booktitle">
-                                        <h3><a href="javascript:void(0);">Slow And Steady Wins The Race</a></h3>
-                                    </div>
-                                    <span class="tg-bookwriter">By: <a href="javascript:void(0);">Drusilla Glandon</a></span>
-                                    <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                                        <i class="fa fa-shopping-basket"></i>
-                                        <em>Thêm Giỏ Hàng</em>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                                        ';
+                            }
+                        }
+                        ?>
+
                     </div>
                 </div>
             </div>
