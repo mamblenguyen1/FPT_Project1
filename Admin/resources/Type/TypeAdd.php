@@ -6,7 +6,7 @@ if (isset($_POST['addType'])) {
     $typeName = $_POST['typeName'] ?? "";
     $typeCate = $_POST['typeCate'] ?? "";
     if (!$typeName == "" && !$typeCate == "") {
-        if ($type->checkDuplicateType(trim($typeName))) {
+        if ($type->checkDuplicateType(trim($typeName),$typeCate)) {
             echo '<script>alert("Tên danh mục con đã tồn tại !!")</script>';
             echo '<script>window.location.href="index.php?pages=admin&action=TypeAdd"</script>';
         } else {

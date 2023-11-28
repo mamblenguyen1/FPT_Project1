@@ -32,8 +32,9 @@ if (isset($_POST['addProductbtn'])) {
         !$product_description == "" &&
         !$product_short_description == ""
 
-    ) {
-        if ($product->checkDuplicateProduct(trim($product_name))) {
+    ) 
+    {
+        if ($product->checkDuplicateProduct(trim($product_name),$type_id, $category_id)) {
             echo '<script>alert("Tên sản phẩm đã tồn tại !!")</script>';
             echo '<script>window.location.href="index.php?pages=admin&action=ProductAdd"</script>';
         } else { 
@@ -49,8 +50,7 @@ if (isset($_POST['addProductbtn'])) {
                     move_uploaded_file($anhne, $path);
                 }
             }
-        }
-    else {
+    }   else {
         echo '<script>alert("Xin vui lòng nhập đầy đủ thông tin !!")</script>';
     }
 }
@@ -139,7 +139,7 @@ if (isset($_POST['addProductbtn'])) {
                         </div>
                         <!-- hình ảnh sản phẩm -->
 
-                        <input type="file" name="product_img" id="">
+                        <input type="file" accept=".jpg, .jpeg, .png" name="product_img" id="">
                         <?
                         if (isset($_FILES['product_img']['name'])) {
                             if (empty($_FILES['product_img']['name'])) {

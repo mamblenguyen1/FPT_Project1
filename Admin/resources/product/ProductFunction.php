@@ -98,10 +98,10 @@ class ProductFunction
         return $result;
     }
 
-    public function checkDuplicateProduct($Product)
+    public function checkDuplicateProduct($Product, $Type_ID, $cate_ID)
     {
         $db = new connect();
-        $select = "SELECT * FROM products WHERE LOWER(product_name) = '$Product'";
+        $select = "SELECT * FROM products WHERE LOWER(product_name) = '$Product' AND type_id = $Type_ID AND category_id = $cate_ID";
         $result = $db->pdo_query($select);
         return $result;
     }

@@ -38,16 +38,20 @@ if (isset($_POST['editProduct'])) {
         !$product_short_description == ""
 
     ) {
-        $product->Edit_Product($product_name, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_short_description, $product_description, $user_updated, $ProductId);
-        echo '<script>alert("sửa sản phẩm thành công !!")</script>';
-        echo '<script>window.location.href="index.php?pages=admin&action=productList"</script>';
-        $anhne = $_FILES['product_img']['tmp_name'];
-        $error = $_FILES['product_img']['error'];
-        $path = 'images/product/' . $product_img . '.png';
-        if (
-            $error === 0
-        ) {
-            move_uploaded_file($anhne, $path);
+        if ($product->checkDuplicateProduct(trim($product_name), $type_id, $category_id)) {
+            echo '<script>alert("Tên sản phẩm đã tồn tại !!")</script>';
+        } else {
+            $product->Edit_Product($product_name, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_short_description, $product_description, $user_updated, $ProductId);
+            echo '<script>alert("sửa sản phẩm thành công !!")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=productList"</script>';
+            $anhne = $_FILES['product_img']['tmp_name'];
+            $error = $_FILES['product_img']['error'];
+            $path = 'images/product/' . $product_img . '.png';
+            if (
+                $error === 0
+            ) {
+                move_uploaded_file($anhne, $path);
+            }
         }
     } else {
         echo '<script>alert("Vui lòng nhập đầy đủ thông tin !!")</script>';

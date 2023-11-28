@@ -100,14 +100,12 @@ class Type
         $result = $db->pdo_execute($sql);
         return $result;
     }
-    // check tên tồn tại
-    public function checkDuplicateType($Type)
+    // check tên tồn tại 
+    public function checkDuplicateType($Type, $cate_ID)
     {
         $db = new connect();
-        $select = "SELECT * FROM type WHERE LOWER(type_name) = '$Type'";
+        $select = "SELECT * FROM `type` WHERE LOWER(type_name) = '$Type' AND category_id = $cate_ID";
         $result = $db->pdo_query($select);
         return $result;
     }
-
-    
 }

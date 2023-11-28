@@ -22,7 +22,7 @@ if (isset($_POST['editType'])) {
     $category_id = $_POST['typeCate'] ?? "";
     $is_show = $_POST['typeShow'] ?? "";
     if (!$type_name == "" && !$category_id == "") {
-        if ($type->checkDuplicateType(trim($type_name))) {
+        if ($type->checkDuplicateType(trim($type_name), $category_id)) {
             echo '<script>alert("Tên danh mục con đã tồn tại !!")</script>';
             echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
         } else {
