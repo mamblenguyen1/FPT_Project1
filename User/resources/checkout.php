@@ -90,8 +90,8 @@ if (isset($_GET['user_id'])) {
                     </li>
                 </ul>
                 <li class="list-group-item border-0 d-flex justify-content-between">
-        <input type="text" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
-        <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color: var(--primary-color); font-size:15px; width:75%; background-color: var(--secondary-color);">Thanh Toán</button>
+        <input  type="hidden" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
+        <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color: var(--primary-color); font-size:15px;margin-left:70%;margin-bottom:100px; width:75%;height:40px;font-size:18px;font-weight:bold; background-color: var(--secondary-color);">Thanh Toán</button>
     </form>
 </li>
     </div>
@@ -129,14 +129,14 @@ if (isset($_COOKIE['userID'])) {
                     <div class="info">
                         <p style="font-size: 15px">' . $row['product_name'] . '<strong> X ' . $row['order_quantity'] . '</strong></p>
                         <div class="pricee  ">
-                            <h3  class="price1" style=" font-size: 17px ;color:red ; text-transform : none">' . number_format($row['order_quantity'] * $row['product_price']) . ' đ</span></h3>
+                            <h3  class="price1" style=" font-size: 17px ;color:red ; text-transform : none">' . number_format($row['order_quantity'] * $product->sale($row['product_price'],$row['product_sale'])) . ' đ</span></h3>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 ';
-            $firstPrice = $row['order_quantity'] * $row['product_price'];
+            $firstPrice = $row['order_quantity'] * $product->sale($row['product_price'],$row['product_sale']);
             $cost = $cost + $firstPrice;
         }
     }
@@ -190,7 +190,7 @@ if (isset($_POST['code-input'])) {
                 <a class="text-muted1">$5</a>
             </li> -->
         <li class="list-group-item border-0 d-flex justify-content-between">
-            <h3><b>Tổng: <a><?= round($order->getOrder_total_payment($user_id, 'order_total_payment')) ?> đ</a></b></h3>
+            <h3><b>Tổng: <a><?=number_format( round($order->getOrder_total_payment($user_id, 'order_total_payment'))) ?> đ</a></b></h3>
             <!-- <input type="hidden" name="priceFinal" value="<?= round((($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount))) ?>" id=""> -->
         </li>
     </form>

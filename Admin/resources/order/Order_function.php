@@ -675,4 +675,8 @@ function editStatusCartAd($order_status_id, $cart_id)
             return $row['lasted'];
         }
     }
+    function sale($product_price,$product_sale){
+        $result = $product_price - ($product_price * ($product_sale/100));
+        return $result;
+    }
 }

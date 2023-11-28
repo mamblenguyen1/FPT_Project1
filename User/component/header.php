@@ -7,7 +7,7 @@ include('style.php');
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<strong class="tg-logo"><a href="index.php?pages=user&action=home"><img style="height: 140px;" src="images/loweb.png" alt="company name here"></a></strong>
+						<strong class="tg-logo"><a href="index.php?pages=user&action=home"><img style="height: 140px;width:140px" src="images/loweb.png" alt="company name here"></a></strong>
 						<div class="tg-wishlistandcart" style="z-index: 2;float: right;position: absolute; padding-top: 70px;margin-left: 84%;">
 							<?
 							if (isset($_COOKIE['userID'])) {
@@ -144,7 +144,7 @@ include('style.php');
 									?>
 								</select>
 								<input id="search-input" type="text" name="keyword" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm. . .">
-								<button name="search-btn" type="submit">Tìm Kiếm</button>
+								<button name="search-btn" type="submit"><i class="icon-magnifier" style="font-size:24px"></i></i></button>
 							</fieldset>
 							<?
 							if (isset($_POST['search-btn'])) {

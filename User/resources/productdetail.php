@@ -6,10 +6,10 @@ include('user/component/header.php');
 <?
 if (isset($_POST['deletecomment'])) {
 	$product_id = $_GET['product_id'];
-    $comment_detail = $_POST['detailCommentId'];
-    $comment->deletedComment($comment_detail);
-    echo '<script>alert("Đã ẩn bình luận ! ! !")</script>';
-  };
+	$comment_detail = $_POST['detailCommentId'];
+	$comment->deletedComment($comment_detail);
+	echo '<script>alert("Đã ẩn bình luận ! ! !")</script>';
+};
 
 
 if (isset($_GET['product_id'])) {
@@ -83,11 +83,24 @@ if (isset($_COOKIE['viewCount'])) {
 												</figure>
 												<div class="tg-postbookcontent">
 													<span class="tg-bookprice">
-														<ins style="color: red;"><? echo number_format($product->all_product_category($category_id, $product_id, 'product_price')) ?><span>đ</span></ins>
-														<del><? echo number_format($product->all_product_category($category_id, $product_id, 'product_sale')) ?><span>đ</span></del>
+														<ins style="color: red;"><? echo number_format($product->sale($product->all_product_category($category_id, $product_id, 'product_price'), $product->all_product_category($category_id, $product_id, 'product_sale'))) ?><span>đ</span></ins>
+														<del><?
+																if ($product->all_product_category($category_id, $product_id, 'product_sale') > 0) {
+																	echo number_format($product->all_product_category($category_id, $product_id, 'product_price'));
+																	echo 'đ';
+																} else {
+																	echo '';
+																} ?>
+														</del>
 													</span>
-													<span class="tg-bookwriter"><span>Tiết kiệm :</span><? echo number_format(($product->all_product_category($category_id, $product_id, 'product_price')) - ($product->all_product_category($category_id, $product_id, 'product_sale'))) ?></span>
-													<ul class="tg-delevrystock">
+													<?
+													if ($product->all_product_category($category_id, $product_id, 'product_sale') > 0) {
+														echo '<span class="tg-bookwriter"><span>Tiết kiệm: </span>' . number_format(($product->all_product_category($category_id, $product_id, 'product_price')) - ($product->sale($product->all_product_category($category_id, $product_id, 'product_price'), $product->all_product_category($category_id, $product_id, 'product_sale')))) . ' đ</span>
+';
+													} else {
+														echo '<div><br></div>';
+													};
+													?> <ul class="tg-delevrystock">
 														<li><i class="icon-rocket"></i><span>Giao hàng toàn quốc</span></li>
 														<li><i class="icon-checkmark-circle"></i><span>3 -5 ngày </span></li>
 														<li><i class="icon-store"></i><span>Trạng thái: <em>Còn hàng</em></span></li>
@@ -413,20 +426,20 @@ if (isset($_COOKIE['viewCount'])) {
 												</div>
 												<hr>
 														';
-														$stmt1  = $conn->prepare("SELECT * FROM comment_reply
+																		$stmt1  = $conn->prepare("SELECT * FROM comment_reply
 														WHere comment_reply.comment_detail_id = $row[comment_detail_id]");
-																					$stmt1->execute();
-																					if ($stmt1->rowCount() > 0) {
-																						foreach ($stmt1 as $row1) {
-																							echo '
+																		$stmt1->execute();
+																		if ($stmt1->rowCount() > 0) {
+																			foreach ($stmt1 as $row1) {
+																				echo '
 																			<div class="reply-comment">
 																			<p> <i class="fa fa-reply"></i>
 																			<strong>Trả lời từ ADMIN</strong>
 																			</p>
 																			<span>' . $row1['content'] . '</span>
 																			</div>';
-																						}
-																					}
+																			}
+																		}
 																	}
 																}
 															}
@@ -551,12 +564,14 @@ if (isset($_COOKIE['viewCount'])) {
 
 </div>
 <style>
-	.text-center{
+	.text-center {
 		color: var(--secondary-color);
 	}
-	.col-md-6 h2{
+
+	.col-md-6 h2 {
 		color: var(--secondary-color);
 	}
+
 	.comment-method {
 		padding: 10px 0;
 	}
