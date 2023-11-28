@@ -13,7 +13,7 @@
         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a style="text-decoration:none" href="#" class="d-block">Nguyễn Minh Quang</a>
+        <a style="text-decoration:none" href="#" class="d-block"><?=$user->getInfouser2($_COOKIE['userID'], 'user_name')?></a>
       </div>
     </div>
     <!-- SidebarSearch Form -->

@@ -41,7 +41,7 @@
                                                     <form action="index.php?pages=admin&action=OrderDetail" method="post">
                                                         <input type="hidden" value="' . $row['order_id'] . '" name="order_id">
                                                         <input type="hidden" value="' . $row['user_id'] . '" name="user_id">
-                                                        <button type="submit" name="detail_order" class="btn  btn-outline-primary">Chi tiết</button>
+                                                        <button type="submit" name="Das_detail" class="btn  btn-outline-primary">Chi tiết</button>
                                                     </form>
                                                 </td>
                                               </tr> 
