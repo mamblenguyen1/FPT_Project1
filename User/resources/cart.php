@@ -120,11 +120,11 @@ if (isset($_POST['updateQty'])) {
               </div>
             </div>
           </td>
-          <td data-th="Price">' . number_format($row['product_price']) . ' đ</td>
+          <td data-th="Price">' . number_format($product->sale($row['product_price'],$row['product_sale'])) . ' đ</td>
           <td data-th="Quantity">
             <input type="number" value="' . $row['order_quantity'] . '" class="form-control text-center" name="cartqty">
           </td>
-          <td data-th="Subtotal" class="text-center">' . number_format($row['order_quantity'] * $row['product_price']) . ' đ</td>
+          <td data-th="Subtotal" class="text-center">' . number_format($row['order_quantity'] * $product->sale($row['product_price'],$row['product_sale'])) . ' đ</td>
           <td class="actions" data-th="">
           <input type="hidden" name="cartDetailId" value="' . $row['order_detail_id'] . '" id="">
           <button name="updateQty" type="submit" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
@@ -133,7 +133,7 @@ if (isset($_POST['updateQty'])) {
           </td>
         </tr>
           ';
-        $total_product = $row['order_quantity'] * $row['product_price'];
+        $total_product = $row['order_quantity'] * $product->sale($row['product_price'],$row['product_sale']);
         $total_price = $total_price + $total_product;
       }
 

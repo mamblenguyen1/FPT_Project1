@@ -34,7 +34,7 @@ class ProductFunction
     {
         $db = new connect();
         $sql = "SELECT * FROM category";
-         $rs = $db->pdo_query($sql);
+        $rs = $db->pdo_query($sql);
         echo json_encode($rs);
     }
 
@@ -53,7 +53,7 @@ class ProductFunction
         return $db->pdo_query($sql);
     }
 
-    
+
 
     function category_type_con_select_all($category_id)
     {
@@ -62,7 +62,7 @@ class ProductFunction
         return $db->pdo_query($sql);
     }
 
-    function add_product($product_name, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id,$product_short_description ,$product_description, $user_created)
+    function add_product($product_name, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_short_description, $product_description, $user_created)
     {
         $db = new connect();
         $sql = "INSERT INTO 
@@ -72,7 +72,7 @@ class ProductFunction
         return $db->pdo_execute($sql);
     }
 
-    function count_view($user_id,$product_id)
+    function count_view($user_id, $product_id)
     {
         $db = new connect();
         $sql = "SELECT COUNT(*) FROM user_views WHERE user_id = $user_id AND product_id = $product_id";
@@ -82,7 +82,7 @@ class ProductFunction
         }
     }
 
-    function Edit_Product($product_name, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id,$product_short_description ,$product_description, $user_updated, $Product_ID)
+    function Edit_Product($product_name, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_short_description, $product_description, $user_updated, $Product_ID)
     {
         $db = new connect();
         $select = "UPDATE products SET product_name  = '$product_name', product_price = $product_price, product_sale = $product_sale, product_img = '$product_img',  product_short_description = '$product_short_description', product_description = '$product_description', product_quantily = '$product_quantily', category_id = $category_id, type_id = $type_id, user_updated = $user_updated , updated_at = CURRENT_TIMESTAMP 
@@ -149,11 +149,11 @@ class ProductFunction
             return $row[$column];
         }
     }
-  
 
 
 
-  
+
+
 
     function create_Prod($nameP, $ImgP, $PriP, $DesP, $CateP, $giam_gia, $dac_biet)
     {
@@ -265,12 +265,17 @@ class ProductFunction
         $result = $db->pdo_execute($sql);
         return $result;
     }
-        //xóa vĩnh viễn sản phẩm ẩn
-        function permanently_deleted_product($product_id)
-        {
-            $db = new connect();
-            $sql = "DELETE FROM `products` WHERE product_id = $product_id";
-            $result = $db->pdo_execute($sql);
-            return $result;
-        }
+    //xóa vĩnh viễn sản phẩm ẩn
+    function permanently_deleted_product($product_id)
+    {
+        $db = new connect();
+        $sql = "DELETE FROM `products` WHERE product_id = $product_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+
+    function sale($product_price,$product_sale){
+        $result = $product_price - ($product_price * ($product_sale/100));
+        return $result;
+    }
 }
