@@ -236,6 +236,16 @@ class ProductFunction
 
         return $shortenedText;
     }
+    function substringLength($text, $maxLength)
+    {
+        if (strlen($text) < $maxLength) {
+            $shortenedText = ' <div><br></div>';
+        } else {
+            $shortenedText = '';
+        }
+
+        return $shortenedText;
+    }
     // tổng sp
     function CountProducts()
     {

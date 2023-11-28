@@ -103,12 +103,12 @@ include('user/component/header.php');
                                             <?
 
                                                 foreach ($stmt as $row) {
-                                                    $sale = $row['product_sale'] >0;
-                                                    $product_name_text = $product->substringtext($row['product_name'], 22);
+                                                    $sale = $row['product_sale'] > 0;
+                                                    $product_name_text = $product->substringtext($row['product_name'], 30);
                                                     echo '<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
                                             
                                                 <div class="tg-postbook">
-                                                    '.($sale ? "<span class='saleprice'>-$row[product_sale]%</span>":"").'
+                                                    ' . ($sale ? "<span class='saleprice'>-$row[product_sale]%</span>" : "") . '
                                                     <figure class="tg-featureimg">
                                                         <div class="tg-bookimg">
                                                             <div class="tg-frontcover"><img  style="width: 300px; height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
@@ -124,16 +124,18 @@ include('user/component/header.php');
                                                         <div class="tg-booktitle">
                                                         
                                                             <h3>
-                                                            <a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a>
-                                                        </h3>
+                                                            <a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a> 
+                                                        '.$product->substringLength($row['product_name'], 22).'
+                                                            </h3>
+
                                                         </div>
                                                         <span class="tg-bookwriter">Hãng: <a href="">' . $row['type_name'] . '</a></span>
                                                         <span class="tg-stars"><span></span></span>
                                                         <span class="tg-bookprice">
                                                          
-                                                            <ins>' . number_format($product->sale($row['product_price'],$row['product_sale'])) . ' đ</ins>
+                                                            <ins>' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</ins>
                                                             <br>
-                                                            <del>' .($sale ? "$row[product_price] đ":"<div><br></div>") . '</del>
+                                                            <del>' . ($sale ? "$row[product_price] đ" : "<div><br></div>") . '</del>
                                                         </span>
                                                         <form action="index.php?pages=user&action=cart" method="post">
                                                         <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
@@ -163,7 +165,6 @@ include('user/component/header.php');
                                 </div>
                             </div>
                         </div>
-                        <a href=""style="z-index: 10; top:0; right:0;position:absolute;back"></a>
                         <?
                         include('user/component/sidebar.php');
                         ?>
