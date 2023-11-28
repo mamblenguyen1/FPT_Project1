@@ -2,9 +2,7 @@
 include('user/component/header.php');
 ?>
 <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
-
     <main id="tg-main" class="tg-main tg-haslayout">
-
         <div class="tg-sectionspace tg-haslayout">
             <div class="container">
                 <div class="row">
@@ -129,16 +127,15 @@ include('user/component/header.php');
                                                         
                                                             <h3>
                                                             <a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a>
-
-                                                             
                                                         </h3>
                                                         </div>
                                                         <span class="tg-bookwriter">Hãng: <a href="">' . $row['type_name'] . '</a></span>
                                                         <span class="tg-stars"><span></span></span>
                                                         <span class="tg-bookprice">
-                                                            <ins>' . number_format($row['product_sale']) . ' đ</ins>
+                                                            <ins>' . number_format($row['product_price'])
+                                                        . ' đ</ins>
                                                             <br>
-                                                            <del>' . number_format($row['product_price']) . ' đ</del>
+                                                            <del>' . number_format($row['product_sale']) . ' đ</del>
                                                         </span>
                                                         <form action="index.php?pages=user&action=cart" method="post">
                                                         <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
@@ -180,8 +177,3 @@ include('user/component/header.php');
 <?
 include('user/component/footer.php');
 ?>
-<!-- <form action="index.php?pages=user&action=productdetail" method="post">
-    <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
-    <input type="hidden" name="category_id" value="' . $row['category_id'] . '">
-    <button type="submit" style="background-color: white;" name="details">' . $product_name_text . '</button>
-</form> -->

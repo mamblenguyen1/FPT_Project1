@@ -81,7 +81,13 @@ include('User/component/header.php');
                                             </div>
                                             <br><br>
                                     <? }
-                                    } ?>
+                                    } else {
+                                        echo 'Bạn chưa đặt đơn hàng nào.';
+                                        echo '<a style="color:red" href="index.php?pages=user&action=cart">Đến giỏ hàng</a>
+                                            <a style="color:blue" href="index.php?pages=user&action=products">Xem thêm sản phẩm</a>';
+                                    }
+
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -161,7 +167,7 @@ include('user/component/footer.php');
         font-size: 16px;
         color: red;
     }
-    
+
     .cost .costprice {
         color: gray;
         font-size: 17px;

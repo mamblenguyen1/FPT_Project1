@@ -90,10 +90,10 @@ if (isset($_GET['user_id'])) {
                     </li>
                 </ul>
                 <li class="list-group-item border-0 d-flex justify-content-between">
-        <input type="text" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
-        <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color: var(--primary-color); font-size:15px; width:75%; background-color: var(--secondary-color);">Thanh Toán</button>
-    </form>
-</li>
+                    <input type="text" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
+                    <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color: var(--primary-color); font-size:15px; width:75%; background-color: var(--secondary-color);">Thanh Toán</button>
+        </form>
+        </li>
     </div>
 
 </div>
@@ -150,9 +150,12 @@ if (isset($_POST['code-input'])) {
         $result = $code->checkExpires($_POST['code']);
         if ($result == true) {
             if (($order->getOrder_total_payment($user_id, 'order_total_payment')) < intval($code->getInfoCode($_POST['code'], 'code_condition'))) {
-                echo '<span style="color:red" class="vaild">Bạn không đủ điều kiện sử dụng mã giảm giá, tổng giá trị đơn hàng phải > '.number_format(intval($code->getInfoCode($_POST['code'], 'code_condition'))).' đ để sử dụng mã này</span>';
+                echo '<span style="color:red" class="vaild">Bạn không đủ điều kiện sử dụng mã giảm giá, tổng giá trị đơn hàng phải > ' . number_format(intval($code->getInfoCode($_POST['code'], 'code_condition'))) . ' đ để sử dụng mã này</span>';
             } else {
                 echo '<span style="color:green" class="vaild">Áp dụng mã giảm giá <b>' . $_POST['code'] . '</b> thành công !</span>';
+                echo '
+         
+                ';
                 $sql = $code->getCode($_POST['code']);
                 extract($sql);
                 $discount = $Percentage / 100;
@@ -170,8 +173,8 @@ if (isset($_POST['code-input'])) {
 <h4 class="d-flex justify-content-between align-items-center mb-3">
     <form method="post" class="color-white">
         <label for="firstName">Mã giảm giá (Nếu Có)</label>
-        <input value="" name="code" type="text" class="form-control" style="width:200px;" placeholder="Nhập mã giảm giá">
-        <button type="submit" name="code-input" class="tg-btn" style="width:100px; padding:0;">Nhập</button>
+        <input value="" name="code" type="text" id="code1" class="form-control" style="width:200px;" placeholder="Nhập mã giảm giá">
+        <button type="submit" name="code-input" class="tg-btn" id="code1" style="width:100px; padding:0;">Nhập</button>
         <h3><label><b>Thành tiền</b></label></h3>
         <ul class="list-group mb-3"></ul>
         <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
@@ -264,27 +267,34 @@ if (isset($_POST['code-input'])) {
     }
 </script>
 <style>
-    .color-white li{
+    .color-white li {
         background: var(--primary-color);
     }
-    .color-white li a{
+
+    .color-white li a {
         color: var(--secondary-color-color);
     }
-    .color-white li .text-muted1{
+
+    .color-white li .text-muted1 {
         color: var(--secondary-color);
     }
-    .info p{
+
+    .info p {
         color: var(--secondary-color);
     }
-    .my-3 li{
+
+    .my-3 li {
         background: var(--primary-color);
     }
-    h4 b{
+
+    h4 b {
         color: var(--secondary-color);
     }
-    label{
+
+    label {
         color: var(--secondary-color);
     }
+
     img {
         width: 100px;
         height: 50px;
@@ -342,7 +352,8 @@ if (isset($_POST['code-input'])) {
 
     .confirm-oder {
         color: white;
-        background: var(--secondary-color);;
+        background: var(--secondary-color);
+        ;
         font-size: 1rem;
         line-height: 1.5rem;
         width: 100%;
