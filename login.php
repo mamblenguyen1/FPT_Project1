@@ -38,6 +38,16 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
+
+
+
+
+
+
+
+
+
+
 <body style="margin: 0; padding:0; max-width: 100%;">
   <!-- Form Đăng Nhập -->
   <div class="container-login">
@@ -89,7 +99,9 @@ if (isset($_POST["submit"])) {
               <div class="group">
                 <button type="submit" name="submit" class="button"> Đăng nhập</button>
               </div>
+
             </form>
+
             <div class="hr"></div>
 
             <!-- Quên Mật Khẩu -->
@@ -98,7 +110,7 @@ if (isset($_POST["submit"])) {
             </div>
 
           </div>
-          
+
           <!-- Form Đăng Ký -->
           <div class="sign-up-htm">
             <form action="" method="post">
@@ -222,7 +234,6 @@ if (isset($_POST["submit"])) {
         } else {
           $user->user_create($username, $regEmail, $phone, $pass1);
           echo '<script>alert("Chúc mừng bạn đã đăng ký thành công !!!")</script>';
-
         }
       } else if ($pass1 != $pass2) {
         echo '<script>alert("Mật Khẩu không giống Nhau !!!")</script>';
@@ -253,7 +264,9 @@ if (isset($_POST["submit"])) {
     }
   }
   ?>
+
   <link rel="stylesheet" href="css/login.css">
+
   <style>
     .danger {
       color: #fff;
@@ -287,6 +300,17 @@ if (isset($_POST["submit"])) {
       color: #00ffdc;
     }
   </style>
+  <div id="g_id_onload" data-client_id="982902368259-u614j7ige69qenvsembcsrrt2q72s0ui.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="false">
+  </div>
+
+  <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left">
+  </div>
+
+  <!-- Display the user's profile info -->
+  <div class="pro-data hidden"></div>
+  <div id="g_id_onload" data-client_id="982902368259-u614j7ige69qenvsembcsrrt2q72s0ui.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="true">
+  </div>
+
   <script>
     var Chars = ["*", "X", "+", "-", "1", "0", "1", "@", "vn"];
     var Cells = [];
@@ -371,6 +395,49 @@ if (isset($_POST["submit"])) {
         var u = random(.3, 3.8);
         Cells[i] = new Matrix(x, y, r, h, t, u);
       }
+    }
+  </script>
+  <script src="https://accounts.google.com/gsi/client" async></script>
+  <script>
+    // Credential response handler function
+
+
+    // Ví dụ: đặt một cookie có tên "user" với giá trị "John Doe" có hiệu lực trong 7 ngày
+   
+    function handleCredentialResponse(response) {
+      // Post JWT token to server-side
+      fetch("auth_init.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            request_type: 'user_auth',
+            credential: response.credential
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status == 1) {
+            let responsePayload = data.pdata;
+            window.location.href = "http://localhost/FPT_Project1/index.php";
+            // setcookie("userID", responsePayload.sub, time() + 3600, "/");
+            // let profileHTML = '<h3>Welcome ' + responsePayload.given_name + '! <a href="javascript:void(0);" onclick="signOut(' + responsePayload.sub + ');">Sign out</a></h3>';
+            // profileHTML += '<img src="' + responsePayload.picture + '"/><p><b>Auth ID: </b>' + responsePayload.sub + '</p><p><b>Name: </b>' + responsePayload.name + '</p><p><b>Email: </b>' + responsePayload.email + '</p>';
+            // document.getElementsByClassName("pro-data")[0].innerHTML = profileHTML;
+
+            // document.querySelector("#btnWrap").classList.add("hidden");
+            // document.querySelector(".pro-data").classList.remove("hidden");
+          }
+        })
+        .catch(console.error);
+    }
+
+    // Sign out the user
+    function signOut(authID) {
+      document.getElementsByClassName("pro-data")[0].innerHTML = '';
+      document.querySelector("#btnWrap").classList.remove("hidden");
+      document.querySelector(".pro-data").classList.add("hidden");
     }
   </script>
 </body>

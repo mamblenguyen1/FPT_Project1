@@ -234,7 +234,15 @@ class UserFunction
     }
 
 
-
+    function getInfoUserByOauth_uid( $oauth_uid , $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM user WHERE user.oauth_uid = $oauth_uid";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
 
 
 
