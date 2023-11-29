@@ -68,7 +68,7 @@ class ORDER
         return $result;
     }
 
-    
+
     public function DuplicateCartProStorge($productId, $userid)
     {
         $db = new connect();
@@ -170,31 +170,32 @@ class ORDER
         return $result;
     }
 
-    function insertAndSelectCartDetail($address, $totalPrice, $orderId, $pdo) {
+    function insertAndSelectCartDetail($address, $totalPrice, $orderId, $pdo)
+    {
         try {
             // Bắt đầu giao dịch
             $pdo->beginTransaction();
-    
+
             // Chèn dữ liệu vào bảng `cart`
             $stmt = $pdo->prepare("INSERT INTO `cart` (user_id, address, total_price) VALUES (?, ?, ?)");
             $stmt->execute([15, $address, $totalPrice]);
             $cartId = $pdo->lastInsertId(); // Lấy cart_id mới chèn vào
-    
+
             // Chèn dữ liệu vào bảng `cart_detail` từ `order_detail`
             $stmt = $pdo->prepare("INSERT INTO `cart_detail` (cart_id, product_id, quantity) 
                                   SELECT ?, product_id, order_quantity 
                                   FROM `order_detail` 
                                   WHERE `order_id` = ? AND `order_status_id` = 1");
             $stmt->execute([$cartId, $orderId]);
-    
+
             // Truy vấn SELECT ngay lập tức sau khi chèn dữ liệu
             $stmt = $pdo->prepare("SELECT * FROM `cart_detail` WHERE `cart_id` = ?");
             $stmt->execute([$cartId]);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+
             // Kết thúc giao dịch
             $pdo->commit();
-    
+
             return $result;
         } catch (PDOException $e) {
             // Xử lý lỗi và hủy bỏ giao dịch nếu có lỗi
@@ -240,7 +241,7 @@ class ORDER
             return $row[$column];
         }
     }
-   
+
 
     function editStatusOrder($order_status_id, $order_id)
     {
@@ -265,59 +266,59 @@ class ORDER
 
 
 
-// ---------------------------------------------------------------------------------------------|
-//|                            Chổ này viết hàm giỏ hàng nè nha                                 |
-//|                                                                                             |
-//----------------------------------------------------------------------------------------------|
+    // ---------------------------------------------------------------------------------------------|
+    //|                            Chổ này viết hàm giỏ hàng nè nha                                 |
+    //|                                                                                             |
+    //----------------------------------------------------------------------------------------------|
 
-function Show_Cart($user_id)
-{
-    $db = new connect();
-    $sql = "SELECT * FROM cart , order_status
+    function Show_Cart($user_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM cart , order_status
     WHERE cart.status = order_status.order_status_id
     AND cart.user_id = $user_id
     AND cart.status <> 4";
-    $result = $db->pdo_query($sql);
-    return $result;
-}
-function Hidden_Cart()
-{
-    $db = new connect();
-    $sql = "SELECT * FROM cart , order_status
+        $result = $db->pdo_query($sql);
+        return $result;
+    }
+    function Hidden_Cart()
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM cart , order_status
     WHERE cart.status = order_status.order_status_id
     AND cart.status = 4";
-    $result = $db->pdo_query($sql);
-    return $result;
-}
-function Show_Cart_detail($cart_id)
-{
-    $db = new connect();
-    $sql = "SELECT * FROM cart , order_status, cart_detail, products
+        $result = $db->pdo_query($sql);
+        return $result;
+    }
+    function Show_Cart_detail($cart_id)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM cart , order_status, cart_detail, products
     WHERE cart.status = order_status.order_status_id
     AND cart.cart_id= cart_detail.cart_id
     AND cart_detail.product_id = products.product_id
     AND cart.cart_id = $cart_id";
-    $result = $db->pdo_query($sql);
-    return $result;
-}
-function Show_Cart_detail_Collumn($cart_id, $column)
-{
-    $db = new connect();
-    $sql = "SELECT * FROM cart , order_status, cart_detail, products, user
+        $result = $db->pdo_query($sql);
+        return $result;
+    }
+    function Show_Cart_detail_Collumn($cart_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM cart , order_status, cart_detail, products, user
     WHERE cart.status = order_status.order_status_id
     AND cart.cart_id= cart_detail.cart_id
     AND cart_detail.product_id = products.product_id
     AND cart.user_id = user.user_id
     AND cart.cart_id = $cart_id";
-    $result = $db->pdo_query($sql);
-    foreach ($result as $row) {
-        return $row[$column];
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
     }
-}
-function Show_Cart_detail_Collumn1($user_id, $column)
-{
-    $db = new connect();
-    $sql = "SELECT * FROM cart , order_status, cart_detail, products, user
+    function Show_Cart_detail_Collumn1($user_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM cart , order_status, cart_detail, products, user
     WHERE cart.status = order_status.order_status_id
     AND cart.cart_id= cart_detail.cart_id
     AND cart_detail.product_id = products.product_id
@@ -326,65 +327,65 @@ function Show_Cart_detail_Collumn1($user_id, $column)
     AND cart.status = 1
     order BY cart.date
     DESC LIMIT 1";
-    $result = $db->pdo_query($sql);
-    foreach ($result as $row) {
-        return $row[$column];
-    }  
-}
-function getCartStatusDetail($cart_id, $column)
-{
-    $db = new connect();
-    $sql = "SELECT * FROM `order_status` ,  cart
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    function getCartStatusDetail($cart_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `order_status` ,  cart
     WHERE cart.status = order_status.order_status_id 
     AND cart.cart_id= $cart_id";
-    $result = $db->pdo_query($sql);
-    foreach ($result as $row) {
-        return $row[$column];
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
     }
-}
 
-function CountCart($user_id, $column)
-{
-    $db = new connect();
-    $sql = "SELECT COUNT(cart.cart_id) FROM cart 
+    function CountCart($user_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(cart.cart_id) FROM cart 
     WHERE cart.user_id = $user_id
     AND cart.status <> 4
     ";
-    $result = $db->pdo_query($sql);
-    foreach ($result as $row) {
-        return $row[$column];
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
     }
-}
 
-//đếm sl sp trong giỏ hàng
-function CountCart1($user_id)
-{
-    $db = new connect();
-    $sql = "SELECT COUNT(*) FROM order_detail, user 
+    //đếm sl sp trong giỏ hàng
+    function CountCart1($user_id)
+    {
+        $db = new connect();
+        $sql = "SELECT COUNT(*) FROM order_detail, user 
     WHERE user_id = $user_id
     AND order_status_id=1";
-    $result = $db->pdo_query($sql);
+        $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row['COUNT(*)'];
         }
-}
-  
-function editStatusCartAd($order_status_id, $cart_id)
-{
-    $db = new connect();
-    $select = "UPDATE cart SET status = $order_status_id
+    }
+
+    function editStatusCartAd($order_status_id, $cart_id)
+    {
+        $db = new connect();
+        $select = "UPDATE cart SET status = $order_status_id
     WHERE cart.cart_id =$cart_id";
-    $result = $db->pdo_execute($select);
-    return $result;
-}
-// function cancelCart( $cart_id)
-// {
-//     $db = new connect();
-//     $select = "UPDATE cart SET status = 4
-//     WHERE cart.cart_id =$cart_id";
-//     $result = $db->pdo_execute($select);
-//     return $result;
-// }
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
+    // function cancelCart( $cart_id)
+    // {
+    //     $db = new connect();
+    //     $select = "UPDATE cart SET status = 4
+    //     WHERE cart.cart_id =$cart_id";
+    //     $result = $db->pdo_execute($select);
+    //     return $result;
+    // }
 
 
 
@@ -450,7 +451,19 @@ function editStatusCartAd($order_status_id, $cart_id)
         }
     }
 
-
+    function cart_total_monney($userid){
+        $db = new connect();
+        $sql = "SELECT * FROM products, `order`, order_detail WHERE `order`.user_id = $userid
+        AND `order`.order_id = order_detail.order_id
+        AND `order_detail`.product_id = products.product_id
+        AND `order_detail`.order_status_id = 1";
+        $result = $db ->pdo_query($sql);
+        $total = 0;
+        foreach ($result as $row){
+            $total = $total + ($this->sale($row['product_price'],$row['product_sale']) * $row['order_quantity']);
+            return $total;
+        }
+    }
     function getOrder_total_payment($userid, $column)
     {
         $db = new connect();
@@ -697,10 +710,27 @@ function editStatusCartAd($order_status_id, $cart_id)
         AND cart.status=1";
         $result   = $db->pdo_query($sql);
         return $result;
-
     }
-    function sale($product_price,$product_sale){
-        $result = $product_price - ($product_price * ($product_sale/100));
+    function sale($product_price, $product_sale)
+    {
+        $result = $product_price - ($product_price * ($product_sale / 100));
         return $result;
+    }
+
+    function count_order_by_id($product_id)
+    {
+        $db = new connect();
+        $sql = "SELECT
+        sum(order_quantity)
+    FROM
+        order_detail
+    WHERE
+        product_id = $product_id
+    AND
+        order_status_id = 2";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row){
+            return $row['sum(order_quantity)'];
+        }
     }
 }

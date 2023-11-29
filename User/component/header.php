@@ -15,7 +15,7 @@ include('style.php');
 								<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" style="margin-left: -45%;">
 									<span class="tg-themebadge">' . $order->CountCart1($_COOKIE['userID']) . '</span>
 									<i class="icon-cart"></i>
-									<span style="text-transform : none">' . number_format($order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment')) . ' đ</span>
+									<span style="text-transform : none">' . number_format($order->cart_total_monney($_COOKIE['userID'])) . ' đ</span>
 								</a>
 							';
 							} else {

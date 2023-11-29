@@ -111,8 +111,8 @@ include('user/component/header.php');
                                                     ' . ($sale ? "<span class='saleprice'>-$row[product_sale]%</span>" : "") . '
                                                     <figure class="tg-featureimg">
                                                         <div class="tg-bookimg">
-                                                            <div class="tg-frontcover"><img  style="width: 300px; height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
-                                                            <div class="tg-backcover"><img  style="width: 300px; height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                                            <div class="tg-frontcover"><img  style="width: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                                            <div class="tg-backcover"><img  style="width: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
                                                             </div>
                                                     </figure>
                                                     <div class="tg-postbookcontent">

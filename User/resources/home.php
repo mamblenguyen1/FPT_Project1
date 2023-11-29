@@ -67,15 +67,15 @@ include('user/component/header.php');
                             if ($stmt->rowCount() > 0) {
                                 foreach ($stmt as $row) {
                                     $sale = $row['product_sale'] > 0;
-                                    $product_name_text = $product->substringtext($row['product_name'], 22);
+                                    $product_name_text = $product->substringtext($row['product_name'], 30);
                                     echo '
                                     <div class="item">
                                 <div class="tg-postbook">
                                 ' . ($sale ? "<span class='saleprice'>-$row[product_sale]%</span>" : "") . '
                                     <figure class="tg-featureimg">
                                         <div class="tg-bookimg">
-                                        <div class="tg-frontcover"><img style="width:175.55;height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
-                                        <div class="tg-backcover"><img style="width:175.55;height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                        <div class="tg-frontcover"><img style="width:175.55;height:175.55px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                        <div class="tg-backcover"><img style="width:175.55;height: 175.55;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
                                         </div>
                                         
                                     </figure>
@@ -86,7 +86,10 @@ include('user/component/header.php');
                                         </ul>
                                         <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                                         <div class="tg-booktitle">
-                                            <h3><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a></h3>
+                                        <h3>
+                                        <a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a> 
+                                    '.$product->substringLength($row['product_name'], 22).'
+                                        </h3>
                                         </div>
                                         <span class="tg-bookwriter">By: <a href="javascript:void(0);">' .  $row['type_name'] . '</a></span>
                                         <span class="tg-stars"><span></span></span>
@@ -168,8 +171,8 @@ include('user/component/header.php');
                                             <figure class="tg-featureimg">
                                                 <div class="tg-bookimg">
 
-                                                    <div class="tg-frontcover"><img style="width:175.55;height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
-                                                    <div class="tg-backcover"><img style="width:175.55;height: 200px;" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                                    <div class="tg-frontcover"><img style="width:175.55;height:175.55px" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                                    <div class="tg-backcover"><img style="width:175.55;height:175.55px" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
                                                 </div>
 
                                             </figure>
@@ -312,7 +315,7 @@ include('user/component/header.php');
                 <div class="row">
                     <div class="col-xs-16 col-sm-16 col-md-16 col-lg-16">
                         <div class="tg-sectionhead">
-                            <h2><span>Some Great Books</span>Sản phẩm bán chạy</h2>
+                            <h2><span>Top 5 </span>Sản phẩm bán chạy</h2>
                             <a class="tg-btn" href="index.php?pages=user&action=products" style="margin-right: 2%;">Xem Tất Cả</a>
                         </div>
                     </div>
@@ -331,7 +334,7 @@ include('user/component/header.php');
                         GROUP BY product_id
                         ORDER BY COUNT(product_id) DESC
                         )
-                            LIMIT 4
+                            LIMIT 5
                         
                         ;");
                         $stmt->execute();
@@ -342,7 +345,7 @@ include('user/component/header.php');
                             <div class="tg-postbook">
                                 <figure class="tg-featureimg">
                                     <div class="tg-bookimg" style="background: white;">
-                                        <div class="tg-frontcover"><img style="height: 150px" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
+                                        <div class="tg-frontcover"><img style="width:175.55;height:175.55px" src="images/product/' . $row['product_img'] . '.png" alt="image description"></div>
                                     </div>
                                     <div class="tg-hovercontent">
                                         <div class="tg-description">
@@ -350,7 +353,7 @@ include('user/component/header.php');
                                         </div>
                                         <strong class="tg-bookpage">Danh mục : ' . $row['category_name'] . '</strong>
                                         <strong class="tg-bookcategory">Hãng :' . $row['type_name'] . ' </strong>
-                                        <strong class="tg-bookprice">Giá : ' . $row['product_price'] . '</strong>
+                                        <strong class="tg-bookprice">Giá : ' . number_format($product->sale($row['product_price'],$row['product_sale'])) . ' đ</strong>
                                         <div class="tg-ratingbox"><span class="tg-stars"><span></span></span></div>
                                     </div>
                                 </figure>
@@ -358,7 +361,7 @@ include('user/component/header.php');
                                     <div class="tg-booktitle">
                                         <h3><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . '">' . $row['product_name'] . '</a></h3>
                                     </div>
-                                    <span class="tg-bookwriter">Số lượng đã bán: <a href="javascript:void(0);">' . $product->count_order_by_id($row['product_id'], 'COUNT(order_detail.product_id)') . '</a></span>
+                                    <span class="tg-bookwriter">Số lượng đã bán: <a href="javascript:void(0);">'. $order->count_order_by_id($row['product_id']) .'</a></span>
                                     <form action="index.php?pages=user&action=cart" method="post">
                                     <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
                                     <input type="hidden" name="qty" value="1">

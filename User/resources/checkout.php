@@ -92,7 +92,7 @@ if (isset($_GET['user_id'])) {
                 <li class="list-group-item border-0 d-flex justify-content-between">
 
                     <input type="hidden" name="order_id" value="<?= $order->getOrder_total_payment($user_id, 'order_id') ?>">
-                    <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color: var(--primary-color); font-size:15px;margin-left:70%;margin-bottom:100px; width:75%;height:40px;font-size:18px;font-weight:bold; background-color: var(--secondary-color);">Thanh Toán</button>
+                    <button name="payment" class="btn bg-slate-900 text-slate-50 btn-block confirm-oder rounded-full" type="submit" style="color: var(--primary-color); font-size:15px;margin-left:14%;margin-bottom:100px; width:75%;height:40px;font-size:18px;font-weight:bold; background-color: var(--secondary-color);">Thanh Toán</button>
         </form>
         </li>
     </div>
