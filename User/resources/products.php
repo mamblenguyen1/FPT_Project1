@@ -16,6 +16,16 @@ include('user/component/header.php');
                                     <div class="tg-productgrid">
                                         <div class="tg-refinesearch">
                                             <?
+                                            // Số lượng mục trên mỗi trang
+                                            $itemsPerPage = 8;
+
+                                            // Trang hiện tại
+                                            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+                                            // Tính offset
+                                            $offset = ($currentPage - 1) * $itemsPerPage;
+
+
                                             $category_render = 0;
                                             $type_render = 0;
                                             $keyword_render  = 0;
@@ -26,7 +36,7 @@ include('user/component/header.php');
                                                     type.type_id = products.type_id
                                                     AND 
                                                     category.category_id = products.category_id
-                                                    AND products.is_deleted = 1 AND products.category_id = $category_render");
+                                                    AND products.is_deleted = 1 AND products.category_id = $category_render LIMIT $offset, $itemsPerPage");
                                             } else if (isset($_GET['type'])) {
                                                 $type_render = $_GET['type'];
                                                 $conn = $db->pdo_get_connection();
@@ -34,7 +44,7 @@ include('user/component/header.php');
                                                     type.type_id = products.type_id
                                                     AND 
                                                     category.category_id = products.category_id
-                                                    AND products.is_deleted = 1 AND products.type_id = $type_render");
+                                                    AND products.is_deleted = 1 AND products.type_id = $type_render LIMIT $offset, $itemsPerPage");
                                             } else if (isset($_GET['search'])) {
                                                 $keyword_render = $_GET['search'];
                                                 $category_render = $_GET['id'];
@@ -61,7 +71,7 @@ include('user/component/header.php');
                                                         SELECT  products.product_id FROM products 
                                                         WHERE products.is_deleted = 1                                                
                                                         AND products.product_name LIKE '%$keyword_render%'
-                                                            )");
+                                                            ) LIMIT $offset, $itemsPerPage");
                                                 } else {
                                                     $conn = $db->pdo_get_connection();
                                                     $stmt = $conn->prepare("SELECT * FROM products , category , type
@@ -83,7 +93,7 @@ include('user/component/header.php');
                                                         type.type_id = products.type_id
                                                         AND products.is_deleted = 1                                                
                                                         AND type.type_name LIKE '%$keyword_render%'
-                                                            )");
+                                                            ) LIMIT $offset, $itemsPerPage");
                                                 }
                                             } else {
                                                 $conn = $db->pdo_get_connection();
@@ -92,7 +102,7 @@ include('user/component/header.php');
                                                     AND 
                                                     category.category_id = products.category_id
                                                     AND
-                                                    products.is_deleted = 1 ");
+                                                    products.is_deleted = 1 LIMIT $offset, $itemsPerPage");
                                             }
                                             $stmt->execute();
                                             if ($stmt->rowCount() > 0) {
@@ -125,7 +135,7 @@ include('user/component/header.php');
                                                         
                                                             <h3>
                                                             <a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a> 
-                                                        '.$product->substringLength($row['product_name'], 22).'
+                                                        ' . $product->substringLength($row['product_name'], 22) . '
                                                             </h3>
 
                                                         </div>
@@ -158,6 +168,17 @@ include('user/component/header.php');
                                                     echo '<h4>Danh mục chưa có sản phẩm !</h4>';
                                                 }
                                             };
+                                            $totalItems = $db->pdo_query("SELECT COUNT(*) AS item FROM products");
+                                            foreach ($totalItems as $row) {
+                                                $totalPages = 1+($row['item'] / $itemsPerPage);
+                                                echo '<div class="pagination">';
+                                                for ($i = 1; $i <= $totalPages; $i++) {
+                                                    echo '<a href="./index.php?pages=user&action=products&page=' . $i . '">' . $i . '</a>';
+                                                }
+                                                echo '</div>';
+                                            };
+
+
 
                                             ?>
                                         </div>
