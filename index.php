@@ -12,9 +12,7 @@ require_once './Admin/resources/order/Order_Function.php';
 require_once './Admin/resources/promotioncodes/CodeFunction.php';
 require_once './Admin/resources/contact/ContactFunction.php';
 require_once './componant/TimeFunction.php';
-
-
-
+require_once 'dbConfig.php';
 
 $db = new connect();
 $user = new UserFunction();
@@ -240,6 +238,7 @@ if (isset($_GET['pages'])) {
                     setcookie("viewCount", '', time() + 1, "/");
                     setcookie("role", '', time() + 1, "/");
                     setcookie("userID", '', time() + 1, "/");
+                    setcookie("Oauth", '', time() + 1, "/");
                     header("location: index.php?pages=user&action=home");
                     break;
                 case "forget":

@@ -1,7 +1,6 @@
 <?php
-  if(isset($_COOKIE['userID'])){
-  	setcookie("role", '', time() +1 , "/");
-    setcookie("userID", '', time() +1 , "/");
-    header('location: ./?pages=user&action=home');
-  }
+setcookie("viewCount", '', time() + 1, "/");
+setcookie("role", '', time() + 1, "/");
+setcookie("userID", '', time() + 1, "/");
+header("location: index.php?pages=user&action=home");
 ?>
