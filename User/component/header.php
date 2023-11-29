@@ -58,6 +58,7 @@ include('style.php');
 										<ul>
 											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
 											<li><a href="index.php?pages=admin&action=dashboard">Vào trang quản trị</a></li>
+											<li><a class="logout-btn" href="./index.php?pages=user&action=order">Đơn mua</a></li>
 											<li><a class="logout-btn" href="./index.php?pages=user&action=logout">Đăng Xuất</a></li>
 										</ul>
 									</ul>

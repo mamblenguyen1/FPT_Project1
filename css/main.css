@@ -1693,7 +1693,7 @@ li.menu-item-has-mega-menu {
 
 .mega-menu .tg-themetabnav {
 	margin: 0;
-	width: 230px;
+	width: 33%;
 	background: #fff;
 	position: relative;
 }
@@ -3289,7 +3289,7 @@ li.menu-item-has-mega-menu {
 }
 
 .tg-post {
-	width: 100%;
+	width: 70%;
 	float: left;
 	margin: 15px 0;
 }
@@ -3571,7 +3571,7 @@ li.menu-item-has-mega-menu {
 }
 
 .tg-widget ul li {
-	width: 100%;
+	/* width: 100%; */
 	float: left;
 	padding: 11px 0;
 	position: relative;

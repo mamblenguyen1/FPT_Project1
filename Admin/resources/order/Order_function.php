@@ -463,8 +463,8 @@ class ORDER
         $total = 0;
         foreach ($result as $row) {
             $total = $total + ($this->sale($row['product_price'], $row['product_sale']) * $row['order_quantity']);
-            return $total;
         }
+        return $total;
     }
     function getOrder_total_payment($userid, $column)
     {
