@@ -3,9 +3,17 @@
 <?
 if (isset($_POST['restore_type'])) {
     $typeID = $_POST['type_id'];
-    $type->RestoreType($typeID);
-    echo '<script>alert("Đã khôi phục danh mục ! ! !")</script>';
-    echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+    $db = new connect();
+    $sql = "SELECT * FROM `type`,category WHERE category.category_id = `type`.category_id AND `type`.type_id = $typeID AND category.is_deleted = 1";
+    $result = $db->pdo_query_one($sql);
+    if ($result == null) {
+        echo '<script>alert("Hãy khôi phục danh mục thuộc hãng trước")</script>';
+        echo '<script>window.location.href="index.php?pages=admin&action=CategoryHidden"</script>';
+    } else {
+        $type->RestoreType($typeID);
+        echo '<script>alert("Đã khôi phục hãng ! ! !")</script>';
+        echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+    };
 }
 ?>
 <div class="main-panel">

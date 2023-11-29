@@ -3,9 +3,27 @@
 <?
 if (isset($_POST['restore_product'])) {
     $productID = $_POST['product_id'];
-    $product->RestoreProduct($productID);
-    echo '<script>alert("Đã khôi phục danh mục ! ! !")</script>';
-    echo '<script>window.location.href="index.php?pages=admin&action=productList"</script>';
+
+    // sét danh mục
+    $db = new connect();
+    $sql = "SELECT * FROM products,category WHERE category.category_id = products.category_id AND products.product_id = $productID AND category.is_deleted = 1";
+    $result = $db->pdo_query_one($sql);
+    if ($result == null) {
+        echo '<script>alert("Hãy khôi phục danh mục thuộc sản phẩm trước")</script>';
+        echo '<script>window.location.href="index.php?pages=admin&action=CategoryHidden"</script>';
+    } else {
+        $db = new connect();
+        $sql = "SELECT * FROM products,type WHERE type.type_id = products.type_id AND products.product_id = $productID AND type.is_deleted = 1";
+        $result = $db->pdo_query_one($sql);
+        if ($result == null) {
+            echo '<script>alert("Hãy khôi phục hãng thuộc sản phẩm trước")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=TypeHidden"</script>';
+        } else {
+            $product->RestoreProduct($productID);
+            echo '<script>alert("Đã khôi phục danh mục ! ! !")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=productList"</script>';
+        };
+    };
 }
 ?>
 <div class="main-panel">
