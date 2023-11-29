@@ -57,12 +57,12 @@ if(isset($_POST['cancel'])){
                       extract($sql);
                       echo ' 
                           <tr>
-                          <th>'.$row['cart_id'].'</th>
-                          <th>'.$row['date'].'</th>
-                          <th>'.$row['address'].'</th>
-                          <th>'.$row['payment'].'</th>
-                          <th>'.$row['total_price'].'</th>
-                          <th>'.$row['order_status'].'</th>
+                          <td>'.$row['cart_id'].'</td>
+                          <td>'.$row['date'].'</td>
+                          <td>'.$row['address'].'</td>
+                          <td>'.$row['payment'].'</td>
+                          <td>'.$row['total_price'].'</td>
+                          <td>'.$row['order_status'].'</td>
                           <td>
                           <form action="" method="post">
                               <input type="hidden" value="' . $row['cart_id'] . '" name="cart_id">

@@ -131,10 +131,10 @@ if (isset($_POST['detail_order'])) {
                       extract($sql);
                       echo ' 
                           <tr>
-                          <th>'.$STT++.'</th>
-                          <th>'.$row['product_name'].'</th>
-                          <th>'.$row['quantity'].'</th>
-                          <th>'.number_format($row['product_price']).'đ</th>
+                          <td>'.$STT++.'</td>
+                          <td>'.$row['product_name'].'</td>
+                          <td>'.$row['quantity'].'</td>
+                          <td>'.number_format($row['product_price']).'đ</td>
                           </tr>
                           ';
                     }

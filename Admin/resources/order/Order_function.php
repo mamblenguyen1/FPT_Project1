@@ -361,12 +361,13 @@ class ORDER
     function CountCart1($user_id)
     {
         $db = new connect();
-        $sql = "SELECT COUNT(*) FROM order_detail, user 
-    WHERE user_id = $user_id
-    AND order_status_id=1";
+        $sql = "SELECT COUNT(*) AS number FROM order_detail,  `order`
+        WHERE order_detail.order_id = `order`.order_id
+        AND `order`.user_id = $user_id
+        AND order_status_id=1";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
-            return $row['COUNT(*)'];
+            return $row['number'];
         }
     }
 
@@ -451,16 +452,17 @@ class ORDER
         }
     }
 
-    function cart_total_monney($userid){
+    function cart_total_monney($userid)
+    {
         $db = new connect();
         $sql = "SELECT * FROM products, `order`, order_detail WHERE `order`.user_id = $userid
         AND `order`.order_id = order_detail.order_id
         AND `order_detail`.product_id = products.product_id
         AND `order_detail`.order_status_id = 1";
-        $result = $db ->pdo_query($sql);
+        $result = $db->pdo_query($sql);
         $total = 0;
-        foreach ($result as $row){
-            $total = $total + ($this->sale($row['product_price'],$row['product_sale']) * $row['order_quantity']);
+        foreach ($result as $row) {
+            $total = $total + ($this->sale($row['product_price'], $row['product_sale']) * $row['order_quantity']);
             return $total;
         }
     }
@@ -729,7 +731,7 @@ class ORDER
     AND
         order_status_id = 2";
         $result = $db->pdo_query($sql);
-        foreach ($result as $row){
+        foreach ($result as $row) {
             return $row['sum(order_quantity)'];
         }
     }

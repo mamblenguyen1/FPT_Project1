@@ -46,17 +46,17 @@ if (isset($_POST['detail_order'])) {
                   </thead>
                   <tbody style="text-align: center;">
                     <?
-                    $sql = $order->Show_Cart($user_id);
+                    $sql = $order->Show_Cart($_POST['user_id']);
                     foreach ($sql as $row) {
                       extract($sql);
                       echo ' 
                           <tr>
-                          <th>'.$row['cart_id'].'</th>
-                          <th>'. $timecount->timeformatterDMY($row['date']).'</th>
-                          <th>'.$row['address'].'</th>
-                          <th>'.$row['payment'].'</th>
-                          <th>'.number_format($row['total_price']).' đ</th>
-                          <th>'.$row['order_status'].'</th>
+                          <td>'.$row['cart_id'].'</td>
+                          <td>'. $timecount->timeformatterDMY($row['date']).'</td>
+                          <td>'.$row['address'].'</td>
+                          <td>'.$row['payment'].'</td>
+                          <td>'.number_format($row['total_price']).' đ</td>
+                          <td>'.$row['order_status'].'</td>
                           <td>
                           <form action="index.php?pages=admin&action=OrderDetailList" method="post">
                               <input type="hidden" value="' . $row['cart_id'] . '" name="cart_id">
