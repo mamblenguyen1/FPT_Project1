@@ -5,3 +5,13 @@
       <b>Version</b> 3.2.0
     </div>
   </footer>
+  <style>
+    *{
+        margin: 0;
+        padding: 0;
+       max-width: 100%;
+    }
+    body{
+        width: 100%;
+    }
+</style>

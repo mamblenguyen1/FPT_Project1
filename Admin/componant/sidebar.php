@@ -254,3 +254,13 @@
   </div>
   <!-- /.sidebar -->
 </aside>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+       max-width: 100%;
+    }
+    body{
+        width: 100%;
+    }
+</style>

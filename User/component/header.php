@@ -11,73 +11,21 @@ include('style.php');
 						<div class="tg-wishlistandcart" style="z-index: 2;float: right;position: absolute; padding-top: 70px;margin-left: 84%;">
 							<?
 							if (isset($_COOKIE['userID'])) {
-								$conn = $db->pdo_get_connection();
-								$stmt = $conn->prepare("SELECT * FROM order_detail, products, `order`, user
-									WHERE order_detail.order_id = `order`.order_id AND
-									products.product_id = `order_detail`.product_id 
-									AND order_detail.order_status_id  = 4
-									 AND
-									user.user_id = `order`.user_id AND 
-									`order`.user_id = $_COOKIE[userID]");
-								$stmt->execute();
-								if ($stmt->rowCount() > 0) {
-									echo '
-										<div class="dropdown tg-themedropdown tg-minicartdropdown">
-										<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: -45%;">
-											<span class="tg-themebadge">' . $stmt->rowCount() . '</span>
-											<i class="icon-cart"></i>
-											<span style="text-transform : none">' . number_format($order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment')) . ' đ</span>
-										</a>
-										';
-									echo
-									'<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart" style="margin-top: 12%; margin-right: 30%;">';
-									foreach ($stmt as $row) {
-										echo '
-							<div class="tg-minicartbody">
-									<div class="tg-minicarproduct">
-										<figure>
-											<img style="width: 70px; height: 80px;" src="images/product/' . $row['product_img'] . '.png" alt="image description">
-
-										</figure>
-										<div class="tg-minicarproductdata">
-											<h5><a href="">' . $row['product_name'] . ' <strong> X ' . $row['order_quantity'] . '</strong></a> </h5>
-											<h6><a href="" style="text-transform : none">' . number_format($row['order_quantity'] * $row['product_price']) . ' đ</a></h6>
-										</div>
-									</div>
-
-								</div>
+								echo '<div class="dropdown tg-themedropdown tg-minicartdropdown">
+								<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" style="margin-left: -45%;">
+									<span class="tg-themebadge">' . $order->CountCart1($_COOKIE['userID']) . '</span>
+									<i class="icon-cart"></i>
+									<span style="text-transform : none">' . number_format($order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment')) . ' đ</span>
+								</a>
 							';
-									}
-									echo '
-							<div class="tg-minicartfoot">
-							<a class="tg-btnemptycart" href="">
-								<i class="fa fa-trash-o"></i>
-								<span>Xóa toàn bộ</span>
-							</a>
-							<span class="tg-subtotal">Tổng cộng: <strong>' . number_format($order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment')) . ' đ</strong></span>
-							<div class="tg-btns">
-								<a class="tg-btn tg-active" href="index.php?pages=user&action=cart">Xem giỏ hàng</a>
-								<a class="tg-btn" href="">Thanh toán</a>
-							</div>
-						</div>
-						<a href="index.php?pages=user&action=order&userID=' . isset($_COOKIE['userID']) . '" style="color: black">Đơn mua</a>
-					</div>
-							';
-								} else {
-									echo '	<div class="dropdown tg-themedropdown tg-minicartdropdown">
-						<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown"style="margin-left: -45%;">
-							<span class="tg-themebadge"></span>
-							<i class="icon-cart" style="color: var(--secondary-color);"></i>
-							<span style="color: var(--secondary-color);">Giỏ hàng</span>
-						</a>';
-								}
 							} else {
-								echo '	<div class="dropdown tg-themedropdown tg-minicartdropdown">
-					<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" style="margin-left: -40%; color: white">
-						<span class="tg-themebadge"></span>
-						<i class="icon-cart" style="color: var(--secondary-color);"></i>
-						<span style="color: var(--secondary-color);">Giỏ hàng</span>
-					</a>';
+								echo '<div class="dropdown tg-themedropdown tg-minicartdropdown">
+								<a href="index.php?pages=user&action=cart" id="tg-minicart" class="tg-btnthemedropdown" style="margin-left: -40%;">
+									<span class="tg-themebadge"></span>
+									<i class="icon-cart"></i>
+									<span style="text-transform : none">Giỏ hàng</span>
+								</a>
+								';
 							}
 							?>
 							<div class="tg-userlogin" style="margin-top: -12.2%; width: 300px; background: var(--primary-color); color: var(--secondary-color);">
@@ -88,10 +36,11 @@ include('style.php');
 								<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
 								<div class="user">
 								<div class="user-name">
-									<span>Chào ! '.$user->getInfouser2($_COOKIE['userID'], 'user_name').'</span>
-									<ul class="menu" style="position: relative; display: block; padding: 10px 30px; margin-top: 10%; margin-left: -20%;">
-										<ul>
+									<span>Chào ! ' . $user->getInfouser2($_COOKIE['userID'], 'user_name') . '</span>
+									<ul class="menu" style="position: relative;display: block;padding: 10px 30px;margin-top: 15%;margin-left: -70%;">
+										<ul style="width: 295px;">
 											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
+											<li><a class="logout-btn" href="./index.php?pages=user&action=order">Đơn mua</a></li>
 											<li><a class="logout-btn" href="./index.php?pages=user&action=logout">Đăng Xuất</a></li>
 										</ul>
 									</ul>
@@ -104,8 +53,8 @@ include('style.php');
 								<figure><a href=""><img style="height:40px; width:40px" src="images/user1.jpg" alt="image description"></a></figure>
 								<div class="user">
 								<div class="user-name">
-									<span>Chào ! '.$user->getInfouser2($_COOKIE['userID'], 'user_name').'</span>
-									<ul class="menu" style="position: relative; display: block; padding: 10px 30px; margin-top: 10%; margin-left: -20%;">
+									<span>Chào ! ' . $user->getInfouser2($_COOKIE['userID'], 'user_name') . '</span>
+									<ul class="menu" style="position: relative;display: block;padding: 10px 30px;margin-top: 15%;margin-left: -65%;">
 										<ul>
 											<li><a href="index.php?pages=user&action=informationuser&userID=' . isset($_COOKIE['userID']) . '">Cập nhật người dùng</a></li>
 											<li><a href="index.php?pages=admin&action=dashboard">Vào trang quản trị</a></li>
@@ -239,25 +188,26 @@ include('style.php');
 </header>
 
 <script>
-	var icon =document.getElementById("icon");
-	icon.onclick =function(){
+	var icon = document.getElementById("icon");
+	icon.onclick = function() {
 		document.body.classList.toggle("dark-theme");
-		if(document.body.classList.contains("dark-theme")){
+		if (document.body.classList.contains("dark-theme")) {
 			icon.src = "/images/dark_theme_icon/sun.png";
-		}else{
+		} else {
 			icon.src = "/images/dark_theme_icon/moon.png";
 		}
 	}
 </script>
 <style>
-	#icon{
-	width: 25px;
-    height: 25px;
-    cursor: pointer;
-    margin-left: 55%;
-    position: absolute;
-    margin-bottom: 3%;
+	#icon {
+		width: 25px;
+		height: 25px;
+		cursor: pointer;
+		margin-left: 55%;
+		position: absolute;
+		margin-bottom: 3%;
 	}
+
 	#category-select {
 		width: 20%;
 		flex: 1;
@@ -266,6 +216,7 @@ include('style.php');
 		padding: 8px;
 		height: 44px;
 	}
+
 	#search-input {
 		width: 71.3%;
 		flex: 1;
@@ -273,47 +224,57 @@ include('style.php');
 		border-radius: 0 0 0 0;
 		margin-left: -4;
 	}
+
 	.tg-userlogin {
 		padding: 30px 0;
 	}
+
 	.menu {
 		position: relative;
 		display: block;
 		padding: 20px 30px;
 	}
+
 	.login-btn {
 		display: inline-block;
 		padding: 5px 15px;
 	}
+
 	.user {
 		width: 250px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
+
 	.category {
 		font-weight: bold;
 	}
+
 	.render-type ul li a:hover {
 		text-decoration: underline;
 		background-color: #77B748 !important;
 		color: white;
 	}
+
 	.logout {
 		padding-bottom: 8.5px;
 	}
+
 	.menu ul {
 		background-color: #504C4C;
 		position: absolute;
-		width: 300px;
+		width: 295px;
 		display: none;
 		opacity: .9;
 		top: 10px;
 	}
+
 	.menu ul li {
 		margin: 10px 0;
 		list-style: none;
 	}
+
 	.menu ul li a {
 		display: inline-block;
 		z-index: 1000000;
@@ -321,11 +282,13 @@ include('style.php');
 		margin: 0px 20px;
 		color: white;
 	}
+
 	.menu ul li a:hover {
 		background-color: #504C4C;
 		color: black;
 		font-weight: bold;
 	}
+
 	.menu:hover>ul {
 		display: block;
 	}

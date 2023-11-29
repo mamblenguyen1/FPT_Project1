@@ -1,7 +1,7 @@
 <?
 include('User/component/header.php');
 ?>
-<div class="tg-sectionspace tg-haslayout">
+<div class="tg-sectionspace tg-haslayout" style="padding: 20px;">
     <?
         if(isset($_POST['cancel'])){
             $cart_id = $_POST['cart_id'];
@@ -18,6 +18,7 @@ include('User/component/header.php');
         foreach ($stmt as $row) {
         
     ?>
+    <h3 style="text-align: center; font-size: 30px;">Đơn hàng của bạn</h3>
             <div class="container">
                 <div class="order-list">
                     <div class="order">

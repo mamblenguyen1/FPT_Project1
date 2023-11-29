@@ -356,6 +356,18 @@ function CountCart($user_id, $column)
     }
 }
 
+//đếm sl sp trong giỏ hàng
+function CountCart1($user_id)
+{
+    $db = new connect();
+    $sql = "SELECT COUNT(*) FROM order_detail, user 
+    WHERE user_id = $user_id
+    AND order_status_id=1";
+    $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row['COUNT(*)'];
+        }
+}
   
 function editStatusCartAd($order_status_id, $cart_id)
 {
