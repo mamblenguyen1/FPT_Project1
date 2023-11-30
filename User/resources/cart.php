@@ -114,7 +114,7 @@ if (isset($_POST['updateQty'])) {
           <tr>
           <td data-th="Product">
             <div class="row">
-              <div class="col-sm-2 hidden-xs"><img src="/images/product/' . $row['product_img'] . '.png" alt="..." class="img-responsive" /></div>
+              <div class="col-sm-2 hidden-xs"><img src="images/product/' . $row['product_img'] . '.png" alt="..." class="img-responsive" /></div>
               <div class="col-sm-10">
                 <h4 class="nomargin">' . $row['product_name'] . '</h4>
               </div>

@@ -172,15 +172,13 @@ include('user/component/header.php');
                                             foreach ($totalItems as $row) {
                                                 $totalPages = ceil($row['item'] / $itemsPerPage);
                                                 echo '<div class="w3-bar" style="width: 100%; overflow: hidden; text-align: center">
-                                                <a href="#" class="w3-button">&laquo;</a>';
+                                                ';
                                                 for ($i = 1; $i <= $totalPages; $i++) {
                                                     echo '
                                                     <a href="./index.php?pages=user&action=products&page=' . $i . '"class="w3-button">' . $i . '</a>
-                                                   
                                                     ';
                                                 }
                                                 echo '
-                                                <a href="#" class="w3-button">&raquo;</a>
                                                 </div>';
                                             };
                                             ?>
@@ -204,18 +202,24 @@ include('user/component/footer.php');
 <style>
     .w3-bar {
         display: inline-block;
+        height: 50px;
     }
 
     .w3-bar a {
+        height: 50px;
         color: black;
         padding: 8px 16px;
         text-decoration: none;
         font-size: 20px;
+        border-radius: 20%;
+        border: 1px solid black;
+        opacity: 0.5;
     }
 
     .w3-bar a:hover {
         background-color: lightgray;
         color: #77b748;
-        border-radius: 5px;
+        border-radius: 0 0 50% 50%;
+
     }
 </style>

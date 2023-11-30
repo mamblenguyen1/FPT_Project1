@@ -67,19 +67,19 @@ if (isset($_GET['user_id'])) {
                     <li class="list-group-item border-0 d-flex justify-content-between lh-condensed custom-radio">
                         <div>
                             <input id="momo" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                            <img src="../../images/momo.png" alt="Visa" />
+                            <img src="images/momo.png" alt="Visa" />
                         </div>
                     </li>
                     <li class="list-group-item border-0 d-flex justify-content-between lh-condensed custom-radio">
                         <div>
                             <input id="momo" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                            <img src="../../images/visa.png" />
+                            <img src="images/visa.png" />
                         </div>
                     </li>
                     <li class="list-group-item border-0 d-flex justify-content-between lh-condensed custom-radio">
                         <div>
                             <input id="momo" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                            <img src="../../images/paypal.png" />
+                            <img src="images/paypal.png" />
                         </div>
                     </li>
                     <li class="list-group-item border-0 d-flex justify-content-between lh-condensed custom-radio">

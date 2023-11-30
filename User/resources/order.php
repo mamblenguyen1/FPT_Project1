@@ -2,13 +2,13 @@
 include('User/component/header.php');
 ?>
 <div class="tg-sectionspace tg-haslayout" style="padding: 20px;">
+    <h3 style="text-align: center; font-size: 30px;"><b>Đơn hàng của bạn</b></h3>
     <?
-        if(isset($_POST['cancel'])){
-            $cart_id = $_POST['cart_id'];
-            $order->editStatusCartAd(4, $cart_id);
-            echo '<script>window.location.href="index.php?pages=user&action=order"</script>';
-        
-        }
+    if (isset($_POST['cancel'])) {
+        $cart_id = $_POST['cart_id'];
+        $order->editStatusCartAd(4, $cart_id);
+        echo '<script>window.location.href="index.php?pages=user&action=order"</script>';
+    }
     ?>
     <?
     $conn = $db->pdo_get_connection();
@@ -16,18 +16,33 @@ include('User/component/header.php');
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
         foreach ($stmt as $row) {
-        
+
     ?>
-    <h3 style="text-align: center; font-size: 30px;">Đơn hàng của bạn</h3>
             <div class="container">
                 <div class="order-list">
                     <div class="order">
-                        <div class="head">
-                            <h4 class="name">Mã đơn hàng #<?= $row['cart_id'] ?></h4>
+                        <?
+                        if ($row['status'] == 1) {
+                            echo '
+                            <div class="head">
+                            <h4 style="background-color:#7a6a01" class="name">Mã đơn hàng #' . $row['cart_id'] . '</h4>
                             <div class="status">
-                                <h4>Trạng thái: <?= $row['order_status'] ?></h4>
+                                <h4 style="background-color:#7a6a01">Trạng thái: ' . $row['order_status'] . ' </h4>
                             </div>
                         </div>
+                            ';
+                        } else {
+                            echo '
+                            <div class="head">
+                            <h4 style="background-color:green" class="name">Mã đơn hàng #' . $row['cart_id'] . '</h4>
+                            <div class="status">
+                                <h4 style="background-color:green">Trạng thái: ' . $row['order_status'] . ' </h4>
+                            </div>
+                        </div>
+                            ';
+                        }
+                        ?>
+
                         <?
                         $finalPrice = 0;
                         $conn = $db->pdo_get_connection();
@@ -46,12 +61,12 @@ include('User/component/header.php');
                                 <p>Số lượng: ' . $row['quantity'] . '</p>
                             </div>
                             <div class="price">
-                                <span style="font-size: 14px; font-weight:bold">' . number_format($row['quantity'] * $row['product_price']) . 'đ</span>
+                                <span style="font-size: 14px; font-weight:bold">' . number_format($row['quantity'] * $product->sale($row['product_price'],$row['product_sale'])) . 'đ</span>
                             </div>
 
                         </div>
                         ';
-                                $tong = $row['quantity'] * $row['product_price'];
+                                $tong = $row['quantity'] * $product->sale($row['product_price'],$row['product_sale']);
                                 $finalPrice = $finalPrice + $tong;
                             }
                         }
@@ -62,22 +77,26 @@ include('User/component/header.php');
                                 if ($row['status'] == 1) {
                                     echo '
                                     <form action="" method="post">
-                                    <input type="hidden" name="cart_id" value="'.$row['cart_id'].'">
+                                    <input type="hidden" name="cart_id" value="' . $row['cart_id'] . '">
                                     <button type="submit" name="cancel" class="btn btn-danger">Huỷ đơn hàng</button>
                                 </form>
                             ';
                                 } else {
-                                    echo '';
+                                    echo '
+                                    <form action="" method="post">
+                                    <button style="pointer-events: none;" type="submit" name="cancel" class="btn btn-danger">Huỷ đơn hàng</button>
+                                </form>
+                            ';
                                 }
                                 ?>
                             </div>
-                            
+
                             <div class="prices">
-                                <p>Tổng tiền :   <span style="font-size: 19px; color: gray;"><?= number_format($finalPrice)?> đ</span></p>
-                                <p>Giảm giá : 
-                            <?
-                             echo   (100 - intval($row['total_price'] *100 / $finalPrice));
-                            ?>  %
+                                <p>Tổng tiền : <span style="font-size: 19px; color: gray;"><?= number_format($finalPrice) ?> đ</span></p>
+                                <p>Giảm giá :
+                                    <?
+                                    echo (100 - intval($row['total_price'] * 100 / $finalPrice));
+                                    ?> %
                                 </p>
                                 <span>
                                     Thành tiền:
@@ -92,6 +111,8 @@ include('User/component/header.php');
 
             </div>
     <? }
+    } else {
+        echo '<p style="text-align: center; font-size: 20px;">Bạn không có đơn hàng nào đang được xử lý</p>';
     } ?>
 </div>
 

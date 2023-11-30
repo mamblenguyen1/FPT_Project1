@@ -147,7 +147,7 @@ if (isset($_GET['order_id'])) {
                         </div>
                     </div>
 
-                    <a class="btn btn-primary" style="display: block ; margin: 20px auto; width: 200px; padding: 15px 25px;" href="index.php?pages=user&action=history">Về Trang Lịch Sử</a>
+                    <a class="btn btn-primary" style="display: block ; margin: 20px auto; width: 200px; padding: 15px 25px;" href="index.php?pages=user&action=order">Theo dõi đơn hàng</a>
                 </div>
             </div>
         </div>
