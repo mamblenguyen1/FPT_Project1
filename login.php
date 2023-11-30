@@ -38,16 +38,6 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
-
-
-
-
-
-
-
-
-
-
 <body style="margin: 0; padding:0; max-width: 100%;">
   <!-- Form Đăng Nhập -->
   <div class="container-login">
@@ -59,6 +49,8 @@ if (isset($_POST["submit"])) {
         <div class="login-form">
           <div class="sign-in-htm">
             <form action="" method="post">
+              <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left">
+              </div>
               <div class="group">
                 <label for="user" class="label">Email</label>
                 <input id="user" name="email" type="text" class="input">
@@ -74,7 +66,6 @@ if (isset($_POST["submit"])) {
                   }
                   ?>
                 </span>
-
               </div>
               <div class="group">
                 <label for="pass" class="label">Mật khẩu</label>
@@ -97,23 +88,32 @@ if (isset($_POST["submit"])) {
                 <label for="check"><span class="icon"></span> Nhớ tài khoản</label>
               </div>
               <div class="group">
-                <button type="submit" name="submit" class="button"> Đăng nhập</button>
+                <button type="submit" name="submit" class="button" style="position: absolute;margin-top: 25%;"> Đăng nhập</button>
               </div>
-
             </form>
-
             <div class="hr"></div>
-
             <!-- Quên Mật Khẩu -->
             <div class="foot-lnk">
               <a href="index.php?pages=user&action=forget">Quên mật khẩu?</a>
             </div>
-
           </div>
-
           <!-- Form Đăng Ký -->
           <div class="sign-up-htm">
             <form action="" method="post">
+            <div class="group">
+                <label for="user" class="label">Họ và tên</label>
+                <input id="user" name="username" type="text" class="input">
+                <?
+                if (isset($_POST["submitreg"])) {
+                  $username = $_POST["username"];
+                  if ($username == "") {
+                    echo "Xin vui lòng nhập lại họ và tên";
+                  } else {
+                    echo '';
+                  }
+                }
+                ?>
+              </div>
               <div class="group">
                 <label for="pass" class="label">Email</label>
                 <input id="pass" name="regEmail" type="text" class="input">
@@ -128,7 +128,6 @@ if (isset($_POST["submit"])) {
                 }
                 ?>
               </div>
-
               <div class="group">
                 <label for="pass" class="label">Mật khẩu</label>
                 <input id="pass" name="pass1" type="password" class="input" data-type="password">
@@ -143,7 +142,6 @@ if (isset($_POST["submit"])) {
                 }
                 ?>
               </div>
-
               <div class="group">
                 <label for="pass" class="label">Nhập lại mật khẩu</label>
                 <input id="pass" name="pass2" type="password" class="input" data-type="password">
@@ -152,21 +150,6 @@ if (isset($_POST["submit"])) {
                   $pass2 = $_POST["pass2"];
                   if ($pass2 == "") {
                     echo "Xin vui lòng nhập lại mật khẩu";
-                  } else {
-                    echo '';
-                  }
-                }
-                ?>
-              </div>
-
-              <div class="group">
-                <label for="user" class="label">Họ và tên</label>
-                <input id="user" name="username" type="text" class="input">
-                <?
-                if (isset($_POST["submitreg"])) {
-                  $username = $_POST["username"];
-                  if ($username == "") {
-                    echo "Xin vui lòng nhập lại họ và tên";
                   } else {
                     echo '';
                   }
@@ -237,7 +220,6 @@ if (isset($_POST["submit"])) {
         }
       } else if ($pass1 != $pass2) {
         echo '<script>alert("Mật Khẩu không giống Nhau !!!")</script>';
-
         echo '
         <script>
         var myDiv = document.getElementById("tab-2");
@@ -264,10 +246,20 @@ if (isset($_POST["submit"])) {
     }
   }
   ?>
-
+  <div id="g_id_onload" data-client_id="982902368259-u614j7ige69qenvsembcsrrt2q72s0ui.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="false">
+  </div>
+  <!-- Display the user's profile info -->
+  <div class="pro-data hidden"></div>
+  <div id="g_id_onload" data-client_id="982902368259-u614j7ige69qenvsembcsrrt2q72s0ui.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="true">
+  </div>
   <link rel="stylesheet" href="css/login.css">
-
   <style>
+    .g_id_signin {
+      position: absolute;
+      margin-top: 65%;
+      margin-left: 2%;
+      z-index: 2;
+    }
     .danger {
       color: #fff;
       background-color: #dc3545;
@@ -278,7 +270,6 @@ if (isset($_POST["submit"])) {
       border: 1px solid transparent;
       border-radius: 0.25rem;
     }
-
     .success {
       color: #fff;
       background-color: #28a745;
@@ -289,7 +280,6 @@ if (isset($_POST["submit"])) {
       border: 1px solid transparent;
       border-radius: 0.25rem;
     }
-
     .val-log {
       color: red;
       display: block;
@@ -300,17 +290,6 @@ if (isset($_POST["submit"])) {
       color: #00ffdc;
     }
   </style>
-  <div id="g_id_onload" data-client_id="982902368259-u614j7ige69qenvsembcsrrt2q72s0ui.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="false">
-  </div>
-
-  <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left">
-  </div>
-
-  <!-- Display the user's profile info -->
-  <div class="pro-data hidden"></div>
-  <div id="g_id_onload" data-client_id="982902368259-u614j7ige69qenvsembcsrrt2q72s0ui.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="true">
-  </div>
-
   <script>
     var Chars = ["*", "X", "+", "-", "1", "0", "1", "@", "vn"];
     var Cells = [];
@@ -318,7 +297,6 @@ if (isset($_POST["submit"])) {
     var dropspeed = 8;
     var tiles = 160;
     var x = 0;
-
     function setup() {
       noStroke();
       colorMode(HSB, 360, 100, 1, .1);
@@ -336,7 +314,7 @@ if (isset($_POST["submit"])) {
     }
 
     function draw() {
-      background(255, .009);
+      background(0, .009);
       for (var i = 0; i < tiles; i++) {
         Cells[i].spread();
         Cells[i].update();
@@ -400,10 +378,7 @@ if (isset($_POST["submit"])) {
   <script src="https://accounts.google.com/gsi/client" async></script>
   <script>
     // Credential response handler function
-
-
     // Ví dụ: đặt một cookie có tên "user" với giá trị "John Doe" có hiệu lực trong 7 ngày
-   
     function handleCredentialResponse(response) {
       // Post JWT token to server-side
       fetch("auth_init.php", {
@@ -425,14 +400,12 @@ if (isset($_POST["submit"])) {
             // let profileHTML = '<h3>Welcome ' + responsePayload.given_name + '! <a href="javascript:void(0);" onclick="signOut(' + responsePayload.sub + ');">Sign out</a></h3>';
             // profileHTML += '<img src="' + responsePayload.picture + '"/><p><b>Auth ID: </b>' + responsePayload.sub + '</p><p><b>Name: </b>' + responsePayload.name + '</p><p><b>Email: </b>' + responsePayload.email + '</p>';
             // document.getElementsByClassName("pro-data")[0].innerHTML = profileHTML;
-
             // document.querySelector("#btnWrap").classList.add("hidden");
             // document.querySelector(".pro-data").classList.remove("hidden");
           }
         })
         .catch(console.error);
     }
-
     // Sign out the user
     function signOut(authID) {
       document.getElementsByClassName("pro-data")[0].innerHTML = '';

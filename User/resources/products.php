@@ -170,16 +170,19 @@ include('user/component/header.php');
                                             };
                                             $totalItems = $db->pdo_query("SELECT COUNT(*) AS item FROM products");
                                             foreach ($totalItems as $row) {
-                                                $totalPages = 1+($row['item'] / $itemsPerPage);
-                                                echo '<div class="pagination">';
+                                                $totalPages = ceil($row['item'] / $itemsPerPage);
+                                                echo '<div class="w3-bar" style="width: 100%; overflow: hidden; text-align: center">
+                                                <a href="#" class="w3-button">&laquo;</a>';
                                                 for ($i = 1; $i <= $totalPages; $i++) {
-                                                    echo '<a href="./index.php?pages=user&action=products&page=' . $i . '">' . $i . '</a>';
+                                                    echo '
+                                                    <a href="./index.php?pages=user&action=products&page=' . $i . '"class="w3-button">' . $i . '</a>
+                                                   
+                                                    ';
                                                 }
-                                                echo '</div>';
+                                                echo '
+                                                <a href="#" class="w3-button">&raquo;</a>
+                                                </div>';
                                             };
-
-
-
                                             ?>
                                         </div>
                                     </div>
@@ -198,3 +201,21 @@ include('user/component/header.php');
 <?
 include('user/component/footer.php');
 ?>
+<style>
+    .w3-bar {
+        display: inline-block;
+    }
+
+    .w3-bar a {
+        color: black;
+        padding: 8px 16px;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    .w3-bar a:hover {
+        background-color: lightgray;
+        color: #77b748;
+        border-radius: 5px;
+    }
+</style>

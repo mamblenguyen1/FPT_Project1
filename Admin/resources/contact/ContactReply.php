@@ -72,6 +72,3 @@ if (isset($_POST['send'])) {
 </div>
 </div>
 </div>
-
-
-<?php include './admin/componant/footer.php' ?>

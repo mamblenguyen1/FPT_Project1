@@ -17,7 +17,7 @@
       </div>
     </div>
     <!-- SidebarSearch Form -->
-    <div class="form-inline">
+    <!-- <div class="form-inline">
       <div class="input-group" data-widget="sidebar-search">
         <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -26,7 +26,7 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -247,6 +247,16 @@
             </p>
           </a>
         </li>
+
+        <li class="nav-item">
+          <a href="http://localhost/FPT_Project1/" class="nav-link">
+          <i class='fas fa-sign-out-alt'></i>
+            <p>
+              Trở về
+            </p>
+          </a>
+        </li>
+
       </ul>
 
     </nav>

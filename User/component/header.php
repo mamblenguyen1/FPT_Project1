@@ -45,7 +45,7 @@ include('style.php');
 										</ul>
 									</ul>
 								</div>
-								<img src="/images/dark_theme_icon/moon.png" id="icon" style="width: 25px; height: 25px; cursor: pointer;margin-left: 55%;position: absolute;margin-bottom: 3%;">
+								<img src="images/dark_theme_icon/moon.png" id="icon" style="width: 25px; height: 25px; cursor: pointer;margin-left: 55%;position: absolute;margin-bottom: 3%;">
 							</div>
 								';
 									} else {
@@ -63,14 +63,14 @@ include('style.php');
 										</ul>
 									</ul>
 								</div>
-								<img src="/images/dark_theme_icon/moon.png" id="icon" style="width: 25px; height: 25px; cursor: pointer;margin-left: 55%;position: absolute;margin-bottom: 3%;">
+								<img src="images/dark_theme_icon/moon.png" id="icon" style="width: 25px; height: 25px; cursor: pointer;margin-left: 55%;position: absolute;margin-bottom: 3%;">
 							</div>
 								';
 									}
 								} else {
 									echo '
 							<a class="login-btn" href="index.php?pages=user&action=login">Đăng nhập</a>
-							<img src="/images/dark_theme_icon/moon.png" id="icon" style="width: 25px; height: 25px; cursor: pointer;margin-left: 5%;position: absolute;">
+							<img src="images/dark_theme_icon/moon.png" id="icon" style="width: 25px; height: 25px; cursor: pointer;margin-left: 5%;position: absolute;">
 							';
 								}
 								?>
@@ -193,9 +193,9 @@ include('style.php');
 	icon.onclick = function() {
 		document.body.classList.toggle("dark-theme");
 		if (document.body.classList.contains("dark-theme")) {
-			icon.src = "/images/dark_theme_icon/sun.png";
+			icon.src = "images/dark_theme_icon/sun.png";
 		} else {
-			icon.src = "/images/dark_theme_icon/moon.png";
+			icon.src = "images/dark_theme_icon/moon.png";
 		}
 	}
 </script>

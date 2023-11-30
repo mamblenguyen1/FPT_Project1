@@ -39,7 +39,7 @@ if (!empty($jsonObj->request_type) && $jsonObj->request_type == 'user_auth') {
             setcookie("userID", $user_id, time() + 3600, "/");
         } else {
             // Insert user data 
-            $query = "INSERT INTO user(user_name, email, oauth_uid, role_id) VALUES ('$user_name','$email',  $oauth_uid, 2)";
+            $query = "INSERT INTO user(user_name, email, oauth_uid, role_id, is_deleted) VALUES ('$user_name','$email',  $oauth_uid, 2,1)";
             $insert = $db->query($query);
             if ($insert) {
                 // Lấy ra user_id vừa được tạo

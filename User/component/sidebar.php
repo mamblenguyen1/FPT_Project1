@@ -86,3 +86,8 @@
         </div>
     </aside>
 </div>
+<style>
+    .tg-widget ul li{
+        width: 100%;
+    }
+</style>
