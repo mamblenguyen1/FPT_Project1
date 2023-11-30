@@ -11,7 +11,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                            <a href="?pages=admin&action=UserAdd"><button type="button" class="btn btn-outline-primary">Thêm Tài Khoản</button></a>
+                                <a href="?pages=admin&action=UserAdd"><button type="button" class="btn btn-outline-primary">Thêm Tài Khoản</button></a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -31,7 +31,7 @@
                                     </thead>
                                     <tbody>
                                         <?
-                                        $row = $user->user_select_all();
+                                        $row = $user->user_select_all2();
                                         foreach ($row as $ketqua) {
                                             extract($ketqua);
                                         ?>
@@ -40,7 +40,7 @@
                                                 <td><?= $email ?></td>
                                                 <td><?= $user_password ?></td>
                                                 <td><?= $user_phone_number ?></td>
-                                                <td><?= $user_street ?> - <?= $ketqua['xa']?> - <?= $ketqua['huyen']?> - <?= $ketqua['thanhpho']?> </td>                                                
+                                                <td><?= $user_street ?> - <?= $user->getInfo_address($user_id, 'xa') ?> - <?= $user->getInfo_address($user_id, 'huyen') ?> - <?= $user->getInfo_address($user_id, 'thanhpho') ?></td>
                                                 <td><?= $role_name ?></td>
                                                 <td><?= $created_at ?></td>
                                                 <td>
