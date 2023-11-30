@@ -45,7 +45,7 @@ include('style.php');
 										</ul>
 									</ul>
 								</div>
-								<img src="images/dark_theme_icon/moon.png" id="icon" style="width: 25px; height: 25px; cursor: pointer;margin-left: 55%;position: absolute;margin-bottom: 3%;">
+								<img src="images/dark_theme_icon/moon.png" id="icon" style="width: 25px; height: 25px; cursor: pointer;margin-left: 65%;position: absolute;margin-bottom: 5%;">
 							</div>
 								';
 									} else {
