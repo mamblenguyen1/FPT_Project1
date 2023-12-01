@@ -100,7 +100,7 @@ if (isset($_POST['addProductbtn'])) {
 
                         <!-- giá giảm Laptop -->
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Giá sau khi giảm </label>
+                            <label for="exampleInputEmail1">Phần trăm giảm giá </label>
                             <input name="product_sale" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá sản phẩm sau khi giảm. . .">
                             <?
                             if (isset($_POST["product_sale"])) {

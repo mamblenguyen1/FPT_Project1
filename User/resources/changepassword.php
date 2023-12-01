@@ -42,10 +42,10 @@ if (isset($_POST['submituser'])) {
         <div class="row no-gutters row-bordered row-border-light">
             <div class="col-md-3 pt-0">
                 <div class="list-group list-group-flush account-settings-links">
-                    <a class="list-group-item list-group-item-action active " href="index.php?pages=user&action=informationuser" style="color: var(--secondary-color);">Thông tin tài khoản</a>
-                    <a class="list-group-item list-group-item-action " href="index.php?pages=user&action=updateuser" style="color: var(--secondary-color);">Cập nhật tài khoản</a>
-                    <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=changepassword" style="color: var(--secondary-color);">Đổi mật khẩu</a>
-                    <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=history" style="color: var(--secondary-color);">Lịch sử đơn hàng</a>
+                    <a class="list-group-item list-group-item-action " href="index.php?pages=user&action=informationuser">Thông tin tài khoản</a>
+                    <a class="list-group-item list-group-item-action " href="index.php?pages=user&action=updateuser">Cập nhật tài khoản</a>
+                    <a class="list-group-item list-group-item-action active " href="index.php?pages=user&action=changepassword">Đổi mật khẩu</a>
+                    <a class="list-group-item list-group-item-action" href="index.php?pages=user&action=history">Lịch sử đơn hàng</a>
                 </div>
             </div>
             <div class="col-md-9">
