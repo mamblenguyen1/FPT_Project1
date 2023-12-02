@@ -188,52 +188,63 @@ if (isset($_GET['pages'])) {
             include 'js.php';
 
             switch ($_GET['action']) {
+                //trang chủ
                 case 'home':
                     include './User/resources/home.php';
                     break;
+                //trang sản phẩm
                 case 'products':
                     include './User/resources/products.php';
                     break;
+                //trang chi tiết sản phẩm
                 case 'productdetail':
                     include './User/resources/productdetail.php';
                     break;
+                //trang liên hệ
                 case 'contact':
                     include './User/resources/contact.php';
                     break;
-                    //policy
+                //trang chính sách
                 case 'policy':
                     include './User/resources/policy.php';
                     break;
+                //Trang giới thiệu
                 case 'introduce':
                     include './User/resources/introduce.php';
                     break;
+                //trang giỏ hàng
                 case 'cart':
                     include './User/resources/cart.php';
                     break;
-                    //thong tin tk
+                //cập nhật mật khẩu
                 case 'updateuser':
                     include './User/resources/updateuser.php';
                     break;
+                //trang thông tin người dùng
                 case 'informationuser':
                     include './User/resources/informationuser.php';
                     break;
+                //cảm ơn khi mua hàng
                 case 'thanks':
                     include './User/resources/thanks.php';
                     break;
-
+                //trang lịch sử đơn hàng
                 case 'history':
                     include './User/resources/history.php';
                     break;
+                //trang quản lí đơn mua
                 case 'order':
                     include './User/resources/order.php';
                     break;
-                    //checkout
+                //trang thanh toán
                 case 'checkout':
                     include './User/resources/checkout.php';
                     break;
+                //trang đổi mật khẩu người dùng
                 case 'changepassword':
                     include './User/resources/changepassword.php';
                     break;
+                //đăng xuất
                 case "logout":
                     setcookie("viewCount", '', time() + 1, "/");
                     setcookie("role", '', time() + 1, "/");
@@ -241,9 +252,11 @@ if (isset($_GET['pages'])) {
                     setcookie("Oauth", '', time() + 1, "/");
                     header("location: index.php?pages=user&action=home");
                     break;
+                //quên mật khẩu
                 case "forget":
                     include './User/resources/forgotPass.php';
                     break;
+                //đăng nhập
                 case 'login':
                     include 'login.php';
                     break;

@@ -172,9 +172,9 @@ include('style.php');
 									<a href="index.php?pages=user&action=policy">Chính Sách</a>
 								</li>
 
-								<li>
+								<!-- <li>
 									<a href="#">Tin Tức</a>
-								</li>
+								</li> -->
 
 								<li>
 									<a href="index.php?pages=user&action=contact">Liên Hệ</a>
@@ -188,6 +188,8 @@ include('style.php');
 	</div>
 </header>
 
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger intent="WELCOME" chat-title="Litech" agent-id="5856bd24-209e-4f33-8484-814df82c9008" language-code="vi" style="background-color: #77b748;"></df-messenger>
 <script>
 	var icon = document.getElementById("icon");
 	icon.onclick = function() {
