@@ -1,6 +1,14 @@
 <?php include './Admin/componant/header.php' ?>
 <?php include './admin/componant/sidebar.php' ?>
 <?
+function isValidPassword($user_password) { // Biểu thức chính quy bắt lỗi mật khẩu
+  $pattern = '/^(?=.*[a-z])(?=.*\d)[a-z\d]{8,20}$/';
+  return preg_match($pattern, $user_password);
+}
+function isValidPhoneNumber($user_phone_number) { // Biểu thức chính quy bắt lỗi SĐT
+  $pattern = '/^0\d{9}$/';
+  return preg_match($pattern, $user_phone_number);
+}
 if (isset($_POST['edit'])) {
   $user_id = $_POST['user_id'];
   $statusId = $user->getInfouser($user_id, 'status_id');
@@ -24,12 +32,20 @@ if (isset($_POST['sua_user'])) {
   $Street = $_POST['Street'] ?? "";
   $role_id = $_POST['role_id'] ?? "";
   if (!$user_name == "" && !$user_password == "" && !$user_phone_number == "" && !$Province == ""  && !$district == ""  && !$wards == ""  && !$Street == "" && !$role_id == "") {
-      $user->update_user($user_name, $user_password, $user_phone_number, $Province, $district, $wards, $Street, $role_id, $user_id);
-      echo '<script>alert("Cập nhật tài khoản thành công !!!")</script>';
-      echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
+    if (isValidPassword($user_password)){
+      if (isValidPhoneNumber($user_phone_number)) {
+        $user->update_user($user_name, $user_password, $user_phone_number, $Province, $district, $wards, $Street, $role_id, $user_id);
+        echo '<script>alert("Cập nhật tài khoản thành công !!!")</script>';
+        echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
+      } else {
+      echo '<script>alert("Vui lòng nhập đúng định dạng số điện thoại !!!")</script>';
+     }
+    } else {
+      echo '<script>alert("Mật khẩu phải lớn hơn 8 ký tự và có ít nhất 1 thường và 1 số !!!")</script>';
     }
+  }
    else {
-    echo '<script>alert("Vui lòng nhập đầy đủ thông tin !!!")</script>';
+    echo '<script>alert("Bạn nhập chưa đúng, vui lòng nhập lại !!!")</script>';
   }
 }
 

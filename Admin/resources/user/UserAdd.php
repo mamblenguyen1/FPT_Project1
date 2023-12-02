@@ -2,6 +2,16 @@
 <?php include './admin/componant/sidebar.php' ?>
 
 <?
+function isValidPassword($user_password)
+{ // Biểu thức chính quy bắt lỗi mật khẩu
+  $pattern = '/^(?=.*[a-z])(?=.*\d)[a-z\d]{8,20}$/';
+  return preg_match($pattern, $user_password);
+}
+function isValidPhoneNumber($user_phone_number)
+{ // Biểu thức chính quy bắt lỗi SĐT
+  $pattern = '/^0\d{9}$/';
+  return preg_match($pattern, $user_phone_number);
+}
 if (isset($_POST['them_user'])) {
   $user_name = $_POST['user_name'];
   $email = $_POST['email'];
@@ -21,9 +31,17 @@ if (isset($_POST['them_user'])) {
         echo '<script>alert("Email đã tồn tại !!!")</script>';
         echo '<script>window.location.href="index.php?pages=admin&action=UserAdd</script>';
       } else {
-        $user->user_insert($user_name, $email, $user_phone_number, $Province, $district, $wards, $Street, $user_password, $role_id);
-        echo '<script>alert("Thêm tài khoản thành công !!!")</script>';
-        echo '<script>window.location.href="index.php?pages=admin&action=UserList</script>';
+        if (isValidPassword($user_password)) {
+          if (isValidPhoneNumber($user_phone_number)) {
+            $user->user_insert($user_name, $email, $user_phone_number, $Province, $district, $wards, $Street, $user_password, $role_id);
+            echo '<script>alert("Thêm tài khoản thành công !!!")</script>';
+            echo '<script>window.location.href="index.php?pages=admin&action=UserList</script>';
+          } else {
+            echo '<script>alert("Vui lòng nhập đúng định dạng số điện thoại !!!")</script>';
+          }
+        } else {
+          echo '<script>alert("Mật khẩu phải lớn hơn 8 ký tự và có ít nhất 1 thường và 1 số !!!")</script>';
+        }
       }
     }
   } else {

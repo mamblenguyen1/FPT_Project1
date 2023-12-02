@@ -100,7 +100,7 @@ if (isset($_POST["submit"])) {
           <!-- Form Đăng Ký -->
           <div class="sign-up-htm">
             <form action="" method="post">
-            <div class="group">
+              <div class="group">
                 <label for="user" class="label">Họ và tên</label>
                 <input id="user" name="username" type="text" class="input">
                 <?
@@ -181,7 +181,19 @@ if (isset($_POST["submit"])) {
       </div>
     </div>
   </div>
+
+
   <?
+  function isValidPassword($user_password)
+  { // Biểu thức chính quy bắt lỗi mật khẩu
+    $pattern = '/^(?=.*[a-z])(?=.*\d)[a-z\d]{8,20}$/';
+    return preg_match($pattern, $user_password);
+  }
+  function isValidPhoneNumber($phone)
+  { // Biểu thức chính quy bắt lỗi SĐT
+    $pattern = '/^0\d{9}$/';
+    return preg_match($pattern, $phone);
+  }
   if (isset($_POST["submitreg"])) {
     $regEmail = $_POST["regEmail"];
     $pass1 = $_POST["pass1"];
@@ -205,18 +217,36 @@ if (isset($_POST["submit"])) {
         if ($user->checkDuplicateEmail(trim($regEmail))) {
           echo '<script>alert("Email đã tồn tại !!!")</script>';
           echo '
-        <script>
-        var myDiv = document.getElementById("tab-2");
-        console.log(myDiv);
-        myDiv.setAttribute("checked", "true");
-        var myDiv = document.getElementById("tab-1");
-        console.log(myDiv);
-        myDiv.setAttribute("checked", "false");
-      </script>
-        ';
+              <script>
+                var myDiv = document.getElementById("tab-2");
+                console.log(myDiv);
+                myDiv.setAttribute("checked", "true");
+                var myDiv = document.getElementById("tab-1");
+                console.log(myDiv);
+                myDiv.setAttribute("checked", "false");
+              </script>
+          ';
         } else {
-          $user->user_create($username, $regEmail, $phone, $pass1);
-          echo '<script>alert("Chúc mừng bạn đã đăng ký thành công !!!")</script>';
+          if (isValidPassword($pass1)) {
+          if (isValidPhoneNumber($phone)) {
+            $user->user_create($username, $regEmail, $phone, $pass1);
+            echo '<script>alert("Chúc mừng bạn đã đăng ký thành công !!!")</script>';
+          } else {
+            echo '<script>alert("Vui lòng nhập đúng định dạng số điện thoại !!!")</script>';
+            }
+          } else {
+            echo '<script>alert("Mật khẩu phải lớn hơn 8 ký tự và có ít nhất 1 thường và 1 số !!!")</script>';
+            echo '
+              <script>
+                var myDiv = document.getElementById("tab-2");
+                console.log(myDiv);
+                myDiv.setAttribute("checked", "true");
+                var myDiv = document.getElementById("tab-1");
+                console.log(myDiv);
+                myDiv.setAttribute("checked", "false");
+              </script>
+          ';
+          }
         }
       } else if ($pass1 != $pass2) {
         echo '<script>alert("Mật Khẩu không giống Nhau !!!")</script>';
@@ -260,6 +290,7 @@ if (isset($_POST["submit"])) {
       margin-left: 2%;
       z-index: 2;
     }
+
     .danger {
       color: #fff;
       background-color: #dc3545;
@@ -270,6 +301,7 @@ if (isset($_POST["submit"])) {
       border: 1px solid transparent;
       border-radius: 0.25rem;
     }
+
     .success {
       color: #fff;
       background-color: #28a745;
@@ -280,6 +312,7 @@ if (isset($_POST["submit"])) {
       border: 1px solid transparent;
       border-radius: 0.25rem;
     }
+
     .val-log {
       color: red;
       display: block;
@@ -297,6 +330,7 @@ if (isset($_POST["submit"])) {
     var dropspeed = 8;
     var tiles = 160;
     var x = 0;
+
     function setup() {
       noStroke();
       colorMode(HSB, 360, 100, 1, .1);
