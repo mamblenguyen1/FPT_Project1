@@ -521,11 +521,13 @@ if (isset($_COOKIE['viewCount'])) {
 												<img src="images/product/' . $row['product_img'] . '.png" style="width:150px; height:200px">
 												' . ($sale ? "<span class='saleprice'>-$row[product_sale]%</span>" : "") . '
 											</a>
-											<h4 class="text-center">' .  $row['category_name'] . '</h4>
-											<h5 class="text-center"><ins style="text-decoration:none">' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</ins>
-												<br>
-												<del>' . ($sale ? "$row[product_price] đ" : "<div><br></div>") . '</del>
-											</h5>
+											<h4 class="text-center"><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a> 
+													'.$product->substringLength($row['product_name'], 20).'
+													</h4>
+													<h5 class="text-center"><ins style="text-decoration:none">' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</ins>
+														<br>
+														<del>' . ($sale ? "$row[product_price] đ" : "") . '</del>
+													</h5>
 										</div>
 									</div>
 											';
