@@ -18,7 +18,6 @@
     }
 
     #slider-text h2::after {
-        border-top: 2px solid #c7c7c7;
         content: "";
         position: absolute;
         bottom: 35px;

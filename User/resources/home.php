@@ -17,7 +17,7 @@ include('user/component/header.php');
                                 <div class="tg-booktitle">
                                     <h3><a href="javascript:void(0);">Siêu phẩm Iphone 15 Pro Max</a></h3>
                                 </div>
-                                <span class="tg-bookwriter">Đến từ: <a href="javascript:void(0);">Apple</a></span>
+                                <span class="tg-bookwriter">Hãng: <a href="javascript:void(0);">Apple</a></span>
                                 <span class="tg-stars"><span></span></span>
                                 <div class="tg-priceandbtn">
                                     <span class="tg-bookprice">
@@ -49,7 +49,6 @@ include('user/component/header.php');
                         <div class="tg-sectionhead">
                             <h2><span>Các</span>Sản phẩm được xem nhiều nhất</h2>
                             <a class="tg-btn" href="index.php?pages=user&action=products">Xem tất cả sản phẩm</a>
-
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -91,7 +90,7 @@ include('user/component/header.php');
                                     '.$product->substringLength($row['product_name'], 22).'
                                         </h3>
                                         </div>
-                                        <span class="tg-bookwriter">By: <a href="javascript:void(0);">' .  $row['type_name'] . '</a></span>
+                                        <span class="tg-bookwriter">Hãng: <a href="javascript:void(0);">' .  $row['type_name'] . '</a></span>
                                         <span class="tg-stars"><span></span></span>
                                         <span class="tg-bookprice">
                                         <ins>' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</ins>
@@ -185,7 +184,7 @@ include('user/component/header.php');
 
                                                     <h3><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a></h3>
                                                 </div>
-                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">' .  $row['type_name'] . '</a></span>
+                                                <span class="tg-bookwriter">Hãng: <a href="javascript:void(0);">' .  $row['type_name'] . '</a></span>
                                                 <span class="tg-stars"><span></span></span>
                                             </div>
                                         </div>
@@ -193,58 +192,7 @@ include('user/component/header.php');
                                     ';
                                         }
                                     };
-
                                     ?>
-                                    <!-- <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
-                                        <div class="tg-postbook">
-                                            <figure class="tg-featureimg">
-                                                <div class="tg-bookimg">
-                                                    <div class="tg-frontcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
-                                                    <div class="tg-backcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
-                                                </div>
-                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                                    <i class="icon-heart"></i>
-                                                    <span>Thêm giỏ hàng</span>
-                                                </a>
-                                            </figure>
-                                            <div class="tg-postbookcontent">
-                                                <ul class="tg-bookscategories">
-                                                    <li><a href="javascript:void(0);">Laptop</a></li>
-                                                    <li><a href="javascript:void(0);">Hãng</a></li>
-                                                </ul>
-                                                <div class="tg-booktitle">
-                                                    <h3><a href="javascript:void(0);">Name</a></h3>
-                                                </div>
-                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Hàng VN chất lượng cao</a></span>
-                                                <span class="tg-stars"><span></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 col-sm-4 col-md-3 col-lg-4 hidden-md">
-                                        <div class="tg-postbook">
-                                            <figure class="tg-featureimg">
-                                                <div class="tg-bookimg">
-                                                    <div class="tg-frontcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
-                                                    <div class="tg-backcover"><img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture//Apro/Apro_product_32067/samsung-galaxy-_main_9_1020.png.webp" alt="image description"></div>
-                                                </div>
-                                                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                                                    <i class="icon-heart"></i>
-                                                    <span>Thêm giỏ hàng</span>
-                                                </a>
-                                            </figure>
-                                            <div class="tg-postbookcontent">
-                                                <ul class="tg-bookscategories">
-                                                    <li><a href="javascript:void(0);">Laptop</a></li>
-                                                    <li><a href="javascript:void(0);">Fun</a></li>
-                                                </ul>
-                                                <div class="tg-booktitle">
-                                                    <h3><a href="javascript:void(0);">Name</a></h3>
-                                                </div>
-                                                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Hàng VN chất lượng cao</a></span>
-                                                <span class="tg-stars"><span></span></span>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>

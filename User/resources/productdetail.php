@@ -501,36 +501,36 @@ if (isset($_COOKIE['viewCount'])) {
 										</div>
 									</div>
 									<?
-									$cate_similar = $_GET['category_id'];
-									$pro_similar = $_GET['product_id'];
-									$conn = $db->pdo_get_connection();
-									$stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
-									type.type_id = products.type_id
-									AND 
-									category.category_id = products.category_id
-									AND
-									products.is_deleted = 1
-									AND category.category_id = $cate_similar
-									AND products.product_id <> $pro_similar ");
-									$stmt->execute();
-									foreach ($stmt as $row) {
-										$product_name_text = $product->substringtext($row['product_name'], 22);
-										echo '
+                            $conn = $db->pdo_get_connection();
+                            $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                                                    type.type_id = products.type_id
+                                                    AND 
+                                                    category.category_id = products.category_id
+                                                    AND
+                                                    products.is_deleted = 1
+                                                    ORDER BY products.product_view DESC LIMIT 10");
+                            $stmt->execute();
+                            if ($stmt->rowCount() > 0) {
+                                foreach ($stmt as $row) {
+                                    $sale = $row['product_sale'] > 0;
+                                    $product_name_text = $product->substringtext($row['product_name'], 30);
+                                    echo '
 											<div class="item">
 										<div class="col-xs-12 col-sm-6 col-md-2">
 											<a href="./?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . '">
 												<img src="images/product/' . $row['product_img'] . '.png" style="width:150px; height:200px">
+												' . ($sale ? "<span class='saleprice'>-$row[product_sale]%</span>" : "") . '
 											</a>
-											<h4 class="text-center">' . $product_name_text . '</h4>
-											<h5 class="text-center"><ins style="text-decoration:none"> ' . $row['product_sale'] . '</ins>
+											<h4 class="text-center">' .  $row['category_name'] . '</h4>
+											<h5 class="text-center"><ins style="text-decoration:none">' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</ins>
 												<br>
-												<del>' . $row['product_price'] . '</del>
+												<del>' . ($sale ? "$row[product_price] đ" : "<div><br></div>") . '</del>
 											</h5>
 										</div>
 									</div>
 											';
 									}
-
+								};
 									?>
 								</div>
 

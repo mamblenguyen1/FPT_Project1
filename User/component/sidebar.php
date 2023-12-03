@@ -73,7 +73,7 @@
                                 <div class="tg-posttitle">
                                     <h3><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' "> ' . $row['product_name'] . '</a></h3>
                                 </div>
-                                <span class="tg-bookwriter">By: <a href="">' . $row['type_name'] . '</a></span>
+                                <span class="tg-bookwriter">Hãng: <a href="">' . $row['type_name'] . '</a></span>
                             </div>
                         </article>
                     </li>
