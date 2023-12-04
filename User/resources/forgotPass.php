@@ -12,14 +12,6 @@ if (isset($_POST['forgot'])) {
     }
 }
 ?>
-<!-- <form action="" method="post">
-    <label for="Nhập email"></label>
-    <input type="text" name="email" id="">
-    <button type="submit" name="forgot">Lấy mật khẩu</button>
-</form> -->
-
-
-
 <div class="container">
     <div class="page-left">
         <div class="header">
@@ -37,7 +29,6 @@ if (isset($_POST['forgot'])) {
     </div>
     <div class="page-right"></div>
     </form>
-
 </div>
 <style>
     * {

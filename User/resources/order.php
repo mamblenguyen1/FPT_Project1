@@ -17,7 +17,7 @@ include('User/component/header.php');
     if ($stmt->rowCount() > 0) {
         foreach ($stmt as $row) {
 
-    ?>
+            ?>
             <div class="container">
                 <div class="order-list">
                     <div class="order">
@@ -42,31 +42,29 @@ include('User/component/header.php');
                             ';
                         }
                         ?>
-
                         <?
                         $finalPrice = 0;
                         $conn = $db->pdo_get_connection();
                         $stmt = $conn->prepare("SELECT * FROM cart_detail, products ,cart
-                WHERE cart_detail.product_id = products.product_id
-                AND cart.cart_id = cart_detail.cart_id
-                AND cart_detail.cart_id = $row[cart_id]");
+                            WHERE cart_detail.product_id = products.product_id
+                            AND cart.cart_id = cart_detail.cart_id
+                            AND cart_detail.cart_id = $row[cart_id]");
                         $stmt->execute();
                         if ($stmt->rowCount() > 0) {
                             foreach ($stmt as $row) {
                                 echo ' 
-                        <div class="detail">
-                            <img src="images/product/' . $row['product_img'] . '.png" class="img-responsive" style="width: 100px;height: 100px;" />
-                            <div class="info">
-                                <h5 class="nomargin">' . $row['product_name'] . '</h5>
-                                <p>Số lượng: ' . $row['quantity'] . '</p>
-                            </div>
-                            <div class="price">
-                                <span style="font-size: 14px; font-weight:bold">' . number_format($row['quantity'] * $product->sale($row['product_price'],$row['product_sale'])) . 'đ</span>
-                            </div>
-
-                        </div>
+                                    <div class="detail">
+                                        <img src="images/product/' . $row['product_img'] . '.png" class="img-responsive" style="width: 100px;height: 100px;" />
+                                        <div class="info">
+                                            <h5 class="nomargin">' . $row['product_name'] . '</h5>
+                                            <p>Số lượng: ' . $row['quantity'] . '</p>
+                                        </div>
+                                        <div class="price">
+                                            <span style="font-size: 14px; font-weight:bold">' . number_format($row['quantity'] * $product->sale($row['product_price'], $row['product_sale'])) . 'đ</span>
+                                        </div>
+                                    </div>
                         ';
-                                $tong = $row['quantity'] * $product->sale($row['product_price'],$row['product_sale']);
+                                $tong = $row['quantity'] * $product->sale($row['product_price'], $row['product_sale']);
                                 $finalPrice = $finalPrice + $tong;
                             }
                         }
@@ -92,7 +90,9 @@ include('User/component/header.php');
                             </div>
 
                             <div class="prices">
-                                <p>Tổng tiền : <span style="font-size: 19px; color: gray;"><?= number_format($finalPrice) ?> đ</span></p>
+                                <p>Tổng tiền : <span style="font-size: 19px; color: gray;">
+                                        <?= number_format($finalPrice) ?> đ
+                                    </span></p>
                                 <p>Giảm giá :
                                     <?
                                     echo (100 - intval($row['total_price'] * 100 / $finalPrice));
@@ -110,7 +110,7 @@ include('User/component/header.php');
                 </div>
 
             </div>
-    <? }
+        <? }
     } else {
         echo '<p style="text-align: center; font-size: 20px;">Bạn không có đơn hàng nào đang được xử lý</p>';
     } ?>

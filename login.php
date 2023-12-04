@@ -287,7 +287,7 @@ if (isset($_POST["submit"])) {
     .g_id_signin {
       position: absolute;
       margin-top: 65%;
-      margin-left: 2%;
+      margin-left: 10%;
       z-index: 2;
     }
 

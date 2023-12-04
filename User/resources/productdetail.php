@@ -10,15 +10,12 @@ if (isset($_POST['deletecomment'])) {
 	$comment->deletedComment($comment_detail);
 	echo '<script>alert("Đã ẩn bình luận ! ! !")</script>';
 };
-
-
 if (isset($_GET['product_id'])) {
 	$product_id = $_GET['product_id'];
 }
 if (isset($_GET['category_id'])) {
 	$category_id = $_GET['category_id'];
 }
-
 if (isset($_POST['editcomment'])) {
 	if (isset($_GET['product_id'])) {
 		$product_id = $_GET['product_id'];
@@ -45,28 +42,8 @@ if (isset($_COOKIE['viewCount'])) {
 	$update_view = "UPDATE products SET product_view = product_view + 1 WHERE product_id = $product_id";
 	$result = $db->pdo_execute($update_view);
 }
-
-
-
 ?>
 <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
-
-	<!-- <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="../images/background-login1.jpg">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<div class="tg-innerbannercontent">
-						<h1>Chi tiết sản phẩm</h1>
-						<ol class="tg-breadcrumb">
-							<li><a href="">Trang chủ</a></li>
-							<li><a href="">Sản phẩm</a></li>
-							<li class="tg-active">Chi tiết sản phẩm</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
 	<main id="tg-main" class="tg-main tg-haslayout">
 		<div class="tg-sectionspace tg-haslayout">
 			<div class="container">
@@ -96,7 +73,7 @@ if (isset($_COOKIE['viewCount'])) {
 													<?
 													if ($product->all_product_category($category_id, $product_id, 'product_sale') > 0) {
 														echo '<span class="tg-bookwriter"><span>Tiết kiệm: </span>' . number_format(($product->all_product_category($category_id, $product_id, 'product_price')) - ($product->sale($product->all_product_category($category_id, $product_id, 'product_price'), $product->all_product_category($category_id, $product_id, 'product_sale')))) . ' đ</span>
-';
+														';
 													} else {
 														echo '<div><br></div>';
 													};
@@ -116,13 +93,11 @@ if (isset($_COOKIE['viewCount'])) {
 													</div>
 													<script>
 														let soLuongGioHang = 1;
-
 														// Hàm tăng số lượng
 														function tangSoLuong() {
 															soLuongGioHang++;
 															capNhatGioHang();
 														}
-
 														// Hàm giảm số lượng
 														function giamSoLuong() {
 															if (soLuongGioHang > 0) {
@@ -130,13 +105,11 @@ if (isset($_COOKIE['viewCount'])) {
 																capNhatGioHang();
 															}
 														}
-
 														// Hàm cập nhật giỏ hàng trên giao diện
 														function capNhatGioHang() {
 															let hienThiGioHang = document.getElementById('hien-thi-gio-hang');
 															hienThiGioHang.value = soLuongGioHang;
 														}
-
 														// Gọi hàm cập nhật giỏ hàng khi tải trang
 														document.addEventListener('DOMContentLoaded', function() {
 															capNhatGioHang();
@@ -158,7 +131,6 @@ if (isset($_COOKIE['viewCount'])) {
 													<h3><? echo $product->all_product_category($category_id, $product_id, 'product_name') ?></h3>
 												</div>
 												<span class="tg-bookwriter">Hãng: <a href="" style="color: var(--secondary-color);"><? echo $product->all_product_category($category_id, $product_id, 'type_name') ?></a></span>
-												<span class="tg-stars"><span></span></span>
 												<span class="tg-addreviews"><a href="">Đánh giá</a></span>
 												<div class="tg-share">
 													<span>Share:</span>
@@ -182,16 +154,11 @@ if (isset($_COOKIE['viewCount'])) {
 												<ul class="tg-productinfo">
 													<?
 													echo ($product->all_product_category($category_id, $product_id, 'product_description'));
-
 													?>
-
-
 												</ul>
-
 											</div>
 										</div>
 										<br>
-
 										<div class="tg-productdescription">
 											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 												<div class="tg-sectionhead">
@@ -204,19 +171,8 @@ if (isset($_COOKIE['viewCount'])) {
 												<div class="tg-tab-content tab-content">
 													<div role="tabpanel" class="tg-tab-pane tab-pane active" id="description">
 														<div class="tg-description">
-															<!-- <form action="" method="post">
-																<input type="text" name="" id="">
-																<button type="submit">Gửi bình luận</button>
-															</form> -->
-															<!-- comment -->
 															<div class="">Nhận xét</div>
 															<?
-															// if (isset($_POST['AddComment'])) {
-															// 	if (isset($_COOKIE['userID'])) {
-															// 		$product_id = $_POST['product_id'];
-															// 		$user_id = $_COOKIE['userID'];
-															// 		$content = $_COOKIE['content'];
-
 															if (isset($_POST['AddComment'])) {
 																if (isset($_COOKIE['userID'])) {
 																	$product_id = $_POST['product_id'];
@@ -238,7 +194,6 @@ if (isset($_COOKIE['viewCount'])) {
 																}
 															}
 															?>
-
 															<form class="review-form" method="post">
 																<div class="form-group p-20">
 																	<label>Your message</label>
@@ -254,7 +209,6 @@ if (isset($_COOKIE['viewCount'])) {
 																<button class="round-black-btn btn btn-primary" name="AddComment">Gửi bình luận</button>
 															</form>
 															<!-- thêm bình luận -->
-
 															<p></p>
 															<h4>Tất cả comment:</h4>
 															<?
@@ -302,8 +256,6 @@ if (isset($_COOKIE['viewCount'])) {
 																	<button type="submit" class="btn btn-primary" name="editcomment"><i class="fa fa-send-o"></i></button>
 																	</form>
 															</div>
-	
-													
 														';
 																		$stmt1  = $conn->prepare("SELECT * FROM comment_reply
 														WHere comment_reply.comment_detail_id = $row[comment_detail_id]");
@@ -418,11 +370,9 @@ if (isset($_COOKIE['viewCount'])) {
 													</p>
 													<p>' . $row['comment_date'] . '</p>
 												</div>
-	
 														<p>' . $row['comment_content'] . ' </p>
 													</div>
 													<br>
-												
 												</div>
 												<hr>
 														';
@@ -444,8 +394,6 @@ if (isset($_COOKIE['viewCount'])) {
 																}
 															}
 															?>
-
-
 														</div>
 													</div>
 													<div role="tabpanel" class="tg-tab-pane tab-pane" id="review">
@@ -465,13 +413,11 @@ if (isset($_COOKIE['viewCount'])) {
 								</div>
 							</div>
 						</div>
-
 						<?
 						include('user/component/sidebar.php');
 						?>
 					</div>
 				</div>
-
 				<div class="container">
 					<div class="row" id="slider-text">
 						<div class="col-md-6">
@@ -479,7 +425,6 @@ if (isset($_COOKIE['viewCount'])) {
 						</div>
 					</div>
 				</div>
-
 				<!-- Item slider-->
 				<div class="container-fluid">
 
@@ -501,20 +446,20 @@ if (isset($_COOKIE['viewCount'])) {
 										</div>
 									</div>
 									<?
-                            $conn = $db->pdo_get_connection();
-                            $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+									$conn = $db->pdo_get_connection();
+									$stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
                                                     type.type_id = products.type_id
                                                     AND 
                                                     category.category_id = products.category_id
                                                     AND
                                                     products.is_deleted = 1
                                                     ORDER BY products.product_view DESC LIMIT 10");
-                            $stmt->execute();
-                            if ($stmt->rowCount() > 0) {
-                                foreach ($stmt as $row) {
-                                    $sale = $row['product_sale'] > 0;
-                                    $product_name_text = $product->substringtext($row['product_name'], 30);
-                                    echo '
+									$stmt->execute();
+									if ($stmt->rowCount() > 0) {
+										foreach ($stmt as $row) {
+											$sale = $row['product_sale'] > 0;
+											$product_name_text = $product->substringtext($row['product_name'], 30);
+											echo '
 											<div class="item">
 										<div class="col-xs-12 col-sm-6 col-md-2">
 											<a href="./?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . '">
@@ -522,20 +467,19 @@ if (isset($_COOKIE['viewCount'])) {
 												' . ($sale ? "<span class='saleprice'>-$row[product_sale]%</span>" : "") . '
 											</a>
 											<h4 class="text-center"><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a> 
-													'.$product->substringLength($row['product_name'], 20).'
+													' . $product->substringLength($row['product_name'], 20) . '
 													</h4>
 													<h5 class="text-center"><ins style="text-decoration:none">' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</ins>
 														<br>
-														<del>' . ($sale ? "$row[product_price] đ" : "") . '</del>
+														<del>' . ($sale ? number_format($row['product_price']) . ' đ' : '<div><br></div>') . '</del>
 													</h5>
 										</div>
 									</div>
 											';
-									}
-								};
+										}
+									};
 									?>
 								</div>
-
 								<div id="slider-control">
 									<a class="left carousel-control" href="#itemslider" data-slide="prev"><img src="https://cdn0.iconfinder.com/data/icons/website-kit-2/512/icon_402-512.png" alt="Left" class="img-responsive"></a>
 									<a class="right carousel-control" href="#itemslider" data-slide="next"><img src="http://pixsector.com/cache/81183b13/avcc910c4ee5888b858fe.png" alt="Right" class="img-responsive"></a>
@@ -544,26 +488,12 @@ if (isset($_COOKIE['viewCount'])) {
 						</div>
 					</div>
 				</div>
-
 				<?
 				include('User/component/recommend_product_slider.php');
 				?>
-
-
 			</div>
 		</div>
-		<!--************************************
-					News Grid End
-			*************************************-->
-
-
-
-
 	</main>
-	<!--************************************
-				Main End
-		*************************************-->
-
 </div>
 <style>
 	.text-center {

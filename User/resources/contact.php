@@ -1,9 +1,6 @@
 <?
 include('User/component/header.php');
 ?>
-
-
-
 <?
 // lấy thông tin người dùng
 if (isset($_COOKIE['userID'])) {
@@ -14,7 +11,6 @@ if (isset($_COOKIE['userID'])) {
 	$email = '';
 }
 ?>
-
 <?
 // gửi liên hệ
 if (isset($_POST['contact-btn'])) {
@@ -24,7 +20,7 @@ if (isset($_POST['contact-btn'])) {
 	$content = $_POST['content'];
 	if ($name != '' && $email != '' && $subject != '' && $content != '') {
 		$contact->send_contact($name, $email, $subject, $content);
-		$mail->thanksMail($name , $email);
+		$mail->thanksMail($name, $email);
 		echo '<script>alert("Cảm ơn bạn đã gửi liên hệ cho chúng tôi")</script>';
 		echo '<script>window.location.href="index.php?pages=user&action=contact"</script>';
 	} else {
@@ -74,7 +70,7 @@ if (isset($_POST['contact-btn'])) {
 									}
 									?>
 								</div>
-								<div class="form-group" style="width:100%" >
+								<div class="form-group" style="width:100%">
 									<input type="text" name="subject" class="form-control" placeholder="Chủ đề">
 									<?
 									if (isset($_POST["subject"])) {
@@ -144,14 +140,7 @@ if (isset($_POST['contact-btn'])) {
 			</div>
 		</div>
 	</div>
-	<!--************************************
-					Contact Us End
-			*************************************-->
 </main>
-<!--************************************
-				Main End
-		*************************************-->
-
 <?
 include('user/component/footer.php');
 ?>

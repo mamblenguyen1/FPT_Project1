@@ -31,22 +31,18 @@ include('User/component/header.php');
                                     $stmt->execute();
                                     if ($stmt->rowCount() > 0) {
                                         foreach ($stmt as $row) {
-
                                     ?>
-
-
                                             <div class="history">
                                                 <h3 class="title">
                                                     Mã đơn hàng #<?= $row['cart_id'] ?>
                                                 </h3>
-
                                                 <?
                                                 $finalPrice = 0;
                                                 $conn = $db->pdo_get_connection();
                                                 $stmt = $conn->prepare("SELECT * FROM cart_detail, products ,cart
-                                     WHERE cart_detail.product_id = products.product_id
-                                     AND cart.cart_id = cart_detail.cart_id
-                                     AND cart_detail.cart_id = $row[cart_id]");
+                                                    WHERE cart_detail.product_id = products.product_id
+                                                    AND cart.cart_id = cart_detail.cart_id
+                                                    AND cart_detail.cart_id = $row[cart_id]");
                                                 $stmt->execute();
                                                 if ($stmt->rowCount() > 0) {
                                                     foreach ($stmt as $row) {
@@ -93,7 +89,6 @@ include('User/component/header.php');
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

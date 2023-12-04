@@ -41,11 +41,9 @@ include('user/component/header.php');
                                         <p>Phí giao hàng sẽ được tính toán dựa trên địa chỉ giao hàng và trọng lượng của đơn hàng.
                                             Thông tin chi tiết về phí giao hàng sẽ được hiển thị trước khi bạn hoàn tất đặt hàng.</p>
                                         <h5 style="color: var(--secondary-color);">3.2 Thời gian giao hàng</h5>
-
                                         <p>Chúng tôi cam kết cung cấp thông tin chính xác về thời gian giao hàng dự kiến.
                                             Tuy nhiên, có thể có những trường hợp không lường trước được như tình trạng khẩn
                                             cấp hoặc điều kiện thời tiết xấu.</p>
-
                                         <h4 style="color: var(--secondary-color);">4. Chính Sách Đổi Trả và Hoàn Tiền</h4>
                                         <h5 style="color: var(--secondary-color);">4.1 Đổi trả</h5>
                                         <p>Chúng tôi chấp nhận đổi trả sản phẩm trong vòng một khoảng thời gian xác định.
@@ -72,29 +70,29 @@ include('user/component/header.php');
                     </div>
                 </div>
                 <br><br>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="tg-sectionhead">
-                            <h2>Sản phẩm mới nhất</h2>
-                            <a class="tg-btn" href="index.php?pages=user&action=products">Xem tất cả sản phẩm</a>
-                        </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-sectionhead">
+                        <h2>Sản phẩm mới nhất</h2>
+                        <a class="tg-btn" href="index.php?pages=user&action=products">Xem tất cả sản phẩm</a>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div id="tg-bestsellingbooksslider" class="tg-bestsellingbooksslider tg-bestsellingbooks owl-carousel">
-                            <?
-                            $conn = $db->pdo_get_connection();
-                            $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="tg-bestsellingbooksslider" class="tg-bestsellingbooksslider tg-bestsellingbooks owl-carousel">
+                        <?
+                        $conn = $db->pdo_get_connection();
+                        $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
                                                     type.type_id = products.type_id
                                                     AND 
                                                     category.category_id = products.category_id
                                                     AND
                                                     products.is_deleted = 1
                                                     ORDER BY products.product_view DESC LIMIT 10");
-                            $stmt->execute();
-                            if ($stmt->rowCount() > 0) {
-                                foreach ($stmt as $row) {
+                        $stmt->execute();
+                        if ($stmt->rowCount() > 0) {
+                            foreach ($stmt as $row) {
 
-                                    $product_name_text = $product->substringtext($row['product_name'], 22);
-                                    echo '
+                                $product_name_text = $product->substringtext($row['product_name'], 22);
+                                echo '
                                     <div class="item">
                                 <div class="tg-postbook">
                                     <figure class="tg-featureimg">
@@ -133,16 +131,16 @@ include('user/component/header.php');
                                 </div>
                             </div>
                                     ';
-                                }
-                            };
-                            ?>
-                        </div>
+                            }
+                        };
+                        ?>
                     </div>
+                </div>
             </div>
     </main>
 </div>
 <style>
-    p{
+    p {
         color: var(--secondary-color);
     }
 </style>

@@ -2,34 +2,19 @@
 include('user/component/header.php');
 ?>
 <link href="img/favicon.ico" rel="icon">
-
-<!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-<!-- Template Stylesheet -->
 <br><br><br><br><br><br><br><br><br>
-<!-- Header Start -->
-<!-- <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="https://www.elementum.com/app/uploads/elementor/thumbs/BigCompanies-pqlonwmmm1rmykr8uirglaeg053alprtnca06xq1ss.png"> -->
 <div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<!-- <div class="tg-innerbannercontent">
-					<h1 >Giới thiệu về chúng tôi</h1>
-
-					<ol class="tg-breadcrumb">
-						<li><a href="javascript:void(0);">Trang chủ</a></li>
-						<li class="tg-active">Giới thiệu</li>
-					</ol>
-				</div> -->
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        </div>
+    </div>
 </div>
-<!-- Header End -->
-<!-- About Start -->
+</div>
 <main id="tg-main" class="tg-main tg-haslayout">
     <div class="tg-sectionspace tg-haslayout">
         <div class="container-xxl py-5">
@@ -65,14 +50,11 @@ include('user/component/header.php');
                                 <p class="mb-0" style="color: var(--secondary-color)"><i class="fa fa-arrow-right text-primary me-2"></i> Đội ngũ nhân viên trình độ cao</p>
                             </div>
                         </div>
-                        <!-- <a class="btn btn-primary py-3 px-5 mt-2" href="">Xem Ngay</a> -->
                     </div>
                 </div>
             </div>
         </div>
-        <!-- About End -->
         <br><br>
-        <!-- Team Start -->
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -156,7 +138,6 @@ include('user/component/header.php');
         </div>
     </div>
 </main>
-<!-- Team End -->
 <br>
 <br>
 <br><br>

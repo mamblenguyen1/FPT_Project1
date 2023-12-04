@@ -15,7 +15,7 @@ if (isset($_POST['luu_user'])) {
     $wards = $_POST['wards'] ?? "";
     $Street = $_POST['Street'] ?? "";
     if (!$user_name == "" && !$user_phone_number == "" && !$Province == ""  && !$district == ""  && !$wards == ""  && !$Street == "") {
-        $user->update_user1($user_name, $user_phone_number, $Province, $district, $wards, $Street , $user_id);
+        $user->update_user1($user_name, $user_phone_number, $Province, $district, $wards, $Street, $user_id);
         echo '<script>alert("Cập nhật tài khoản thành công")</script>';
         echo '<script>window.location.href="index.php?pages=user&action=updateuser"</script>';
     } else {
@@ -160,77 +160,82 @@ if (isset($_POST['luu_user'])) {
     </div>
 </div>
 <script>
-$(document).ready(function(){    
-    $.ajax({
-        url: "./admin/resources/address/province.php",       
-        dataType:'json',         
-        success: function(data){     
-            $("#Province").html("");
-            for (i=0; i<data.length; i++){            
-                var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
-                var str = ` 
+    $(document).ready(function() {
+        $.ajax({
+            url: "./admin/resources/address/province.php",
+            dataType: 'json',
+            success: function(data) {
+                $("#Province").html("");
+                for (i = 0; i < data.length; i++) {
+                    var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
+                    var str = ` 
                 <option value="${Province['province_id']}"> ${Province['name']} </option>
                    `;
-                $("#Province").append(str);
+                    $("#Province").append(str);
+                }
+                $("#Province").on("change", function(e) {
+                    layHuyen();
+                });
             }
-            $("#Province").on("change", function(e) { layHuyen();  });
-        }
-    });
-})
-
+        });
+    })
 </script>
 <script>
-function layHuyen(){
-    var province_id = $("#Province").val();
-    $.ajax({
-        url: "./admin/resources/address/district.php?province_id=" + province_id,
-        dataType:'json',         
-        success: function(data){     
-            $("#district").html("");
-            for (i=0; i<data.length; i++){            
-                var district = data[i]; 
-                var str = ` 
+    function layHuyen() {
+        var province_id = $("#Province").val();
+        $.ajax({
+            url: "./admin/resources/address/district.php?province_id=" + province_id,
+            dataType: 'json',
+            success: function(data) {
+                $("#district").html("");
+                for (i = 0; i < data.length; i++) {
+                    var district = data[i];
+                    var str = ` 
                 <option  value="${district['district_id']}">${district['name']} </option>`;
-                $("#district").append(str);
-            }       
-            $("#district").on("change", function(e) { layXa();  });     
-        }
-    });
-}
+                    $("#district").append(str);
+                }
+                $("#district").on("change", function(e) {
+                    layXa();
+                });
+            }
+        });
+    }
 </script>
 <script>
-function layXa(){
-    var district_id = $("#district").val();
-    $.ajax({
-        url: "./admin/resources/address/wards.php?district_id=" + district_id,
-        dataType:'json',         
-        success: function(data){     
-            $("#wards").html("");
-            for (i=0; i<data.length; i++){            
-                var wards = data[i]; 
-                var str = ` 
+    function layXa() {
+        var district_id = $("#district").val();
+        $.ajax({
+            url: "./admin/resources/address/wards.php?district_id=" + district_id,
+            dataType: 'json',
+            success: function(data) {
+                $("#wards").html("");
+                for (i = 0; i < data.length; i++) {
+                    var wards = data[i];
+                    var str = ` 
                 <option  value="${wards['wards_id']}">${wards['name']} </option>`;
-                $("#wards").append(str);
-            }            
-        }
-    });
-}
+                    $("#wards").append(str);
+                }
+            }
+        });
+    }
 </script>
 <?
 include('user/component/footer.php');
 ?>
 <style>
-    label{
+    label {
         color: var(secondary-color);
     }
-        .pt-0{
+
+    .pt-0 {
         border: 1px solid white;
     }
 
-    .account-settings-links a{
+    .account-settings-links a {
         background: var(--primary-color);
         border: 1px solid white;
     }
+
     .vaild {
         color: red;
     }

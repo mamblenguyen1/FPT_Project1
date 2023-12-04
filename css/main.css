@@ -2673,7 +2673,8 @@ li.menu-item-has-mega-menu {
 	float: left;
 	width: auto;
 	display: block;
-	max-width: none;
+	/* max-width: none; */
+	margin-top: 23%;
 }
 
 .tg-featureditmcontent {
@@ -2730,7 +2731,7 @@ li.menu-item-has-mega-menu {
 }
 
 .tg-priceandbtn {
-	top: 0;
+	top: 30px;
 	right: 0;
 	margin: 45px 0;
 	text-align: center;

@@ -11,21 +11,17 @@ include('user/component/header.php');
                             <div id="tg-content" class="tg-content">
                                 <div class="tg-products">
                                     <div class="tg-sectionhead">
-                                        <h2><span>Danh mục sản phẩm</span></h2>
+                                        <h3><span>Danh mục sản phẩm</span></h3>
                                     </div>
                                     <div class="tg-productgrid">
                                         <div class="tg-refinesearch">
                                             <?
                                             // Số lượng mục trên mỗi trang
                                             $itemsPerPage = 8;
-
                                             // Trang hiện tại
                                             $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-
                                             // Tính offset
                                             $offset = ($currentPage - 1) * $itemsPerPage;
-
-
                                             $category_render = 0;
                                             $type_render = 0;
                                             $keyword_render  = 0;
@@ -108,10 +104,8 @@ include('user/component/header.php');
                                             if ($stmt->rowCount() > 0) {
                                             ?>
                                                 <span>Đã tìm thấy <? echo $stmt->rowCount() ?> sản phẩm </span><br><br>
-
                                                 <!-- Render product -->
                                             <?
-
                                                 foreach ($stmt as $row) {
                                                     $sale = $row['product_sale'] > 0;
                                                     $product_name_text = $product->substringtext($row['product_name'], 30);
@@ -140,12 +134,11 @@ include('user/component/header.php');
 
                                                         </div>
                                                         <span class="tg-bookwriter">Hãng: <a href="">' . $row['type_name'] . '</a></span>
-                                                        <span class="tg-stars"><span></span></span>
                                                         <span class="tg-bookprice">
                                                          
                                                             <ins>' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</ins>
                                                             <br>
-                                                            <del>' . ($sale ? "$row[product_price] đ" : "<div><br></div>") . '</del>
+                                                            <del>' . ($sale ? number_format($row['product_price']) . ' đ' : '<div><br></div>') . '</del>
                                                         </span>
                                                         <form action="index.php?pages=user&action=cart" method="post">
                                                         <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
@@ -192,7 +185,6 @@ include('user/component/header.php');
                         ?>
                     </div>
                 </div>
-
             </div>
     </main>
 </div>

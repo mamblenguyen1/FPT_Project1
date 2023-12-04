@@ -16,7 +16,7 @@ if (isset($_POST['submituser'])) {
                 <strong>Lỗi !</strong> Nhập lại mật khẩu cũ không đúng</div>';
             } else {
                 $user->update_Pass_user($NewPass, $user_id);
-    echo ' <div class="alert alert-success">
+                echo ' <div class="alert alert-success">
         <strong>Chúc mừng !</strong> Bạn đã đổi mật khẩu thành công</div>';
             }
         } else {
@@ -113,14 +113,15 @@ if (isset($_POST['submituser'])) {
 include('user/component/footer.php');
 ?>
 <style>
-        .pt-0{
+    .pt-0 {
         border: 1px solid white;
     }
 
-    .account-settings-links a{
+    .account-settings-links a {
         background: var(--primary-color);
         border: 1px solid white;
     }
+
     .ui-w-80 {
         width: 80px !important;
         height: auto;

@@ -1,9 +1,7 @@
 <?
 include('User/component/header.php');
 ?>
-
 <?
-
 if (isset($_GET['order_id'])) {
     $order_id = $_GET['order_id'];
     if (isset($_POST['payment'])) {
@@ -20,15 +18,12 @@ if (isset($_GET['order_id'])) {
         $totalprice = $order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment');
         $order->addCartAndCartDetail($_COOKIE['userID'], $address, $totalprice, $order_id);
         $cart_now = $order->Show_Cart_detail_Collumn1($_COOKIE['userID'], 'cart_id');
-        // $mail->MailOrder($cart_now,$order_id, 'admin@gmail.com');
+        $mail->MailOrder($cart_now, $order_id, 'dang6996nvd@gmail.com');
     }
 }
-
 ?>
 <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
-
     <main id="tg-main" class="tg-main tg-haslayout">
-
         <div class="tg-sectionspace tg-haslayout">
             <div class="thanks">
                 <div class="title">
@@ -43,19 +38,15 @@ if (isset($_GET['order_id'])) {
                     <h3>Thông tin khách hàng</h3>
                     <label class="base-label margin-20">Tên</label>
                     <p class="margin-0"><? echo $order->getInfoOrderId($order_id, 'user_name') ?></p>
-
                     <label class="base-label margin-20">Địa chỉ email</label>
                     <p class="margin-0"><? echo $order->getInfoOrderId($order_id, 'email') ?></p>
-
                     <label class="base-label margin-20">Địa chỉ giao hàng</label>
                     <p class="margin-0">
                         <? echo $address ?>
                     </p>
-
                     <label class="base-label margin-20">Số điện thoại</label>
                     <p class="margin-0"><? echo $phone_number ?></p>
                     <div class="hr"></div>
-
                     <h3 class="">Thông tin sản phẩm</h3>
                     <table id="checkout-table">
                         <thead>
@@ -65,8 +56,6 @@ if (isset($_GET['order_id'])) {
                                 <th>Số lượng</th>
                                 <th>Tổng cộng</th>
                             </tr>
-
-
                         </thead>
                         <tbody>
                             <!-- Dòng 1: Sản phẩm 1 -->
@@ -92,30 +81,25 @@ if (isset($_GET['order_id'])) {
                                     echo '
                                         <tr>
                                             <td>' . $row['product_name'] . '</td>
-                                            <td>' . number_format($product->sale($row['product_price'],$row['product_sale'])) . ' đ</td>
+                                            <td>' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</td>
                                             <td>' . $row['order_quantity'] . '</td>
-                                            <td>' . number_format($product->sale($row['product_price'],$row['product_sale']) * $row['order_quantity']) . ' đ</td>
+                                            <td>' . number_format($product->sale($row['product_price'], $row['product_sale']) * $row['order_quantity']) . ' đ</td>
                                         </tr>
                                             ';
-                                            $tong = $tong + ($product->sale($row['product_price'],$row['product_sale']) * $row['order_quantity']);
+                                    $tong = $tong + ($product->sale($row['product_price'], $row['product_sale']) * $row['order_quantity']);
                                 }
                             }
                             ?>
-
-
-
                             <!-- Dòng 2: Sản phẩm 2 -->
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="3">Giá tổng</td>
-                                <td><? echo number_format($tong)?> đ</td>
+                                <td><? echo number_format($tong) ?> đ</td>
                             </tr>
-
-                            
                             <tr>
                                 <td colspan="3">Phần trăm đã giảm</td>
-                                <td><? echo (100 - intval(($order->getOrder_total_payment(($order->getInfoOrderId($order_id, 'user_id')), 'order_total_payment')) *100 / $tong)) ?> %</td>  
+                                <td><? echo (100 - intval(($order->getOrder_total_payment(($order->getInfoOrderId($order_id, 'user_id')), 'order_total_payment')) * 100 / $tong)) ?> %</td>
                             </tr>
                             <tr>
                                 <th colspan="3">Tổng cộng</th>
@@ -123,16 +107,11 @@ if (isset($_GET['order_id'])) {
                             </tr>
                         </tfoot>
                     </table>
-
                     <?
                     $order->updateOrderDetail($order_id);
-
                     ?>
-
                     <div class="hr"></div>
-
                     <h3>Phương thức thanh toán</h3>
-
                     <div class="three-column margin-20">
                         <div>
                             <label class="base-label">Card</label>
@@ -146,7 +125,6 @@ if (isset($_GET['order_id'])) {
                             <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_circles_92px_2x.png">
                         </div>
                     </div>
-
                     <a class="btn btn-primary" style="display: block ; margin: 20px auto; width: 200px; padding: 15px 25px;" href="index.php?pages=user&action=order">Theo dõi đơn hàng</a>
                 </div>
             </div>
@@ -154,12 +132,6 @@ if (isset($_GET['order_id'])) {
 
     </main>
 </div>
-<?
-// if (isset($_POST['payment'])) {
-//     $price = $_POST['finalprice'];
-//     echo $price;
-// }
-?>
 <style>
     .thanks .logo {
         margin-top: 0px;

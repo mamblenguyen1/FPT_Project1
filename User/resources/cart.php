@@ -2,8 +2,6 @@
 include('user/component/header.php');
 ?>
 <?
-
-
 if (isset($_POST['addoneproduct'])) {
   $product_id = $_POST['product_id'];
   $qty = $_POST['qty'];
@@ -13,11 +11,11 @@ if (isset($_POST['addoneproduct'])) {
     if ($order->DuplicateCartPro($product_id, $userid)) {
       if ($order->DuplicateCartProStorge($product_id, $userid)) {
         $order->updateCartQtyDup($product_id, $qty);
-       } else {
+      } else {
         if ($order->DuplicateCartProStorgeAD($product_id, $userid)) {
           $order->addCartDetails($userid, $product_id, $qty);
-          }
         }
+      }
     } else {
       if ($order->DuplicateCart($userid)) {
         $order->addCartDetails($userid, $product_id, $qty);
@@ -33,9 +31,6 @@ if (isset($_POST['addoneproduct'])) {
     echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
   }
 }
-
-
-
 if (isset($_POST['buy'])) {
   $product_id = $_POST['product_id'];
   $qty = $_POST['qty'];
@@ -45,11 +40,11 @@ if (isset($_POST['buy'])) {
     if ($order->DuplicateCartPro($product_id, $userid)) {
       if ($order->DuplicateCartProStorge($product_id, $userid)) {
         $order->updateCartQtyDup($product_id, $qty);
-       } else {
+      } else {
         if ($order->DuplicateCartProStorgeAD($product_id, $userid)) {
           $order->addCartDetails($userid, $product_id, $qty);
-          }
         }
+      }
     } else {
       if ($order->DuplicateCart($userid)) {
         $order->addCartDetails($userid, $product_id, $qty);
@@ -65,7 +60,6 @@ if (isset($_POST['buy'])) {
     echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
   }
 }
-
 if (isset($_POST['deleteCart'])) {
   $cartdeId = $_POST['cartDetailId'];
   $order->deleteCartDetailAd($cartdeId);
@@ -79,8 +73,6 @@ if (isset($_POST['updateQty'])) {
 <link rel="stylesheet" href="../../css/cart.css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <table id="cart" class="table table-hover table-condensed" style="width: 80%; margin: 0 auto;">
-
-
   <?
   // $id = $_POST['idcmt'];
   if (isset($_COOKIE['userID'])) {
@@ -120,11 +112,11 @@ if (isset($_POST['updateQty'])) {
               </div>
             </div>
           </td>
-          <td data-th="Price">' . number_format($product->sale($row['product_price'],$row['product_sale'])) . ' đ</td>
+          <td data-th="Price">' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</td>
           <td data-th="Quantity">
             <input type="number" value="' . $row['order_quantity'] . '" class="form-control text-center" name="cartqty">
           </td>
-          <td data-th="Subtotal" class="text-center">' . number_format($row['order_quantity'] * $product->sale($row['product_price'],$row['product_sale'])) . ' đ</td>
+          <td data-th="Subtotal" class="text-center">' . number_format($row['order_quantity'] * $product->sale($row['product_price'], $row['product_sale'])) . ' đ</td>
           <td class="actions" data-th="">
           <input type="hidden" name="cartDetailId" value="' . $row['order_detail_id'] . '" id="">
           <button name="updateQty" type="submit" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
@@ -133,10 +125,9 @@ if (isset($_POST['updateQty'])) {
           </td>
         </tr>
           ';
-        $total_product = $row['order_quantity'] * $product->sale($row['product_price'],$row['product_sale']);
+        $total_product = $row['order_quantity'] * $product->sale($row['product_price'], $row['product_sale']);
         $total_price = $total_price + $total_product;
       }
-
       echo '
         </tbody>
         <tfoot>
@@ -168,7 +159,6 @@ if (isset($_POST['updateQty'])) {
     <div class="alert-cart">
   Bạn chưa có sản phẩm trong giỏ hàng ! ! !
 </div>
-   
 ';
     }
   } else {
@@ -178,19 +168,9 @@ if (isset($_POST['updateQty'])) {
   ?>
 
 </table>
-<!-- <script src="../../js/cart.js"></script> -->
-
-
 <?
 include('user/component/footer.php');
 ?>
-
-
-
-
-<!-- <script src="../../js/cart.js"></script> -->
-
-
 <style>
   .alert-cart {
     text-align: center;
@@ -198,4 +178,3 @@ include('user/component/footer.php');
     margin: 30px auto;
   }
 </style>
-<!-- <button name="checkout" type="submit" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></button> -->

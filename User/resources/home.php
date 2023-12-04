@@ -8,40 +8,60 @@ include('user/component/header.php');
             <div class="container">
                 <div class="row">
                     <div class="tg-featureditm">
+                        <?
+                        $conn = $db->pdo_get_connection();
+                        $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
+                        type.type_id = products.type_id
+                        AND 
+                        category.category_id = products.category_id
+                        AND 
+                        products.product_id IN (
+                        SELECT product_id
+                        FROM order_detail
+                        WHERE order_detail.order_status_id = 2
+                        GROUP BY product_id
+                        ORDER BY COUNT(product_id) DESC
+                        )
+                            LIMIT 1
+                        
+                        ;");
+                        $stmt->execute();
+                        if ($stmt->rowCount() > 0) {
+                            foreach ($stmt as $row) {
+                                $sale = $row['product_sale'] > 0;
+                                echo '
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-sm hidden-xs">
-                            <figure><img src="https://apple-store.ifuture.co.in/wp-content/uploads/2023/01/Latest-Apple-Model-iphone-14-2022.png" alt="image description"></figure>
+                            <figure><img src="images/product/' . $row['product_img'] . '.png"></figure>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="tg-featureditmcontent">
                                 <div class="tg-themetagbox"><span class="tg-themetag">Đặc sắc</span></div>
                                 <div class="tg-booktitle">
-                                    <h3><a href="javascript:void(0);">Siêu phẩm Iphone 15 Pro Max</a></h3>
+                                    <h3><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . '">' . $row['product_name'] . '</a></h3>
                                 </div>
-                                <span class="tg-bookwriter">Hãng: <a href="javascript:void(0);">Apple</a></span>
-                                <span class="tg-stars"><span></span></span>
+                                <span class="tg-bookwriter">Hãng :' . $row['type_name'] . '</span>
                                 <div class="tg-priceandbtn">
                                     <span class="tg-bookprice">
-                                        <ins>$23.18</ins>
-                                        <del>$30.20</del>
+                                        <ins>Giá : ' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</ins>
+                                        <del>' . ($sale ? number_format($row['product_price']) . ' đ' : '<div><br></div>') . '</del>
                                     </span>
-                                    <a class="tg-btn tg-btnstyletwo tg-active" href="javascript:void(0);">
-                                        <i class="fa fa-shopping-basket"></i>
-                                        <em>Mua Ngay</em>
-                                    </a>
+                                    <form action="index.php?pages=user&action=cart" method="post">
+                                    <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
+                                    <input type="hidden" name="qty" value="1">
+                                    <button style="width: 60%  " type="submit" class="tg-btn tg-btnstyletwo" name="addoneproduct" ><i class="fa fa-shopping-basket"></i>
+                                        Mua ngay</button>
+                                </form>
                                 </div>
                             </div>
                         </div>
+                        ';
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
         </section>
-        <!--************************************
-                Featured Item End
-        *************************************-->
-
-        <!--************************************
-                Best View Start
-        *************************************-->
         <section class="tg-sectionspace tg-haslayout">
             <div class="container">
                 <div class="row">
@@ -86,16 +106,14 @@ include('user/component/header.php');
                                         <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                                         <div class="tg-booktitle">
                                         <h3>
-                                        <a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a> 
-                                    '.$product->substringLength($row['product_name'], 22).'
+                                        <a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a> ' . $product->substringLength($row['product_name'], 22) . '
                                         </h3>
                                         </div>
                                         <span class="tg-bookwriter">Hãng: <a href="javascript:void(0);">' .  $row['type_name'] . '</a></span>
-                                        <span class="tg-stars"><span></span></span>
                                         <span class="tg-bookprice">
-                                        <ins>' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</ins>
+                                        <ins>' . number_format($product->sale($row['product_price'], $row['product_sale'])) . 'đ</ins>
                                         <br>
-                                        <del>' . ($sale ? "$row[product_price] đ" : "<div><br></div>") . '</del>
+                                        <del>' . ($sale ? number_format($row['product_price']) . ' đ' : '<div><br></div>') . '</del>
                                         </span>
                                         <form action="index.php?pages=user&action=cart" method="post">
                                         <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
@@ -109,21 +127,13 @@ include('user/component/header.php');
                                     ';
                                 }
                             };
-
-
                             ?>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!--************************************
-                Best Selling End
-        *************************************-->
 
-        <!--************************************
-                New Release Start
-        *************************************-->
         <section class="tg-sectionspace tg-haslayout">
             <div class="container">
                 <div class="row">
@@ -149,7 +159,6 @@ include('user/component/header.php');
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="row">
                                 <div class="tg-newreleasebooks">
-
                                     <?
                                     $conn = $db->pdo_get_connection();
                                     $stmt = $conn->prepare("SELECT * FROM products, type, category WHERE
@@ -162,7 +171,7 @@ include('user/component/header.php');
                                     $stmt->execute();
                                     if ($stmt->rowCount() > 0) {
                                         foreach ($stmt as $row) {
-                                           
+
                                             $product_name_text = $product->substringtext($row['product_name'], 22);
                                             echo '
                                     <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
@@ -185,7 +194,6 @@ include('user/component/header.php');
                                                     <h3><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a></h3>
                                                 </div>
                                                 <span class="tg-bookwriter">Hãng: <a href="javascript:void(0);">' .  $row['type_name'] . '</a></span>
-                                                <span class="tg-stars"><span></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -200,12 +208,7 @@ include('user/component/header.php');
                 </div>
             </div>
         </section>
-        <!--************************************
-                New Release End
-        *************************************-->
-        <!--************************************
-                Collection Count Start
-        *************************************-->
+
         <section class="tg-parallax tg-bgcollectioncount tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/image.png">
             <div class="tg-sectionspace tg-collectioncount tg-haslayout">
                 <div class="container">
@@ -252,12 +255,7 @@ include('user/component/header.php');
                 </div>
             </div>
         </section>
-        <!--************************************
-                Collection Count End
-        *************************************-->
-        <!--************************************
-                Picked By Author Start
-        *************************************-->
+
         <section class="tg-sectionspace tg-haslayout">
             <div class="container">
                 <div class="row">
@@ -301,15 +299,14 @@ include('user/component/header.php');
                                         </div>
                                         <strong class="tg-bookpage">Danh mục : ' . $row['category_name'] . '</strong>
                                         <strong class="tg-bookcategory">Hãng :' . $row['type_name'] . ' </strong>
-                                        <strong class="tg-bookprice">Giá : ' . number_format($product->sale($row['product_price'],$row['product_sale'])) . ' đ</strong>
-                                        <div class="tg-ratingbox"><span class="tg-stars"><span></span></span></div>
+                                        <strong class="tg-bookprice">Giá : ' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</strong>
                                     </div>
                                 </figure>
                                 <div class="tg-postbookcontent">
                                     <div class="tg-booktitle">
                                         <h3><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . '">' . $row['product_name'] . '</a></h3>
                                     </div>
-                                    <span class="tg-bookwriter">Số lượng đã bán: <a href="javascript:void(0);">'. $order->count_order_by_id($row['product_id']) .'</a></span>
+                                    <span class="tg-bookwriter">Số lượng đã bán: <a href="javascript:void(0);">' . $order->count_order_by_id($row['product_id']) . '</a></span>
                                     <form action="index.php?pages=user&action=cart" method="post">
                                     <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
                                     <input type="hidden" name="qty" value="1">
@@ -323,17 +320,11 @@ include('user/component/header.php');
                             }
                         }
                         ?>
-
                     </div>
                 </div>
             </div>
         </section>
-        <!--************************************
-                Picked By Author End
-        *************************************-->
-        <!--************************************
-                Testimonials Start
-        *************************************-->
+
         <section class="tg-parallax tg-bgtestimonials tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="https://cutewallpaper.org/28/coffee-and-laptop-wallpaper/146069268.jpg">
             <div class="tg-sectionspace tg-haslayout">
                 <div class="container">
@@ -378,19 +369,9 @@ include('user/component/header.php');
                 </div>
             </div>
         </section>
-        <!--************************************
-                Testimonials End
-        *************************************-->
-        <!--************************************
-                Latest News Start
-        *************************************-->
-        <!--************************************
-                Latest News End
-        *************************************-->
+
         </main>
-        <!--************************************
-            Main End
-    *************************************-->
+
     </div>
     <script src="js/vendor/jquery-library.js"></script>
     <script src="js/vendor/bootstrap.min.js"></script>
@@ -405,7 +386,6 @@ include('user/component/header.php');
     <script src="js/gmap3.js"></script>
     <script src="js/main.js"></script>
 </body>
-
 <?
 include('user/component/footer.php');
 ?>

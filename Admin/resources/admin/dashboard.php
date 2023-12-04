@@ -12,7 +12,7 @@ include './Admin/componant/sidebar.php';
         </div>
         <div class="dashboard-content">
             <div class="static-board">
-                <div class="row">
+                <div class="row" style="margin-left: calc(0.1 * var(--bs-gutter-x));">
                     <div class="col-xl-3 col-sm-6 mb-3">
                         <div class="card text-white bg-primary o-hidden h-100">
                             <div class="card-body">
