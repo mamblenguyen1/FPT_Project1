@@ -145,6 +145,14 @@ class ORDER
         $result = $db->pdo_execute($select);
         return $result;
     }
+    function updateIsCode($order_id, $id)
+    {
+        $db = new connect();
+        $select = "UPDATE `order` SET is_code =  $id  WHERE order.order_id  = $order_id";
+        $result = $db->pdo_execute($select);
+        return $result;
+    }
+    
     function updateOrderDetail($order_id)
     {
         $db = new connect();
@@ -236,6 +244,15 @@ class ORDER
     {
         $db = new connect();
         $sql = "SELECT * FROM `order_status` , `order` WHERE `order`.order_status_id = order_status.order_status_id AND `order`.order_id = $order_id";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    function is_codeOrder($order_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM `order` WHERE  `order`.order_id = $order_id";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];

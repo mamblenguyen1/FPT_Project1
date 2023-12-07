@@ -48,7 +48,8 @@ if (isset($_POST['them_user'])) {
       } else {
         if (isValidPassword($user_password)) {
           if (isValidPhoneNumber($user_phone_number)) {
-            $user->user_insert($user_name, $email, $user_phone_number, $Province, $district, $wards, $Street, $user_password, $role_id);
+            $pass_hash = md5($user_password);
+            $user->user_insert($user_name, $email, $user_phone_number, $Province, $district, $wards, $Street, $pass_hash, $role_id);
             echo '
                 <script>
                     Toastify({
@@ -67,7 +68,7 @@ if (isset($_POST['them_user'])) {
                     }).showToast();
                 </script>';
           } else {
-              echo '
+            echo '
                 <script>
                   Toastify({
                     text: "Vui lòng nhập đúng định dạng SĐT !!!",
@@ -86,7 +87,7 @@ if (isset($_POST['them_user'])) {
                 </script>';
           }
         } else {
-            echo '
+          echo '
               <script>
                 Toastify({
                   text: "Mật khẩu phải lớn hơn 8 ký tự và có ít nhất 1 thường và 1 số !!!",

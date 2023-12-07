@@ -2,7 +2,7 @@
 class UserFunction
 {
     //thêm
-    function user_insert($user_name, $email, $user_phone_number, $province , $district , $wards, $Street ,$user_password, $role_id)
+    function user_insert($user_name, $email, $user_phone_number, $province, $district, $wards, $Street, $user_password, $role_id)
     {
         $db = new connect();
         $sql = "INSERT INTO user(user_name, email, user_phone_number, province_id, district_id , wards_id, user_street,user_password, role_id, is_deleted) VALUES ('$user_name','$email' , '$user_phone_number', $province , $district, $wards, '$Street', '$user_password', $role_id, 1)";
@@ -34,7 +34,7 @@ class UserFunction
         return $result;
     }
     //cập nhật tài khoản bên user
-    function update_user1($user_name, $user_phone_number, $province, $district, $wards, $Street , $user_id)
+    function update_user1($user_name, $user_phone_number, $province, $district, $wards, $Street, $user_id)
     {
         $db = new connect();
         $select = "UPDATE `user` SET user_name = '$user_name' , user_phone_number = '$user_phone_number', province_id = $province, district_id = $district, wards_id = $wards, user_street = '$Street'  WHERE user_id = $user_id";
@@ -61,16 +61,16 @@ class UserFunction
             return $row[$column];
         }
     }
-    function getAddress($loct= '', $id, $column)
+    function getAddress($loct = '', $id, $column)
     {
         $db = new connect();
-        $sql = "SELECT * FROM $loct  WHERE  $loct"."_id = $id";
+        $sql = "SELECT * FROM $loct  WHERE  $loct" . "_id = $id";
         $result = $db->pdo_query($sql);
         foreach ($result as $row) {
             return $row[$column];
         }
     }
-   
+
     function getInfoDistrict($userID, $column)
     {
         $db = new connect();
@@ -137,7 +137,7 @@ class UserFunction
         }
     }
 
-    function update_NewPass($userPass , $userEmail)
+    function update_NewPass($userPass, $userEmail)
     {
         $db = new connect();
         $select = "UPDATE user SET  user_password = '$userPass' WHERE email = '$userEmail'";
@@ -171,7 +171,7 @@ class UserFunction
         return $db->pdo_query($sql);
     }
 
-//hiển thị bình luận ẩn
+    //hiển thị bình luận ẩn
     function user_select_all_hidden()
     {
         $db = new connect();
@@ -179,21 +179,36 @@ class UserFunction
         return $db->pdo_query($sql);
     }
 
+    // public function checkUser($Email, $password)
+    // {
+    //     $db = new connect();
+    //     $select = "SELECT * FROM user WHERE email = '$Email' AND user_password = '$password'";
+    //     $result = $db->pdo_query_one($select);
+    //     if ($result != null)
+    //         return true;
+    //     else
+    //         return false;
+    // }
     public function checkUser($Email, $password)
-    {
+    {   
+        $pass_hash = md5($password);
         $db = new connect();
-        $select = "SELECT * FROM user WHERE email = '$Email' AND user_password = '$password'";
+        $select = "SELECT * FROM user WHERE email = '$Email' AND user_password = '$pass_hash'";
         $result = $db->pdo_query_one($select);
         if ($result != null)
             return true;
         else
             return false;
     }
+
+
+
     public function checkRole($Email, $password)
     {
+        $pass_hash = md5($password);
         $db = new connect();
         $select = "SELECT user.role_id FROM user, `role` 
-        WHERE user.role_id = role.role_id AND email = '$Email' AND user_password ='$password'";
+        WHERE user.role_id = role.role_id AND email = '$Email' AND user_password ='$pass_hash'";
         $result = $db->pdo_query_one($select);
         return $result;
     }
@@ -242,7 +257,7 @@ class UserFunction
     }
 
 
-    function getInfoUserByOauth_uid( $oauth_uid , $column)
+    function getInfoUserByOauth_uid($oauth_uid, $column)
     {
         $db = new connect();
         $sql = "SELECT * FROM user WHERE user.oauth_uid = $oauth_uid";
@@ -334,7 +349,7 @@ class UserFunction
             return $row[$column];
         }
     }
-// tổng tk
+    // tổng tk
     function Countuser()
     {
         $db = new connect();
@@ -354,20 +369,20 @@ class UserFunction
             return $row['COUNT(user.user_id)'];
         }
     }
-        //khôi phục tài khoản ẩn
-        function RestoreUser($user_id)
-        {
-            $db = new connect();
-            $sql = "UPDATE `user` SET is_deleted = 1 WHERE user_id = $user_id";
-            $result = $db->pdo_execute($sql);
-            return $result;
-        }
-        //xóa vĩnh viễn tài khoản ẩn
-        function permanently_deleted_user($user_id)
-        {
-            $db = new connect();
-            $sql = "DELETE FROM user WHERE user_id = $user_id";
-            $result = $db->pdo_execute($sql);
-            return $result;
-        }
+    //khôi phục tài khoản ẩn
+    function RestoreUser($user_id)
+    {
+        $db = new connect();
+        $sql = "UPDATE `user` SET is_deleted = 1 WHERE user_id = $user_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
+    //xóa vĩnh viễn tài khoản ẩn
+    function permanently_deleted_user($user_id)
+    {
+        $db = new connect();
+        $sql = "DELETE FROM user WHERE user_id = $user_id";
+        $result = $db->pdo_execute($sql);
+        return $result;
+    }
 }
