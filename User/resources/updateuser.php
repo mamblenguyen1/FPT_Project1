@@ -42,7 +42,7 @@ if (isset($_POST['luu_user'])) {
         echo '
             <script>
                 Toastify({
-                    text: "Vui lòng nhập đúng định dạng SĐT !!!",
+                    text: "Vui Lòng Nhập Đúng Định Dạng SĐT !!!",
                     duration: 3000,
                     gravity: "top",
                     position: "center",
@@ -54,14 +54,14 @@ if (isset($_POST['luu_user'])) {
                         fontSize:"23px",
                         padding:"20px",
                     },
-                showToast();
+                }).showToast();
             </script>';
     }
     } else {
         echo '
             <script>
                 Toastify({
-                    text: "Vui lòng nhập đủ thông tin !!!",
+                    text: "Vui Lòng Nhập Đầy Đủ Thông Tin !!!",
                     duration: 3000,
                     gravity: "top",
                     position: "center",
@@ -73,7 +73,7 @@ if (isset($_POST['luu_user'])) {
                         fontSize:"23px",
                         padding:"20px",
                     },
-                showToast();
+                }).showToast();
             </script>';
     }
 }

@@ -78,7 +78,7 @@ if (isset($_POST['sua_user'])) {
                   duration: 3000,
                   gravity: "top",
                   position: "center",
-                  backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                  backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
                   stopOnFocus: true,
                   close: true, // Cho phép đóng toast bằng cách nhấp vào
                   className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
@@ -97,7 +97,7 @@ if (isset($_POST['sua_user'])) {
             duration: 3000,
             gravity: "top",
             position: "center",
-            backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+            backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
             stopOnFocus: true,
             close: true, // Cho phép đóng toast bằng cách nhấp vào
             className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
@@ -117,7 +117,7 @@ if (isset($_POST['sua_user'])) {
           duration: 3000,
           gravity: "top",
           position: "center",
-          backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+          backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
           stopOnFocus: true,
           close: true, // Cho phép đóng toast bằng cách nhấp vào
           className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
