@@ -20,18 +20,17 @@ include('User/component/header.php');
                     <h3 style="color: var(--secondary-color);">Thông tin người dùng</h3>
                     <div id="General">
                         <div class="card-body media align-items-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="d-block ui-w-80">
                             <div class="media-body ml-4">
                             </div>
                         </div>
                         <br>
                         <?
                         echo '
-                            <label for=""><b>Họ và tên <span class="span0" style="margin-left: 3%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'user_name') . '</span></label>
-                            <label for=""><b>Email <span class="span1" style="margin-left: 6%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'email') . '</span></label>
-                            <label for=""><b>Địa chỉ <span class="span2" style="margin-left: 5%;">:</span></b> <span>' . $user->getInfo_address($_COOKIE['userID'], 'user_street') . ' - ' . $user->getInfo_address($_COOKIE['userID'], 'xa') . ' -  ' . $user->getInfo_address($_COOKIE['userID'], 'huyen') . ' -  ' . $user->getInfo_address($_COOKIE['userID'], 'thanhpho') . '</span></label>                 
-                            <label for=""><b>Số điện thoại <span class="span3" style="margin-left: 0%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'user_phone_number') . '</span></label>
-                            <label for=""><b>Mật khẩu <span class="span4" style="margin-left: 3%;">:</span></b> <span>******</span></label>
+                    <label for=""><b>Họ và tên <span class="span0" style="margin-left: 3%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'user_name') . '</span></label>
+                    <label for=""><b>Email <span class="span1" style="margin-left: 6%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'email') . '</span></label>
+                    <label for=""><b>Địa chỉ <span class="span2" style="margin-left: 5%;">:</span></b> <span>' . $user->getInfo_address($_COOKIE['userID'], 'user_street') . ' - ' . $user->getInfo_address($_COOKIE['userID'], 'xa') . ' -  ' . $user->getInfo_address($_COOKIE['userID'], 'huyen') . ' -  ' . $user->getInfo_address($_COOKIE['userID'], 'thanhpho') . '</span></label>                 
+                       <label for=""><b>Số điện thoại <span class="span3" style="margin-left: 0%;">:</span></b> <span>' . $user->getInfouser($_COOKIE['userID'], 'user_phone_number') . '</span></label>
+                    <label for=""><b>Mật khẩu <span class="span4" style="margin-left: 3%;">:</span></b> <span>******</span></label>
                     ';
                         ?>
                     </div>
@@ -45,19 +44,17 @@ include('User/component/header.php');
 include('user/component/footer.php');
 ?>
 <style>
-    .pt-0 {
+    .pt-0{
         border: 1px solid white;
     }
 
-    .account-settings-links a {
+    .account-settings-links a{
         background: var(--primary-color);
         border: 1px solid white;
     }
-
-    .list-group {
+    .list-group{
         margin-bottom: 0px;
     }
-
     .ui-w-80 {
         width: 80px !important;
         height: auto;

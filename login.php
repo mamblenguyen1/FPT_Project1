@@ -10,7 +10,7 @@ if (isset($_POST["submit"])) {
       echo '<script>alert("Email không hợp lệ !!!")</script>';
     } else {
       if ($user->checkAccount($email, $pass)) {
-        echo '<script>alert("Vô hiệu hóa!!")</script>';
+        echo '<script>alert("Tài Khoản Đã Bị Vô hiệu hóa!!")</script>';
       } else {
         if ($user->checkUser($email, $pass)) {
           foreach (($user->checkRole($email, $pass)) as $row) {

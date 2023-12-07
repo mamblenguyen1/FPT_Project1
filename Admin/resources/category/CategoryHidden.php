@@ -4,8 +4,23 @@
 if (isset($_POST['restore_cate'])) {
     $cateID = $_POST['category_id'];
     $category->RestoreCate($cateID);
-    echo '<script>alert("Đã khôi phục danh mục ! ! !")</script>';
-    echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
+    echo '
+        <script>
+            Toastify({
+                text: "Khôi Phục Danh Mục Thành Công !!!",
+                duration: 3000,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                stopOnFocus: true,
+                close: true, // Cho phép đóng toast bằng cách nhấp vào
+                className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                style: {
+                    fontSize:"23px",
+                    padding:"20px",
+                },
+            }).showToast();
+        </script>';
 }
 ?>
 <div class="main-panel">

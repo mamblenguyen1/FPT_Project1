@@ -17,8 +17,26 @@ if (isset($_POST['edit'])) {
 if (isset($_POST['delete'])) {
   $user_id = $_POST['user_id'];
   $user->deleteuser($user_id);
-  echo '<script>alert("Đã xóa user ! ! !")</script>';
-  echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
+  echo '
+    <script>
+        Toastify({
+            text: "Xóa Tài Khoản Thành Công !!!",
+            duration: 3000,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+            stopOnFocus: true,
+            close: true, // Cho phép đóng toast bằng cách nhấp vào
+            className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+            style: {
+                fontSize:"23px",
+                padding:"20px",
+            },
+        }).showToast();
+        setTimeout(function() {
+          window.location.href = "index.php?pages=admin&action=UserList";
+      }, 800);
+    </script>';
 }
 
 if (isset($_POST['sua_user'])) {
@@ -35,17 +53,80 @@ if (isset($_POST['sua_user'])) {
     if (isValidPassword($user_password)){
       if (isValidPhoneNumber($user_phone_number)) {
         $user->update_user($user_name, $user_password, $user_phone_number, $Province, $district, $wards, $Street, $role_id, $user_id);
-        echo '<script>alert("Cập nhật tài khoản thành công !!!")</script>';
-        echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
+        echo '
+          <script>
+            Toastify({
+              text: "Sửa Tài Khoản Thành Công !!!",
+              duration: 3000,
+              gravity: "top",
+              position: "center",
+              backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+              stopOnFocus: true,
+              close: true, // Cho phép đóng toast bằng cách nhấp vào
+              className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+              style: {
+                fontSize:"23px",
+                padding:"20px",
+              },
+            }).showToast();
+          </script>';
       } else {
-      echo '<script>alert("Vui lòng nhập đúng định dạng số điện thoại !!!")</script>';
+        echo '
+          <script>
+              Toastify({
+                  text: "Vui lòng nhập đúng định dạng SĐT !!!",
+                  duration: 3000,
+                  gravity: "top",
+                  position: "center",
+                  backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                  stopOnFocus: true,
+                  close: true, // Cho phép đóng toast bằng cách nhấp vào
+                  className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                  style: {
+                      fontSize:"23px",
+                      padding:"20px",
+                  },
+              }).showToast();
+          </script>';
      }
     } else {
-      echo '<script>alert("Mật khẩu phải lớn hơn 8 ký tự và có ít nhất 1 thường và 1 số !!!")</script>';
+      echo '
+        <script>
+          Toastify({
+            text: "Mật khẩu phải lớn hơn 8 ký tự và có ít nhất 1 thường và 1 số !!!",
+            duration: 3000,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+            stopOnFocus: true,
+            close: true, // Cho phép đóng toast bằng cách nhấp vào
+            className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+            style: {
+              fontSize:"23px",
+              padding:"20px",
+            },
+          }).showToast();
+        </script>';
     }
   }
    else {
-    echo '<script>alert("Bạn nhập chưa đúng, vui lòng nhập lại !!!")</script>';
+    echo '
+      <script>
+        Toastify({
+          text: "Vui lòng nhập đủ thông tin !!!",
+          duration: 3000,
+          gravity: "top",
+          position: "center",
+          backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+          stopOnFocus: true,
+          close: true, // Cho phép đóng toast bằng cách nhấp vào
+          className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+          style: {
+            fontSize:"23px",
+            padding:"20px",
+          },
+        }).showToast();
+      </script>';
   }
 }
 

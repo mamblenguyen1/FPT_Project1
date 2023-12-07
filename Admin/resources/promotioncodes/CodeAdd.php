@@ -12,16 +12,76 @@ if (isset($_POST['addcode'])) {
     $ngayGioHienTai = date("Y-m-d");
     if (!$Code == "" && !$Percentage == "" && !$ExpiryDate == "" &&  !$Description == "" && !$IsActive == "" && !$code_condition == "") {
         if ($ExpiryDate < $ngayGioHienTai) {
-            echo '<script>alert("Ngày tháng không hợp lệ !!")</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text:"Ngày Tháng Không Hợp Lệ !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                        position: "center",
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        style: {
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
         } else if ($code->checkDuplicateCode(trim($Code))) {
-            echo '<script>alert("Mã đã tôn tại!!")</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text:"Mã Giảm Giá Đã Tồn Tại !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                        position: "center",
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        style: {
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
         } else {
             $code->create_code($Code, $Percentage, $ExpiryDate, $Description, $IsActive, $code_condition);
-            echo '<script>alert("tạo mã giảm giá thành công  !!")</script>';
-            echo '<script>window.location.href="index.php?pages=admin&action=CodeList"</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text: "Thêm Mã Giảm Giá Thành Công !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                        style: {
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
         }
     } else {
-        echo '<script>alert("Vui lòng điền đầy đủ thông tin!!")</script>';
+        echo '
+            <script>
+                Toastify({
+                    text:"Xin vui lòng nhập đủ thông tin !!!",
+                    duration: 3000,
+                    gravity: "top",
+                    backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                    position: "center",
+                    stopOnFocus: true,
+                    close: true, // Cho phép đóng toast bằng cách nhấp vào
+                    style: {
+                        fontSize:"23px",
+                        padding:"20px",
+                    },
+                }).showToast();
+            </script>';
     }
 }
 ?>

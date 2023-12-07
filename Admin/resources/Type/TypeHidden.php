@@ -7,12 +7,42 @@ if (isset($_POST['restore_type'])) {
     $sql = "SELECT * FROM `type`,category WHERE category.category_id = `type`.category_id AND `type`.type_id = $typeID AND category.is_deleted = 1";
     $result = $db->pdo_query_one($sql);
     if ($result == null) {
-        echo '<script>alert("Hãy khôi phục danh mục thuộc hãng trước")</script>';
-        echo '<script>window.location.href="index.php?pages=admin&action=CategoryHidden"</script>';
+        echo '
+            <script>
+                Toastify({
+                    text: "Hãy Khôi Phục Danh Mục Thuộc Hãng Trước !!!",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "center",
+                    backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng     
+                    stopOnFocus: true,
+                    close: true, // Cho phép đóng toast bằng cách nhấp vào
+                    className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                    style: {
+                        fontSize:"23px",
+                        padding:"20px",
+                    },
+                }).showToast();
+            </script>';
     } else {
         $type->RestoreType($typeID);
-        echo '<script>alert("Đã khôi phục hãng ! ! !")</script>';
-        echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+        echo '
+        <script>
+            Toastify({
+                text: "Khôi Phục Danh Mục Con Thành Công !!!",
+                duration: 3000,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                stopOnFocus: true,
+                close: true, // Cho phép đóng toast bằng cách nhấp vào
+                className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                style: {
+                    fontSize:"23px",
+                    padding:"20px",
+                },
+            }).showToast();
+        </script>';
     };
 }
 ?>

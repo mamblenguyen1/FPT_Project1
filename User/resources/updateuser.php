@@ -2,6 +2,10 @@
 include('User/component/header.php');
 ?>
 <?
+function isValidPhoneNumber($user_phone_number) { // Biểu thức chính quy bắt lỗi SĐT
+    $pattern = '/^0\d{9}$/';
+    return preg_match($pattern, $user_phone_number);
+  }
 $user_id = $_COOKIE['userID'];
 if (isset($_POST['edit'])) {
     $user_id = $_POST['user_id'];
@@ -15,11 +19,62 @@ if (isset($_POST['luu_user'])) {
     $wards = $_POST['wards'] ?? "";
     $Street = $_POST['Street'] ?? "";
     if (!$user_name == "" && !$user_phone_number == "" && !$Province == ""  && !$district == ""  && !$wards == ""  && !$Street == "") {
-        $user->update_user1($user_name, $user_phone_number, $Province, $district, $wards, $Street, $user_id);
-        echo '<script>alert("Cập nhật tài khoản thành công")</script>';
-        echo '<script>window.location.href="index.php?pages=user&action=updateuser"</script>';
+        if (isValidPhoneNumber($user_phone_number)) {
+        $user->update_user1($user_name, $user_phone_number, $Province, $district, $wards, $Street , $user_id);
+        echo '
+                <script>
+                    Toastify({
+                        text: "Cập nhật Tài Khoản thành công !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                        style: {
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
     } else {
-        $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
+        echo '
+            <script>
+                Toastify({
+                    text: "Vui lòng nhập đúng định dạng SĐT !!!",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "center",
+                    backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                    stopOnFocus: true,
+                    close: true, // Cho phép đóng toast bằng cách nhấp vào
+                    className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                    style: {
+                        fontSize:"23px",
+                        padding:"20px",
+                    },
+                showToast();
+            </script>';
+    }
+    } else {
+        echo '
+            <script>
+                Toastify({
+                    text: "Vui lòng nhập đủ thông tin !!!",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "center",
+                    backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                    stopOnFocus: true,
+                    close: true, // Cho phép đóng toast bằng cách nhấp vào
+                    className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                    style: {
+                        fontSize:"23px",
+                        padding:"20px",
+                    },
+                showToast();
+            </script>';
     }
 }
 ?>
@@ -41,22 +96,10 @@ if (isset($_POST['luu_user'])) {
                 <div class="tab-content">
                     <h3 style="color: var(--secondary-color);">Thông tin người dùng</h3>
                     <div id="General">
-                        <div class="card-body media align-items-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="d-block ui-w-80" style="margin-left: 3%; padding-bottom: 10px;">
-                            <div class="media-body ml-4">
-                                <label class="btn btn-outline-primary" style="width: 16.5%;">
-                                    Upload new photo
-                                    <input type="file" class="account-settings-fileinput">
-                                </label> &nbsp;
-                                <button type="button" class="btn btn-default md-btn-flat" style="border: 1px solid var(--secondary-color); color: var(--secondary-color)">Reset</button>
-                            </div>
-                        </div>
-                        <br>
-
                         <form class="card-body" method="post">
                             <input type="hidden" name="user_id" value="<? echo $user->getInfo_user($user_id, 'user_id'); ?>">
                             <div class="form-group">
-                                <label class="form-label">Name</label>
+                                <label class="form-label">Tên người dùng</label>
                                 <input type="text" class="form-control mb-1" name="user_name" value="<? echo $user->getInfo_user($user_id, 'user_name'); ?>">
                                 <?
                                 if (isset($_POST["user_name"])) {
@@ -74,7 +117,7 @@ if (isset($_POST['luu_user'])) {
                                 <?
                                 if (isset($_POST["user_phone_number"])) {
                                     if (empty($_POST["user_phone_number"])) {
-                                        echo '<span class="vaild">Xin vui lòng nhập tên người dùng</span>';
+                                        echo '<span class="vaild">Xin vui lòng nhập số điện thoại</span>';
                                     } else {
                                         echo '';
                                     }
@@ -160,82 +203,77 @@ if (isset($_POST['luu_user'])) {
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-        $.ajax({
-            url: "./admin/resources/address/province.php",
-            dataType: 'json',
-            success: function(data) {
-                $("#Province").html("");
-                for (i = 0; i < data.length; i++) {
-                    var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
-                    var str = ` 
+$(document).ready(function(){    
+    $.ajax({
+        url: "./admin/resources/address/province.php",       
+        dataType:'json',         
+        success: function(data){     
+            $("#Province").html("");
+            for (i=0; i<data.length; i++){            
+                var Province = data[i]; //vd  {idTinh:'6', loai:'Tỉnh', tenTinh:'Bắc Kạn'}
+                var str = ` 
                 <option value="${Province['province_id']}"> ${Province['name']} </option>
                    `;
-                    $("#Province").append(str);
-                }
-                $("#Province").on("change", function(e) {
-                    layHuyen();
-                });
+                $("#Province").append(str);
             }
-        });
-    })
+            $("#Province").on("change", function(e) { layHuyen();  });
+        }
+    });
+})
+
 </script>
 <script>
-    function layHuyen() {
-        var province_id = $("#Province").val();
-        $.ajax({
-            url: "./admin/resources/address/district.php?province_id=" + province_id,
-            dataType: 'json',
-            success: function(data) {
-                $("#district").html("");
-                for (i = 0; i < data.length; i++) {
-                    var district = data[i];
-                    var str = ` 
+function layHuyen(){
+    var province_id = $("#Province").val();
+    $.ajax({
+        url: "./admin/resources/address/district.php?province_id=" + province_id,
+        dataType:'json',         
+        success: function(data){     
+            $("#district").html("");
+            for (i=0; i<data.length; i++){            
+                var district = data[i]; 
+                var str = ` 
                 <option  value="${district['district_id']}">${district['name']} </option>`;
-                    $("#district").append(str);
-                }
-                $("#district").on("change", function(e) {
-                    layXa();
-                });
-            }
-        });
-    }
+                $("#district").append(str);
+            }       
+            $("#district").on("change", function(e) { layXa();  });     
+        }
+    });
+}
 </script>
 <script>
-    function layXa() {
-        var district_id = $("#district").val();
-        $.ajax({
-            url: "./admin/resources/address/wards.php?district_id=" + district_id,
-            dataType: 'json',
-            success: function(data) {
-                $("#wards").html("");
-                for (i = 0; i < data.length; i++) {
-                    var wards = data[i];
-                    var str = ` 
+function layXa(){
+    var district_id = $("#district").val();
+    $.ajax({
+        url: "./admin/resources/address/wards.php?district_id=" + district_id,
+        dataType:'json',         
+        success: function(data){     
+            $("#wards").html("");
+            for (i=0; i<data.length; i++){            
+                var wards = data[i]; 
+                var str = ` 
                 <option  value="${wards['wards_id']}">${wards['name']} </option>`;
-                    $("#wards").append(str);
-                }
-            }
-        });
-    }
+                $("#wards").append(str);
+            }            
+        }
+    });
+}
 </script>
 <?
 include('user/component/footer.php');
 ?>
 <style>
-    label {
+    label{
         color: var(secondary-color);
     }
-
-    .pt-0 {
+        .pt-0{
         border: 1px solid white;
     }
 
-    .account-settings-links a {
+    .account-settings-links a{
         background: var(--primary-color);
         border: 1px solid white;
     }
-
     .vaild {
         color: red;
     }

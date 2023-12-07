@@ -5,15 +5,61 @@ if (isset($_POST['addCate'])) {
     $category_name = $_POST['cateName'] ?? "";
     if (!$category_name == "") {
         if ($category->checkDuplicateCate(trim($category_name))) {
-            echo '<script>alert("Tên danh mục đã tồn tại !!")</script>';
-            echo '<script>window.location.href="index.php?pages=admin&action=addcate"</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text:"Danh mục Đã Tồn Tại !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                        position: "center",
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        style: {
+                            // Các thuộc tính CSS để tùy chỉnh hơn
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
         } else {
             $category->create_category($category_name);
-            echo '<script>alert("tạo thành công !!")</script>';
-            echo '<script>window.location.href="index.php?pages=admin&action=listcate"</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text: "Thêm Danh Mục Thành Công !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                        style: {
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
         }
     } else {
-        $_SESSION['messages'] = "Bạn phải nhập thông tin đầy đủ";
+        echo '
+            <script>
+                Toastify({
+                    text:"Vui Lòng Nhập Đầy Đủ Thông Tin !!!",
+                    duration: 3000,
+                    gravity: "top",
+                    backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                    position: "center",
+                    stopOnFocus: true,
+                    close: true, // Cho phép đóng toast bằng cách nhấp vào
+                    style: {
+                        // Các thuộc tính CSS để tùy chỉnh hơn
+                        fontSize:"23px",
+                        padding:"20px",
+                    },
+                }).showToast();
+            </script>';
     }
 }
 ?>

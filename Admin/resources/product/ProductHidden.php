@@ -9,19 +9,64 @@ if (isset($_POST['restore_product'])) {
     $sql = "SELECT * FROM products,category WHERE category.category_id = products.category_id AND products.product_id = $productID AND category.is_deleted = 1";
     $result = $db->pdo_query_one($sql);
     if ($result == null) {
-        echo '<script>alert("Hãy khôi phục danh mục thuộc sản phẩm trước")</script>';
-        echo '<script>window.location.href="index.php?pages=admin&action=CategoryHidden"</script>';
+        echo '
+            <script>
+                Toastify({
+                    text:"Hãy Khổi Phục Danh Mục Thuộc Hãng Trước!!!",
+                    duration: 3000,
+                    gravity: "top",
+                    backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                    position: "center",
+                    stopOnFocus: true,
+                    close: true, // Cho phép đóng toast bằng cách nhấp vào
+                    style: {
+                        // Các thuộc tính CSS để tùy chỉnh hơn
+                        fontSize:"23px",
+                        padding:"20px",
+                    },
+                }).showToast();
+            </script>';
     } else {
         $db = new connect();
         $sql = "SELECT * FROM products,type WHERE type.type_id = products.type_id AND products.product_id = $productID AND type.is_deleted = 1";
         $result = $db->pdo_query_one($sql);
         if ($result == null) {
-            echo '<script>alert("Hãy khôi phục hãng thuộc sản phẩm trước")</script>';
-            echo '<script>window.location.href="index.php?pages=admin&action=TypeHidden"</script>';
+            echo '
+            <script>
+                Toastify({
+                    text:"Hãy Khổi Phục Hãng Thuộc Sản Phẩm Trước!!!",
+                    duration: 3000,
+                    gravity: "top",
+                    backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                    position: "center",
+                    stopOnFocus: true,
+                    close: true, // Cho phép đóng toast bằng cách nhấp vào
+                    style: {
+                        // Các thuộc tính CSS để tùy chỉnh hơn
+                        fontSize:"23px",
+                        padding:"20px",
+                    },
+                }).showToast();
+            </script>';
         } else {
             $product->RestoreProduct($productID);
-            echo '<script>alert("Đã khôi phục danh mục ! ! !")</script>';
-            echo '<script>window.location.href="index.php?pages=admin&action=productList"</script>';
+            echo '
+            <script>
+                Toastify({
+                    text: "Khôi Phục Sản Phẩm Thành Công!!!",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "center",
+                    backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                    stopOnFocus: true,
+                    close: true, // Cho phép đóng toast bằng cách nhấp vào
+                    className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                    style: {
+                        fontSize:"23px",
+                        padding:"20px",
+                    },
+                }).showToast();
+            </script>';
         };
     };
 }

@@ -4,10 +4,6 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
 <?
-// echo json_encode($product->category_select_all());
-// echo json_encode($product->category_type_con_select_all(3));
-//  $product->take_category();
-
 if (isset($_POST['addProductbtn'])) {
     $category_id = $_POST['category_id'] ?? "";
     $product_name = $_POST['product_name'] ?? "";
@@ -35,12 +31,42 @@ if (isset($_POST['addProductbtn'])) {
     ) 
     {
         if ($product->checkDuplicateProduct(trim($product_name),$type_id, $category_id)) {
-            echo '<script>alert("Tên sản phẩm đã tồn tại !!")</script>';
-            echo '<script>window.location.href="index.php?pages=admin&action=ProductAdd"</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text:"Sản Phẩm Đã Tồn Tại !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                        position: "center",
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        style: {
+                            // Các thuộc tính CSS để tùy chỉnh hơn
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
         } else { 
                 $product->add_product($product_name, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_short_description, $product_description, $user_created);
-                echo '<script>alert("tạo thành công !!")</script>';
-                echo '<script>window.location.href="index.php?pages=admin&action=productList"</script>';
+                echo '
+                    <script>
+                        Toastify({
+                            text: "Thêm Sản Phẩm Thành Công !!!",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "center",
+                            backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                            stopOnFocus: true,
+                            close: true, // Cho phép đóng toast bằng cách nhấp vào
+                            className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                            style: {
+                                fontSize:"23px",
+                                padding:"20px",
+                            },
+                        }).showToast();
+                    </script>';
                 $anhne = $_FILES['product_img']['tmp_name'];
                 $error = $_FILES['product_img']['error'];
                 $path = 'images/product/' . $product_img . '.png';
@@ -51,7 +77,22 @@ if (isset($_POST['addProductbtn'])) {
                 }
             }
     }   else {
-        echo '<script>alert("Xin vui lòng nhập đầy đủ thông tin !!")</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text:"Xin vui lòng nhập đủ thông tin !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                        position: "center",
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        style: {
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
     }
 }
 ?>
@@ -200,8 +241,8 @@ if (isset($_POST['addProductbtn'])) {
                     <td></td>
                     <td></td>
                 </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </textarea>
                             <script>
                                 ClassicEditor
@@ -217,7 +258,7 @@ if (isset($_POST['addProductbtn'])) {
 
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" name="addProductbtn" class="btn btn-primary">Lưu danh mục</button>
+                            <button type="submit" onclick="showToast()" name="addProductbtn" class="btn btn-primary">Thêm danh mục</button>
                         </div>
                 </form>
             </div>
@@ -264,4 +305,71 @@ if (isset($_POST['addProductbtn'])) {
             }
         });
     }
+</script>
+<script>
+  function showToast(isSuccess) {
+    if (isSuccess) {
+      toast({
+        title: "Thành công!",
+        message: "Bạn đã đăng ký thành công tài khoản tại F8.",
+        type: "success",
+        duration: 5000
+      });
+    }
+    else {
+      toast({
+        title: "Thất bại!",
+        message: "Có lỗi xảy ra, vui lòng liên hệ quản trị viên.",
+        type: "error",
+        duration: 5000
+      });
+    }
+  }
+  // Toast function
+  function toast({ title = "", message = "", type = "info", duration = 3000 }) {
+    const main = document.getElementById("toast");
+    if (main) {
+      const toast = document.createElement("div");
+
+      // Auto remove toast
+      const autoRemoveId = setTimeout(function () {
+        main.removeChild(toast);
+      }, duration + 1000);
+
+      // Remove toast when clicked
+      toast.onclick = function (e) {
+        if (e.target.closest(".toast__close")) {
+          main.removeChild(toast);
+          clearTimeout(autoRemoveId);
+        }
+      };
+
+      const icons = {
+        success: "fas fa-check-circle",
+        info: "fas fa-info-circle",
+        warning: "fas fa-exclamation-circle",
+        error: "fas fa-exclamation-circle"
+      };
+      const icon = icons[type];
+      const delay = (duration / 1000).toFixed(2);
+
+      toast.classList.add("toast", `toast--${type}`);
+      toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
+
+      toast.innerHTML = `
+                      <div class="toast__icon">
+                          <i class="${icon}"></i>
+                      </div>
+                      <div class="toast__body">
+                          <h3 class="toast__title">${title}</h3>
+                          <p class="toast__msg">${message}</p>
+                      </div>
+                      <div class="toast__close">
+                          <i class="fas fa-times"></i>
+                      </div>
+                  `;
+      main.appendChild(toast);
+    }
+  }
+
 </script>

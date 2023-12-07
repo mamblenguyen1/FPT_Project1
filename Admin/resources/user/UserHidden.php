@@ -4,16 +4,24 @@
 if (isset($_POST['restore_user'])) {
     $userID = $_POST['user_id'];
     $user->RestoreUser($userID);
-    echo '<script>alert("Đã khôi phục tài khoản ! ! !")</script>';
-    echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
+    echo '
+        <script>
+            Toastify({
+                text: "Khôi Phục Tài Khoản Thành Công !!!",
+                duration: 3000,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                stopOnFocus: true,
+                close: true, // Cho phép đóng toast bằng cách nhấp vào
+                className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                style: {
+                    fontSize:"23px",
+                    padding:"20px",
+                },
+            }).showToast();
+        </script>';
 }
-//xóa vĩnh viễn
-// if (isset($_POST['permanently_deleted_user'])) {
-//     $userpermanently = $_POST['user_id'];
-//     $user->permanently_deleted_user($userpermanently);
-//     echo '<script>alert("Xóa danh mục thành công ! ! !")</script>';
-//     echo '<script>window.location.href="index.php?pages=admin&action=UserHidden"</script>';
-// }
 ?>
 <div class="main-panel">
     <div class="content-wrapper">

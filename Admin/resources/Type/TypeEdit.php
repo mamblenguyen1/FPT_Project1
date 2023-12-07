@@ -9,8 +9,26 @@ if (isset($_POST['edit_type'])) {
 if (isset($_POST['delete_type'])) {
     $type_id = $_POST['type_id'];
     $type->deleteCate($type_id);
-    echo '<script>alert("Đã xóa danh mục ! ! !")</script>';
-    echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+    echo '
+    <script>
+        Toastify({
+            text: "Đã Xóa Danh Mục Con Thành Công !!!",
+            duration: 3000,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+            stopOnFocus: true,
+            close: true, // Cho phép đóng toast bằng cách nhấp vào
+            className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+            style: {
+                fontSize:"23px",
+                padding:"20px",
+            },
+        }).showToast();
+        setTimeout(function() {
+          window.location.href = "index.php?pages=admin&action=TypeList";
+      }, 800);
+    </script>';
 }
 
 ?>
@@ -23,16 +41,59 @@ if (isset($_POST['editType'])) {
     $is_show = $_POST['typeShow'] ?? "";
     if (!$type_name == "" && !$category_id == "") {
         if ($type->checkDuplicateType(trim($type_name), $category_id)) {
-            echo '<script>alert("Tên danh mục con đã tồn tại !!")</script>';
-            echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text:"Danh Mục Con Đã Tồn Tại !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                        position: "center",
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        style: {
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
         } else {
             $type->update_Type($type_name, $category_id, $user_updated, $typeid);
-            echo '<script>alert("Cập nhập thành công !!")</script>';
-            echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text: "Sửa Danh Mục Con Thành Công !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                        style: {
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
         }
     } else {
-        echo '<script>alert("Vui lòng nhập đầy đủ thông tin !!")</script>';
-        echo '<script>window.location.href="index.php?pages=admin&action=TypeList"</script>';
+        echo '
+            <script>
+                Toastify({
+                    text:"Vui lòng nhập đủ thông tin !!!",
+                    duration: 3000,
+                    gravity: "top",
+                    backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                    position: "center",
+                    stopOnFocus: true,
+                    close: true, // Cho phép đóng toast bằng cách nhấp vào
+                    style: {
+                        fontSize:"23px",
+                        padding:"20px",
+                    },
+                }).showToast();
+            </script>';
     }
 }
 ?>

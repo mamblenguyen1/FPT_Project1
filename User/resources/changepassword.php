@@ -2,6 +2,10 @@
 include('User/component/header.php');
 ?>
 <?
+function isValidPassword($NewPassAg) { // Biểu thức chính quy bắt lỗi mật khẩu
+    $pattern = '/^(?=.*[a-z])(?=.*\d)[a-z\d]{8,20}$/';
+    return preg_match($pattern, $NewPassAg);
+  }
 $user_id = $_COOKIE['userID'];
 if (isset($_POST['submituser'])) {
     $OldPass = $_POST['Old'];
@@ -10,26 +14,100 @@ if (isset($_POST['submituser'])) {
     if (!empty($OldPass) && !empty($NewPass) && !empty($NewPassAg)) {
         if ($OldPass === ($user->getInfouser2($user_id, 'user_password'))) {
             if ($NewPass != $NewPassAg) {
-                // echo '<script>alert("Nhập lại mật khẩu không đúng")</script>';
-                // echo '<script>window.location.href="index.php?pages=user&action=changepassword"</script>';
-                echo ' <div class="alert alert-warning">
-                <strong>Lỗi !</strong> Nhập lại mật khẩu cũ không đúng</div>';
+                echo '
+                    <script>
+                    Toastify({
+                        text: "Mật khẩu mới không giống nhau !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                        style: {
+                        fontSize:"23px",
+                        padding:"20px",
+                        },
+                    }).showToast();
+                    </script>';
             } else {
-                $user->update_Pass_user($NewPass, $user_id);
-                echo ' <div class="alert alert-success">
-        <strong>Chúc mừng !</strong> Bạn đã đổi mật khẩu thành công</div>';
+                if (isValidPassword($NewPassAg)){  
+                    $user->update_Pass_user($NewPass, $user_id);
+                    echo '
+                        <script>
+                            Toastify({
+                                text: "Đổi mật khẩu thành công !!!",
+                                duration: 3000,
+                                gravity: "top",
+                                position: "center",
+                                backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                                stopOnFocus: true,
+                                close: true, // Cho phép đóng toast bằng cách nhấp vào
+                                className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                                style: {
+                                    fontSize:"23px",
+                                    padding:"20px",
+                                },
+                            }).showToast();
+                        </script>';
+                } else {
+                    echo '
+                        <script>
+                            Toastify({
+                                text: "Mật khẩu phải lớn hơn 8 ký tự và có ít nhất 1 thường và 1 số !!!",
+                                duration: 3000,
+                                gravity: "top",
+                                position: "center",
+                                backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                                stopOnFocus: true,
+                                close: true, // Cho phép đóng toast bằng cách nhấp vào
+                                className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                                style: {
+                                    fontSize:"23px",
+                                    padding:"20px",
+                                },
+                            }).showToast();
+                        </script>';
+                }
             }
         } else {
-            // echo '<script>alert("Mật khẩu cũ không đúng")</script>';
-            // echo '<script>window.location.href="index.php?pages=user&action=changepassword"</script>';
-            echo ' <div class="alert alert-warning">
-            <strong>Lỗi !</strong> Mật khẩu cũ không đúng</div>';
+            echo '
+                <script>
+                    Toastify({
+                        text: "Mật khẩu cũ không đúng !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                        style: {
+                          fontSize:"23px",
+                          padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
         }
     } else {
-        // echo '<script>alert("Xin lòng nhập đầy đủ thông tin")</script>';
-        // echo '<script>window.location.href="index.php?pages=user&action=changepassword"</script>';
-        echo ' <div class="alert alert-warning">
-        <strong>Lỗi !</strong> Vui lòng nhập đầy đủ thông tin</div>';
+        echo '
+            <script>
+                Toastify({
+                    text: "Vui lòng nhập đầy đủ thông tin !!!",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "center",
+                    backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                    stopOnFocus: true,
+                    close: true, // Cho phép đóng toast bằng cách nhấp vào
+                    className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                    style: {
+                        fontSize:"23px",
+                        padding:"20px",
+                    },
+                }).showToast();
+            </script>';
     }
 }
 
@@ -113,15 +191,14 @@ if (isset($_POST['submituser'])) {
 include('user/component/footer.php');
 ?>
 <style>
-    .pt-0 {
+        .pt-0{
         border: 1px solid white;
     }
 
-    .account-settings-links a {
+    .account-settings-links a{
         background: var(--primary-color);
         border: 1px solid white;
     }
-
     .ui-w-80 {
         width: 80px !important;
         height: auto;

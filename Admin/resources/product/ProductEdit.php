@@ -9,8 +9,25 @@ if (isset($_POST['ProductEdit'])) {
 if (isset($_POST['deleteproduct'])) {
     $product_id = $_POST['product_id'];
     $product->deleteProduct($product_id);
-    echo '<script>alert("Đã xóa sản phẩm thành công ! ! !")</script>';
-    echo '<script>window.location.href="index.php?pages=admin&action=productList"</script>';
+    echo '
+        <script>
+            Toastify({
+                text:"Xóa Sản Phẩm Thành Công !!!",
+                duration: 3000,
+                gravity: "top",
+                backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                position: "center",
+                stopOnFocus: true,
+                close: true, // Cho phép đóng toast bằng cách nhấp vào
+                style: {
+                    fontSize:"23px",
+                    padding:"20px",
+                },
+            }).showToast();
+            setTimeout(function() {
+                window.location.href = "index.php?pages=admin&action=productList";
+            }, 800);
+        </script>';
 }
 if (isset($_POST['editProduct'])) {
     $category_id = $_POST['category_id'] ?? "";
@@ -39,11 +56,42 @@ if (isset($_POST['editProduct'])) {
 
     ) {
         if ($product->checkDuplicateProduct(trim($product_name), $type_id, $category_id)) {
-            echo '<script>alert("Tên sản phẩm đã tồn tại !!")</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text: "Sản Phẩm Đã Tồn Tại !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                        style: {
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
         } else {
             $product->Edit_Product($product_name, $product_price, $product_sale, $product_img, $product_quantily, $category_id, $type_id, $product_short_description, $product_description, $user_updated, $ProductId);
-            echo '<script>alert("sửa sản phẩm thành công !!")</script>';
-            echo '<script>window.location.href="index.php?pages=admin&action=productList"</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text: "Sửa Sản Phẩm Thành Công !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                        style: {
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
             $anhne = $_FILES['product_img']['tmp_name'];
             $error = $_FILES['product_img']['error'];
             $path = 'images/product/' . $product_img . '.png';
@@ -54,7 +102,22 @@ if (isset($_POST['editProduct'])) {
             }
         }
     } else {
-        echo '<script>alert("Vui lòng nhập đầy đủ thông tin !!")</script>';
+        echo '
+            <script>
+                Toastify({
+                    text:"Xin vui lòng nhập đủ thông tin !!!",
+                    duration: 3000,
+                    gravity: "top",
+                    backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                    position: "center",
+                    stopOnFocus: true,
+                    close: true, // Cho phép đóng toast bằng cách nhấp vào
+                    style: {
+                        fontSize:"23px",
+                        padding:"20px",
+                    },
+                }).showToast();
+            </script>';
     }
 }
 ?>

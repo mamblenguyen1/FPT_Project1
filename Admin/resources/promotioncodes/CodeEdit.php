@@ -4,8 +4,25 @@
 if (isset($_POST['delete_code'])) {
     $code_id = $_POST['CodeID'];
     $code->deleteCode($code_id);
-    echo '<script>alert("Đã xóa mã giảm giá ! ! !")</script>';
-    echo '<script>window.location.href="index.php?pages=admin&action=CodeList"</script>';
+    echo '
+        <script>
+            Toastify({
+                text:"Xóa Mã Giảm Giá Thành Công !!!",
+                duration: 3000,
+                gravity: "top",
+                backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                position: "center",
+                stopOnFocus: true,
+                close: true, // Cho phép đóng toast bằng cách nhấp vào
+                style: {
+                    fontSize:"23px",
+                    padding:"20px",
+                },
+            }).showToast();
+            setTimeout(function() {
+                window.location.href="index.php?pages=admin&action=CodeList";
+            }, 800);
+        </script>';
 }
 ?>
 
@@ -26,14 +43,62 @@ if (isset($_POST['EditCode'])) {
 
     if (!$Code == "" && !$Percentage == "" && !$ExpiryDate == "" &&  !$Description == "" && !$IsActive == "" && !$code_condition == "") {
         if ($ExpiryDate < $ngayGioHienTai) {
-            echo '<script>alert("Ngày tháng không hợp lệ !!")</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text:"Ngày Tháng Không Hợp Lệ !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                        position: "center",
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        style: {
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                    setTimeout(function() {
+                        window.location.href = "index.php?pages=admin&action=listcate";
+                    }, 800);
+                </script>';
         } else {
             $code->updateCode($Code, $Percentage, $ExpiryDate, $Description, $IsActive, $CodeID, $code_condition);
-            echo '<script>alert("sửa mã giảm giá thành công  !!")</script>';
-            echo '<script>window.location.href="index.php?pages=admin&action=CodeList"</script>';
+            echo '
+                <script>
+                    Toastify({
+                        text: "Sửa Mã Giảm Giá Thành Công !!!",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "center",
+                        backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+                        stopOnFocus: true,
+                        close: true, // Cho phép đóng toast bằng cách nhấp vào
+                        className: "toastify-custom", // Thêm lớp CSS tùy chỉnh
+                        style: {
+                            fontSize:"23px",
+                            padding:"20px",
+                        },
+                    }).showToast();
+                </script>';
         }
     } else {
-        echo '<script>alert("Vui lòng điền đầy đủ thông tin!!")</script>';
+        echo '
+        <script>
+            Toastify({
+                text:"Vui Lòng Nhập Đủ Thông Tin !!!",
+                duration: 3000,
+                gravity: "top",
+                backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+                position: "center",
+                stopOnFocus: true,
+                close: true, // Cho phép đóng toast bằng cách nhấp vào
+                style: {
+                    fontSize:"23px",
+                    padding:"20px",
+                },
+            }).showToast();
+        </script>';
     }
 }
 ?>
