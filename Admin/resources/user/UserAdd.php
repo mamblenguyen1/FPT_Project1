@@ -33,7 +33,8 @@ if (isset($_POST['them_user'])) {
       } else {
         if (isValidPassword($user_password)) {
           if (isValidPhoneNumber($user_phone_number)) {
-            $user->user_insert($user_name, $email, $user_phone_number, $Province, $district, $wards, $Street, $user_password, $role_id);
+            $pass_hash = md5($user_password);
+            $user->user_insert($user_name, $email, $user_phone_number, $Province, $district, $wards, $Street, $pass_hash, $role_id);
             echo '<script>alert("Thêm tài khoản thành công !!!")</script>';
             echo '<script>window.location.href="index.php?pages=admin&action=UserList</script>';
           } else {

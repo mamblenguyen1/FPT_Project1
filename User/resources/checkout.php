@@ -162,6 +162,7 @@ if (isset($_POST['code-input'])) {
                 $discount = $Percentage / 100;
                 $finalprice = (($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount));
                 $order->updateCartTotal($_COOKIE['userID'], $finalprice);
+                $order->updateIsCode($order_id, 1);
             }
         } else {
             echo '<span style="color:red" class="vaild">Mã giảm giá đã hết hạn sử dụng !</span>';
@@ -175,7 +176,21 @@ if (isset($_POST['code-input'])) {
     <form method="post" class="color-white">
         <label for="firstName">Mã giảm giá (Nếu Có)</label>
         <input value="" name="code" type="text" id="code1" class="form-control" style="width:200px;" placeholder="Nhập mã giảm giá">
-        <button type="submit" name="code-input" class="tg-btn" id="code1" style="width:100px; padding:0;">Nhập</button>
+
+        <? if ($order->is_codeOrder($order_id, 'is_code') == 0) {
+            echo '
+            <button type="submit" name="code-input" class="tg-btn" id="code1" style="width:100px; padding:0;">Nhập</button>
+
+            ';
+        } else {
+            echo '
+            <button  style="width:100px; padding:0;" disabled>Nhập</button>
+
+            
+            ';
+        }
+        ?>
+
         <h3><label><b>Thành tiền</b></label></h3>
         <ul class="list-group mb-3"></ul>
         <li class="list-group-item border-0 d-flex justify-content-between lh-condensed">
@@ -195,6 +210,10 @@ if (isset($_POST['code-input'])) {
             </li> -->
         <li class="list-group-item border-0 d-flex justify-content-between">
             <h3><b>Tổng: <a><?= number_format(round($order->getOrder_total_payment($user_id, 'order_total_payment'))) ?> đ</a></b></h3>
+            <?
+                $order->updateCartTotal($_COOKIE['userID'], ($order->getOrder_total_payment($user_id, 'order_total_payment')));
+            
+            ?>
             <!-- <input type="hidden" name="priceFinal" value="<?= round((($order->getOrder_total_payment($user_id, 'order_total_payment') - ($order->getOrder_total_payment($user_id, 'order_total_payment')) * $discount))) ?>" id=""> -->
         </li>
     </form>

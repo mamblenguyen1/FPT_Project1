@@ -152,6 +152,8 @@ if (isset($_POST['updateQty'])) {
       if (isset($_POST['checkout'])) {
         $user_id = $_POST['user_id'];
         $order_id = $_POST['order_id'];
+        $order->updateIsCode($order_id, 0);
+
         echo "<script>window.location.href = 'index.php?pages=user&action=checkout&user_id=$user_id&order_id=$order_id'</script>";
       };
     } else {

@@ -34,7 +34,8 @@ if (isset($_POST['sua_user'])) {
   if (!$user_name == "" && !$user_password == "" && !$user_phone_number == "" && !$Province == ""  && !$district == ""  && !$wards == ""  && !$Street == "" && !$role_id == "") {
     if (isValidPassword($user_password)){
       if (isValidPhoneNumber($user_phone_number)) {
-        $user->update_user($user_name, $user_password, $user_phone_number, $Province, $district, $wards, $Street, $role_id, $user_id);
+        $pass_hash = md5($user_password);
+        $user->update_user($user_name, $pass_hash, $user_phone_number, $Province, $district, $wards, $Street, $role_id, $user_id);
         echo '<script>alert("Cập nhật tài khoản thành công !!!")</script>';
         echo '<script>window.location.href="index.php?pages=admin&action=UserList"</script>';
       } else {

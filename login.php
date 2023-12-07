@@ -12,6 +12,7 @@ if (isset($_POST["submit"])) {
       if ($user->checkAccount($email, $pass)) {
         echo '<script>alert("Vô hiệu hóa!!")</script>';
       } else {
+
         if ($user->checkUser($email, $pass)) {
           foreach (($user->checkRole($email, $pass)) as $row) {
             if ($row == "1") {
@@ -229,7 +230,9 @@ if (isset($_POST["submit"])) {
         } else {
           if (isValidPassword($pass1)) {
           if (isValidPhoneNumber($phone)) {
-            $user->user_create($username, $regEmail, $phone, $pass1);
+            $pass_hash  = md5($pass1);
+    
+            $user->user_create($username, $regEmail, $phone, $pass_hash);
             echo '<script>alert("Chúc mừng bạn đã đăng ký thành công !!!")</script>';
           } else {
             echo '<script>alert("Vui lòng nhập đúng định dạng số điện thoại !!!")</script>';

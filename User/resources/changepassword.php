@@ -5,17 +5,24 @@ include('User/component/header.php');
 $user_id = $_COOKIE['userID'];
 if (isset($_POST['submituser'])) {
     $OldPass = $_POST['Old'];
+    $old_hash = md5($OldPass);
+    $old_query = ($user->getInfouser2($user_id, 'user_password'));
+    // echo $old_hash ;
+    // echo '---';
+    // echo $old_query;
+    // exit();
     $NewPass = $_POST['New'];
     $NewPassAg = $_POST["Again"];
     if (!empty($OldPass) && !empty($NewPass) && !empty($NewPassAg)) {
-        if ($OldPass === ($user->getInfouser2($user_id, 'user_password'))) {
+        if ($old_hash === $old_query) {
             if ($NewPass != $NewPassAg) {
                 // echo '<script>alert("Nhập lại mật khẩu không đúng")</script>';
                 // echo '<script>window.location.href="index.php?pages=user&action=changepassword"</script>';
                 echo ' <div class="alert alert-warning">
                 <strong>Lỗi !</strong> Nhập lại mật khẩu cũ không đúng</div>';
             } else {
-                $user->update_Pass_user($NewPass, $user_id);
+                $new_pass_hash = md5($NewPass);
+                $user->update_Pass_user($new_pass_hash, $user_id);
                 echo ' <div class="alert alert-success">
         <strong>Chúc mừng !</strong> Bạn đã đổi mật khẩu thành công</div>';
             }
