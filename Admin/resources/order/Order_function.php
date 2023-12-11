@@ -239,7 +239,17 @@ class ORDER
             return $row['count(order.order_id)'];
         }
     }
-
+    function getInfoUserByCartID($cart_id, $column)
+    {
+        $db = new connect();
+        $sql = "SELECT * FROM cart, user WHERE cart.user_id = user.user_id
+        AND cart.cart_id = $cart_id ";
+        $result = $db->pdo_query($sql);
+        foreach ($result as $row) {
+            return $row[$column];
+        }
+    }
+    
     function getOrderStatus($order_id, $column)
     {
         $db = new connect();

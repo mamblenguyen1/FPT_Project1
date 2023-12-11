@@ -18,7 +18,8 @@ if (isset($_GET['order_id'])) {
         $totalprice = $order->getOrder_total_payment($_COOKIE['userID'], 'order_total_payment');
         $order->addCartAndCartDetail($_COOKIE['userID'], $address, $totalprice, $order_id);
         $cart_now = $order->Show_Cart_detail_Collumn1($_COOKIE['userID'], 'cart_id');
-        $mail->MailOrder($cart_now, $order_id, 'dang6996nvd@gmail.com');
+        $customMail =  $order->getInfoUserByCartID($cart_now, 'email');
+        $mail->MailOrder($cart_now, $order_id, $customMail);
     }
 }
 ?>
