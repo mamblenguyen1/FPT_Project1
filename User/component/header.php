@@ -290,7 +290,7 @@ include('style.php');
 
 	.menu ul li a:hover {
 		background-color: #504C4C;
-		color: black;
+		color: #77b748;;
 		font-weight: bold;
 	}
 

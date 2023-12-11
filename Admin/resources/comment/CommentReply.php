@@ -47,10 +47,6 @@ if (isset($_POST['deletecomment'])) {
     </div>
 </div>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
     .comment {
         border: 1px solid #ccc;
         padding: 10px;
@@ -60,6 +56,14 @@ if (isset($_POST['deletecomment'])) {
         margin-left: 20px;
         border-left: 1px solid #ccc;
         padding-left: 10px;
+    }
+    *{
+        margin: 0;
+        padding: 0;
+       max-width: 100%;
+    }
+    body{
+        width: 100%;
     }
 </style>
 <?php include './admin/componant/footer.php' ?>

@@ -11,6 +11,23 @@ if (isset($_POST['addoneproduct'])) {
     if ($order->DuplicateCartPro($product_id, $userid)) {
       if ($order->DuplicateCartProStorge($product_id, $userid)) {
         $order->updateCartQtyDup($product_id, $qty);
+        echo '
+			<script>
+			Toastify({
+			text:"Thêm vào giỏ hàng thành công !!!",
+			duration: 3000,
+			gravity: "top",
+			backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+			position: "center",
+			stopOnFocus: true,
+			close: true, // Cho phép đóng toast bằng cách nhấp vào
+			style: {
+			// Các thuộc tính CSS để tùy chỉnh hơn
+			fontSize:"23px",
+			padding:"20px",
+			},
+			}).showToast();
+			</script>';
       } else {
         if ($order->DuplicateCartProStorgeAD($product_id, $userid)) {
           $order->addCartDetails($userid, $product_id, $qty);
@@ -19,16 +36,47 @@ if (isset($_POST['addoneproduct'])) {
     } else {
       if ($order->DuplicateCart($userid)) {
         $order->addCartDetails($userid, $product_id, $qty);
-        // echo '<script>alert("Thêm vào chi tiết giỏ hàng thành công ! !")</script>';
+        echo '
+			<script>
+			Toastify({
+			text:"Thêm vào giỏ hàng thành công !!!",
+			duration: 3000,
+			gravity: "top",
+			backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+			position: "center",
+			stopOnFocus: true,
+			close: true, // Cho phép đóng toast bằng cách nhấp vào
+			style: {
+			// Các thuộc tính CSS để tùy chỉnh hơn
+			fontSize:"23px",
+			padding:"20px",
+			},
+			}).showToast();
+			</script>';
       } else {
         $order->addCart($userid, $product_id, $qty);
-        echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng ! !")</script>';
+        echo '
+			<script>
+			Toastify({
+			text:"Sản phẩm đã được thêm vào giỏ hàng !!!",
+			duration: 3000,
+			gravity: "top",
+			backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+			position: "center",
+			stopOnFocus: true,
+			close: true, // Cho phép đóng toast bằng cách nhấp vào
+			style: {
+			// Các thuộc tính CSS để tùy chỉnh hơn
+			fontSize:"23px",
+			padding:"20px",
+			},
+			}).showToast();
+			</script>';
         echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
       }
     }
   } else {
-    echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng ! !")</script>';
-    echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
+    echo '<p style="margin: 0px 20px;">Vui lòng đăng nhập !!! <a href="index.php?pages=user&action=login" style=" text-decoration: underline;">Đăng nhập.</a></p>';
   }
 }
 if (isset($_POST['buy'])) {
@@ -48,15 +96,63 @@ if (isset($_POST['buy'])) {
     } else {
       if ($order->DuplicateCart($userid)) {
         $order->addCartDetails($userid, $product_id, $qty);
-        // echo '<script>alert("Thêm vào chi tiết giỏ hàng thành công ! !")</script>';
+        echo '
+			<script>
+			Toastify({
+			text:"Sản phẩm đã được thêm vào giỏ hàng !!!",
+			duration: 3000,
+			gravity: "top",
+			backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+			position: "center",
+			stopOnFocus: true,
+			close: true, // Cho phép đóng toast bằng cách nhấp vào
+			style: {
+			// Các thuộc tính CSS để tùy chỉnh hơn
+			fontSize:"23px",
+			padding:"20px",
+			},
+			}).showToast();
+			</script>';
       } else {
         $order->addCart($userid, $product_id, $qty);
-        echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng ! !")</script>';
+        echo '
+			<script>
+			Toastify({
+			text:"Sản phẩm đã được thêm vào giỏ hàng !!!",
+			duration: 3000,
+			gravity: "top",
+			backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+			position: "center",
+			stopOnFocus: true,
+			close: true, // Cho phép đóng toast bằng cách nhấp vào
+			style: {
+			// Các thuộc tính CSS để tùy chỉnh hơn
+			fontSize:"23px",
+			padding:"20px",
+			},
+			}).showToast();
+			</script>';
         echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
       }
     }
   } else {
-    echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng ! !")</script>';
+    echo '
+    <script>
+    Toastify({
+    text:"Sản phẩm đã được thêm vào giỏ hàng !!!",
+    duration: 3000,
+    gravity: "top",
+    backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+    position: "center",
+    stopOnFocus: true,
+    close: true, // Cho phép đóng toast bằng cách nhấp vào
+    style: {
+    // Các thuộc tính CSS để tùy chỉnh hơn
+    fontSize:"23px",
+    padding:"20px",
+    },
+    }).showToast();
+    </script>';
     echo '<script>window.location.href="index.php?pages=user&action=products"</script>';
   }
 }
@@ -164,8 +260,23 @@ if (isset($_POST['updateQty'])) {
 ';
     }
   } else {
-    echo '<script>alert("Xin vui lòng đăng nhập để vào giỏ hàng")</script>';
-    echo '<script>window.location.href="index.php?pages=user&action=home"</script>';
+    echo '
+    <script>
+    Toastify({
+    text:"Vui lòng đăng nhập để vào giỏ hàng !!!",
+    duration: 3000,
+    gravity: "top",
+    backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+    position: "center",
+    stopOnFocus: true,
+    close: true, // Cho phép đóng toast bằng cách nhấp vào
+    style: {
+    // Các thuộc tính CSS để tùy chỉnh hơn
+    fontSize:"23px",
+    padding:"20px",
+    },
+    }).showToast();
+    </script>';
   }
   ?>
 

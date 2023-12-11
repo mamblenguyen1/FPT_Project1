@@ -12,7 +12,6 @@ if (isset($_POST["submit"])) {
       if ($user->checkAccount($email, $pass)) {
         echo '<script>alert("Tài Khoản Đã Bị Vô hiệu hóa!!")</script>';
       } else {
-
         if ($user->checkUser($email, $pass)) {
           foreach (($user->checkRole($email, $pass)) as $row) {
             if ($row == "1") {

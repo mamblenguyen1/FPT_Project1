@@ -215,8 +215,9 @@ class UserFunction
 
     public function checkAccount($Email, $password)
     {
+        $pass_hash = md5($password);
         $db = new connect();
-        $select = "SELECT * FROM user WHERE email = '$Email' AND user_password = '$password' AND is_deleted = 2";
+        $select = "SELECT * FROM user WHERE email = '$Email' AND user_password = '$pass_hash' AND is_deleted = 2";
         $result = $db->pdo_query_one($select);
         if ($result != null)
             return true;

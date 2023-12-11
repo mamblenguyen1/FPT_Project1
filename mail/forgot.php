@@ -1,16 +1,7 @@
 <?php
-
-
 require "PHPMailer/src/PHPMailer.php";
 require "PHPMailer/src/SMTP.php";
 require 'PHPMailer/src/Exception.php';
-
-
-
-
-
-
-
 class Mailer
 {
 
@@ -299,10 +290,10 @@ class Mailer
                                                         <p style="font-size:14px;">Nếu có thắc mắc về câu trả lời của chúng tôi , xin vui lòng liên hệ trực tiếp với chúng tôi qua : </p>
                                                         <a class="link-build-content" style="color:inherit;; text-decoration: none;" target="_blank" href="https://comparecycle.com">
                                                                     <span style="color:inherit;font-family:Open Sans;font-size:14px;">
-                                                                        <p><strong>Email : demo@gmail.com</strong></p>
+                                                                        <p><strong>Email : Litech@gmail.vn</strong></p>
                                                                     </span>
                                                                     <span style="color:inherit;font-family:Open Sans;font-size:14px;">
-                                                                        <p><strong>SĐT : 0123456789</strong></p>
+                                                                        <p><strong>SĐT : 19009999</strong></p>
                                                                     </span>
                                                         </a>
                                                     </p>
@@ -313,7 +304,7 @@ class Mailer
                                                                     width: 200px;
                                                                     text-decoration: none;
                                                                     border-radius: 10px;
-                                                                    margin: 15px 15px;" href=""><b>Ghé thăm cửa hàng chúng tôi</b></a>
+                                                                    margin: 15px 15px;" href="http://localhost/FPT_Project1/index.php?pages=user&action=home"><b>Ghé thăm cửa hàng chúng tôi</b></a>
                                                                 </span>
                                                     </p>
                                                 </div>
@@ -524,7 +515,7 @@ class Mailer
                   </td>
                   <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;"><small></small></td>
                   <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="center">'.$quantity.' </td>
-                  <td style="font-size: 12px; font-family:  sans-serif; color: #1e2b33;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="right">'.$quantity * $order->sale($product_price,$product_sale).'</td>
+                  <td style="font-size: 12px; font-family:  sans-serif; color: #1e2b33;  line-height: 18px;  vertical-align: top; padding:10px 0;" align="right">'.number_format($quantity * $order->sale($product_price,$product_sale)).' đ</td>
                 </tr>
             <tr>
               <td height="1" colspan="4" style="border-bottom:1px solid #e4e4e4"></td>
@@ -567,7 +558,7 @@ class Mailer
                               Tổng cộng
                             </td>
                             <td style="font-size: 12px; font-family:  sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; white-space:nowrap;" width="80">
-                              ' .$total .'
+                              ' .number_format($total).' đ
                             </td>
                           </tr>
                           <tr>
@@ -583,7 +574,7 @@ class Mailer
                               <strong>Thành Tiền</strong>
                             </td>
                             <td style="font-size: 12px; font-family:  sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ">
-                              <strong>' .intval(($order->getOrder_total_payment(($order->getInfoOrderId($order_id, 'user_id')), 'order_total_payment'))) .'</strong>
+                              <strong>' .number_format(intval(($order->getOrder_total_payment(($order->getInfoOrderId($order_id, 'user_id')), 'order_total_payment')))).' đ</strong>
                             </td>
                           </tr>
                         </tbody>

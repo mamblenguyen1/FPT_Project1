@@ -8,7 +8,23 @@ if (isset($_POST['deletecomment'])) {
 	$product_id = $_GET['product_id'];
 	$comment_detail = $_POST['detailCommentId'];
 	$comment->deletedComment($comment_detail);
-	echo '<script>alert("Đã ẩn bình luận ! ! !")</script>';
+	echo '
+		<script>
+			Toastify({
+				text:"Đã xóa bình luận !!!",
+				duration: 3000,
+		gravity: "top",
+		backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+		position: "center",
+		stopOnFocus: true,
+		close: true, // Cho phép đóng toast bằng cách nhấp vào
+		style: {
+		// Các thuộc tính CSS để tùy chỉnh hơn
+		fontSize:"23px",
+		padding:"20px",
+		},
+		}).showToast();
+		</script>';
 };
 if (isset($_GET['product_id'])) {
 	$product_id = $_GET['product_id'];
@@ -29,7 +45,23 @@ if (isset($_POST['editcomment'])) {
 	if (empty($content)) {
 	} else {
 		$comment->update_cmt($comment_detail_id, $content);
-		echo '<script>alert("Chỉnh sửa bình luận thành công")</script>';
+		echo '
+			<script>
+			Toastify({
+			text:"Chỉnh sửa bình luận thành công!!!",
+			duration: 3000,
+			gravity: "top",
+			backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+			position: "center",
+			stopOnFocus: true,
+			close: true, // Cho phép đóng toast bằng cách nhấp vào
+			style: {
+			// Các thuộc tính CSS để tùy chỉnh hơn
+			fontSize:"23px",
+			padding:"20px",
+			},
+			}).showToast();
+			</script>';
 		echo '<script>window.location.href="index.php?pages=user&action=productdetail&category_id=' . $category_id . '&product_id=' . $product_id . '"</script>';
 	}
 }
@@ -179,18 +211,82 @@ if (isset($_COOKIE['viewCount'])) {
 																	$user_id = $_COOKIE['userID'];
 																	$content = $_POST['content'];
 																	if ($content == '') {
-																		echo '<script>alert("Xin vui lòng nhập nội dung bình luận ! !")</script>';
+																		echo '
+																					<script>
+																						Toastify({
+																							text:"Vui lòng bạn nhập nội dung !!!",
+																							duration: 3000,
+																							gravity: "top",
+																							backgroundColor: "#ffa500", // Màu nền của toast khi điều kiện đúng
+																							position: "center",
+																							stopOnFocus: true,
+																							close: true, // Cho phép đóng toast bằng cách nhấp vào
+																							style: {
+																								// Các thuộc tính CSS để tùy chỉnh hơn
+																								fontSize:"23px",
+																								padding:"20px",
+																							},
+																						}).showToast();
+																					</script>';
 																	} else {
 																		if ($comment->DuplicateColumn($product_id)) {
 																			$comment->addCommentDetails($product_id, $user_id, $content);
-																			echo '<script>alert("Cảm ơn bạn đã để lại bình luận  ! !")</script>';
+																			echo '
+																					<script>
+																						Toastify({
+																							text:"Cảm ơn bạn đã để lại bình luận !!!",
+																							duration: 3000,
+																							gravity: "top",
+																							backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+																							position: "center",
+																							stopOnFocus: true,
+																							close: true, // Cho phép đóng toast bằng cách nhấp vào
+																							style: {
+																								// Các thuộc tính CSS để tùy chỉnh hơn
+																								fontSize:"23px",
+																								padding:"20px",
+																							},
+																						}).showToast();
+																					</script>';
 																		} else {
 																			$comment->addComment($product_id, $user_id, $content);
-																			echo '<script>alert("Cảm ơn bạn đã để lại bình luận ! !")</script>';
+																			echo '
+																					<script>
+																						Toastify({
+																							text:"Cảm ơn bạn đã để lại bình luận !!!",
+																							duration: 3000,
+																							gravity: "top",
+																							backgroundColor: "#28a745", // Màu nền của toast khi điều kiện đúng
+																							position: "center",
+																							stopOnFocus: true,
+																							close: true, // Cho phép đóng toast bằng cách nhấp vào
+																							style: {
+																								// Các thuộc tính CSS để tùy chỉnh hơn
+																								fontSize:"23px",
+																								padding:"20px",
+																							},
+																						}).showToast();
+																					</script>';
 																		}
 																	}
 																} else {
-																	echo '<script>alert("Xin vui lòng đăng nhập để bình luận !!")</script>';
+																	echo '
+																					<script>
+																						Toastify({
+																							text:"Vui lòng đăng nhập để bình luận !!!",
+																							duration: 3000,
+																							gravity: "top",
+																							backgroundColor: "#dc3545", // Màu nền của toast khi điều kiện đúng
+																							position: "center",
+																							stopOnFocus: true,
+																							close: true, // Cho phép đóng toast bằng cách nhấp vào
+																							style: {
+																								// Các thuộc tính CSS để tùy chỉnh hơn
+																								fontSize:"23px",
+																								padding:"20px",
+																							},
+																						}).showToast();
+																					</script>';
 																}
 															}
 															?>

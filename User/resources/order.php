@@ -79,12 +79,6 @@ include('User/component/header.php');
                                     <button type="submit" name="cancel" class="btn btn-danger">Huỷ đơn hàng</button>
                                 </form>
                             ';
-                                } else {
-                                    echo '
-                                    <form action="" method="post">
-                                    <button style="pointer-events: none;" type="submit" name="cancel" class="btn btn-danger">Huỷ đơn hàng</button>
-                                </form>
-                            ';
                                 }
                                 ?>
                             </div>

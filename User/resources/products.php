@@ -124,7 +124,7 @@ include('user/component/header.php');
                                                             <li><a href="">' .  $row['category_name'] . '   </a> 
                                                             </li>
                                                         </ul>
-                                                        <div class="tg-themetagbox"><span class="tg-themetag">hot</span></div>
+                                                       
                                                         <div class="tg-booktitle">
                                                         
                                                             <h3>

@@ -2,8 +2,33 @@
 if (isset($_POST['forgot'])) {
     $email = $_POST['email'];
     if ($user->checkDuplicateEmail($email)) {
-        $newRandomPass = rand();
-        $mail->sendEmail('Mật khẩu mới của bạn là :  ' . $newRandomPass, $email);
+        function generateRandomString($length) {
+            $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $numbers = '0123456789';
+            $charactersLength = strlen($characters);
+            $numbersLength = strlen($numbers);
+            $randomString = '';
+        
+            // Tạo ngẫu nhiên 4 chữ cái
+            for ($i = 0; $i < 4; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+        
+            // Tạo ngẫu nhiên 4 số
+            for ($i = 0; $i < 4; $i++) {
+                $randomString .= $numbers[rand(0, $numbersLength - 1)];
+            }
+        
+            // Trộn chuỗi ngẫu nhiên
+            $randomString = str_shuffle($randomString);
+        
+            return $randomString;
+        }
+        
+        // Gọi hàm để tạo dãy ngẫu nhiên
+        $randomCode = generateRandomString(8);
+        $newRandomPass = md5($randomCode);
+        $mail->sendEmail('Mật khẩu mới của bạn là :  ' . $randomCode, $email);
         $user->update_NewPass($newRandomPass, $email);
         echo '<script>alert("Xin vui lòng kiểm tra lại Email   !!")</script>';
         echo '<script>window.location.href="index.php?pages=user&action=login"</script>';
@@ -152,7 +177,7 @@ if (isset($_POST['forgot'])) {
 
     .page-right {
         flex: 1;
-        background-image: url("../../images/forgotBanner.jpg");
+        background-image: url("images/forgotBanner.jpg");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
