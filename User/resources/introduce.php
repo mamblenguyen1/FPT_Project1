@@ -22,7 +22,7 @@ include('user/component/header.php');
                 <div class="row g-5">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
                         <div class="position-relative h-100">
-                            <img class="img-fluid position-absolute w-100 h-100" src="https://inkythuatso.com/uploads/thumbnails/800/2022/03/2665651-15-15-34-30.jpg" alt="" style="object-fit: cover; height: 70%; width: 100%;">
+                            <img class="img-fluid position-absolute w-100 h-100" src="images/store.jpg" alt="" style="object-fit: cover; height: 70%; width: 100%;">
                         </div>
                     </div>
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -64,7 +64,7 @@ include('user/component/header.php');
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="team-item bg-light">
                             <div class="overflow-hidden">
-                                <img class="img-fluid" src="https://inkythuatso.com/uploads/thumbnails/800/2022/03/2665651-15-15-34-30.jpg" alt="">
+                                <img class="img-fluid" src="images/user/1.jpg" alt="">
                             </div>
                             <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
                                 <div class="bg-light d-flex justify-content-center pt-2 px-1">
@@ -82,7 +82,7 @@ include('user/component/header.php');
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="team-item bg-light">
                             <div class="overflow-hidden">
-                                <img class="img-fluid" src="https://inkythuatso.com/uploads/thumbnails/800/2022/03/2665651-15-15-34-30.jpg" alt="">
+                                <img class="img-fluid" src="images/user/2.jpg" alt="">
                             </div>
                             <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
                                 <div class="bg-light d-flex justify-content-center pt-2 px-1">
@@ -100,7 +100,7 @@ include('user/component/header.php');
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="team-item bg-light">
                             <div class="overflow-hidden">
-                                <img class="img-fluid" src="https://inkythuatso.com/uploads/thumbnails/800/2022/03/2665651-15-15-34-30.jpg" alt="">
+                                <img class="img-fluid" src="images/user/3.jpg" alt="">
                             </div>
                             <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
                                 <div class="bg-light d-flex justify-content-center pt-2 px-1">
@@ -118,7 +118,7 @@ include('user/component/header.php');
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                         <div class="team-item bg-light">
                             <div class="overflow-hidden">
-                                <img class="img-fluid" src="https://inkythuatso.com/uploads/thumbnails/800/2022/03/2665651-15-15-34-30.jpg" alt="">
+                                <img class="img-fluid" src="images/user/4.jpg" alt="">
                             </div>
                             <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
                                 <div class="bg-light d-flex justify-content-center pt-2 px-1">

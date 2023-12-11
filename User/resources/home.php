@@ -35,11 +35,11 @@ include('user/component/header.php');
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="tg-featureditmcontent">
-                                <div class="tg-themetagbox"><span class="tg-themetag">Đặc sắc</span></div>
+                                <div class="tg-themetagbox"><span class="tg-themetag">Mới</span></div>
                                 <div class="tg-booktitle">
                                     <h3><a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . '">' . $row['product_name'] . '</a></h3>
                                 </div>
-                                <span class="tg-bookwriter">Hãng :' . $row['type_name'] . '</span>
+                                <span class="tg-bookwriter">Hãng: ' . $row['type_name'] . '</span>
                                 <div class="tg-priceandbtn">
                                     <span class="tg-bookprice">
                                         <ins>Giá : ' . number_format($product->sale($row['product_price'], $row['product_sale'])) . ' đ</ins>
@@ -103,7 +103,7 @@ include('user/component/header.php');
                                             <li><a href="javascript:void(0);">' .  $row['category_name'] . '</a></li>
                                             <li><a href="javascript:void(0);">' . $row['type_name'] . '</a></li>
                                         </ul>
-                                        <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
+                                        <div class="tg-themetagbox"><span class="tg-themetag">Hot</span></div>
                                         <div class="tg-booktitle">
                                         <h3>
                                         <a href="index.php?pages=user&action=productdetail&category_id=' . $row['category_id'] . '&product_id=' . $row['product_id'] . ' ">' . $product_name_text . '</a> ' . $product->substringLength($row['product_name'], 22) . '
@@ -219,7 +219,7 @@ include('user/component/header.php');
                                     <i class="icon-bubble"></i>
                                 </div>
                                 <div class="tg-titlepluscounter">
-                                    <h2>Drama</h2>
+                                    <h2>Bình luận</h2>
                                     <h3 data-from="0" data-to="6179213" data-speed="8000" data-refresh-interval="50">6,179,213</h3>
                                 </div>
                             </div>
@@ -228,7 +228,7 @@ include('user/component/header.php');
                                     <i class="icon-heart-pulse"></i>
                                 </div>
                                 <div class="tg-titlepluscounter">
-                                    <h2>Horror</h2>
+                                    <h2>Dịch vụ</h2>
                                     <h3 data-from="0" data-to="3121242" data-speed="8000" data-refresh-interval="50">3,121,242</h3>
                                 </div>
                             </div>
@@ -237,7 +237,7 @@ include('user/component/header.php');
                                     <i class="icon-heart"></i>
                                 </div>
                                 <div class="tg-titlepluscounter">
-                                    <h2>Romance</h2>
+                                    <h2>Lượt yêu thích</h2>
                                     <h3 data-from="0" data-to="2101012" data-speed="8000" data-refresh-interval="50">2,101,012</h3>
                                 </div>
                             </div>
@@ -246,7 +246,7 @@ include('user/component/header.php');
                                     <i class="icon-star"></i>
                                 </div>
                                 <div class="tg-titlepluscounter">
-                                    <h2>Fashion</h2>
+                                    <h2>Đánh giá</h2>
                                     <h3 data-from="0" data-to="1158245" data-speed="8000" data-refresh-interval="50">1,158,245</h3>
                                 </div>
                             </div>
@@ -332,32 +332,32 @@ include('user/component/header.php');
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-push-2">
                             <div id="tg-testimonialsslider" class="tg-testimonialsslider tg-testimonials owl-carousel">
                                 <div class="item tg-testimonial">
-                                    <figure><img src="images/user1.jpg" alt="image description"></figure>
-                                    <blockquote style="color: white;"><q>Chúng tôi luôn mang đến những sản phẩm mới nhất, chất lượng nhất đến khách hàng</q></blockquote>
+                                    <figure><img src="images/user/1.jpg" alt="image description" style="width: 100px; height: 100px;"></figure>
+                                    <blockquote style="color: white;"><q>"Chúng tôi luôn mang đến những sản phẩm mới nhất, chất lượng nhất đến khách hàng."</q></blockquote>
                                     <div class="tg-testimonialauthor">
                                         <h3 style="color: white;">Nguyễn Minh Quang</h3>
                                     </div>
                                 </div>
 
                                 <div class="item tg-testimonial">
-                                    <figure><img src="images/user1.jpg" alt="image description"></figure>
-                                    <blockquote style="color: white;"><q>Chúng tôi luôn mang đến những sản phẩm mới nhất, chất lượng nhất đến khách hàng</q></blockquote>
+                                    <figure><img src="images/user/4.jpg" alt="image description" style="width: 100px; height: 100px;"></figure>
+                                    <blockquote style="color: white;"><q>"Đây không chỉ là nơi để bán sản phẩm, mà còn là cơ hội để xây dựng mối quan hệ với khách hàng."</q></blockquote>
                                     <div class="tg-testimonialauthor">
                                         <h3 style="color: white;">Nguyễn Văn Đặng</h3>
                                     </div>
                                 </div>
 
                                 <div class="item tg-testimonial">
-                                    <figure><img src="images/user1.jpg" alt="image description"></figure>
-                                    <blockquote style="color: white;"><q>Chúng tôi luôn mang đến những sản phẩm mới nhất, chất lượng nhất đến khách hàng</q></blockquote>
+                                    <figure><img src="images/user/2.jpg" alt="image description" style="width: 100px; height: 100px;"></figure>
+                                    <blockquote style="color: white;"><q>"Thứ bạn cần chúng tôi có, thứ bạn có tôi không có."</q></blockquote>
                                     <div class="tg-testimonialauthor">
                                         <h3 style="color: white;">Quách Thanh Tú</h3>
                                     </div>
                                 </div>
 
                                 <div class="item tg-testimonial">
-                                    <figure><img src="images/user1.jpg" alt="image description"></figure>
-                                    <blockquote style="color: white;"><q>Chúng tôi luôn mang đến những sản phẩm mới nhất, chất lượng nhất đến khách hàng</q></blockquote>
+                                    <figure><img src="images/user/3.jpg" alt="image description" style="width: 100px; height: 100px;"></figure>
+                                    <blockquote style="color: white;"><q>"Một cửa hàng xuất sắc không chỉ giúp người mua tìm kiếm sản phẩm dễ dàng, mà còn tạo ra sự tin tưởng và an tâm trong quá trình mua sắm."</q></blockquote>
                                     <div class="tg-testimonialauthor">
                                         <h3 style="color: white;">Võ Phan Hoàng Sang</h3>
                                     </div>

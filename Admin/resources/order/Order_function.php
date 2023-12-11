@@ -723,10 +723,7 @@ class ORDER
     function Show_Order_in_use()
     {
         $db = new connect();
-        $sql = "SELECT * FROM `cart_detail`, `user`, `cart`
-        WHERE user.user_id=cart.user_id 
-        AND cart.cart_id=cart_detail.cart_id 
-        AND cart.status=1";
+        $sql = "SELECT * FROM user INNER JOIN `cart` WHERE user.user_id=`cart`.user_id AND status = 1";
         $result   = $db->pdo_query($sql);
         return $result;
     }

@@ -111,20 +111,7 @@ if (isset($_GET['order_id'])) {
                     $order->updateOrderDetail($order_id);
                     ?>
                     <div class="hr"></div>
-                    <h3>Phương thức thanh toán</h3>
-                    <div class="three-column margin-20">
-                        <div>
-                            <label class="base-label">Card</label>
-                            XXXX-XXXX-XXXX-1234
-                        </div>
-                        <div>
-                            <label class="base-label">Expiration</label>
-                            01/23
-                        </div>
-                        <div class="mc"><label class="base-label">Card Type</label>
-                            <img src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_circles_92px_2x.png">
-                        </div>
-                    </div>
+                    <h3>Phương thức thanh toán: COD</h3>
                     <a class="btn btn-primary" style="display: block ; margin: 20px auto; width: 200px; padding: 15px 25px;" href="index.php?pages=user&action=order">Theo dõi đơn hàng</a>
                 </div>
             </div>

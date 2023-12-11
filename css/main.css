@@ -287,7 +287,7 @@ table>tfoot>tr>td {
 	color: var(--secondary-color);
 	line-height: 2.5;
 	padding-left: 3px;
-	text-align: center;
+	text-align: left;
 	vertical-align: top;
 }
 
@@ -1225,7 +1225,9 @@ body.tg-comingsoonpage .tg-wrapper {
 	position: relative;
 	padding: 0 20px 0 10px;
 }
-
+.tg-userlogin span:hover {
+	color: #77b748;
+}
 .tg-userlogin span:before {
 	top: 0;
 	right: 0;

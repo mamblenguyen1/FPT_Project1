@@ -258,7 +258,7 @@ if (isset($_POST['addProductbtn'])) {
 
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" onclick="showToast()" name="addProductbtn" class="btn btn-primary">Thêm danh mục</button>
+                            <button type="submit" onclick="showToast()" name="addProductbtn" class="btn btn-primary">Thêm sản phẩm</button>
                         </div>
                 </form>
             </div>

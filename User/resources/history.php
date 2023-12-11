@@ -56,12 +56,12 @@ include('User/component/header.php');
                                                             </div>
                                                             <div class="productinfo">
                                                                 <div class="quantity">Số lượng : <?= $row['quantity'] ?></div>
-                                                                <div class="price"> Giá : <?= number_format($row['quantity'] * $row['product_price']) ?></div>
+                                                                <div class="price"> Giá : <?= number_format($product->sale($row['product_price'], $row['product_sale']) * $row['quantity'])?></div>
                                                             </div>
                                                         </div>
                                                         <hr>
                                                         <?
-                                                        $tong = $row['quantity'] * $row['product_price'];
+                                                        $tong = $product->sale($row['product_price'], $row['product_sale']) * $row['quantity'];
                                                         $finalPrice = $finalPrice + $tong;
                                                         ?>
                                                     <? }
@@ -69,7 +69,7 @@ include('User/component/header.php');
                                                     <div class="cost">
                                                         <p class="costprice">Tổng cộng : <?= number_format($finalPrice) ?> đ</p>
                                                         <p class="per">Giảm giá : <? echo (100 - intval($row['total_price'] * 100 / $finalPrice)); ?> %</p>
-                                                        <p class="finalprice"> Thành tiền : <?= number_format($row['total_price']) ?></p>
+                                                        <p class="finalprice"> Thành tiền : <?= number_format($row['total_price']) ?> đ</p>
                                                     </div>
                                                 <?
                                                 }

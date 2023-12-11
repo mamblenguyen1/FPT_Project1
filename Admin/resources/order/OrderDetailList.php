@@ -125,7 +125,7 @@ if (isset($_POST['detail_order'])) {
                   </thead>
                   <tbody style="text-align: center;">
                     <?
-                    $STT = 0;
+                    $STT = 1;
                     $sql = $order->Show_Cart_detail($cart_id);
                     foreach ($sql as $row) {
                       extract($sql);

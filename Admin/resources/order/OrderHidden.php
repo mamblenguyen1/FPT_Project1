@@ -61,7 +61,7 @@ if(isset($_POST['cancel'])){
                           <td>'.$row['date'].'</td>
                           <td>'.$row['address'].'</td>
                           <td>'.$row['payment'].'</td>
-                          <td>'.$row['total_price'].'</td>
+                          <td>'.number_format($row['total_price']).'đ</td>
                           <td>'.$row['order_status'].'</td>
                           <td>
                           <form action="" method="post">

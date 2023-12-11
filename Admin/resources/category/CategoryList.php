@@ -44,7 +44,7 @@
                                         <form action="index.php?pages=admin&action=editcate" method="post">
                                              <input type="hidden" value="' . $row['category_id'] . '" name="cate_id">
                                              <button type="submit" name="edit_cate" class="btn btn-outline-primary">Chỉnh sửa</button>
-                                             <button type="submit" onclick="return confirm(\'Bạn Có đồng ý xóa không ?\')" name="delete_cate" class="btn btn-outline-danger">Xóa</button>
+                                             <button type="submit" onclick="return confirm(\'Bạn có đồng ý xóa không? Việc này sẻ bao gồm xóa tất cả sản phẩm và hãng có trong danh mục này !!!\')" name="delete_cate" class="btn btn-outline-danger">Xóa</button>
                                         </form>
                                            
                                         </td>

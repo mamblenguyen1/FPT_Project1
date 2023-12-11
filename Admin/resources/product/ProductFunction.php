@@ -49,7 +49,7 @@ class ProductFunction
     function category_type_select_all($category_id)
     {
         $db = new connect();
-        $sql = "SELECT * FROM category, type WHERE category.category_id=type.category_id AND category.category_id=$category_id";
+        $sql = "SELECT * FROM category, type WHERE category.category_id=type.category_id AND category.category_id=$category_id AND type.is_deleted=1";
         return $db->pdo_query($sql);
     }
 
