@@ -21,10 +21,11 @@ if (isset($_POST['addProductbtn'])) {
         !$product_name == "" &&
         !$product_price == "" &&
         $product_price > 1000 &&
-        $product_sale > 0 &&
-        $product_sale < 100 &&
         !$product_sale == "" &&
+        $product_sale >= 0 &&
+        $product_sale < 100 &&
         !$product_quantily == "" &&
+        $product_quantily >= 0 &&
         !$type_id == "" &&
         !$user_created == "" &&
         !$product_img == "" &&
@@ -154,10 +155,10 @@ if (isset($_POST['addProductbtn'])) {
                             <input name="product_sale" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá sản phẩm sau khi giảm. . .">
                             <?
                             if (isset($_POST["product_sale"])) {
-                                if (empty($_POST["product_sale"])) {
+                                if (intval($_POST["product_sale"] == "")) {
                                     echo '<span class="vaild">Xin vui lòng nhập phần trăm giá giảm của sản phẩm </span>';
                                 } else {
-                                    if(($_POST["product_sale"]) < 0 && ($_POST["product_sale"]) > 100){
+                                    if(($_POST["product_sale"]) < 0 || ($_POST["product_sale"]) > 100){
                                     echo '<span class="vaild">Phẩn trăm giảm giá phải lớn hơn 0 và bé hơn 100 </span>';
                                     }else{
                                         echo '';
@@ -172,7 +173,7 @@ if (isset($_POST['addProductbtn'])) {
                             <?
                             if (isset($_POST["product_short_description"])) {
                                 if (empty($_POST["product_short_description"])) {
-                                    echo '<span class="vaild">Xin vui lòng nhập giá giảm của sản phẩm </span>';
+                                    echo '<span class="vaild">Xin vui lòng nhập mô tả của sản phẩm </span>';
                                 } else {
                                     echo '';
                                 }
@@ -184,10 +185,14 @@ if (isset($_POST['addProductbtn'])) {
                             <input name="product_quantily" type="number" class="form-control" id="exampleInputEmail1" placeholder="Nhập số lượng. . .">
                             <?
                             if (isset($_POST["product_quantily"])) {
-                                if (empty($_POST["product_quantily"])) {
+                                if (intval($_POST["product_quantily"] == "")) {
                                     echo '<span class="vaild">Xin vui lòng nhập số lượng </span>';
                                 } else {
-                                    echo '';
+                                    if(intval(($_POST["product_quantily"])) < 0){
+                                    echo '<span class="vaild">Số lượng không được bé hơn 0 </span>';
+                                    }else{
+                                        echo '';
+                                    }
                                 }
                             }
                             ?>
