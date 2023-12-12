@@ -20,6 +20,9 @@ if (isset($_POST['addProductbtn'])) {
         !$category_id == "" &&
         !$product_name == "" &&
         !$product_price == "" &&
+        $product_price > 1000 &&
+        $product_sale > 0 &&
+        $product_sale < 100 &&
         !$product_sale == "" &&
         !$product_quantily == "" &&
         !$type_id == "" &&
@@ -133,7 +136,13 @@ if (isset($_POST['addProductbtn'])) {
                                 if (empty($_POST["product_price"])) {
                                     echo '<span class="vaild">Xin vui lòng nhập giá sản phẩm </span>';
                                 } else {
-                                    echo '';
+                                    if(($_POST["product_price"]) < 1000){
+                                        echo '<span class="vaild">Giá sản phẩm phải lớn hơn 1000 VND </span>';
+
+                                    }else{
+                                        echo '';
+
+                                    }
                                 }
                             }
                             ?>
@@ -146,9 +155,14 @@ if (isset($_POST['addProductbtn'])) {
                             <?
                             if (isset($_POST["product_sale"])) {
                                 if (empty($_POST["product_sale"])) {
-                                    echo '<span class="vaild">Xin vui lòng nhập giá giảm của sản phẩm </span>';
+                                    echo '<span class="vaild">Xin vui lòng nhập phần trăm giá giảm của sản phẩm </span>';
                                 } else {
-                                    echo '';
+                                    if(($_POST["product_sale"]) < 0 && ($_POST["product_sale"]) > 100){
+                                    echo '<span class="vaild">Phẩn trăm giảm giá phải lớn hơn 0 và bé hơn 100 </span>';
+                                    }else{
+                                        echo '';
+
+                                    }
                                 }
                             } ?>
                         </div>
